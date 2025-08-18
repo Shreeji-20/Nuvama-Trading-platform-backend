@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: APIConnect
+Version: 2.0.9
+Summary: APIs to trade from Nuvama
+Home-page: https://nuvamawealth.com/
+Download-URL: https://www.nuvamawealth.com/ewwebimages/webfiles/download/Python_APIConnect/APIConnect-2.0.8.tar.gz
+Author: Nuvama
+Author-email: support@nuvama.com
+License: MIT
+Keywords: Nuvama,Open API,Trade,Nuvama Python Library
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.7
+License-File: LICENSE.txt
+Requires-Dist: urllib3 >=1.26.6
+Requires-Dist: requests >=2.26.0
+

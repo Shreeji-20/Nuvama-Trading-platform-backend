@@ -1,0 +1,146 @@
+2025-08-12 11:15:19,625 [INFO] constants.router: Router object is being created.
+2025-08-12 11:15:19,625 [INFO] APIConnect.http: Http object is being created.
+2025-08-12 11:15:19,625 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-12 11:15:19,625 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-12 11:15:19,643 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-12 11:15:20,674 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 200 None
+2025-08-12 11:15:20,674 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-08-12 11:15:20,674 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-08-12 11:15:20,781 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-08-12 11:15:20,781 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-08-12 11:15:20,781 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-08-12 11:15:20,797 [INFO] APIConnect.api_utils: Checking for new update.
+2025-08-12 11:15:20,878 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-08-12 11:15:20,878 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1754956826700, 'exp': 1754956826689, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'ae26fc6c-ade4-43c2-aa64-ed3c37f53d08', 'srvTm': 1754977521418}
+2025-08-12 11:15:23,136 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-08-12 11:15:23,201 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-08-12 11:15:23,819 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-08-12 13:38:12,264 [INFO] constants.router: Router object is being created.
+2025-08-12 13:38:12,264 [INFO] APIConnect.http: Http object is being created.
+2025-08-12 13:38:12,264 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-12 13:38:12,264 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-12 13:38:12,275 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-12 13:38:13,175 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/eYbfnWSPPT1-2g/ HTTP/1.1" 200 None
+2025-08-12 13:38:13,176 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-08-12 13:38:13,176 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-08-12 13:38:13,295 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-08-12 13:38:13,295 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-08-12 13:38:13,295 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-08-12 13:38:13,295 [INFO] APIConnect.api_utils: Checking for new update.
+2025-08-12 13:38:13,445 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-08-12 13:38:13,445 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1754956826700, 'exp': 1754956826689, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '906fd7e1-a4d1-488c-a37b-1218bb629dc6', 'srvTm': 1754986094101}
+2025-08-12 13:38:14,675 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-08-12 13:38:14,753 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-08-12 13:38:15,371 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-08-12 18:01:34,908 [INFO] constants.router: Router object is being created.
+2025-08-12 18:01:34,909 [INFO] APIConnect.http: Http object is being created.
+2025-08-12 18:01:34,909 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-12 18:01:34,909 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-12 18:01:34,917 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-12 18:01:36,181 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 200 None
+2025-08-12 18:01:36,182 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-08-12 18:01:36,182 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-08-12 18:01:36,283 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-08-12 18:01:36,288 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-08-12 18:01:36,288 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-08-12 18:01:36,292 [INFO] APIConnect.api_utils: Checking for new update.
+2025-08-12 18:01:36,386 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-08-12 18:01:36,387 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1754956826700, 'exp': 1754956826689, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'b8774846-72cd-40a3-abb4-9b94ed058257', 'srvTm': 1755001897221}
+2025-08-12 18:01:38,054 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-08-12 18:01:38,122 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-08-12 18:01:38,804 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-08-12 18:01:39,974 [ERROR] APIConnect.login_helper: Error occurred while downloading/ reading instruments: 'Series' object has no attribute 'upper'
+Traceback (most recent call last):
+  File "C:\Users\shree\OneDrive\Desktop\TrueData\venv\Lib\site-packages\APIConnect\login_helper.py", line 138, in _Instruments
+    nifty_lot_size = int(df[df['symbolname'].upper() == "NIFTY"].iloc[0]['lotsize'])
+                            ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shree\OneDrive\Desktop\TrueData\venv\Lib\site-packages\pandas\core\generic.py", line 6318, in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Series' object has no attribute 'upper'
+2025-08-12 18:02:28,739 [INFO] constants.router: Router object is being created.
+2025-08-12 18:02:28,739 [INFO] APIConnect.http: Http object is being created.
+2025-08-12 18:02:28,740 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-12 18:02:28,740 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-12 18:02:28,751 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-12 18:02:29,737 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 200 None
+2025-08-12 18:02:29,737 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-08-12 18:02:29,738 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-08-12 18:02:29,823 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 222 196
+2025-08-12 18:03:35,086 [INFO] constants.router: Router object is being created.
+2025-08-12 18:03:35,086 [INFO] APIConnect.http: Http object is being created.
+2025-08-12 18:03:35,086 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-12 18:03:35,086 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-12 18:03:35,093 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-12 18:03:35,783 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 200 None
+2025-08-12 18:03:35,784 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-08-12 18:03:35,785 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-08-12 18:03:35,892 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-08-12 18:03:35,895 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-08-12 18:03:35,895 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-08-12 18:03:35,899 [INFO] APIConnect.api_utils: Checking for new update.
+2025-08-12 18:03:35,988 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-08-12 18:03:35,989 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1754956826700, 'exp': 1754956826689, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'a2c34af1-11a9-4416-87b3-f9f3317407e0', 'srvTm': 1755002016827}
+2025-08-12 18:03:38,727 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-08-12 18:03:38,800 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-08-12 18:03:39,419 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-08-13 11:06:51,957 [INFO] constants.router: Router object is being created.
+2025-08-13 11:06:51,957 [INFO] APIConnect.http: Http object is being created.
+2025-08-13 11:06:51,957 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-13 11:06:51,957 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-13 11:06:51,965 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-13 11:06:52,991 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 200 None
+2025-08-13 11:06:52,991 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-08-13 11:06:52,991 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-08-13 11:06:53,097 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-08-13 11:06:53,097 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-08-13 11:06:53,097 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-08-13 11:06:53,097 [INFO] APIConnect.api_utils: Checking for new update.
+2025-08-13 11:06:53,192 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-08-13 11:06:53,192 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1755043222403, 'exp': 1755043222386, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '4c1fbcbc-eb08-4c3f-b306-ddd590e605ee', 'srvTm': 1755063414492}
+2025-08-13 11:06:53,868 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-08-13 11:06:53,938 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-08-13 11:06:54,712 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-08-13 11:07:45,519 [INFO] constants.router: Router object is being created.
+2025-08-13 11:07:45,519 [INFO] APIConnect.http: Http object is being created.
+2025-08-13 11:07:45,519 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-13 11:07:45,519 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-13 11:07:45,525 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-13 11:07:46,387 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 200 None
+2025-08-13 11:07:46,387 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-08-13 11:07:46,387 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-08-13 11:07:46,457 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 222 196
+2025-08-13 11:16:11,253 [INFO] constants.router: Router object is being created.
+2025-08-13 11:16:11,253 [INFO] APIConnect.http: Http object is being created.
+2025-08-13 11:16:11,253 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-13 11:16:11,253 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-13 11:16:11,269 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-13 11:16:12,195 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 200 None
+2025-08-13 11:16:12,195 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-08-13 11:16:12,195 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-08-13 11:16:12,307 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-08-13 11:16:12,322 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-08-13 11:16:12,322 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-08-13 11:16:12,322 [INFO] APIConnect.api_utils: Checking for new update.
+2025-08-13 11:16:12,455 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-08-13 11:16:12,455 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1755043222403, 'exp': 1755043222386, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '28379123-b351-4513-aef0-6e24f8e134f4', 'srvTm': 1755063973770}
+2025-08-13 11:16:13,480 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-08-13 11:16:13,547 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-08-13 11:16:14,144 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-08-13 11:54:26,012 [INFO] constants.router: Router object is being created.
+2025-08-13 11:54:26,012 [INFO] APIConnect.http: Http object is being created.
+2025-08-13 11:54:26,013 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-13 11:54:26,013 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-13 11:54:26,020 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-13 11:54:27,058 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/eYbfnWSPPT1-2g/ HTTP/1.1" 200 None
+2025-08-13 11:54:27,058 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-08-13 11:54:27,059 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-08-13 11:54:27,165 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-08-13 11:54:27,168 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-08-13 11:54:27,168 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-08-13 11:54:27,171 [INFO] APIConnect.api_utils: Checking for new update.
+2025-08-13 11:54:27,278 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-08-13 11:54:27,279 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1755043222403, 'exp': 1755043222386, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'eaea2942-80b8-47e0-8b11-961b617fd964', 'srvTm': 1755066268614}
+2025-08-13 11:54:27,799 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-08-13 11:54:27,878 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-08-13 11:54:28,558 [INFO] APIConnect.login_helper: Loaded instruments.csv
