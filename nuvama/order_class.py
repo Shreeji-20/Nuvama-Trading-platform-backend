@@ -56,6 +56,7 @@ class Orders:
         redis_key = f"order:{order_details['user_id']}" + f"{order_details['remark']}" + f"{order_details['order_id']}"
         qty = 0
         start = time.time()
+        print("IOC timeout : ",order_details['IOC'])
         while time.time() - start < int(order_details['IOC']):
             try:
                 if self.r.exists(redis_key):

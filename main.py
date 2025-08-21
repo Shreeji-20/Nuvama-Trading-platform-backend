@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 import pandas as pd
 import time
 import traceback
-from routers import users , spreads, stratergy_1
+from routers import users , spreads, stratergy_1,multi_leg_spreads ,stratergy_4leg
 
 # Connect to Redis
 r = redis.Redis(host="localhost", port=6379, db=0, decode_responses=True)
@@ -15,6 +15,8 @@ app = FastAPI()
 app.include_router(users.router)
 app.include_router(spreads.router)
 app.include_router(stratergy_1.router)
+app.include_router(multi_leg_spreads.router)
+app.include_router(stratergy_4leg.router)
 
 
 # Allow CORS from any origin (you can restrict this later)
@@ -30,6 +32,31 @@ app.add_middleware(
 @app.get("/")
 def landing():
     return {"message": "Welcome to the Trading API"}
+
+@app.get("/index/{symbol}")
+def get_index_data(symbol: str):
+    try:
+        if r.exists(f"reduced_quotes:{symbol.upper()}"):
+            data = json.loads(r.get(f"reduced_quotes:{symbol.upper()}"))
+            return JSONResponse(content=data, status_code=200)
+        else:
+            raise Exception("Index data not found")
+    except Exception as e:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "Bad Request", "message": str(e)}
+        )
+        
+@app.get("/lotsizes")
+def get_lotsizes_data():
+    try:
+        lotsizes = json.loads(r.get("lotsizes"))
+        return JSONResponse(content=lotsizes, status_code=200)
+    except Exception as e:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "Bad Request", "message": str(e)}
+        )
 
 @app.get("/optiondata")
 def get_options_data():

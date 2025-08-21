@@ -7,6 +7,7 @@ import importlib.util, sys, pathlib, traceback
 from typing import Optional
 from fastapi.responses import JSONResponse
 import threading
+import subprocess
 router = APIRouter()
 
 r = redis.Redis(host="localhost", port=6379, db=0, decode_responses=True)
@@ -36,20 +37,26 @@ class Stratergy1(BaseModel):
     id: Optional[int]=None
     note: Optional[str]=None
     run_state: Optional[int]=None
+    exit_price_gap: float
 
 @router.post("/stratergy/stratergy_1/add")
 def store_data(item: Stratergy1):
-    print("Req rec : ",item)
-    
-    new_id = r.incr("stratergy:id")
-    item.id = new_id
+    try:
+        print("Req rec : ",item)
+        
+        new_id = r.incr("stratergy:id")
+        item.id = new_id
 
-    r.set(f"stratergies:stratergy_1_{new_id}", item.json())
+        r.set(f"stratergies:stratergy_1_{new_id}", item.json())
 
-    obj = stratergies.Stratergy1(new_id)
-    t = threading.Thread(target=obj.main_logic, daemon=True)
-    t.start()
-    return {"message": "Data stored successfully", "id": new_id}
+        subprocess.run(["start", "cmd", "/k", "python3 C:\\Users\\shree\\OneDrive\\Desktop\\TrueData\\stratergy_run.py", str(new_id)], shell=True)
+        # obj = stratergies.Stratergy1(new_id)
+        # t = threading.Thread(target=obj.main_logic, daemon=True)
+        # t.start()
+        return {"message": "Data stored successfully", "id": new_id}
+    except Exception as e:
+        print(f"ERROR: failed to store data: {e}")
+        print(traceback.format_exc())
 
 @router.put("/stratergy/stratergy_1/update")
 def update_data(item:Stratergy1):

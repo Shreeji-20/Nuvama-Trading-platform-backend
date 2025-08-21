@@ -10,6 +10,8 @@ import os
 import sys
 from nuvama.websocket import order_streaming_socket
 import threading
+import subprocess
+
 
 # Path to the directory containing the module
 current_dir = os.path.dirname(__file__)
@@ -79,12 +81,9 @@ def userlogin(user: User):
         else:
             # Launch a new cmd window that runs the order streaming runner for this user
             try:
-                script_path = os.path.abspath(os.path.join(parent_dir, "nuvama", "websocket", "run_order_streaming.py"))
-                activate = os.path.abspath(os.path.join(parent_dir, "venv", "Scripts", "activate.bat"))
-                # Use start to open new cmd window, activate venv, then run using python3 and keep window open with /k
-                # The call command is required to run a batch file and return to the current cmd instance
-                cmd = f'cmd.exe /c start cmd /k "call \"{activate}\" && python3 \"{script_path}\" {user.userid}"'
-                os.system(cmd)
+                subprocess.run(["start", "cmd", "/k", "python3 C:\\Users\\shree\\OneDrive\\Desktop\\TrueData\\nuvama\\websocket\\order_streaming.py", user.userid], shell=True)
+                if user.userid == "70249886":
+                    subprocess.run(["start", "cmd", "/k", "python3 C:\\Users\\shree\\OneDrive\\Desktop\\TrueData\\nuvama\\websocket\\central_socket_data.py"], shell=True)
             except Exception as e:
                 print("Failed to launch order streaming cmd:", e)
             return JSONResponse(

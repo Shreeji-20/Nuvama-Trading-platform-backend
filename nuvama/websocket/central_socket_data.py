@@ -32,7 +32,7 @@ class CentralSocketData:
         
         self.reduced_quotes = ['-29','-101']
         self.quotes_streamer_start()
-        time.sleep(10)
+        time.sleep(2)
         self.common_obj = common_functions()
         
         if not self.options_data:
@@ -40,7 +40,7 @@ class CentralSocketData:
             self.common_obj.refresh_strikes_and_options(expiry=1,symbol='SENSEX')
             self.common_obj.refresh_strikes_and_options(expiry=0,symbol='NIFTY')
             self.common_obj.refresh_strikes_and_options(expiry=0,symbol='SENSEX')
-        
+        time.sleep(2)
         self.strikes_updates_channel = self.r.pubsub()
         self.strikes_updates_channel.subscribe('strikes_updates')
 
@@ -141,20 +141,21 @@ if __name__ == "__main__":
           
             while True:
                 try:
-                    if socket.api_connect.feedobj.t_read:
-                        if socket.api_connect.feedobj.t_read.is_alive():
-                            pass
-                        else:
-                            raise Exception("Tread not alive")
+                    feedobj = socket.api_connect.feedobj
+                    # Check reading thread
+                    if feedobj.t_read:
+                        if not feedobj.t_read.is_alive():
+                            raise Exception("Reading thread not alive")
                     else:
-                        raise Exception("Exception tread")
-                    if socket.api_connect.feedobj.timer:
-                        if socket.api_connect.feedobj.timer.isTimerActive():
-                            pass
-                        else:
-                            raise Exception("Exception timer")
+                        raise Exception("No reading thread")
+                    
+                    # Check timer
+                    if feedobj.timer:
+                        if not feedobj.timer.isTimerActive():
+                            raise Exception("Timer not active")
                     else:
-                        raise Exception("Time obj not found")
+                        raise Exception("Timer object not found")
+                    
                     time.sleep(0.5)
                 except KeyboardInterrupt:
                     os._exit(1)
@@ -163,9 +164,12 @@ if __name__ == "__main__":
         except Exception as e:
             print(traceback.format_exc())
             print("Error Occured: ",e, " Restarting...")
-            socket.shutdown()
-            socket.depth_shutdown()
-            time.sleep(1)
+            try:
+                socket.shutdown()
+                socket.depth_shutdown()
+            except:
+                pass
+            time.sleep(2)  # Longer delay before restart
         except KeyboardInterrupt:
             os._exit(1)
             
