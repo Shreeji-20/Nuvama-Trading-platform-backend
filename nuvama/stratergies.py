@@ -342,7 +342,7 @@ class Stratergy1:
                     if not od["Quantity"] >= self.params["slices"]:
                         od["Slice_Quantity"] = od["Quantity"]
                     od = self.order.place_order(od)
-                    self.order.IOC_order(od, od_base)
+                    self.order.IOC_order(od, *[od_base])
                     # read latest order data and update per-user counters
                     last_key = f"order:{od['user_id']}" + f"{od['remark']}" + f"{od.get('order_id', '')}"
                     last_raw = self.r.get(last_key)
@@ -376,7 +376,7 @@ class Stratergy1:
                         if not ex["Quantity"] >= self.params["slices"]:
                             ex["Slice_Quantity"] = ex["Quantity"]
                         ex = self.order.place_order(ex)
-                        self.order.IOC_order(ex, ex_base)
+                        self.order.IOC_order(ex, *[ex_base])
                         last_key = f"order:{ex['user_id']}" + f"{ex['remark']}" + f"{ex.get('order_id', '')}"
                         last_raw = self.r.get(last_key)
                         if last_raw:
@@ -408,7 +408,7 @@ class Stratergy1:
                     if not od["Quantity"] >= self.params["slices"]:
                         od["Slice_Quantity"] = od["Quantity"]
                     od = self.order.place_order(od)
-                    self.order.IOC_order(od, od_base)
+                    self.order.IOC_order(od, *[od_base])
                     last_key = f"order:{od['user_id']}" + f"{od['remark']}" + f"{od.get('order_id', '')}"
                     last_raw = self.r.get(last_key)
                     if last_raw:
@@ -437,7 +437,7 @@ class Stratergy1:
                         if not ex["Quantity"] >= self.params["slices"]:
                             ex["Slice_Quantity"] = ex["Quantity"]
                         ex = self.order.place_order(ex)
-                        self.order.IOC_order(ex, ex_base)
+                        self.order.IOC_order(ex, *[ex_base])
                         last_key = f"order:{ex['user_id']}" + f"{ex['remark']}" + f"{ex.get('order_id', '')}"
                         last_raw = self.r.get(last_key)
                         if last_raw:

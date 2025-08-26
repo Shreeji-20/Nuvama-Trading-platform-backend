@@ -1,6 +1,7 @@
 import os
 from APIConnect.APIConnect import APIConnect
 import redis
+import json
 import orjson
 import importlib.util, sys, pathlib, traceback
 import time
@@ -18,7 +19,19 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 class Stratergy4Leg:
     def __init__(self, paramsid) -> None:
         self.r = redis.Redis(host="localhost", port=6379, db=0)
-        self.order = Orders()
+        self.lot_sizes = json.loads(self.r.get("lotsizes"))
+        users = self.r.keys("user:*")
+        data = [json.loads(self.r.get(user)) for user in users]
+        self.user_obj_dict = {}
+        # print(f"reqid:{item.get('user_id')}")
+        for item in data:
+            print(f"reqid:{item.get('userid')}")
+            if self.r.exists(f"reqid:{item.get('userid')}"):
+                print(f"API object exists for user {item.get('apikey')}")
+                self.user_obj_dict[item.get("userid")] = APIConnect(item.get("apikey"), "", "", False, "", False)
+
+       
+        self.order = Orders(self.user_obj_dict)
         # lock used when updating shared per-user templates/qtys from worker threads
         self.templates_lock = threading.Lock()
 
@@ -28,6 +41,7 @@ class Stratergy4Leg:
         if raw_params is None:
             raise RuntimeError(f"params key missing in redis: {self.params_key}")
         self.params = orjson.loads(raw_params.decode())
+        self.global_action = self.params.get('action', 'BUY').upper()
         self.executed = False
 
         # cached mapping used to translate streaming symbol -> trading symbol
@@ -92,6 +106,174 @@ class Stratergy4Leg:
             print(f"ERROR: unexpected error reading {streaming_symbol} from redis: {e}")
             return None
 
+    def _create_depth_key(self, leg_info):
+        """Create Redis depth key from leg info, handling both numeric and date expiry formats."""
+        expiry_value = leg_info['expiry']
+        strike = leg_info['strike']
+        
+        # Ensure strike is formatted correctly (remove any existing decimal if it's a whole number)
+        if isinstance(strike, (int, float)):
+            strike_str = f"{strike:.1f}" if strike % 1 != 0 else f"{int(strike)}.0"
+        else:
+            # If strike is already a string, use it as-is but ensure .0 format for whole numbers
+            strike_str = str(strike)
+            if '.' not in strike_str:
+                strike_str += '.0'
+        
+        if isinstance(expiry_value, (int, str)) and str(expiry_value).isdigit():
+            # Numeric expiry: use as-is
+            return f"depth:{leg_info['symbol'].upper()}_{strike_str}_{leg_info['type']}-{expiry_value}"
+        else:
+            # Legacy date format: keep existing behavior
+            return f"depth:{leg_info['symbol'].upper()}_{strike_str}_{leg_info['type']}-{leg_info['expiry']}"
+
+    def _load_leg_data(self, leg_key, leg_info):
+        """Load and validate leg data from Redis."""
+        depth_key = self._create_depth_key(leg_info)
+        leg_data = self._depth_from_redis(depth_key)
+        
+        if leg_data is None:
+            print(f"ERROR: {leg_key} depth not found: {depth_key}")
+            raise RuntimeError(f"{leg_key} depth missing in redis")
+        
+        return {
+            'data': leg_data,
+            'info': leg_info,
+            'depth_key': depth_key
+        }
+
+    def _calculate_action_based_price_sum(self, leg_keys, leg_prices, debug_label=""):
+        """Calculate price sum considering BUY/SELL actions for each leg."""
+        total_sum = 0
+        debug_parts = []
+        
+        for leg_key in leg_keys:
+            leg_action = self.legs[leg_key]['info'].get('action', self.global_action).upper()
+            leg_price = leg_prices.get(leg_key, 0)
+            if leg_action == "BUY":
+                total_sum += leg_price
+                debug_parts.append(f"+{leg_price}({leg_key}:BUY)")
+            else:  # SELL
+                total_sum -= leg_price
+                debug_parts.append(f"-{leg_price}({leg_key}:SELL)")
+        
+        if debug_label:
+            pass
+            # print(f"DEBUG: {debug_label}: {' '.join(debug_parts)} = {total_sum}")
+        
+        return total_sum, debug_parts
+
+    def _calculate_exit_price_with_gap(self, base_price, action, exit_price_gap):
+        """Calculate exit price with gap adjustment, ensuring minimum price of 0.05."""
+        if action == "BUY":
+            adjusted_price = base_price - ((base_price * exit_price_gap) / 100)
+        else:
+            adjusted_price = base_price + ((base_price * exit_price_gap) / 100)
+        return max(0.05, adjusted_price)
+
+    def _format_limit_price(self, price):
+        """Format price to ensure it's never negative and rounded properly."""
+        return str(round(max(0.05, abs(price)) * 20) / 20)
+
+    def _get_lot_size(self):
+        """Get the lot size for the trading symbol. Default to 75 for NIFTY.
+        
+        Priority:
+        1. Explicit lot_size in params
+        2. Symbol-based default lot sizes
+        3. Fallback to 75
+        """
+        # Check if lot_size is explicitly provided in params
+        # if 'lot_size' in self.params:
+        #     return int(self.params['lot_size'])
+        
+        symbol = None
+        if hasattr(self, 'legs') and self.legs:
+            # Get symbol from first available leg
+            first_leg_key = next(iter(self.legs.keys()))
+            symbol = self.legs[first_leg_key]['info'].get('symbol', 'NIFTY').upper()
+        
+        # Default lot sizes for different symbols
+        lot_sizes = {
+            'NIFTY': 75,
+            'BANKNIFTY': 15,
+            'FINNIFTY': 40,
+            'MIDCPNIFTY': 75,
+            'SENSEX': 20,
+            'BANKEX': 15
+        }
+
+        return self.lot_sizes.get(symbol, 75)
+
+    def _calculate_slice_quantity(self, total_quantity, slice_multiplier):
+        """Calculate slice quantity based on lot size and slice multiplier.
+        
+        Example: 
+        - NIFTY lot size = 75
+        - Total quantity = 375 (which is 5 lots: 375/75 = 5)
+        - slice_multiplier = 2 (means 2 lots per slice)
+        - slice_quantity = 2 * 75 = 150
+        - This will create: 2 orders of 150 qty + 1 order of 75 qty
+        """
+        lot_size = self._get_lot_size()
+        
+        # slice_quantity = slice_multiplier * lot_size
+        slice_quantity = slice_multiplier * lot_size
+        
+        # If total quantity is less than slice quantity, use total quantity
+        if total_quantity < slice_quantity:
+            slice_quantity = total_quantity
+        
+        # print(f"DEBUG: Slice calculation - Total Qty: {total_quantity}, Lot Size: {lot_size}, Slice Multiplier: {slice_multiplier}, Slice Qty: {slice_quantity}")
+        
+        return slice_quantity
+
+    def _adjust_quantity_for_slicing(self, order_template, slice_multiplier):
+        """Adjust slice quantity based on lot size and slice multiplier."""
+        total_quantity = order_template["Quantity"]
+        slice_quantity = self._calculate_slice_quantity(total_quantity, slice_multiplier)
+        order_template["Slice_Quantity"] = slice_quantity
+
+    def _update_base_leg_quantities(self, base_leg_templates, remaining_qty, slice_multiplier):
+        """Update quantities for all base leg templates."""
+        for base_leg_key in self.base_leg_keys:
+            original_qty = base_leg_templates[base_leg_key]["Quantity"]
+            actual_qty = min(original_qty, remaining_qty)
+            base_leg_templates[base_leg_key]["Quantity"] = actual_qty
+            self._adjust_quantity_for_slicing(base_leg_templates[base_leg_key], slice_multiplier)
+
+    def _place_all_orders(self, main_order, base_leg_orders_dict):
+        """Place orders for all legs and execute IOC."""
+        print("Main Order : ",json.dumps(main_order,indent=2),"Base Leg orders : ",json.dumps(base_leg_orders_dict,indent=2))
+        # breakpoint()
+        main_order = self.order.place_order(main_order)
+        self.order.IOC_order(main_order, *base_leg_orders_dict.values())
+        return main_order
+
+    def _update_filled_quantities(self, order, uid, is_entry=True):
+        """Update filled quantities and templates after order execution."""
+        last_key = f"order:{order['user_id']}" + f"{order['remark']}" + f"{order.get('order_id', '')}"
+        last_raw = self.r.get(last_key)
+        if last_raw:
+            order_data = orjson.loads(last_raw.decode())
+            filled = int(order_data["response"]["data"]["fQty"])
+            
+            with self.templates_lock:
+                if is_entry:
+                    self.entry_qtys[uid] += filled
+                    if self.order_templates[uid].get("Quantity", 0) > 0:
+                        self.order_templates[uid]["Quantity"] = max(0, self.order_templates[uid]["Quantity"] - filled)
+                    total_qty = sum(self.entry_qtys.values())
+                    user_desired_qty = int(self.params.get("bidding_leg", {}).get("quantity", 75))
+                    print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg {'entry' if is_entry else 'exit'} order filled for user {uid}: {filled} (total {'entry' if is_entry else 'exit'}: {total_qty}) (user {'entry' if is_entry else 'exit'}: {self.entry_qtys[uid] if is_entry else self.exit_qtys[uid]}/{user_desired_qty if is_entry else self.entry_qtys.get(uid, 0)})")
+                else:
+                    self.exit_qtys[uid] += filled
+                    total_qty = sum(self.exit_qtys.values())
+                    print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg exit order filled for user {uid}: {filled} (total exit: {total_qty}) (user exit: {self.exit_qtys[uid]}/{self.entry_qtys.get(uid, 0)})")
+            
+            return filled
+        return 0
+
     def _init_legs_and_orders(self):
         """
         Initialize dynamic legs: base legs + 1 bidding leg
@@ -131,27 +313,7 @@ class Stratergy4Leg:
             leg_info = self.params.get(leg_key)
             if not leg_info:
                 raise RuntimeError(f"Missing leg info for {leg_key}")
-            
-            # Handle numeric expiry (0,1,2,3,4,5 etc.) instead of date format
-            expiry_value = leg_info['expiry']
-            if isinstance(expiry_value, (int, str)) and str(expiry_value).isdigit():
-                # Numeric expiry: use as-is
-                depth_key = f"depth:{leg_info['symbol'].upper()}_{leg_info['strike']}.0_{leg_info['type']}-{expiry_value}"
-            else:
-                # Legacy date format: keep existing behavior
-                depth_key = f"depth:{leg_info['symbol'].upper()}_{leg_info['strike']}.0_{leg_info['type']}-{leg_info['expiry']}"
-            
-            leg_data = self._depth_from_redis(depth_key)
-            
-            if leg_data is None:
-                print(f"ERROR: {leg_key} depth not found: {depth_key}")
-                raise RuntimeError(f"{leg_key} depth missing in redis")
-            
-            self.legs[leg_key] = {
-                'data': leg_data,
-                'info': leg_info,
-                'depth_key': depth_key
-            }
+            self.legs[leg_key] = self._load_leg_data(leg_key, leg_info)
         
         # Load bidding leg dynamically
         bidding_leg_key = self.params.get("bidding_leg_key", "bidding_leg")
@@ -161,31 +323,24 @@ class Stratergy4Leg:
         if not bidding_leg_info:
             raise RuntimeError(f"Missing bidding leg info for {bidding_leg_key}")
         
-        # Handle numeric expiry (0,1,2,3,4,5 etc.) for bidding leg
-        expiry_value = bidding_leg_info['expiry']
-        if isinstance(expiry_value, (int, str)) and str(expiry_value).isdigit():
-            # Numeric expiry: use as-is
-            bidding_depth_key = f"depth:{bidding_leg_info['symbol'].upper()}_{bidding_leg_info['strike']}.0_{bidding_leg_info['type']}-{expiry_value}"
-        else:
-            # Legacy date format: keep existing behavior
-            bidding_depth_key = f"depth:{bidding_leg_info['symbol'].upper()}_{bidding_leg_info['strike']}.0_{bidding_leg_info['type']}-{bidding_leg_info['expiry']}"
-        
-        bidding_leg_data = self._depth_from_redis(bidding_depth_key)
-        
-        if bidding_leg_data is None:
-            print(f"ERROR: bidding leg depth not found: {bidding_depth_key}")
-            raise RuntimeError("bidding leg depth missing in redis")
-        
-        self.legs[bidding_leg_key] = {
-            'data': bidding_leg_data,
-            'info': bidding_leg_info,
-            'depth_key': bidding_depth_key
-        }
+        self.legs[bidding_leg_key] = self._load_leg_data(bidding_leg_key, bidding_leg_info)
 
-        # Log strategy info including notes if available
+        # Log strategy info including notes and individual leg actions
         notes = self.params.get("notes", "")
         print(f"INFO: Initializing dynamic strategy with {len(base_leg_keys)} base legs: {base_leg_keys}")
         print(f"INFO: Bidding leg: {bidding_leg_key}")
+        
+        # Log individual leg actions
+        print("INFO: Individual leg actions:")
+        for base_leg_key in base_leg_keys:
+            base_leg_info = self.legs[base_leg_key]['info']
+            # print("action : ",base_leg_info.get('action'), end="")
+            leg_action = base_leg_info.get('action', self.global_action)
+            print(f"  {base_leg_key}: {leg_action}")
+        
+        bidding_leg_info = self.legs[bidding_leg_key]['info']
+        bidding_action = bidding_leg_info.get('action', self.global_action)
+        print(f"  {bidding_leg_key}: {bidding_action}")
         
         # Log expiry format being used
         sample_leg = self.params.get(base_leg_keys[0]) if base_leg_keys else None
@@ -222,6 +377,9 @@ class Stratergy4Leg:
         # Convert all user IDs to strings for consistency
         uids = [str(uid) for uid in uids]
 
+        # Global action for backward compatibility
+        self.global_action = self.params.get('action', 'BUY').upper()
+
         # dictionaries keyed by user_id -> template for each leg
         self.order_templates = {}  # For bidding leg entry orders
         self.base_leg_templates = {}  # For base legs entry orders
@@ -245,7 +403,7 @@ class Stratergy4Leg:
         self.completed_exits = {uid: False for uid in uids}
 
         # Create templates for each user
-        action = self.params['action'].upper()
+        # Note: Global action still used for backward compatibility, but individual leg actions take precedence
         for uid in uids:
             # Initialize dictionaries for this user
             self.order_templates[uid] = {}
@@ -254,32 +412,46 @@ class Stratergy4Leg:
             self.exit_base_leg_templates[uid] = {}
             
             # Bidding leg templates (main trading leg)
-            bidding_leg_data = self.legs[bidding_leg_key]['data']
+            bidding_leg_data = self.legs[self.bidding_leg_key]['data']
+            bidding_leg_info = self.legs[self.bidding_leg_key]['info']
+            bidding_leg_action = bidding_leg_info.get('action', self.global_action).upper()
+            
             self.order_templates[uid] = self._make_order_template(
                 bidding_leg_data, 
-                buy_if=action, 
-                user_id=uid
+                buy_if=bidding_leg_action, 
+                user_id=uid,
+                leg_key=self.bidding_leg_key
             )
+            print(f"DEBUG: Created bidding leg template for {uid}: Quantity={self.order_templates[uid]['Quantity']}")
+            
             self.exit_order_templates[uid] = self._make_order_template(
                 bidding_leg_data, 
-                buy_if=("SELL" if action == "BUY" else "BUY"), 
+                buy_if=("SELL" if bidding_leg_action == "BUY" else "BUY"), 
                 quantity=0, 
-                user_id=uid
+                user_id=uid,
+                leg_key=self.bidding_leg_key
             )
             
             # Base legs templates
-            for base_leg_key in base_leg_keys:
+            for base_leg_key in self.base_leg_keys:
                 base_leg_data = self.legs[base_leg_key]['data']
+                base_leg_info = self.legs[base_leg_key]['info']
+                base_leg_action = base_leg_info.get('action', self.global_action).upper()
+                
                 self.base_leg_templates[uid][base_leg_key] = self._make_order_template(
                     base_leg_data, 
-                    buy_if=action, 
-                    user_id=uid
+                    buy_if=base_leg_action, 
+                    user_id=uid,
+                    leg_key=base_leg_key
                 )
+                print(f"DEBUG: Created base leg template for {uid} {base_leg_key}: Quantity={self.base_leg_templates[uid][base_leg_key]['Quantity']}")
+                
                 self.exit_base_leg_templates[uid][base_leg_key] = self._make_order_template(
                     base_leg_data, 
-                    buy_if=("SELL" if action == "BUY" else "BUY"), 
+                    buy_if=("SELL" if base_leg_action == "BUY" else "BUY"), 
                     quantity=0, 
-                    user_id=uid
+                    user_id=uid,
+                    leg_key=base_leg_key
                 )
 
         # keep single-template attributes for backward compatibility (use first user if present)
@@ -290,11 +462,12 @@ class Stratergy4Leg:
             self.exit_order_details = self.exit_order_templates[first_uid]
             self.exit_base_leg_details = self.exit_base_leg_templates[first_uid]
 
-    def _make_order_template(self, leg_obj, buy_if="BUY", quantity=None, user_id=None):
+    def _make_order_template(self, leg_obj, buy_if="BUY", quantity=None, user_id=None, leg_key=None):
         """Return a dict template for orders built from a depth/leg object.
 
         - buy_if: the action string to use as 'BUY' for entry templates, 'SELL' for exit templates.
         - quantity: optional override for Quantity.
+        - leg_key: the key of the leg (e.g., 'leg1', 'bidding_leg') to get quantity from params
         """
         user_id = user_id if user_id is not None else self.params.get("user_ids")
         if leg_obj is None:
@@ -307,7 +480,18 @@ class Stratergy4Leg:
             OrderTypeEnum.MARKET if self.params["order_type"].upper() == "MARKET" else OrderTypeEnum.LIMIT
         )
 
-        qty = int(self.params["quantity"]) if quantity is None else quantity
+        # Get quantity from leg-specific data or use override
+        if quantity is not None:
+            qty = quantity
+        elif leg_key and leg_key in self.params and 'quantity' in self.params[leg_key]:
+            qty = int(self.params[leg_key]['quantity'])
+        else:
+            # Fallback to bidding_leg quantity if available
+            qty = int(self.params.get("bidding_leg", {}).get("quantity", 75))
+
+        # Calculate slices based on slice_multiplier and lot size
+        slice_multiplier = self.params.get("slice_multiplier", 1)
+        slice_quantity = self._calculate_slice_quantity(qty, slice_multiplier)
 
         return {
             "user_id": user_id,
@@ -316,13 +500,13 @@ class Stratergy4Leg:
             "Action": action,
             "Order_Type": order_type,
             "Quantity": qty,
-            "Slice_Quantity": self.params["slices"],
+            "Slice_Quantity": slice_quantity,
             "Streaming_Symbol": streaming_symbol,
             "Limit_Price": "0",
             "Disclosed_Quantity": 0,
             "TriggerPrice": 0,
             "ProductCode": ProductCodeENum.NRML,
-            "remark": "Lord_Shreeji",
+            "remark": self.params.get("notes", "Lord_Shreeji"),
             "IOC": self.params['IOC_timeout'],
             "exit_price_gap": float(self.params.get('exit_price_gap', 0))
         }
@@ -341,7 +525,7 @@ class Stratergy4Leg:
                 return float(entries[0]["price"]) if entries else 0.0
             s = 0.0
             count = min(n, len(entries))
-            for i in range(count):
+            for i in range(0,count):
                 s += float(entries[i]["price"])
             return s / count
         except (KeyError, IndexError, TypeError, ValueError) as e:
@@ -356,6 +540,68 @@ class Stratergy4Leg:
             return 0.0
         except (KeyError, IndexError, TypeError, ValueError):
             return 0.0
+
+    def _get_leg_prices_with_actions(self, is_exit=False):
+        """Get current prices for all legs based on individual leg actions.
+        
+        For entry: BUY legs use askValues, SELL legs use bidValues
+        For exit: Opposite of entry (BUY legs use bidValues, SELL legs use askValues)
+        """
+        prices = {}
+        direction_debug = []
+        
+        # Get base leg prices dynamically based on their individual actions
+        for base_leg_key in self.base_leg_keys:
+            try:
+                leg_data = self._depth_from_redis(self.legs[base_leg_key]['depth_key'])
+                leg_action = self.legs[base_leg_key]['info'].get('action', self.global_action).upper()
+                
+                # Determine bid_or_ask based on leg action and entry/exit
+                if is_exit:
+                    # For exit: opposite of entry direction
+                    bid_or_ask = "bidValues" if leg_action == "BUY" else "askValues"
+                else:
+                    # For entry: BUY uses ask, SELL uses bid
+                    bid_or_ask = "askValues" if leg_action == "BUY" else "bidValues"
+                
+                direction_debug.append(f"{base_leg_key}({leg_action}:{bid_or_ask[:3]})")
+                
+                if self.params.get("no_of_bidask_average", 1) > 1:
+                    prices[base_leg_key] = self._avg_price(leg_data, bid_or_ask, self.params["no_of_bidask_average"])
+                else:
+                    prices[base_leg_key] = self._safe_get_price(leg_data, bid_or_ask)
+            except (KeyError, TypeError) as e:
+                print(f"ERROR: Failed to get price for {base_leg_key}: {e}")
+                prices[base_leg_key] = 0.0
+        
+        # Get bidding leg price based on its individual action
+        try:
+            bidding_leg_data = self._depth_from_redis(self.legs[self.bidding_leg_key]['depth_key'])
+            bidding_leg_action = self.legs[self.bidding_leg_key]['info'].get('action', self.global_action).upper()
+            
+            # Determine bid_or_ask based on bidding leg action and entry/exit
+            if is_exit:
+                # For exit: opposite of entry direction
+                bid_or_ask = "bidValues" if bidding_leg_action == "BUY" else "askValues"
+            else:
+                # For entry: BUY uses ask, SELL uses bid
+                bid_or_ask = "askValues" if bidding_leg_action == "BUY" else "bidValues"
+            
+            direction_debug.append(f"{self.bidding_leg_key}({bidding_leg_action}:{bid_or_ask[:3]})")
+            
+            if self.params.get("no_of_bidask_average", 1) > 1:
+                prices[self.bidding_leg_key] = self._avg_price(bidding_leg_data, bid_or_ask, self.params["no_of_bidask_average"])
+            else:
+                prices[self.bidding_leg_key] = self._safe_get_price(bidding_leg_data, bid_or_ask)
+        except (KeyError, TypeError) as e:
+            print(f"ERROR: Failed to get price for bidding leg {self.bidding_leg_key}: {e}")
+            prices[self.bidding_leg_key] = 0.0
+        
+        # Debug log showing direction for each leg
+        context = "EXIT" if is_exit else "ENTRY"
+        # print(f"DEBUG: {context} price directions: {', '.join(direction_debug)}")
+        
+        return prices
 
     def _get_leg_prices(self, bid_or_ask):
         """Get current prices for all legs (supports dynamic number of legs)"""
@@ -386,6 +632,75 @@ class Stratergy4Leg:
         
         return prices
 
+    def _execute_entry_orders(self, uid, spread, od, od_base_legs, remaining_qty, is_buy_action):
+        """Execute entry orders for all legs if conditions are met."""
+        start_price = self.params["start_price"]
+        run_state = int(self.params['run_state'])
+        
+        # Check entry conditions based on action type
+        price_condition = (spread < start_price) if is_buy_action else (spread > start_price)
+        if (price_condition and od["Quantity"] > 0 and run_state == 0 and remaining_qty > 0):
+            # Only place order for remaining quantity
+            actual_order_qty = min(od["Quantity"], remaining_qty)
+            od["Quantity"] = actual_order_qty
+            
+            # Execute entry orders for all legs
+            slice_multiplier = self.params.get("slice_multiplier", 1)
+            self._adjust_quantity_for_slicing(od, slice_multiplier)
+            self._update_base_leg_quantities(od_base_legs, remaining_qty, slice_multiplier)
+            
+            od = self._place_all_orders(od, od_base_legs)
+            
+            # Update quantities
+            desired_total_qty = int(self.params.get("bidding_leg", {}).get("quantity", 75))
+            self._update_filled_quantities(od, uid, is_entry=True)
+            
+            return {"uid": uid, "action": "entry"}
+        
+        return None
+
+    def _execute_exit_orders(self, uid, spread, ex, ex_base_legs, is_buy_action):
+        """Execute exit orders for all legs if conditions are met."""
+        exit_start = self.params["exit_start"]
+        run_state = int(self.params['run_state'])
+        
+        # Check exit conditions based on action type
+        exit_condition_1 = (spread > exit_start) if is_buy_action else (spread < exit_start)
+        exit_condition_1 = exit_condition_1 or (run_state == 2)
+        exit_condition_2 = self.entry_qtys.get(uid, 0) > self.exit_qtys.get(uid, 0)
+        
+        if exit_condition_1 and exit_condition_2:
+            action_type = "BUY" if is_buy_action else "SELL"
+            print(f"Dynamic {len(self.base_leg_keys)}-leg {action_type} Exit!")
+            print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg {action_type} EXIT TRIGGERED for user {uid}: spread={spread}, exit_start={exit_start}, run_state={run_state}, entry_qty={self.entry_qtys.get(uid, 0)}, exit_qty={self.exit_qtys.get(uid, 0)}")
+            
+            # Calculate remaining quantity to exit
+            remaining_exit_qty = self.entry_qtys.get(uid, 0) - self.exit_qtys.get(uid, 0)
+            
+            if remaining_exit_qty > 0:
+                ex["Quantity"] = remaining_exit_qty
+                
+                slice_multiplier = self.params.get("slice_multiplier", 1)
+                self._adjust_quantity_for_slicing(ex, slice_multiplier)
+                
+                # Update base leg exit quantities to match
+                for base_leg_key in self.base_leg_keys:
+                    ex_base_legs[base_leg_key]["Quantity"] = remaining_exit_qty
+                    self._adjust_quantity_for_slicing(ex_base_legs[base_leg_key], slice_multiplier)
+                
+                # Place all exit orders
+                ex = self._place_all_orders(ex, ex_base_legs)
+                
+                # Update exit quantities
+                self._update_filled_quantities(ex, uid, is_entry=False)
+                
+                return {"uid": uid, "action": "exit"}
+            else:
+                print(f"INFO: No remaining quantity to exit for user {uid}")
+                return {"uid": uid, "action": "no_exit_needed"}
+        
+        return None
+
     def _process_user(self, uid, spread, leg_prices, leg_prices_exit=None):
         """Worker that runs ENTRY/EXIT logic for a single user (uid).
 
@@ -415,24 +730,31 @@ class Stratergy4Leg:
                 od_base_legs[base_leg_key] = self.base_leg_templates[uid][base_leg_key].copy()
                 ex_base_legs[base_leg_key] = self.exit_base_leg_templates[uid][base_leg_key].copy()
 
-            # Calculate prices: bidding_leg_price = desired_spread - sum(base_legs_prices)
+            # Calculate prices considering BUY/SELL actions for each leg
             desired_spread = self.params.get("desired_spread", 0)
             exit_desired_spread = self.params.get("exit_desired_spread", 0)
             
-            # Entry prices
-            base_legs_price_sum = sum(leg_prices.get(key, 0) for key in self.base_leg_keys)
-            bidding_leg_entry_price = desired_spread - base_legs_price_sum
+            # Entry prices - calculate base legs sum based on their actions
+            base_legs_price_sum, base_legs_price_debug = self._calculate_action_based_price_sum(
+                self.base_leg_keys, leg_prices, f"Base legs price calculation for {uid}")
             
-            # Exit prices
-            base_legs_exit_price_sum = sum(leg_prices_exit.get(key, 0) for key in self.base_leg_keys)
+            # Calculate bidding leg price based on its action
+            bidding_leg_action = self.legs[self.bidding_leg_key]['info'].get('action', self.global_action).upper()
+            if bidding_leg_action == "BUY":
+                bidding_leg_entry_price = desired_spread - abs(base_legs_price_sum)
+            else:  # SELL
+                bidding_leg_entry_price = desired_spread - abs(base_legs_price_sum)
+
+            # Exit prices - calculate base legs exit sum based on their actions
+            base_legs_exit_price_sum, _ = self._calculate_action_based_price_sum(
+                self.base_leg_keys, leg_prices_exit)
+            # print("exit box : ", base_legs_exit_price_sum, leg_prices_exit)
+            # Update limit prices (ensure they're never negative)
+            od["Limit_Price"] = self._format_limit_price(bidding_leg_entry_price)
             
-            # Update limit prices
-            od["Limit_Price"] = str(round(bidding_leg_entry_price * 20) / 20)
-            
-            # Set base leg prices
+            # Set base leg prices (ensure they're never negative)
             for base_leg_key in self.base_leg_keys:
-                price = leg_prices.get(base_leg_key, 0)
-                od_base_legs[base_leg_key]["Limit_Price"] = str(round(price * 20) / 20)
+                od_base_legs[base_leg_key]["Limit_Price"] = self._format_limit_price(leg_prices.get(base_leg_key, 0))
             
             # Handle exit pricing
             if int(self.params['run_state']) == 2:
@@ -441,232 +763,58 @@ class Stratergy4Leg:
                 action = self.params.get("action", "").upper()
                 
                 # Bidding leg exit price
-                bidding_exit_price = leg_prices_exit.get(self.bidding_leg_key, 0)
-                if action == "BUY":
-                    bidding_exit_price = bidding_exit_price - ((bidding_exit_price * exit_price_gap) / 100)
-                else:
-                    bidding_exit_price = bidding_exit_price + ((bidding_exit_price * exit_price_gap) / 100)
-                ex['Limit_Price'] = str(round(bidding_exit_price * 20) / 20)
+                bidding_exit_price = self._calculate_exit_price_with_gap(
+                    leg_prices_exit.get(self.bidding_leg_key, 0), action, exit_price_gap)
+                ex['Limit_Price'] = self._format_limit_price(bidding_exit_price)
                 
                 # Base legs exit prices
                 for base_leg_key in self.base_leg_keys:
-                    base_exit_price = leg_prices_exit.get(base_leg_key, 0)
-                    if action == "BUY":
-                        base_exit_price = base_exit_price - ((base_exit_price * exit_price_gap) / 100)
-                    else:
-                        base_exit_price = base_exit_price + ((base_exit_price * exit_price_gap) / 100)
-                    ex_base_legs[base_leg_key]['Limit_Price'] = str(round(base_exit_price * 20) / 20)
+                    base_exit_price = self._calculate_exit_price_with_gap(
+                        leg_prices_exit.get(base_leg_key, 0), action, exit_price_gap)
+                    ex_base_legs[base_leg_key]['Limit_Price'] = self._format_limit_price(base_exit_price)
             else:
                 # Normal exit using exit_desired_spread
-                bidding_leg_exit_price = exit_desired_spread - base_legs_exit_price_sum
-                ex["Limit_Price"] = str(round(bidding_leg_exit_price * 20) / 20)
+                if bidding_leg_action == "BUY":
+                    bidding_leg_exit_price = exit_desired_spread - base_legs_exit_price_sum
+                else:  # SELL
+                    bidding_leg_exit_price = exit_desired_spread + base_legs_exit_price_sum
+                ex["Limit_Price"] = self._format_limit_price(bidding_leg_exit_price)
                 
                 for base_leg_key in self.base_leg_keys:
-                    price = leg_prices_exit.get(base_leg_key, 0)
-                    ex_base_legs[base_leg_key]["Limit_Price"] = str(round(price * 20) / 20)
+                    ex_base_legs[base_leg_key]["Limit_Price"] = self._format_limit_price(leg_prices_exit.get(base_leg_key, 0))
 
-            # ENTRY LOGIC
+            # ENTRY/EXIT LOGIC
             if self.params["action"].upper() == "BUY":
-                # Check if user still has quantity to fill (entry quantity should not exceed total desired quantity)
+                # Check if user still has quantity to fill
                 current_entry_qty = self.entry_qtys.get(uid, 0)
-                desired_total_qty = int(self.params["quantity"])
-                remaining_qty = desired_total_qty - current_entry_qty
+                bidding_leg_qty = int(self.params.get("bidding_leg", {}).get("quantity", 75))
+                remaining_qty = bidding_leg_qty - current_entry_qty
                 
-                if (spread < self.params["start_price"] and 
-                    od["Quantity"] > 0 and 
-                    int(self.params['run_state']) == 0 and 
-                    remaining_qty > 0):
-                    
-                    # Only place order for remaining quantity
-                    actual_order_qty = min(od["Quantity"], remaining_qty)
-                    od["Quantity"] = actual_order_qty
-                    
-                    # Execute entry orders for all legs
-                    if not od["Quantity"] >= self.params["slices"]:
-                        od["Slice_Quantity"] = od["Quantity"]
-                    
-                    # Update base leg quantities to match
-                    for base_leg_key in self.base_leg_keys:
-                        od_base_legs[base_leg_key]["Quantity"] = actual_order_qty
-                        if not od_base_legs[base_leg_key]["Quantity"] >= self.params["slices"]:
-                            od_base_legs[base_leg_key]["Slice_Quantity"] = od_base_legs[base_leg_key]["Quantity"]
-                    
-                    # Place bidding leg order
-                    od = self.order.place_order(od)
-                    
-                    # Place base leg orders
-                    base_leg_orders = []
-                    for base_leg_key in self.base_leg_keys:
-                        base_leg_order = self.order.place_order(od_base_legs[base_leg_key])
-                        base_leg_orders.append(base_leg_order)
-                    
-                    # Execute IOC for all legs
-                    self.order.IOC_order(od, *base_leg_orders)
-                    
-                    # Update quantities
-                    last_key = f"order:{od['user_id']}" + f"{od['remark']}" + f"{od.get('order_id', '')}"
-                    last_raw = self.r.get(last_key)
-                    if last_raw:
-                        lastest_order_data = orjson.loads(last_raw.decode())
-                        filled = int(lastest_order_data["response"]["data"]["fQty"])
-                        with self.templates_lock:
-                            self.entry_qtys[uid] += filled
-                            if self.order_templates[uid].get("Quantity", 0) > 0:
-                                self.order_templates[uid]["Quantity"] = max(0, self.order_templates[uid]["Quantity"] - filled)
-                            print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg entry order filled for user {uid}: {filled} (total entry: {sum(self.entry_qtys.values())}) (user entry: {self.entry_qtys[uid]}/{desired_total_qty})")
-                    
-                    return {"uid": uid, "action": "entry"}
+                # Try entry orders
+                entry_result = self._execute_entry_orders(uid, spread, od, od_base_legs, remaining_qty, is_buy_action=True)
+                if entry_result:
+                    return entry_result
 
-                # EXIT LOGIC
-                exit_condition_1 = spread > self.params["exit_start"] or int(self.params['run_state']) == 2
-                exit_condition_2 = self.entry_qtys.get(uid, 0) > self.exit_qtys.get(uid, 0)
-                
-                if exit_condition_1 and exit_condition_2:
-                    print(f"Dynamic {len(self.base_leg_keys)}-leg BUY Exit!")
-                    print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg EXIT TRIGGERED for user {uid}: spread={spread}, exit_start={self.params.get('exit_start')}, run_state={self.params.get('run_state')}, entry_qty={self.entry_qtys.get(uid, 0)}, exit_qty={self.exit_qtys.get(uid, 0)}")
-                    
-                    # Calculate remaining quantity to exit (should not exceed entry quantity)
-                    remaining_exit_qty = self.entry_qtys.get(uid, 0) - self.exit_qtys.get(uid, 0)
-                    
-                    if remaining_exit_qty > 0:
-                        ex["Quantity"] = remaining_exit_qty
-                        
-                        if not ex["Quantity"] >= self.params["slices"]:
-                            ex["Slice_Quantity"] = ex["Quantity"]
-                        
-                        # Update base leg exit quantities to match
-                        for base_leg_key in self.base_leg_keys:
-                            ex_base_legs[base_leg_key]["Quantity"] = remaining_exit_qty
-                            if not ex_base_legs[base_leg_key]["Quantity"] >= self.params["slices"]:
-                                ex_base_legs[base_leg_key]["Slice_Quantity"] = ex_base_legs[base_leg_key]["Quantity"]
-                        
-                        # Place exit orders for all legs
-                        ex = self.order.place_order(ex)
-                        
-                        # Place base leg exit orders
-                        base_leg_exit_orders = []
-                        for base_leg_key in self.base_leg_keys:
-                            base_leg_exit_order = self.order.place_order(ex_base_legs[base_leg_key])
-                            base_leg_exit_orders.append(base_leg_exit_order)
-                        
-                        # Execute IOC for all exit legs
-                        self.order.IOC_order(ex, *base_leg_exit_orders)
-                        
-                        # Update exit quantities
-                        last_key = f"order:{ex['user_id']}" + f"{ex['remark']}" + f"{ex.get('order_id', '')}"
-                        last_raw = self.r.get(last_key)
-                        if last_raw:
-                            lastest_order_data_exit = orjson.loads(last_raw.decode())
-                            filled = int(lastest_order_data_exit["response"]["data"]["fQty"])
-                            with self.templates_lock:
-                                self.exit_qtys[uid] += filled
-                                print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg exit order filled for user {uid}: {filled} (total exit: {sum(self.exit_qtys.values())}) (user exit: {self.exit_qtys[uid]}/{self.entry_qtys.get(uid, 0)})")
-                        
-                        return {"uid": uid, "action": "exit"}
-                    else:
-                        print(f"INFO: No remaining quantity to exit for user {uid}")
-                        return {"uid": uid, "action": "no_exit_needed"}
+                # Try exit orders
+                exit_result = self._execute_exit_orders(uid, spread, ex, ex_base_legs, is_buy_action=True)
+                if exit_result:
+                    return exit_result
 
-            else:  # SELL behaviour mirrored
-                # Check if user still has quantity to fill (entry quantity should not exceed total desired quantity)
+            else:  # SELL behaviour
+                # Check if user still has quantity to fill
                 current_entry_qty = self.entry_qtys.get(uid, 0)
-                desired_total_qty = int(self.params["quantity"])
-                remaining_qty = desired_total_qty - current_entry_qty
+                bidding_leg_qty = int(self.params.get("bidding_leg", {}).get("quantity", 75))
+                remaining_qty = bidding_leg_qty - current_entry_qty
                 
-                if (spread > self.params["start_price"] and 
-                    od["Quantity"] > 0 and 
-                    int(self.params['run_state']) == 0 and 
-                    remaining_qty > 0):
-                    
-                    # Only place order for remaining quantity
-                    actual_order_qty = min(od["Quantity"], remaining_qty)
-                    od["Quantity"] = actual_order_qty
-                    
-                    # Execute entry orders for all legs
-                    if not od["Quantity"] >= self.params["slices"]:
-                        od["Slice_Quantity"] = od["Quantity"]
-                    
-                    # Update base leg quantities to match
-                    for base_leg_key in self.base_leg_keys:
-                        od_base_legs[base_leg_key]["Quantity"] = actual_order_qty
-                        if not od_base_legs[base_leg_key]["Quantity"] >= self.params["slices"]:
-                            od_base_legs[base_leg_key]["Slice_Quantity"] = od_base_legs[base_leg_key]["Quantity"]
-                    
-                    # Place bidding leg order
-                    od = self.order.place_order(od)
-                    
-                    # Place base leg orders
-                    base_leg_orders = []
-                    for base_leg_key in self.base_leg_keys:
-                        base_leg_order = self.order.place_order(od_base_legs[base_leg_key])
-                        base_leg_orders.append(base_leg_order)
-                    
-                    # Execute IOC for all legs
-                    self.order.IOC_order(od, *base_leg_orders)
-                    
-                    # Update quantities
-                    last_key = f"order:{od['user_id']}" + f"{od['remark']}" + f"{od.get('order_id', '')}"
-                    last_raw = self.r.get(last_key)
-                    if last_raw:
-                        lastest_order_data = orjson.loads(last_raw.decode())
-                        filled = int(lastest_order_data["response"]["data"]["fQty"])
-                        with self.templates_lock:
-                            self.entry_qtys[uid] += filled
-                            if self.order_templates[uid].get("Quantity", 0) > 0:
-                                self.order_templates[uid]["Quantity"] = max(0, self.order_templates[uid]["Quantity"] - filled)
-                            print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg SELL Entry order filled for user {uid}: {filled} (total entry: {sum(self.entry_qtys.values())}) (user entry: {self.entry_qtys[uid]}/{desired_total_qty})")
-                    
-                    return {"uid": uid, "action": "entry"}
+                # Try entry orders
+                entry_result = self._execute_entry_orders(uid, spread, od, od_base_legs, remaining_qty, is_buy_action=False)
+                if entry_result:
+                    return entry_result
 
-                # EXIT for SELL behavior  
-                exit_condition_1_sell = spread < self.params["exit_start"] or int(self.params['run_state']) == 2
-                exit_condition_2_sell = self.entry_qtys.get(uid, 0) > self.exit_qtys.get(uid, 0)
-                
-                if exit_condition_1_sell and exit_condition_2_sell:
-                    print(f"Dynamic {len(self.base_leg_keys)}-leg SELL Exit!")
-                    print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg SELL EXIT TRIGGERED for user {uid}: spread={spread}, exit_start={self.params.get('exit_start')}, run_state={self.params.get('run_state')}, entry_qty={self.entry_qtys.get(uid, 0)}, exit_qty={self.exit_qtys.get(uid, 0)}")
-                    
-                    # Calculate remaining quantity to exit (should not exceed entry quantity)
-                    remaining_exit_qty = self.entry_qtys.get(uid, 0) - self.exit_qtys.get(uid, 0)
-                    
-                    if remaining_exit_qty > 0:
-                        ex["Quantity"] = remaining_exit_qty
-                        
-                        if not ex["Quantity"] >= self.params["slices"]:
-                            ex["Slice_Quantity"] = ex["Quantity"]
-                        
-                        # Update base leg exit quantities to match
-                        for base_leg_key in self.base_leg_keys:
-                            ex_base_legs[base_leg_key]["Quantity"] = remaining_exit_qty
-                            if not ex_base_legs[base_leg_key]["Quantity"] >= self.params["slices"]:
-                                ex_base_legs[base_leg_key]["Slice_Quantity"] = ex_base_legs[base_leg_key]["Quantity"]
-                        
-                        # Place exit orders for all legs
-                        ex = self.order.place_order(ex)
-                        
-                        # Place base leg exit orders
-                        base_leg_exit_orders = []
-                        for base_leg_key in self.base_leg_keys:
-                            base_leg_exit_order = self.order.place_order(ex_base_legs[base_leg_key])
-                            base_leg_exit_orders.append(base_leg_exit_order)
-                        
-                        # Execute IOC for all exit legs
-                        self.order.IOC_order(ex, *base_leg_exit_orders)
-                        
-                        # Update exit quantities
-                        last_key = f"order:{ex['user_id']}" + f"{ex['remark']}" + f"{ex.get('order_id', '')}"
-                        last_raw = self.r.get(last_key)
-                        if last_raw:
-                            lastest_order_data_exit = orjson.loads(last_raw.decode())
-                            filled = int(lastest_order_data_exit["response"]["data"]["fQty"])
-                            with self.templates_lock:
-                                self.exit_qtys[uid] += filled
-                                print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg SELL exit order filled for user {uid}: {filled} (total exit: {sum(self.exit_qtys.values())}) (user exit: {self.exit_qtys[uid]}/{self.entry_qtys.get(uid, 0)})")
-                        
-                        return {"uid": uid, "action": "exit"}
-                    else:
-                        print(f"INFO: No remaining quantity to exit for user {uid}")
-                        return {"uid": uid, "action": "no_exit_needed"}
+                # Try exit orders
+                exit_result = self._execute_exit_orders(uid, spread, ex, ex_base_legs, is_buy_action=False)
+                if exit_result:
+                    return exit_result
 
         except (redis.RedisError, KeyError, IndexError, TypeError, ValueError) as e:
             print(f"ERROR: per-user ({uid}) dynamic {len(self.base_leg_keys) if hasattr(self, 'base_leg_keys') else 'multi'}-leg flow failed: {e}")
@@ -674,6 +822,27 @@ class Stratergy4Leg:
             print(traceback.format_exc())
             print(f"ERROR: unexpected error in per-user ({uid}) dynamic {len(self.base_leg_keys) if hasattr(self, 'base_leg_keys') else 'multi'}-leg worker: {e}")
         return {"uid": uid, "error": True}
+
+    def _safe_get_total_quantities(self):
+        """Safely get total entry and exit quantities with error handling."""
+        try:
+            total_entry = sum(self.entry_qtys.values())
+        except Exception as e:
+            print(f"ERROR: Error calculating total_entry: {e}")
+            total_entry = 0
+        
+        try:
+            total_exit = sum(self.exit_qtys.values())
+        except Exception as e:
+            print(f"ERROR: Error calculating total_exit: {e}")
+            total_exit = 0
+            
+        try:
+            run_state_val = int(self.params.get('run_state', 0))
+        except Exception:
+            run_state_val = 0
+            
+        return total_entry, total_exit, run_state_val
 
     
     # --- main logic (kept behavior identical) ----------------------------------
@@ -684,13 +853,9 @@ class Stratergy4Leg:
                 if int(self.params['run_state']) == 1:
                     continue # pause
                 
-                # Get bid/ask direction
-                bid_or_ask = "bidValues" if self.params["action"].upper() == "SELL" else "askValues"
-                bid_ask_exit = "askValues" if self.params["action"].upper() == "SELL" else "bidValues"
-
-                # Get current prices for all legs
-                leg_prices = self._get_leg_prices(bid_or_ask)
-                leg_prices_exit = self._get_leg_prices(bid_ask_exit)
+                # Get current prices for all legs based on individual leg actions
+                leg_prices = self._get_leg_prices_with_actions()
+                leg_prices_exit = self._get_leg_prices_with_actions(is_exit=True)
                 
                 # Validate that we have valid price data before proceeding
                 base_leg_sum = sum(leg_prices.get(key, 0) for key in self.base_leg_keys)
@@ -699,16 +864,27 @@ class Stratergy4Leg:
                     time.sleep(0.1)
                     continue
 
-                # Calculate spread as sum of all legs (supports dynamic number of legs)
-                total_price_sum = sum(leg_prices.values())
-                spread = round(abs(total_price_sum) * 20) / 20
+                # Calculate spread considering BUY/SELL actions for each leg
+                # BUY legs are added, SELL legs are subtracted
                 
-                # Enhanced debug logging for dynamic legs
-                base_legs_debug = {k: leg_prices.get(k, 0) for k in self.base_leg_keys}
-                print(f"DEBUG: Dynamic {len(self.base_leg_keys)}-leg spread: {spread}")
-                print(f"DEBUG: Base legs prices: {base_legs_debug}")
-                print(f"DEBUG: Bidding leg ({self.bidding_leg_key}): {leg_prices.get(self.bidding_leg_key, 0)}")
+                # Process bidding leg
+                bidding_leg_action = self.legs[self.bidding_leg_key]['info'].get('action', self.global_action).upper()
+                bidding_leg_price = leg_prices.get(self.bidding_leg_key, 0)
+                bidding_spread_part = bidding_leg_price if bidding_leg_action == "BUY" else -bidding_leg_price
+                bidding_debug = f"+{bidding_leg_price}({self.bidding_leg_key}:BUY)" if bidding_leg_action == "BUY" else f"-{bidding_leg_price}({self.bidding_leg_key}:SELL)"
+                
+                # Process base legs
+                base_legs_sum, base_legs_debug = self._calculate_action_based_price_sum(self.base_leg_keys, leg_prices)
+                
+                total_price_sum = bidding_spread_part + base_legs_sum
+                spread = abs(round(total_price_sum * 20) / 20)  # Remove abs() to preserve sign
 
+                # Enhanced debug logging showing the complete calculation
+                all_debug_parts = [bidding_debug] + base_legs_debug
+                calculation_str = " ".join(all_debug_parts)
+                print(f"INFO: Spread -> {spread} | Calculation: {calculation_str} = {total_price_sum}",end="  \r\r")
+
+                
                 # If per-user templates are configured, run per-user logic in parallel
                 if getattr(self, "uids", None):
                     max_workers = min(8, max(1, len(self.uids)))
@@ -726,7 +902,7 @@ class Stratergy4Leg:
                         for fut in as_completed(futures):
                             try:
                                 res = fut.result()
-                                print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg per-user result: {res}")
+                                # print(f"INFO: Dynamic {len(self.base_leg_keys)}-leg per-user result: {res}")
                             except Exception as e:
                                 print(f"ERROR: Dynamic {len(self.base_leg_keys)}-leg per-user task failed: {e}")
                     
@@ -734,20 +910,7 @@ class Stratergy4Leg:
                     time.sleep(0.1)
                     
                     # Check exit condition only after processing all users
-                    try:
-                        total_entry = sum(self.entry_qtys.values())
-                    except Exception as e:
-                        print(f"ERROR: Error calculating total_entry: {e}")
-                        total_entry = 0
-                    try:
-                        total_exit = sum(self.exit_qtys.values())
-                    except Exception as e:
-                        print(f"ERROR: Error calculating total_exit: {e}")
-                        total_exit = 0
-                    try:
-                        run_state_val = int(self.params.get('run_state', 0))
-                    except Exception:
-                        run_state_val = 0
+                    total_entry, total_exit, run_state_val = self._safe_get_total_quantities()
                     
                     # Log quantities for debugging
                     if total_entry > 0 or total_exit > 0:

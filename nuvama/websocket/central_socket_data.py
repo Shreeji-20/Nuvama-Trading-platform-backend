@@ -66,7 +66,8 @@ class CentralSocketData:
                 symbol = "SENSEX"
             else:
                 symbol = "OTHER"
-            print(response)
+            response['response']['data']['symbol'] = symbol
+            # print(response)
             self.r.set(f"reduced_quotes:{symbol}", orjson.dumps(response).decode())
         except Exception as e:
             print(f"Error processing response (callbackfun): {str(e)}")

@@ -40,28 +40,33 @@ class LegModel(BaseModel):
     strike: float = Field(..., description="Strike price")
     type: str = Field(..., description="Option type (CE/PE)")
     expiry: int = Field(..., description="Expiry cycle (0=current week, 1=next week, 2=following week, etc.)")
+    action: str = Field(default="BUY", description="Individual leg action (BUY/SELL)")
+    quantity: int = Field(..., description="Individual leg quantity")
+
+class BiddingLegModel(LegModel):
+    """Bidding leg model that inherits from LegModel and includes quantity"""
+    pass
 
 class AdvancedOptionsStrategy(BaseModel):
-    # Dynamic legs - can have leg1, leg2, leg3, leg4, etc.
-    bidding_leg: LegModel
+    # Dynamic legs - can have leg1, leg2, leg3, leg4, etc. with individual quantities
+    bidding_leg: BiddingLegModel
     base_legs: List[str] = Field(..., description="List of base leg keys")
     bidding_leg_key: str = Field(default="bidding_leg", description="Key for bidding leg")
     desired_spread: float = Field(..., description="Desired spread value")
     exit_desired_spread: float = Field(..., description="Exit desired spread value")
     start_price: float = Field(..., description="Start price")
     exit_start: float = Field(..., description="Exit start price")
-    action: str = Field(..., description="BUY or SELL")
-    quantity: int = Field(..., description="Quantity")
-    slices: int = Field(..., description="Number of slices")
+    action: str = Field(..., description="Global BUY or SELL (used as fallback)")
+    slice_multiplier: int = Field(..., description="Multiplier for calculating total slices")
     user_ids: List[str] = Field(..., description="List of user IDs")
     run_state: int = Field(default=0, description="Run state (0=Running, 1=Paused, 2=Stopped, 3=Not Started)")
     order_type: str = Field(default="LIMIT", description="Order type")
-    IOC_timeout: int = Field(default=30, description="IOC timeout in seconds")
+    IOC_timeout: float = Field(default=30.0, description="IOC timeout in seconds")
     exit_price_gap: float = Field(default=2.0, description="Exit price gap")
     no_of_bidask_average: int = Field(default=1, description="Number of bid/ask average")
     notes: Optional[str] = Field(default="", description="Strategy notes or comments")
     
-    # Allow extra fields for dynamic legs (leg1, leg2, leg3, etc.)
+    # Allow extra fields for dynamic legs (leg1, leg2, leg3, etc.) each with their own action and quantity
     class Config:
         extra = "allow"
 
@@ -170,7 +175,7 @@ async def create_strategy(strategy: AdvancedOptionsStrategy):
         non_leg_fields = {
             'bidding_leg', 'base_legs', 'bidding_leg_key', 'desired_spread', 
             'exit_desired_spread', 'start_price', 'exit_start', 'action', 
-            'quantity', 'slices', 'user_ids', 'run_state', 'order_type', 
+            'slice_multiplier', 'user_ids', 'run_state', 'order_type', 
             'IOC_timeout', 'exit_price_gap', 'no_of_bidask_average', 'notes'
         }
         
@@ -241,7 +246,7 @@ async def update_strategy(strategy_id: str, strategy: AdvancedOptionsStrategy):
         non_leg_fields = {
             'bidding_leg', 'base_legs', 'bidding_leg_key', 'desired_spread', 
             'exit_desired_spread', 'start_price', 'exit_start', 'action', 
-            'quantity', 'slices', 'user_ids', 'run_state', 'order_type', 
+            'slice_multiplier', 'user_ids', 'run_state', 'order_type', 
             'IOC_timeout', 'exit_price_gap', 'no_of_bidask_average', 'notes'
         }
         
@@ -371,7 +376,7 @@ async def validate_strategy_data(data: dict):
         non_leg_fields = {
             'bidding_leg', 'base_legs', 'bidding_leg_key', 'desired_spread', 
             'exit_desired_spread', 'start_price', 'exit_start', 'action', 
-            'quantity', 'slices', 'user_ids', 'run_state', 'order_type', 
+            'slice_multiplier', 'user_ids', 'run_state', 'order_type', 
             'IOC_timeout', 'exit_price_gap', 'no_of_bidask_average', 'notes'
         }
         
@@ -408,11 +413,17 @@ async def validate_strategy_data(data: dict):
                 validation_results["errors"].append(f"Invalid base_leg reference: {base_leg}. Available legs: {valid_leg_keys}")
         
         # Check required fields
-        required_fields = ["desired_spread", "exit_desired_spread", "start_price", "exit_start", "action", "quantity", "slices", "user_ids"]
+        required_fields = ["desired_spread", "exit_desired_spread", "start_price", "exit_start", "action", "slice_multiplier", "user_ids"]
         for field in required_fields:
             if field not in data:
                 validation_results["valid"] = False
                 validation_results["errors"].append(f"Missing required field: {field}")
+        
+        # Validate that each leg has a quantity field
+        for leg_key, leg_data in legs_data.items():
+            if 'quantity' not in leg_data:
+                validation_results["valid"] = False
+                validation_results["errors"].append(f"Missing quantity field in {leg_key}")
         
         return validation_results
     

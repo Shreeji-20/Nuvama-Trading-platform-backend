@@ -28,7 +28,7 @@ while True:
             else:
                 raise Exception("No reading thread - restarting")
     except Exception as e:
-        # print(traceback.format_exc())
+        print(traceback.format_exc())
         print("Error occured : ",e," Restarting...")
         try:
             order_streaming_socket.api_connect.feedobj.shutdown()
