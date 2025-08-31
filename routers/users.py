@@ -33,17 +33,17 @@ class User(BaseModel):
     userid: str
     apikey: str
     apisecret:str
-    reqid:Optional[str]=None
+    totp_secret:Optional[str]=None
     lastLogin:Optional[str]=None
-    
-    
+    password:Optional[str]=None
+
+
 @router.post("/user")
 def add_user(user:User):
     try:
         print("Req Received : ",user)
         r.set(f"user:{user.userid}",user.json())
-        r.set(f"reqid:{user.userid}",user.reqid)
-        r.expire(f"reqid:{user.userid}",43200)
+        # Note: No longer setting reqid as it's now password/totp_secret based
         return {"message": "Data stored successfully", "id": user.userid}
     except Exception as e:
         print(e)
@@ -74,24 +74,55 @@ def delete_user(user:User):
 @router.post("/userlogin")
 def userlogin(user: User):
     try:
-        islogin = login_obj.login(user_id=user.userid,reqid=user.reqid)
+        # Step 1: Start login process
+        print(f"🚀 Starting login process for user: {user.userid}")
         
-        if islogin!=True:
-            raise Exception(islogin)
-        else:
-            # Launch a new cmd window that runs the order streaming runner for this user
-            try:
-                subprocess.run(["start", "cmd", "/k", "python3 C:\\Users\\shree\\OneDrive\\Desktop\\TrueData\\nuvama\\websocket\\order_streaming.py", user.userid], shell=True)
-                if user.userid == "70249886":
-                    subprocess.run(["start", "cmd", "/k", "python3 C:\\Users\\shree\\OneDrive\\Desktop\\TrueData\\nuvama\\websocket\\central_socket_data.py"], shell=True)
-            except Exception as e:
-                print("Failed to launch order streaming cmd:", e)
-            return JSONResponse(
-        content={"message": "Login successful!", "id": user.userid},
-        status_code=200
-    )
-    except Exception as e:
+        # Step 2: Attempt web login
+        print(f"🔐 Attempting web login for user: {user.userid}")
+        islogin = login_obj.login(user_id=user.userid)
+        
+        if islogin != True:
+            print(f"❌ Web login failed for user {user.userid}: {islogin}")
+            raise Exception(f"Web login failed: {islogin}")
+        
+        print(f"✅ Web login successful for user: {user.userid}")
+        
+        # Step 3: Launch order streaming
+        print(f"🔄 Launching order streaming for user: {user.userid}")
+        try:
+            subprocess.run(["start", "cmd", "/k", "python3 C:\\Users\\shree\\OneDrive\\Desktop\\TrueData\\nuvama\\websocket\\order_streaming.py", user.userid], shell=True)
+            print(f"✅ Order streaming launched for user: {user.userid}")
+            
+            if user.userid == "70249886":
+                subprocess.run(["start", "cmd", "/k", "python3 C:\\Users\\shree\\OneDrive\\Desktop\\TrueData\\nuvama\\websocket\\central_socket_data.py"], shell=True)
+                print(f"✅ Central socket data launched for user: {user.userid}")
+        except Exception as e:
+            print(f"⚠️ Failed to launch order streaming for user {user.userid}: {e}")
+            # Don't fail the entire login for this
+        
+        print(f"🎉 Login process completed successfully for user: {user.userid}")
         return JSONResponse(
-        status_code=400,
-        content={"error": "Bad Request", "message": str(e)}
-    )
+            content={
+                "message": "Login successful!", 
+                "id": user.userid,
+                "status": "success",
+                "steps": [
+                    {"step": "web_login", "status": "completed", "message": "Web login successful"},
+                    {"step": "order_streaming", "status": "completed", "message": "Order streaming launched"},
+                    {"step": "login_complete", "status": "completed", "message": "Login process completed"}
+                ]
+            },
+            status_code=200
+        )
+    except Exception as e:
+        error_msg = str(e)
+        print(f"❌ Login failed for user {user.userid}: {error_msg}")
+        return JSONResponse(
+            status_code=400,
+            content={
+                "error": "Login Failed", 
+                "message": error_msg,
+                "status": "error",
+                "user_id": user.userid
+            }
+        )

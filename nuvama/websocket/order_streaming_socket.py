@@ -2,6 +2,7 @@ import orjson
 import time
 from APIConnect.APIConnect import APIConnect
 import redis
+from datetime import datetime
 class OrderStreamingSocket:
     def __init__(self, user_id):
         self.user_id = user_id
@@ -14,7 +15,6 @@ class OrderStreamingSocket:
     def order_streaming_callback(self, response):
         try:
             response = orjson.loads(response.encode())
-            # print(f"Order Streaming Response:{type(response)} {response}")
             redis_key = f"order:{response['response']['data']['userID']}" + f"{response['response']['data']['rmk']}" + f"{response['response']['data']['oID']}"   
             self.r.set(redis_key, orjson.dumps(response).decode())
         except Exception as e:

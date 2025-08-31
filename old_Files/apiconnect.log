@@ -75,3 +75,44 @@ KeyError: 'NFO'
 2025-08-25 15:49:31,661 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "GET /app-report/equity/pnl/transaction?accountId=10122720&fromDate=2023-10-06&toDate=2023-11-06 HTTP/1.1" 504 92
 2025-08-25 15:50:27,849 [DEBUG] APIConnect.http: Request to url: https://nc.nuvamawealth.com/edelmw-eq/eq/holdings/v1/rmsholdings/10122720/
 2025-08-25 15:50:27,929 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "GET /edelmw-eq/eq/holdings/v1/rmsholdings/10122720/ HTTP/1.1" 200 None
+2025-08-26 14:38:35,335 [INFO] constants.router: Router object is being created.
+2025-08-26 14:38:35,335 [INFO] APIConnect.http: Http object is being created.
+2025-08-26 14:38:35,335 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-26 14:38:35,335 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-26 14:38:39,383 [INFO] APIConnect.api_utils: Checking for new update.
+2025-08-26 14:38:39,391 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-26 14:38:40,011 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-08-26 14:38:40,011 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1756166422511, 'exp': 1756166422502, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'eb65de91-a401-468a-b21d-83b74606167e', 'srvTm': 1756199320675}
+2025-08-26 14:39:07,995 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-08-27 22:00:32,659 [INFO] constants.router: Router object is being created.
+2025-08-27 22:00:32,659 [INFO] APIConnect.http: Http object is being created.
+2025-08-27 22:00:32,659 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-27 22:00:32,659 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-27 22:00:32,669 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-27 22:00:33,623 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/2BlEHXuabO8xRw/ HTTP/1.1" 401 171
+2025-08-27 22:00:51,084 [INFO] constants.router: Router object is being created.
+2025-08-27 22:00:51,085 [INFO] APIConnect.http: Http object is being created.
+2025-08-27 22:00:51,085 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-27 22:00:51,085 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-27 22:00:51,088 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-27 22:00:51,755 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 401 171
+2025-08-27 22:03:55,731 [INFO] constants.router: Router object is being created.
+2025-08-27 22:03:55,731 [INFO] APIConnect.http: Http object is being created.
+2025-08-27 22:03:55,731 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-27 22:03:55,731 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-27 22:03:55,749 [INFO] APIConnect.api_utils: Checking for new update.
+2025-08-27 22:03:55,749 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-27 22:03:56,565 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-08-27 22:03:56,565 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1756252823902, 'exp': 1756252823893, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '84e92891-b0ab-41c0-a6f3-85a7394218ff', 'srvTm': 1756312437127}
+2025-08-28 18:09:47,116 [INFO] constants.router: Router object is being created.
+2025-08-28 18:09:47,116 [INFO] APIConnect.http: Http object is being created.
+2025-08-28 18:09:47,116 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-28 18:09:47,116 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-28 18:10:21,227 [INFO] constants.router: Router object is being created.
+2025-08-28 18:10:21,228 [INFO] APIConnect.http: Http object is being created.
+2025-08-28 18:10:21,229 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-08-28 18:10:21,229 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-08-28 18:10:21,241 [INFO] APIConnect.api_utils: Checking for new update.
+2025-08-28 18:10:21,249 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-08-28 18:10:22,213 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-08-28 18:10:22,213 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1756339223462, 'exp': 1756339223452, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'f39c29e7-4359-427c-8a9d-bcf9766bd7cb', 'srvTm': 1756384823449}

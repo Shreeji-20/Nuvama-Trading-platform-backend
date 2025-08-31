@@ -73,7 +73,7 @@ class common_functions:
         return filtered_df
     
     def refresh_strikes_and_options(self,expiry=0,symbol='NIFTY'):
-        strikes = self.get_strikes(symbol.upper(), 30)
+        strikes = self.get_strikes(symbol.upper(), 10)
         self.options_df = self.get_filtered_df(symbol.upper(), strikes, expiry)
         option_mapper = {
             row['exchangetoken']: {

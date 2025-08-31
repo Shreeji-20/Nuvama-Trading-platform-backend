@@ -57,6 +57,7 @@ class AdvancedOptionsStrategy(BaseModel):
     start_price: float = Field(..., description="Start price")
     exit_start: float = Field(..., description="Exit start price")
     action: str = Field(..., description="Global BUY or SELL (used as fallback)")
+    quantity_multiplier: int = Field(default=1, description="Multiplier for scaling leg quantities")
     slice_multiplier: int = Field(..., description="Multiplier for calculating total slices")
     user_ids: List[str] = Field(..., description="List of user IDs")
     run_state: int = Field(default=0, description="Run state (0=Running, 1=Paused, 2=Stopped, 3=Not Started)")
@@ -175,7 +176,7 @@ async def create_strategy(strategy: AdvancedOptionsStrategy):
         non_leg_fields = {
             'bidding_leg', 'base_legs', 'bidding_leg_key', 'desired_spread', 
             'exit_desired_spread', 'start_price', 'exit_start', 'action', 
-            'slice_multiplier', 'user_ids', 'run_state', 'order_type', 
+            'quantity_multiplier', 'slice_multiplier', 'user_ids', 'run_state', 'order_type', 
             'IOC_timeout', 'exit_price_gap', 'no_of_bidask_average', 'notes'
         }
         
@@ -231,6 +232,7 @@ async def update_strategy(strategy_id: str, strategy: AdvancedOptionsStrategy):
         raise HTTPException(status_code=500, detail="Redis connection not available")
     
     try:
+        print("stratergy : ",strategy.json())
         redis_key = f"4_leg:{strategy_id}"
         
         # Check if strategy exists
@@ -246,8 +248,8 @@ async def update_strategy(strategy_id: str, strategy: AdvancedOptionsStrategy):
         non_leg_fields = {
             'bidding_leg', 'base_legs', 'bidding_leg_key', 'desired_spread', 
             'exit_desired_spread', 'start_price', 'exit_start', 'action', 
-            'slice_multiplier', 'user_ids', 'run_state', 'order_type', 
-            'IOC_timeout', 'exit_price_gap', 'no_of_bidask_average', 'notes'
+            'quantity_multiplier', 'slice_multiplier', 'user_ids', 'run_state', 'order_type', 
+            'IOC_timeout', 'exit_price_gap', 'no_of_bidask_average', 'notes','quantity_multiplier'
         }
         
         for key, value in strategy_dict.items():
@@ -376,7 +378,7 @@ async def validate_strategy_data(data: dict):
         non_leg_fields = {
             'bidding_leg', 'base_legs', 'bidding_leg_key', 'desired_spread', 
             'exit_desired_spread', 'start_price', 'exit_start', 'action', 
-            'slice_multiplier', 'user_ids', 'run_state', 'order_type', 
+            'quantity_multiplier', 'slice_multiplier', 'user_ids', 'run_state', 'order_type', 
             'IOC_timeout', 'exit_price_gap', 'no_of_bidask_average', 'notes'
         }
         
@@ -413,7 +415,7 @@ async def validate_strategy_data(data: dict):
                 validation_results["errors"].append(f"Invalid base_leg reference: {base_leg}. Available legs: {valid_leg_keys}")
         
         # Check required fields
-        required_fields = ["desired_spread", "exit_desired_spread", "start_price", "exit_start", "action", "slice_multiplier", "user_ids"]
+        required_fields = ["desired_spread", "exit_desired_spread", "start_price", "exit_start", "action", "quantity_multiplier", "slice_multiplier", "user_ids"]
         for field in required_fields:
             if field not in data:
                 validation_results["valid"] = False

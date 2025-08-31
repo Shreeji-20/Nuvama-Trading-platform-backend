@@ -26,13 +26,16 @@ class OrderType(str, Enum):
 
 class OptionLeg(BaseModel):
     """Model for individual option leg in a multi-leg strategy"""
-    id: Optional[Union[int, float]] = Field(default=None, description="Unique identifier for the leg")
+    id: Optional[Union[int, float, str]] = Field(default=None, description="Unique identifier for the leg")
     symbol: SymbolType = Field(..., description="Underlying symbol")
     strike: float = Field(..., gt=0, description="Strike price must be greater than 0")
     expiry: str = Field(..., description="Expiry identifier (0=current week, 1=next week, etc.)")
     optionType: OptionType = Field(..., description="Option type (CE/PE)")
     orderType: OrderType = Field(..., description="Order type (buy/sell)")
     quantity: int = Field(default=1, gt=0, description="Quantity must be greater than 0")
+    noBidAskAverage: Optional[int] = Field(default=1, description="Number of bid/ask levels to average")
+    pricingMethod: Optional[str] = Field(default="average", description="Pricing method: 'average' or 'depth'")
+    depthIndex: Optional[int] = Field(default=3, description="Depth index for depth pricing (1-5)")
 
     @validator('expiry')
     def validate_expiry(cls, v):
@@ -41,19 +44,44 @@ class OptionLeg(BaseModel):
             raise ValueError("Expiry must be one of: 0, 1, 2, 3")
         return v
 
+    @validator('noBidAskAverage')
+    def validate_no_bid_ask_average(cls, v):
+        """Validate noBidAskAverage is between 1 and 5"""
+        if v is not None and (v < 1 or v > 5):
+            raise ValueError("noBidAskAverage must be between 1 and 5")
+        return v
+
+    @validator('pricingMethod')
+    def validate_pricing_method(cls, v):
+        """Validate pricing method"""
+        if v is not None and v not in ["average", "depth"]:
+            raise ValueError("pricingMethod must be 'average' or 'depth'")
+        return v
+
+    @validator('depthIndex')
+    def validate_depth_index(cls, v):
+        """Validate depth index is between 1 and 5"""
+        if v is not None and (v < 1 or v > 5):
+            raise ValueError("depthIndex must be between 1 and 5")
+        return v
+
     class Config:
         use_enum_values = True
         schema_extra = {
             "example": {
-                "id": 1692547200.123,
+                "id": "leg_1692547200_123",
                 "symbol": "NIFTY",
                 "strike": 19500.0,
                 "expiry": "0",
                 "optionType": "CE",
                 "orderType": "buy",
-                "quantity": 1
+                "quantity": 1,
+                "noBidAskAverage": 1,
+                "pricingMethod": "average",
+                "depthIndex": 3
             }
         }
+        extra = "allow"
 
 
 class MultiLegStrategy(BaseModel):
@@ -62,6 +90,7 @@ class MultiLegStrategy(BaseModel):
     name: str = Field(..., min_length=1, max_length=100, description="Strategy name")
     legs: List[OptionLeg] = Field(default_factory=list, description="List of option legs")
     totalSpread: Optional[float] = Field(default=None, description="Total spread value")
+    biddingLegId: Optional[Union[int, float, str]] = Field(default=None, description="ID of the leg used as bidding leg")
     created_at: Optional[datetime] = Field(default=None, description="Strategy creation timestamp")
     updated_at: Optional[datetime] = Field(default=None, description="Strategy last update timestamp")
 
@@ -80,6 +109,7 @@ class MultiLegStrategy(BaseModel):
         return v.strip()
 
     class Config:
+        extra = "allow"
         use_enum_values = True
         schema_extra = {
             "example": {
@@ -87,25 +117,32 @@ class MultiLegStrategy(BaseModel):
                 "name": "Bull Call Spread",
                 "legs": [
                     {
-                        "id": 1692547200.123,
+                        "id": "leg_1692547200_123",
                         "symbol": "NIFTY",
                         "strike": 19500.0,
                         "expiry": "0",
                         "optionType": "CE",
                         "orderType": "buy",
-                        "quantity": 1
+                        "quantity": 1,
+                        "noBidAskAverage": 1,
+                        "pricingMethod": "average",
+                        "depthIndex": 3
                     },
                     {
-                        "id": 1692547201.456,
+                        "id": "leg_1692547201_456",
                         "symbol": "NIFTY",
                         "strike": 19600.0,
                         "expiry": "0",
                         "optionType": "CE",
                         "orderType": "sell",
-                        "quantity": 1
+                        "quantity": 1,
+                        "noBidAskAverage": 1,
+                        "pricingMethod": "average",
+                        "depthIndex": 3
                     }
                 ],
                 "totalSpread": -50.0,
+                "biddingLegId": "leg_1692547200_123",
                 "created_at": "2025-08-20T10:30:00Z",
                 "updated_at": "2025-08-20T10:30:00Z"
             }
@@ -117,6 +154,7 @@ class StrategyCreateRequest(BaseModel):
     name: str = Field(..., min_length=1, max_length=100)
     legs: List[OptionLeg] = Field(..., min_items=1)
     totalSpread: Optional[float] = Field(default=None)
+    biddingLegId: Optional[Union[int, float, str]] = Field(default=None, description="ID of the leg used as bidding leg")
 
     class Config:
         use_enum_values = True
@@ -127,6 +165,7 @@ class StrategyUpdateRequest(BaseModel):
     name: Optional[str] = Field(default=None, min_length=1, max_length=100)
     legs: Optional[List[OptionLeg]] = Field(default=None, min_items=1)
     totalSpread: Optional[float] = Field(default=None)
+    biddingLegId: Optional[Union[int, float, str]] = Field(default=None, description="ID of the leg used as bidding leg")
 
     class Config:
         use_enum_values = True
@@ -138,6 +177,7 @@ class StrategyResponse(BaseModel):
     name: str
     legs: List[OptionLeg]
     totalSpread: Optional[float]
+    biddingLegId: Optional[Union[int, float, str]]
     created_at: datetime
     updated_at: datetime
 
