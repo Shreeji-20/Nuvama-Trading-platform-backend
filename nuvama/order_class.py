@@ -45,7 +45,8 @@ class Orders:
             response = orjson.loads(response)
             order_details['order_id'] = response['data']['oid']
             order_details['placed_time'] = response['srvTm']
-          
+            order_details['request'] = order_details
+            order_details['response'] = response
             return order_details
             
         except Exception as e:

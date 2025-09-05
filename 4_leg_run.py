@@ -7,5 +7,5 @@ from nuvama import stratergies_direct_ioc_box
 # obj_dual = stratergies_dual_spread.StratergyDualSpread("fde5ebd6-3052-43cb-a8c8-3871b66c9705")
 # obj_dual.main_logic()
 
-obj_seq = stratergies_direct_ioc_box.StratergyDirectIOCBox("f6038a59-c4b8-4f0d-a6cf-968a4475bac9")
+obj_seq = stratergies_direct_ioc_box.StratergyDirectIOCBox("2480ffb4-9a68-417b-98cf-d4b98a89f0a4")
 obj_seq.main_logic()
