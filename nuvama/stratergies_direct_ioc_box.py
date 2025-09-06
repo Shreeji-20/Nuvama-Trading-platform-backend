@@ -64,6 +64,9 @@ class StratergyDirectIOCBox:
         self.params.setdefault('profit_threshold_sell', 2)  # 2 Rs profit for SELL legs
         self.params.setdefault('profit_threshold_buy', 2)   # 2 Rs profit for BUY legs
         
+        # Set default exit spread if not provided (different from entry spread)
+        self.params.setdefault('exit_desired_spread', 200)  # Default exit spread (usually different from entry)
+        
         # Load option mapper
         self._load_option_mapper()
 
@@ -158,7 +161,13 @@ class StratergyDirectIOCBox:
                 self.logger.error("Params update thread failed", exception=e)
 
     def _init_global_parallel_observation(self):
-        """Initialize global parallel observation for both pairs at startup."""
+        """
+        Initialize global parallel observation for both pairs at startup.
+        
+        Note: This system runs continuously with 2-second observations for real-time
+        execution decisions during order placement. For the initial CASE A/B decision,
+        we use a separate dedicated 10-second observation via _observe_market_for_case_decision().
+        """
         try:
             # Check if already initialized to prevent duplicate initialization
             if self.global_observation_active:
@@ -169,7 +178,7 @@ class StratergyDirectIOCBox:
                 buy_leg_keys = [self.pair1_bidding_leg, self.pair1_base_leg]
                 sell_leg_keys = [self.pair2_bidding_leg, self.pair2_base_leg]
                 
-                self.logger.info("Starting global parallel observation for all pairs")
+                self.logger.info("Starting global parallel observation for all pairs (2-second cycles)")
                 
                 # Start observation for BUY pair
                 self._start_global_parallel_observation("BUY_PAIR", buy_leg_keys[0], buy_leg_keys[1])
@@ -291,31 +300,47 @@ class StratergyDirectIOCBox:
             leg1_price = current_prices.get(leg1_key, 0)
             leg2_price = current_prices.get(leg2_key, 0)
             
-            leg1_prices.append(leg1_price)
-            leg2_prices.append(leg2_price)
+            # Only add valid prices
+            if leg1_price > 0 and leg2_price > 0:
+                leg1_prices.append(leg1_price)
+                leg2_prices.append(leg2_price)
             
             time.sleep(0.2)  # Check every 200ms
+        
+        # Ensure we have enough data points
+        if len(leg1_prices) < 3:
+            self.logger.warning(f"Insufficient data for pair observation ({len(leg1_prices)} samples)")
+            return False
         
         # Analyze trends
         leg1_trend, leg1_change = StrategyHelpers.analyze_price_trend(leg1_prices)
         leg2_trend, leg2_change = StrategyHelpers.analyze_price_trend(leg2_prices)
         
-        if leg1_trend == "STABLE" and leg2_trend == "STABLE":
+        # Determine leg action type (BUY or SELL) from the first leg
+        leg1_action = self.legs[leg1_key]['info'].get('action', self.global_action).upper()
+        leg_action_type = "BUY" if leg1_action == "BUY" else "SELL"
+        
+        # Use new execution strategy logic
+        execution_strategy = self._determine_execution_strategy(
+            leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type
+        )
+        
+        # self.logger.info(
+        #     f"Market observation complete for {leg_action_type} legs",
+        #     f"Strategy: {execution_strategy['strategy']} | Action: {execution_strategy['action']}"
+        # )
+        
+        # Return False if we should skip execution
+        if execution_strategy['action'] == 'SKIP':
+            self.logger.warning(f"Skipping execution: {execution_strategy['reason']}")
             return False
         
-        # Determine order sequence - place increasing leg first for BUY legs
-        if leg1_change > leg2_change:
-            first_leg, second_leg = leg1_key, leg2_key
-        elif leg2_change > leg1_change:
-            first_leg, second_leg = leg2_key, leg1_key
-        else:
-            # Equal trends, use original order
-            first_leg, second_leg = leg1_key, leg2_key
-        
+        # Return execution details for proceeding with orders
         return {
-            'first_leg': first_leg,
-            'second_leg': second_leg,
-            'trend': 'moving',
+            'first_leg': execution_strategy['first_leg'],
+            'second_leg': execution_strategy['second_leg'],
+            'trend': 'strategic_execution',
+            'execution_strategy': execution_strategy,
             'price_data': {
                 leg1_key: leg1_prices,
                 leg2_key: leg2_prices
@@ -327,28 +352,431 @@ class StratergyDirectIOCBox:
             'final_prices': {
                 leg1_key: leg1_prices[-1],
                 leg2_key: leg2_prices[-1]
-            }
+            },
+            'leg_action_type': leg_action_type
         }
+
+    def _determine_execution_strategy(self, leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type="BUY"):
+        """
+        Determine execution strategy based on market trends and order type.
+        
+        Args:
+            leg1_key: First leg identifier
+            leg2_key: Second leg identifier  
+            leg1_trend: Trend for first leg ("STABLE", "INCREASING", "DECREASING")
+            leg2_trend: Trend for second leg ("STABLE", "INCREASING", "DECREASING")
+            leg1_change: Price change for first leg
+            leg2_change: Price change for second leg
+            leg_action_type: "BUY" or "SELL" to determine execution rules
+            
+        Returns:
+            dict: Execution strategy with action and order details
+        """
+        try:
+            # self.logger.info(
+            #     f"Determining execution strategy for {leg_action_type} legs",
+            #     f"{leg1_key}: {leg1_trend} ({leg1_change:.2f}), {leg2_key}: {leg2_trend} ({leg2_change:.2f})"
+            # )
+            
+            if leg_action_type.upper() == "SELL":
+                return self._determine_sell_execution_strategy(leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change)
+            else:  # BUY
+                return self._determine_buy_execution_strategy(leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change)
+                
+        except Exception as e:
+            self.logger.error("Failed to determine execution strategy", exception=e)
+            return {"action": "SKIP", "reason": "strategy_determination_failed"}
+
+    def _determine_sell_execution_strategy(self, leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change):
+        """
+        SELL execution rules:
+        1. Both legs stable -> execute legs
+        2. One decreasing, other stable -> do not execute  
+        3. One increasing, other decreasing -> execute decreasing first
+        4. One increasing, other stable -> execute stable first
+        """
+        # Rule 1: Both legs stable -> execute
+        if leg1_trend == "STABLE" and leg2_trend == "STABLE":
+            # self.logger.success("SELL Strategy: Both legs stable - executing both legs")
+            return {
+                "action": "EXECUTE",
+                "strategy": "both_stable",
+                "first_leg": leg1_key,
+                "second_leg": leg2_key,
+                "reason": "Both legs are stable - safe to execute"
+            }
+        
+        # Rule 2: One decreasing, other stable -> do not execute
+        if ((leg1_trend == "DECREASING" and leg2_trend == "STABLE") or 
+            (leg1_trend == "STABLE" and leg2_trend == "DECREASING")):
+            self.logger.warning("SELL Strategy: One decreasing, other stable - skipping execution")
+            return {
+                "action": "SKIP",
+                "strategy": "decreasing_with_stable", 
+                "reason": "One leg decreasing with other stable - unfavorable for SELL"
+            }
+        
+        # Rule 3: One increasing, other decreasing -> execute decreasing first
+        if ((leg1_trend == "INCREASING" and leg2_trend == "DECREASING") or
+            (leg1_trend == "DECREASING" and leg2_trend == "INCREASING")):
+            decreasing_leg = leg1_key if leg1_trend == "DECREASING" else leg2_key
+            increasing_leg = leg2_key if leg1_trend == "DECREASING" else leg1_key
+            self.logger.success(f"SELL Strategy: Mixed trends - executing decreasing leg ({decreasing_leg}) first")
+            return {
+                "action": "EXECUTE",
+                "strategy": "decreasing_first",
+                "first_leg": decreasing_leg,
+                "second_leg": increasing_leg,
+                "reason": f"Execute decreasing leg first to capture better SELL price"
+            }
+        
+        # Rule 4: One increasing, other stable -> execute stable first
+        if ((leg1_trend == "INCREASING" and leg2_trend == "STABLE") or
+            (leg1_trend == "STABLE" and leg2_trend == "INCREASING")):
+            stable_leg = leg1_key if leg1_trend == "STABLE" else leg2_key
+            increasing_leg = leg2_key if leg1_trend == "STABLE" else leg1_key
+            self.logger.success(f"SELL Strategy: Increasing with stable - executing stable leg ({stable_leg}) first")
+            return {
+                "action": "EXECUTE", 
+                "strategy": "stable_first",
+                "first_leg": stable_leg,
+                "second_leg": increasing_leg,
+                "reason": f"Execute stable leg first, then capture increasing trend"
+            }
+        
+        # Additional cases: Both increasing or both decreasing
+        if leg1_trend == "INCREASING" and leg2_trend == "INCREASING":
+            # Both increasing - execute based on change magnitude (stronger increase first)
+            if abs(leg1_change) >= abs(leg2_change):
+                first_leg, second_leg = leg1_key, leg2_key
+            else:
+                first_leg, second_leg = leg2_key, leg1_key
+            self.logger.info("SELL Strategy: Both increasing - executing stronger increase first")
+            return {
+                "action": "EXECUTE",
+                "strategy": "both_increasing",
+                "first_leg": first_leg,
+                "second_leg": second_leg,
+                "reason": "Both increasing - execute stronger movement first"
+            }
+        
+        if leg1_trend == "DECREASING" and leg2_trend == "DECREASING":
+            # Both decreasing - execute based on change magnitude (stronger decrease first)
+            if abs(leg1_change) >= abs(leg2_change):
+                first_leg, second_leg = leg1_key, leg2_key
+            else:
+                first_leg, second_leg = leg2_key, leg1_key
+            self.logger.warning("SELL Strategy: Both decreasing - executing stronger decrease first")
+            return {
+                "action": "EXECUTE",
+                "strategy": "both_decreasing", 
+                "first_leg": first_leg,
+                "second_leg": second_leg,
+                "reason": "Both decreasing - execute stronger movement first"
+            }
+        
+        # Fallback
+        self.logger.warning("SELL Strategy: Unhandled case - using default execution")
+        return {
+            "action": "EXECUTE",
+            "strategy": "default",
+            "first_leg": leg1_key,
+            "second_leg": leg2_key,
+            "reason": "Unhandled trend combination - default execution"
+        }
+
+    def _determine_buy_execution_strategy(self, leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change):
+        """
+        BUY execution rules:
+        1. Both stable -> execute
+        2. One increasing, other stable -> do not execute
+        3. One stable, other decreasing -> execute stable first  
+        4. One increasing, other decreasing -> execute increasing first
+        """
+        # Rule 1: Both legs stable -> execute
+        if leg1_trend == "STABLE" and leg2_trend == "STABLE":
+            # self.logger.success("BUY Strategy: Both legs stable - executing both legs")
+            return {
+                "action": "EXECUTE",
+                "strategy": "both_stable",
+                "first_leg": leg1_key,
+                "second_leg": leg2_key,
+                "reason": "Both legs are stable - safe to execute"
+            }
+        
+        # Rule 2: One increasing, other stable -> do not execute
+        if ((leg1_trend == "INCREASING" and leg2_trend == "STABLE") or
+            (leg1_trend == "STABLE" and leg2_trend == "INCREASING")):
+            self.logger.warning("BUY Strategy: One increasing, other stable - skipping execution")
+            return {
+                "action": "SKIP",
+                "strategy": "increasing_with_stable",
+                "reason": "One leg increasing with other stable - unfavorable for BUY"
+            }
+        
+        # Rule 3: One stable, other decreasing -> execute stable first
+        if ((leg1_trend == "STABLE" and leg2_trend == "DECREASING") or
+            (leg1_trend == "DECREASING" and leg2_trend == "STABLE")):
+            stable_leg = leg1_key if leg1_trend == "STABLE" else leg2_key
+            decreasing_leg = leg2_key if leg1_trend == "STABLE" else leg1_key
+            self.logger.success(f"BUY Strategy: Stable with decreasing - executing stable leg ({stable_leg}) first")
+            return {
+                "action": "EXECUTE",
+                "strategy": "stable_first",
+                "first_leg": stable_leg,
+                "second_leg": decreasing_leg,
+                "reason": f"Execute stable leg first, then capture decreasing price"
+            }
+        
+        # Rule 4: One increasing, other decreasing -> execute increasing first
+        if ((leg1_trend == "INCREASING" and leg2_trend == "DECREASING") or
+            (leg1_trend == "DECREASING" and leg2_trend == "INCREASING")):
+            increasing_leg = leg1_key if leg1_trend == "INCREASING" else leg2_key
+            decreasing_leg = leg2_key if leg1_trend == "INCREASING" else leg1_key
+            self.logger.success(f"BUY Strategy: Mixed trends - executing increasing leg ({increasing_leg}) first")
+            return {
+                "action": "EXECUTE",
+                "strategy": "increasing_first",
+                "first_leg": increasing_leg,
+                "second_leg": decreasing_leg,
+                "reason": f"Execute increasing leg first to secure better BUY position"
+            }
+        
+        # Additional cases: Both increasing or both decreasing
+        if leg1_trend == "INCREASING" and leg2_trend == "INCREASING":
+            # Both increasing - execute based on change magnitude (stronger increase first)
+            if abs(leg1_change) >= abs(leg2_change):
+                first_leg, second_leg = leg1_key, leg2_key
+            else:
+                first_leg, second_leg = leg2_key, leg1_key
+            self.logger.warning("BUY Strategy: Both increasing - executing stronger increase first")
+            return {
+                "action": "EXECUTE",
+                "strategy": "both_increasing",
+                "first_leg": first_leg,
+                "second_leg": second_leg,
+                "reason": "Both increasing - execute stronger movement first"
+            }
+        
+        if leg1_trend == "DECREASING" and leg2_trend == "DECREASING":
+            # Both decreasing - execute based on change magnitude (stronger decrease first) 
+            if abs(leg1_change) >= abs(leg2_change):
+                first_leg, second_leg = leg1_key, leg2_key
+            else:
+                first_leg, second_leg = leg2_key, leg1_key
+            self.logger.info("BUY Strategy: Both decreasing - executing stronger decrease first")
+            return {
+                "action": "EXECUTE",
+                "strategy": "both_decreasing",
+                "first_leg": first_leg,
+                "second_leg": second_leg,
+                "reason": "Both decreasing - execute stronger movement first for better BUY price"
+            }
+        
+            # Fallback
+        self.logger.warning("BUY Strategy: Unhandled case - using default execution")
+        return {
+            "action": "EXECUTE",
+            "strategy": "default",
+            "first_leg": leg1_key,
+            "second_leg": leg2_key,
+            "reason": "Unhandled trend combination - default execution"
+        }
+
+    def _test_execution_strategies(self, leg1_key, leg2_key):
+        """
+        Test function to demonstrate all execution strategies for both BUY and SELL cases.
+        This helps verify the strategy logic without placing actual orders.
+        """
+        test_scenarios = [
+            ("STABLE", "STABLE", 0.0, 0.0),
+            ("STABLE", "INCREASING", 0.0, 1.5), 
+            ("STABLE", "DECREASING", 0.0, -1.5),
+            ("INCREASING", "STABLE", 1.5, 0.0),
+            ("INCREASING", "INCREASING", 1.5, 2.0),
+            ("INCREASING", "DECREASING", 1.5, -1.0),
+            ("DECREASING", "STABLE", -1.5, 0.0),
+            ("DECREASING", "INCREASING", -1.5, 1.0),
+            ("DECREASING", "DECREASING", -1.5, -2.0)
+        ]
+        
+        self.logger.separator("EXECUTION STRATEGY TEST")
+        
+        for leg_action_type in ["BUY", "SELL"]:
+            self.logger.info(f"Testing {leg_action_type} execution strategies")
+            
+            for leg1_trend, leg2_trend, leg1_change, leg2_change in test_scenarios:
+                strategy = self._determine_execution_strategy(
+                    leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type
+                )
+                
+                print(f"  {leg1_trend:12} + {leg2_trend:12} → {strategy['action']:7} | {strategy['strategy']:20} | {strategy['reason']}")
+            
+            print()  # Empty line between BUY and SELL
+        
+        self.logger.separator("STRATEGY TEST COMPLETE")
+
+    def _observe_market_for_case_decision(self, leg1_key, leg2_key, observation_duration=10):
+        """
+        Dedicated 10-second market observation specifically for CASE A/B decision.
+        More comprehensive analysis with detailed logging for critical decision making.
+        """
+        try:
+            self.logger.info(
+                f"Starting {observation_duration}-second dedicated observation for CASE decision",
+                f"Legs: {leg1_key}, {leg2_key}"
+            )
+            
+            leg1_prices = []
+            leg2_prices = []
+            timestamps = []
+            start_time = time.time()
+            
+            # Collect prices every 200ms for the specified duration
+            sample_count = 0
+            valid_samples = 0
+            while time.time() - start_time < observation_duration:
+                current_time = time.time()
+                current_prices = self._get_leg_prices([leg1_key, leg2_key])
+                leg1_price = current_prices.get(leg1_key, 0)
+                leg2_price = current_prices.get(leg2_key, 0)
+                
+                if leg1_price > 0 and leg2_price > 0:  # Valid prices
+                    leg1_prices.append(leg1_price)
+                    leg2_prices.append(leg2_price)
+                    timestamps.append(current_time)
+                    valid_samples += 1
+                    
+                    # Log first few samples to verify we're getting fresh data
+                    if valid_samples <= 3:
+                        self.logger.debug(
+                            f"Sample {valid_samples}: {leg1_key}={leg1_price:.2f}, {leg2_key}={leg2_price:.2f}",
+                            f"Fresh data fetched at {current_time:.3f}"
+                        )
+                else:
+                    self.logger.warning(f"Invalid prices received: {leg1_key}={leg1_price}, {leg2_key}={leg2_price}")
+                
+                sample_count += 1
+                
+                # Progress logging every 2 seconds
+                elapsed = current_time - start_time
+                if valid_samples > 0 and int(elapsed) % 2 == 0 and elapsed > 0:
+                    progress = (elapsed / observation_duration) * 100
+                    self.logger.debug(
+                        f"Case observation progress: {progress:.0f}%",
+                        f"Valid samples: {valid_samples}/{sample_count}, {leg1_key}: {leg1_price:.2f}, {leg2_key}: {leg2_price:.2f}"
+                    )
+                
+                time.sleep(0.2)  # 200ms intervals
+            
+            # Ensure we have enough valid data points
+            if len(leg1_prices) < 10:
+                self.logger.warning(
+                    f"Insufficient valid data for case decision ({len(leg1_prices)} samples out of {sample_count} attempts)",
+                    "Defaulting to CASE A (STABLE)"
+                )
+                return False
+            
+            # Enhanced trend analysis for critical decision
+            leg1_trend, leg1_change = StrategyHelpers.analyze_price_trend(leg1_prices)
+            leg2_trend, leg2_change = StrategyHelpers.analyze_price_trend(leg2_prices)
+            
+            # Calculate additional statistics for better decision making
+            leg1_volatility = self._calculate_price_volatility(leg1_prices)
+            leg2_volatility = self._calculate_price_volatility(leg2_prices)
+            leg1_direction = "UP" if leg1_prices[-1] > leg1_prices[0] else "DOWN" if leg1_prices[-1] < leg1_prices[0] else "FLAT"
+            leg2_direction = "UP" if leg2_prices[-1] > leg2_prices[0] else "DOWN" if leg2_prices[-1] < leg2_prices[0] else "FLAT"
+            
+            # Log detailed analysis
+            self.logger.info(
+                f"10-second observation completed - {sample_count} samples",
+                f"{leg1_key}: {leg1_trend} ({leg1_direction}, change: {leg1_change:.2f}, volatility: {leg1_volatility:.2f})\n" +
+                f"{leg2_key}: {leg2_trend} ({leg2_direction}, change: {leg2_change:.2f}, volatility: {leg2_volatility:.2f})"
+            )
+            
+            # Enhanced decision logic: Both legs must be STABLE for CASE A
+            if leg1_trend == "STABLE" and leg2_trend == "STABLE":
+                self.logger.success(
+                    "DECISION: Both BUY legs are STABLE over 10 seconds → CASE A",
+                    f"Leg volatilities: {leg1_key}={leg1_volatility:.2f}, {leg2_key}={leg2_volatility:.2f}"
+                )
+                return False  # CASE A
+            
+            # At least one leg is moving - CASE B
+            moving_legs = []
+            if leg1_trend != "STABLE":
+                moving_legs.append(f"{leg1_key}({leg1_trend})")
+            if leg2_trend != "STABLE":
+                moving_legs.append(f"{leg2_key}({leg2_trend})")
+            
+            self.logger.warning(
+                f"DECISION: BUY legs are MOVING over 10 seconds → CASE B",
+                f"Moving legs: {', '.join(moving_legs)}"
+            )
+            
+            # Determine execution order for moving legs (stronger movement first)
+            if abs(leg1_change) > abs(leg2_change):
+                first_leg, second_leg = leg1_key, leg2_key
+                primary_change, secondary_change = leg1_change, leg2_change
+            elif abs(leg2_change) > abs(leg1_change):
+                first_leg, second_leg = leg2_key, leg1_key
+                primary_change, secondary_change = leg2_change, leg1_change
+            else:
+                # Equal movement, use original order
+                first_leg, second_leg = leg1_key, leg2_key
+                primary_change, secondary_change = leg1_change, leg2_change
+            
+            return {
+                'first_leg': first_leg,
+                'second_leg': second_leg,
+                'trend': 'moving',
+                'observation_duration': observation_duration,
+                'sample_count': sample_count,
+                'price_data': {
+                    leg1_key: leg1_prices,
+                    leg2_key: leg2_prices,
+                    'timestamps': timestamps
+                },
+                'trends': {
+                    leg1_key: {
+                        'trend': leg1_trend, 
+                        'change': leg1_change, 
+                        'volatility': leg1_volatility,
+                        'direction': leg1_direction
+                    },
+                    leg2_key: {
+                        'trend': leg2_trend, 
+                        'change': leg2_change, 
+                        'volatility': leg2_volatility,
+                        'direction': leg2_direction
+                    }
+                },
+                'final_prices': {
+                    leg1_key: leg1_prices[-1],
+                    leg2_key: leg2_prices[-1]
+                },
+                'execution_order': {
+                    'primary_leg': first_leg,
+                    'secondary_leg': second_leg,
+                    'primary_change': primary_change,
+                    'secondary_change': secondary_change
+                }
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Failed to observe market for case decision", exception=e)
+            self.logger.warning("Defaulting to CASE A due to observation error")
+            return False  # Default to CASE A on error
 
     def _get_leg_prices(self, leg_keys, is_exit=False):
         """Get current prices for specified legs based on their actions."""
-        prices = {}
-        for leg_key in leg_keys:
-            try:
-                leg_data = self.legs[leg_key]['data']
-                leg_action = self.legs[leg_key]['info'].get('action', self.global_action).upper()
-                
-                if is_exit:
-                    # For exit orders, flip the action (BUY becomes SELL, SELL becomes BUY)
-                    side_key = "askValues" if leg_action == "BUY" else "bidValues"
-                else:
-                    side_key = "bidValues" if leg_action == "BUY" else "askValues"
+        return self.pricing_helpers.get_leg_prices(
+            self.legs, leg_keys, self.global_action, self.data_helpers, is_exit
+        )
 
-                prices[leg_key] = self.pricing_helpers.safe_get_price(leg_data, side_key)
-            except (KeyError, TypeError) as e:
-                print(f"ERROR: Failed to get price for {leg_key}: {e}")
-                prices[leg_key] = 0
-        return prices
+    def _calculate_price_volatility(self, prices):
+        """Calculate price volatility (standard deviation) for a price series."""
+        return self.pricing_helpers.calculate_price_volatility(prices)
 
     def _get_lot_size(self):
         """Get the lot size for the trading symbol."""
@@ -537,7 +965,6 @@ class StratergyDirectIOCBox:
             # Get current prices and prepare order
             new_price = self._get_leg_prices([leg_key])
             print("New Price : ",new_price)
-            breakpoint()
             order = self.order_templates[uid][leg_key].copy()
             
             # Adjust order quantity to remaining quantity
@@ -576,7 +1003,6 @@ class StratergyDirectIOCBox:
                     "mode": self.execution_helper.execution_mode,
                     "response": result
                 })
-                breakpoint()
                 return True
             else:
                 self.logger.error(f"Order execution failed for {leg_key} ({self.execution_helper.execution_mode} mode)")
@@ -587,6 +1013,370 @@ class StratergyDirectIOCBox:
             self.logger.error(f"Failed to place single order for {leg_key}", exception=e)
             self.execution_tracker.add_error(f"Order placement exception for {leg_key}", str(e), e)
             return False
+
+    def _place_modify_order_until_complete(self, uid, leg_key, max_attempts=30, modify_interval=0.3):
+        """
+        Place order using MODIFY strategy until completion.
+        
+        Args:
+            uid: User ID
+            leg_key: Leg identifier  
+            max_attempts: Maximum modification attempts
+            modify_interval: Time between modifications (seconds)
+            
+        Returns:
+            dict: Execution result with filled_qty, filled_price, success status
+        """
+        try:
+            self.logger.info(f"Starting MODIFY execution for {leg_key}", f"User: {uid}, Max attempts: {max_attempts}")
+            
+            # Get remaining quantity and prepare initial order
+            remaining_qty, desired_qty, current_qty = self._get_remaining_quantity_for_leg(uid, leg_key)
+            if remaining_qty <= 0:
+                self.logger.success(f"Desired quantity already reached for {leg_key}")
+                return {"success": True, "filled_qty": current_qty, "filled_price": 0, "reason": "already_filled"}
+            
+            # Get current price and prepare order
+            current_prices = self._get_leg_prices([leg_key])
+            order = self.order_templates[uid][leg_key].copy()
+            order["Quantity"] = remaining_qty
+            order["Slice_Quantity"] = remaining_qty
+            
+            # Add price adjustment based on action
+            tick = 0.05 if order.get("Action") == ActionEnum.BUY else -0.05
+            order["Limit_Price"] = StrategyHelpers.format_limit_price(float(current_prices[leg_key]) + tick)
+            
+            # Place initial order
+            self.logger.info(f"Placing initial order for {leg_key}", f"Qty: {remaining_qty}, Price: {order['Limit_Price']}")
+            success, result = self.execution_helper.execute_order(self.order, order, uid, leg_key)
+            
+            if not success:
+                self.logger.error(f"Initial order placement failed for {leg_key}")
+                return {"success": False, "filled_qty": 0, "filled_price": 0, "reason": "initial_placement_failed"}
+            
+            order_id = result.get('order_id') if isinstance(result, dict) else None
+            if not order_id:
+                self.logger.error(f"No order ID received for {leg_key}")
+                return {"success": False, "filled_qty": 0, "filled_price": 0, "reason": "no_order_id"}
+            
+            # Monitor and modify until completion
+            total_filled_qty = 0
+            attempt = 0
+            
+            while attempt < max_attempts and total_filled_qty < remaining_qty:
+                time.sleep(modify_interval)
+                attempt += 1
+                
+                # Check order status
+                remark = order.get('remark', 'Lord_Shreeji')
+                status = self.order.get_order_status(order_id, uid, remark)
+                
+                current_filled = status.get('filled_qty', 0)
+                filled_price = status.get('filled_price', 0)
+                order_status = status.get('order_status', 'unknown')
+                
+                self.logger.debug(f"MODIFY attempt {attempt} for {leg_key}", 
+                                f"Filled: {current_filled}/{remaining_qty}, Price: {filled_price}, Status: {order_status}")
+                
+                if current_filled >= remaining_qty:
+                    # Order completed
+                    self.logger.success(f"MODIFY execution completed for {leg_key}", 
+                                      f"Filled: {current_filled}, Price: {filled_price}")
+                    return {"success": True, "filled_qty": current_filled, "filled_price": filled_price, "order_id": order_id}
+                
+                # Get fresh price for modification
+                fresh_prices = self._get_leg_prices([leg_key])
+                new_limit_price = StrategyHelpers.format_limit_price(float(fresh_prices[leg_key]) + tick)
+                
+                # Modify order with new price
+                modify_details = {
+                    'user_id': uid,
+                    'Order_ID': order_id,
+                    'Trading_Symbol': order.get('Trading_Symbol'),
+                    'Exchange': order.get('Exchange'),
+                    'Action': order.get('Action'),
+                    'Order_Type': order.get('Order_Type', OrderTypeEnum.LIMIT),
+                    'Quantity': remaining_qty,
+                    'CurrentQuantity': remaining_qty - current_filled,
+                    'Limit_Price': new_limit_price,
+                    'Streaming_Symbol': order.get('Streaming_Symbol'),
+                    'ProductCode': order.get('ProductCode')
+                }
+                
+                modify_result = self.order.modify_order(modify_details)
+                
+                if modify_result.get('status') == 'success':
+                    self.logger.debug(f"Order modified for {leg_key}", f"New price: {new_limit_price}")
+                else:
+                    self.logger.warning(f"Order modification failed for {leg_key}", str(modify_result))
+                
+                total_filled_qty = current_filled
+            
+            # Final status check
+            final_status = self.order.get_order_status(order_id, uid, remark)
+            final_filled = final_status.get('filled_qty', 0)
+            final_price = final_status.get('filled_price', 0)
+            
+            if final_filled >= remaining_qty:
+                self.logger.success(f"MODIFY execution completed for {leg_key} after {attempt} attempts")
+                return {"success": True, "filled_qty": final_filled, "filled_price": final_price, "order_id": order_id}
+            else:
+                self.logger.warning(f"MODIFY execution incomplete for {leg_key}", 
+                                  f"Filled: {final_filled}/{remaining_qty} after {attempt} attempts")
+                return {"success": False, "filled_qty": final_filled, "filled_price": final_price, 
+                       "reason": "max_attempts_reached", "order_id": order_id}
+                
+        except Exception as e:
+            self.logger.error(f"MODIFY execution failed for {leg_key}", exception=e)
+            return {"success": False, "filled_qty": 0, "filled_price": 0, "reason": str(e)}
+
+    def _place_ioc_order_with_retry(self, uid, leg_key, max_retries=1, spread_check_func=None):
+        """
+        Place IOC order with retry logic and spread condition checking.
+        
+        Args:
+            uid: User ID
+            leg_key: Leg identifier
+            max_retries: Maximum retry attempts
+            spread_check_func: Function to check if spread condition is still met (returns True/False)
+            
+        Returns:
+            dict: Execution result with filled_qty, filled_price, success status
+        """
+        try:
+            self.logger.info(f"Starting IOC execution with retry for {leg_key}", f"User: {uid}, Max retries: {max_retries}")
+            
+            retry_count = 0
+            total_filled_qty = 0
+            
+            while retry_count < max_retries:
+                # Check spread condition before each attempt (if provided)
+                if spread_check_func and not spread_check_func():
+                    self.logger.warning(f"Spread condition no longer met for {leg_key}, stopping IOC retries")
+                    return {"success": False, "filled_qty": total_filled_qty, "filled_price": 0, 
+                           "reason": "spread_condition_not_met"}
+                
+                # Get remaining quantity
+                remaining_qty, desired_qty, current_qty = self._get_remaining_quantity_for_leg(uid, leg_key)
+                if remaining_qty <= 0:
+                    self.logger.success(f"Desired quantity already reached for {leg_key}")
+                    return {"success": True, "filled_qty": current_qty, "filled_price": 0, "reason": "already_filled"}
+                
+                # Prepare IOC order
+                current_prices = self._get_leg_prices([leg_key])
+                order = self.order_templates[uid][leg_key].copy()
+                order["Quantity"] = remaining_qty
+                order["Slice_Quantity"] = remaining_qty
+                order["Order_Type"] = OrderTypeEnum.LIMIT
+                order["Duration"] = DurationEnum.IOC
+                order["IOC"] = 0.5  # 500ms timeout
+                
+                # Add price adjustment
+                tick = 0.05 if order.get("Action") == ActionEnum.BUY else -0.05
+                order["Limit_Price"] = StrategyHelpers.format_limit_price(float(current_prices[leg_key]) + tick)
+                
+                retry_count += 1
+                self.logger.info(f"IOC attempt {retry_count}/{max_retries} for {leg_key}", 
+                               f"Qty: {remaining_qty}, Price: {order['Limit_Price']}")
+                
+                # Place IOC order
+                success, result = self.execution_helper.execute_order(self.order, order, uid, leg_key)
+                
+                if success:
+                    # IOC order placed successfully - check fill
+                    order_id = result.get('order_id') if isinstance(result, dict) else None
+                    if order_id:
+                        # Wait a moment for fill data
+                        time.sleep(0.2)
+                        
+                        remark = order.get('remark', 'Lord_Shreeji')
+                        status = self.order.get_order_status(order_id, uid, remark)
+                        filled_qty = status.get('filled_qty', 0)
+                        filled_price = status.get('filled_price', 0)
+                        
+                        total_filled_qty += filled_qty
+                        
+                        if filled_qty > 0:
+                            self.logger.success(f"IOC order filled for {leg_key}", 
+                                              f"Filled: {filled_qty}, Price: {filled_price}")
+                            
+                            # Check if we have enough quantity
+                            if total_filled_qty >= desired_qty:
+                                return {"success": True, "filled_qty": total_filled_qty, "filled_price": filled_price, 
+                                       "attempts": retry_count}
+                        else:
+                            self.logger.warning(f"IOC order placed but not filled for {leg_key}")
+                    else:
+                        self.logger.warning(f"IOC order placed but no order ID for {leg_key}")
+                else:
+                    self.logger.warning(f"IOC order placement failed for {leg_key}", str(result))
+                
+                # Small delay before retry
+                if retry_count < max_retries:
+                    time.sleep(0.1)
+            
+            # All retries exhausted
+            if total_filled_qty > 0:
+                self.logger.warning(f"IOC execution partially completed for {leg_key}", 
+                                  f"Filled: {total_filled_qty}/{desired_qty} after {retry_count} attempts")
+                return {"success": False, "filled_qty": total_filled_qty, "filled_price": 0, 
+                       "reason": "partial_fill", "attempts": retry_count}
+            else:
+                self.logger.error(f"IOC execution failed for {leg_key}", f"No fills after {retry_count} attempts")
+                return {"success": False, "filled_qty": 0, "filled_price": 0, 
+                       "reason": "no_fills", "attempts": retry_count}
+                       
+        except Exception as e:
+            self.logger.error(f"IOC execution with retry failed for {leg_key}", exception=e)
+            return {"success": False, "filled_qty": 0, "filled_price": 0, "reason": str(e)}
+
+    def _execute_pair_with_strategy(self, uid, leg_keys, pair_type="first", execution_mode="MODIFY", 
+                                   spread_check_func=None, strategy_info=None):
+        """
+        Execute a pair of legs using specified execution strategy.
+        
+        Args:
+            uid: User ID
+            leg_keys: List of leg keys [leg1, leg2]
+            pair_type: "first" or "second" pair
+            execution_mode: "MODIFY" or "IOC"
+            spread_check_func: Function to check spread condition (for IOC mode)
+            strategy_info: Strategy execution info (first_leg, second_leg, etc.)
+            
+        Returns:
+            dict: Execution results for both legs
+        """
+        try:
+            self.logger.info(f"Executing {pair_type} pair using {execution_mode} strategy", 
+                           f"Legs: {leg_keys}, User: {uid}")
+            
+            # Determine execution order based on strategy
+            if strategy_info and 'execution_strategy' in strategy_info:
+                first_leg = strategy_info['execution_strategy']['first_leg']
+                second_leg = strategy_info['execution_strategy']['second_leg']
+                execution_reason = strategy_info['execution_strategy']['reason']
+                
+                self.logger.info(f"Using strategic execution order", 
+                               f"First: {first_leg}, Second: {second_leg} | {execution_reason}")
+            else:
+                # Default order
+                first_leg, second_leg = leg_keys[0], leg_keys[1]
+                execution_reason = "Default execution order"
+            
+            results = {}
+            
+            # Execute first leg
+            self.logger.info(f"Executing first leg: {first_leg}")
+            if execution_mode.upper() == "MODIFY":
+                first_result = self._place_modify_order_until_complete(uid, first_leg)
+            else:  # IOC
+                first_result = self._place_ioc_order_with_retry(uid, first_leg, spread_check_func=spread_check_func)
+            
+            results[first_leg] = first_result
+            
+            if not first_result['success']:
+                self.logger.error(f"First leg execution failed: {first_leg}", str(first_result))
+                return {"success": False, "legs": results, "failed_leg": first_leg}
+            
+            # Execute second leg
+            self.logger.info(f"Executing second leg: {second_leg}")
+            if execution_mode == "MODIFY":
+                second_result = self._place_modify_order_until_complete(uid, second_leg)
+            else:  # IOC
+                second_result = self._place_ioc_order_with_retry(uid, second_leg, spread_check_func=spread_check_func)
+            
+            results[second_leg] = second_result
+            
+            if not second_result['success']:
+                self.logger.error(f"Second leg execution failed: {second_leg}", str(second_result))
+                return {"success": False, "legs": results, "failed_leg": second_leg}
+            
+            # Both legs successful
+            self.logger.success(f"{pair_type.capitalize()} pair execution completed", 
+                              f"Mode: {execution_mode}, Both legs filled successfully")
+            
+            return {
+                "success": True,
+                "legs": results,
+                "execution_order": [first_leg, second_leg],
+                "execution_reason": execution_reason,
+                "mode": execution_mode
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Pair execution failed for {pair_type} pair", exception=e)
+            return {"success": False, "error": str(e), "legs": results if 'results' in locals() else {}}
+
+    def _create_spread_condition_checker(self, uid, target_legs, required_spread, comparison_type="<="):
+        """
+        Create a function to check if spread condition is still met.
+        
+        Args:
+            uid: User ID
+            target_legs: List of leg keys to check spread for
+            required_spread: Required spread value
+            comparison_type: "<=" for BUY (current <= required), ">=" for SELL (current >= required)
+            
+        Returns:
+            function: Callable that returns True if condition is met
+        """
+        def check_spread_condition():
+            try:
+                current_prices = self._get_leg_prices(target_legs)
+                current_spread = sum(current_prices[leg] for leg in target_legs)
+                
+                if comparison_type == "<=":
+                    condition_met = current_spread <= required_spread
+                    self.logger.debug(f"BUY spread check: {current_spread:.2f} <= {required_spread:.2f} = {condition_met}")
+                else:  # ">="
+                    condition_met = current_spread >= required_spread
+                    self.logger.debug(f"SELL spread check: {current_spread:.2f} >= {required_spread:.2f} = {condition_met}")
+                
+                return condition_met
+                
+            except Exception as e:
+                self.logger.error("Spread condition check failed", exception=e)
+                return False  # Conservative approach - don't execute if check fails
+        
+        return check_spread_condition
+
+    def _calculate_executed_spread(self, uid, leg_keys, execution_results):
+        """
+        Calculate the executed spread from execution results.
+        
+        Args:
+            uid: User ID
+            leg_keys: List of leg keys
+            execution_results: Results from pair execution
+            
+        Returns:
+            float: Executed spread value
+        """
+        try:
+            total_spread = 0
+            for leg_key in leg_keys:
+                if leg_key in execution_results['legs']:
+                    filled_price = execution_results['legs'][leg_key].get('filled_price', 0)
+                    total_spread += filled_price
+                else:
+                    # Fallback to current price if not in results
+                    current_prices = self._get_leg_prices([leg_key])
+                    total_spread += current_prices[leg_key]
+            
+            self.logger.debug(f"Calculated executed spread: {total_spread:.2f} for legs {leg_keys}")
+            return total_spread
+            
+        except Exception as e:
+            self.logger.error("Failed to calculate executed spread", exception=e)
+            return 0.0
+
+    def _fetch_current_price(self, instrument_token):
+        """
+        Fetch current price for an instrument token.
+        """
+        return self.pricing_helpers.fetch_current_price(
+            instrument_token, self.data_helpers, getattr(self, 'kite', None)
+        )
 
     def _execute_both_pairs(self, uid, prices):
         """Execute both pairs using new dual strategy approach with global observation."""
@@ -617,9 +1407,9 @@ class StratergyDirectIOCBox:
                 })
             
             self.logger.info("Using global observation results for dual strategy execution")
-            
+            # breakpoint()
             # Use new dual strategy execution with global observation
-            return self._execute_dual_strategy_pairs(uid, prices)
+            self._execute_dual_strategy_pairs(uid, prices)
             
         except KeyboardInterrupt:
             self.logger.warning("Execution interrupted by user")
@@ -632,49 +1422,60 @@ class StratergyDirectIOCBox:
             return False
 
     def _execute_dual_strategy_pairs(self, uid, prices):
-        """Execute pairs using dual strategy approach with global observation results."""
+        """Execute pairs using dual strategy approach with dedicated 10-second BUY pair observation."""
         try:
             self.logger.separator(f"DUAL STRATEGY EXECUTION - USER {uid}")
             
-            # Step 1: Get BUY legs observation from global cache
+            # Step 1: Identify BUY and SELL leg pairs
             buy_leg_keys = [self.pair1_bidding_leg, self.pair1_base_leg]
             sell_leg_keys = [self.pair2_bidding_leg, self.pair2_base_leg]
             
             self.logger.info(
-                "Analyzing BUY leg stability using global observation",
+                "Starting 10-second dedicated observation for CASE A/B decision",
                 f"BUY legs: {buy_leg_keys}"
             )
             
-            # Get observation result from global observation
-            observation_result = self._get_global_observation_result("BUY_PAIR")
-            
-            # Log observation to execution tracker
-            self.execution_tracker.add_observation("BUY_PAIR_DECISION", {
+            # Step 2: Perform dedicated 10-second observation for BUY pair decision
+            self.execution_tracker.add_milestone("Starting 10-second BUY pair observation for case decision", {
                 "user": uid,
                 "buy_legs": buy_leg_keys,
                 "sell_legs": sell_leg_keys,
-                "observation_result": observation_result
+                "observation_duration": 10
             })
             
-            if observation_result == None or observation_result == False:
-                # Both BUY legs are STABLE - CASE A: Execute SELL legs first
-                self.logger.success("CASE A: BUY legs are STABLE - executing SELL legs first")
+            # Dedicated 10-second observation specifically for CASE A/B decision
+            buy_pair_observation = self._observe_market_for_case_decision(buy_leg_keys[0], buy_leg_keys[1], 10)
+            # print("Observation : ",buy_pair_observation)
+            # Log the detailed observation result
+            self.execution_tracker.add_observation("BUY_PAIR_CASE_DECISION", {
+                "user": uid,
+                "buy_legs": buy_leg_keys,
+                "sell_legs": sell_leg_keys,
+                "observation_result": buy_pair_observation,
+                "observation_duration": 10
+            })
+            
+            # Step 3: Make CASE A/B decision based on 10-second observation
+            if buy_pair_observation == False or buy_pair_observation is None:
+                # Both BUY legs are STABLE over 10 seconds - CASE A: Execute SELL legs first
+                self.logger.success("CASE A: BUY legs are STABLE over 10 seconds - executing SELL legs first")
                 case_type = "CASE_A"
                 self.execution_tracker.add_milestone(f"User {uid} executing CASE A", {
                     "strategy": "SELL_FIRST",
-                    "reason": "BUY_legs_stable"
+                    "reason": "BUY_legs_stable_10_seconds",
+                    "observation_details": buy_pair_observation
                 })
-                return self._execute_case_a_sell_first(uid, prices, buy_leg_keys, sell_leg_keys)
+                self._execute_case_a_sell_first(uid, prices, buy_leg_keys, sell_leg_keys)
             else:
-                # BUY legs are moving - CASE B: Execute BUY legs first with profit monitoring
-                self.logger.warning("CASE B: BUY legs are MOVING - executing BUY legs first")
+                # BUY legs are moving over 10 seconds - CASE B: Execute BUY legs first with profit monitoring
+                self.logger.warning("CASE B: BUY legs are MOVING over 10 seconds - executing BUY legs first")
                 case_type = "CASE_B"
                 self.execution_tracker.add_milestone(f"User {uid} executing CASE B", {
                     "strategy": "BUY_FIRST",
-                    "reason": "BUY_legs_moving",
-                    "observation_details": observation_result
+                    "reason": "BUY_legs_moving_10_seconds",
+                    "observation_details": buy_pair_observation
                 })
-                return self._execute_case_b_buy_first(uid, prices, buy_leg_keys, sell_leg_keys, observation_result)
+                return self._execute_case_b_buy_first(uid, prices, buy_leg_keys, sell_leg_keys, buy_pair_observation)
                 
         except Exception as e:
             self.logger.error(f"Failed to execute dual strategy for user {uid}", exception=e)
@@ -684,6 +1485,7 @@ class StratergyDirectIOCBox:
     def _execute_case_a_sell_first(self, uid, prices, buy_leg_keys, sell_leg_keys):
         """CASE A: BUY legs stable - Execute SELL legs first, then BUY based on remaining spread."""
         try:
+            breakpoint()
             self.logger.info("CASE A: BUY legs stable - executing SELL legs first")
             self.execution_tracker.add_milestone(f"CASE A execution started for user {uid}", {
                 "strategy": "SELL_FIRST",
@@ -697,36 +1499,58 @@ class StratergyDirectIOCBox:
             self.logger.info("Using global observation for SELL leg execution order", str(sell_leg_keys))
             
             if sell_observation == None or sell_observation == False:
-                # SELL legs are stable, execute in original order
-                self.logger.info("SELL legs are stable - executing in original order")
+                # SELL legs are stable or no observation available, execute in original order
+                self.logger.info("SELL legs are stable or no observation - executing in original order")
                 first_sell_leg = sell_leg_keys[0]
                 second_sell_leg = sell_leg_keys[1]
                 current_sell_prices = self._get_leg_prices(sell_leg_keys)
+                execution_reason = "No strategic observation available"
             else:
-                # SELL legs are moving, execute decreasing leg first
-                self.logger.warning("SELL legs are moving - executing decreasing leg first")
-                # For SELL legs, we want to execute the decreasing leg first (opposite of BUY logic)
-                first_sell_leg = sell_observation['second_leg']  # Decreasing leg (weaker movement)
-                second_sell_leg = sell_observation['first_leg']  # Increasing leg (stronger movement)
-                current_sell_prices = sell_observation['final_prices']
+                # Check if we have the new strategic execution format
+                if isinstance(sell_observation, dict) and 'execution_strategy' in sell_observation:
+                    strategy = sell_observation['execution_strategy']
+                    if strategy['action'] == 'SKIP':
+                        self.logger.warning(f"SELL leg execution skipped: {strategy['reason']}")
+                        return False  # Skip execution based on strategy
+                    
+                    first_sell_leg = strategy['first_leg']
+                    second_sell_leg = strategy['second_leg']
+                    current_sell_prices = sell_observation['final_prices']
+                    execution_reason = strategy['reason']
+                    
+                    self.logger.success(
+                        f"SELL legs strategic execution: {strategy['strategy']}",
+                        f"First: {first_sell_leg}, Second: {second_sell_leg} | {execution_reason}"
+                    )
+                else:
+                    # Fallback to old logic for compatibility
+                    self.logger.warning("Using fallback SELL execution logic")
+                    first_sell_leg = sell_observation.get('first_leg', sell_leg_keys[0])
+                    second_sell_leg = sell_observation.get('second_leg', sell_leg_keys[1])
+                    current_sell_prices = sell_observation.get('final_prices', self._get_leg_prices(sell_leg_keys))
+                    execution_reason = "Fallback execution"
             
             self.logger.info(
-                "Executing SELL legs in optimized order",
-                f"First: {first_sell_leg} (decreasing), Second: {second_sell_leg}"
+                "Executing SELL legs with strategic analysis",
+                f"First: {first_sell_leg}, Second: {second_sell_leg} | {execution_reason}"
             )
             
-            # Execute first SELL leg
-            self.execution_tracker.add_milestone(f"Placing first SELL order for {first_sell_leg}")
-            first_sell_success = self._place_single_order(uid, first_sell_leg, current_sell_prices[first_sell_leg])
-            if not first_sell_success:
+            # Execute first SELL leg with MODIFY strategy
+            self.execution_tracker.add_milestone(f"Placing first SELL order (MODIFY) for {first_sell_leg}")
+            first_sell_result = self._execute_pair_with_strategy(uid, [first_sell_leg], 
+                                                               pair_type="sell_first", execution_mode="modify", 
+                                                               spread_check_func=None, strategy_info=sell_observation)
+            if not first_sell_result['success']:
                 self.logger.error(f"First SELL leg ({first_sell_leg}) failed")
                 self.execution_tracker.add_error(f"First SELL leg failed", f"Leg: {first_sell_leg}")
                 return False
-            
-            # Execute second SELL leg
-            self.execution_tracker.add_milestone(f"Placing second SELL order for {second_sell_leg}")
-            second_sell_success = self._place_single_order(uid, second_sell_leg, current_sell_prices[second_sell_leg])
-            if not second_sell_success:
+
+            # Execute second SELL leg with MODIFY strategy
+            self.execution_tracker.add_milestone(f"Placing second SELL order (MODIFY) for {second_sell_leg}")
+            second_sell_result = self._execute_pair_with_strategy(uid, [second_sell_leg], 
+                                                                pair_type="sell_second", execution_mode="modify", 
+                                                                spread_check_func=None, strategy_info=sell_observation)
+            if not second_sell_result['success']:
                 self.logger.error(f"Second SELL leg ({second_sell_leg}) failed")
                 self.execution_tracker.add_error(f"Second SELL leg failed", f"Leg: {second_sell_leg}")
                 return False
@@ -776,20 +1600,36 @@ class StratergyDirectIOCBox:
                 print("WARNING: No global BUY observation available")
                 buy_trend = None
             
-            # Step 4: BUY spread condition met, proceed with monitoring and execution
+            # Step 4: BUY spread condition met, proceed with IOC execution and monitoring
             profit_threshold_sell = self.params.get("profit_threshold_sell", 2)  # 2 Rs profit threshold
             
-            if self._monitor_sell_profit_and_execute_buy(uid, sell_executed_spread, remaining_spread_for_buy, 
-                                                       buy_leg_keys, profit_threshold_sell):
-                # Successfully executed BUY legs or exited with profit
+            # Create spread condition checker for BUY legs
+            spread_checker = self._create_spread_condition_checker(uid, buy_leg_keys, remaining_spread_for_buy, "<=")
+            
+            # Execute BUY legs with IOC strategy
+            buy_result = self._execute_pair_with_strategy(uid, buy_leg_keys, 
+                                                        pair_type="buy", execution_mode="ioc",
+                                                        spread_check_func=spread_checker, strategy_info=None)
+            
+            if buy_result['success']:
+                # Successfully executed BUY legs
                 self.pair1_orders_placed[uid] = True
                 self.pair1_executed[uid] = True
                 self.all_legs_executed[uid] = True
-                print(f"SUCCESS: Case A execution completed")
+                print(f"SUCCESS: Case A execution completed with IOC BUY")
                 return True
             else:
-                print(f"INFO: Case A - Exited with SELL profit or BUY execution failed")
-                return False
+                # Monitor for sell profit or better buy conditions
+                if self._monitor_sell_profit_and_execute_buy(uid, sell_executed_spread, remaining_spread_for_buy, 
+                                                           buy_leg_keys, profit_threshold_sell):
+                    self.pair1_orders_placed[uid] = True
+                    self.pair1_executed[uid] = True
+                    self.all_legs_executed[uid] = True
+                    print(f"SUCCESS: Case A execution completed via monitoring")
+                    return True
+                else:
+                    print(f"INFO: Case A - Exited with SELL profit or BUY execution failed")
+                    return False
                 
         except Exception as e:
             print(f"ERROR: Case A execution failed: {e}")
@@ -810,25 +1650,53 @@ class StratergyDirectIOCBox:
                 print(f"WARNING: BUY legs became stable, switching to Case A")
                 return self._execute_case_a_sell_first(uid, prices, buy_leg_keys, sell_leg_keys)
             
-            # Check consistency between initial and confirmation observations
-            if (buy_observation['first_leg'] != buy_observation_2['first_leg'] or 
-                buy_observation['second_leg'] != buy_observation_2['second_leg']):
-                print(f"WARNING: BUY market conditions inconsistent, aborting")
-                return False
+            # Handle new strategic execution format
+            if isinstance(buy_observation_2, dict) and 'execution_strategy' in buy_observation_2:
+                strategy = buy_observation_2['execution_strategy']
+                if strategy['action'] == 'SKIP':
+                    print(f"WARNING: BUY leg execution skipped by strategy: {strategy['reason']}")
+                    return False
+                
+                first_buy_leg = strategy['first_leg']
+                second_buy_leg = strategy['second_leg']
+                final_prices = buy_observation_2['final_prices']
+                execution_reason = strategy['reason']
+                
+                print(f"INFO: BUY legs strategic execution: {strategy['strategy']}")
+                print(f"INFO: {execution_reason}")
+            else:
+                # Fallback for old format or from 10-second observation
+                if isinstance(buy_observation, dict) and 'first_leg' in buy_observation:
+                    # Check consistency between initial and confirmation observations
+                    if (buy_observation['first_leg'] != buy_observation_2.get('first_leg') or 
+                        buy_observation['second_leg'] != buy_observation_2.get('second_leg')):
+                        print(f"WARNING: BUY market conditions inconsistent, aborting")
+                        return False
+                    
+                    first_buy_leg = buy_observation['first_leg']
+                    second_buy_leg = buy_observation['second_leg']
+                else:
+                    first_buy_leg = buy_leg_keys[0]
+                    second_buy_leg = buy_leg_keys[1]
+                
+                final_prices = buy_observation_2.get('final_prices', self._get_leg_prices(buy_leg_keys))
+                execution_reason = "Fallback execution logic"
             
-            # Execute BUY legs sequentially (stronger movement first)
-            first_buy_leg = buy_observation['first_leg']
-            second_buy_leg = buy_observation['second_leg']
+            print(f"INFO: Executing BUY legs with MODIFY strategy - First: {first_buy_leg}, Second: {second_buy_leg}")
             
-            print(f"INFO: Executing BUY legs - First: {first_buy_leg}, Second: {second_buy_leg}")
-            
-            first_buy_success = self._place_single_order(uid, first_buy_leg, buy_observation_2['final_prices'][first_buy_leg])
-            if not first_buy_success:
+            # Execute first BUY leg with MODIFY strategy
+            first_buy_result = self._execute_pair_with_strategy(uid, [first_buy_leg], 
+                                                              pair_type="buy_first", execution_mode="modify",
+                                                              spread_check_func=None, strategy_info=buy_observation_2)
+            if not first_buy_result['success']:
                 print(f"ERROR: First BUY leg failed")
                 return False
                 
-            second_buy_success = self._place_single_order(uid, second_buy_leg, buy_observation_2['final_prices'][second_buy_leg])
-            if not second_buy_success:
+            # Execute second BUY leg with MODIFY strategy  
+            second_buy_result = self._execute_pair_with_strategy(uid, [second_buy_leg], 
+                                                               pair_type="buy_second", execution_mode="modify",
+                                                               spread_check_func=None, strategy_info=buy_observation_2)
+            if not second_buy_result['success']:
                 print(f"ERROR: Second BUY leg failed")
                 return False
             
@@ -838,8 +1706,8 @@ class StratergyDirectIOCBox:
             
             # Calculate BUY pair executed spread
             buy_executed_prices = {
-                buy_leg_keys[0]: self.pair1_executed_prices.get(uid, {}).get(buy_leg_keys[0], buy_observation_2['final_prices'][buy_leg_keys[0]]),
-                buy_leg_keys[1]: self.pair1_executed_prices.get(uid, {}).get(buy_leg_keys[1], buy_observation_2['final_prices'][buy_leg_keys[1]])
+                buy_leg_keys[0]: self.pair1_executed_prices.get(uid, {}).get(buy_leg_keys[0], final_prices[buy_leg_keys[0]]),
+                buy_leg_keys[1]: self.pair1_executed_prices.get(uid, {}).get(buy_leg_keys[1], final_prices[buy_leg_keys[1]])
             }
             buy_executed_spread = buy_executed_prices[buy_leg_keys[0]] + buy_executed_prices[buy_leg_keys[1]]
             self.pair1_executed_spread[uid] = buy_executed_spread
@@ -874,20 +1742,36 @@ class StratergyDirectIOCBox:
                 print("WARNING: No global SELL observation available")
                 sell_trend = None
             
-            # Step 4: SELL spread condition met, proceed with monitoring and execution
+            # Step 4: SELL spread condition met, proceed with IOC execution and monitoring
             profit_threshold_buy = self.params.get("profit_threshold_buy", 2)  # 2 Rs profit threshold
             
-            if self._monitor_buy_profit_and_execute_sell(uid, buy_executed_spread, remaining_spread_for_sell, 
-                                                       sell_leg_keys, profit_threshold_buy):
-                # Successfully executed SELL legs or exited with profit
+            # Create spread condition checker for SELL legs
+            spread_checker = self._create_spread_condition_checker(uid, sell_leg_keys, remaining_spread_for_sell, ">=")
+            
+            # Execute SELL legs with IOC strategy
+            sell_result = self._execute_pair_with_strategy(uid, sell_leg_keys, 
+                                                         pair_type="sell", execution_mode="ioc",
+                                                         spread_check_func=spread_checker, strategy_info=None)
+            
+            if sell_result['success']:
+                # Successfully executed SELL legs
                 self.pair2_orders_placed[uid] = True
                 self.pair2_executed[uid] = True
                 self.all_legs_executed[uid] = True
-                print(f"SUCCESS: Case B execution completed")
+                print(f"SUCCESS: Case B execution completed with IOC SELL")
                 return True
             else:
-                print(f"INFO: Case B - Exited with BUY profit or SELL execution failed")
-                return False
+                # Monitor for buy profit or better sell conditions
+                if self._monitor_buy_profit_and_execute_sell(uid, buy_executed_spread, remaining_spread_for_sell, 
+                                                           sell_leg_keys, profit_threshold_buy):
+                    self.pair2_orders_placed[uid] = True
+                    self.pair2_executed[uid] = True
+                    self.all_legs_executed[uid] = True
+                    print(f"SUCCESS: Case B execution completed via monitoring")
+                    return True
+                else:
+                    print(f"INFO: Case B - Exited with BUY profit or SELL execution failed")
+                    return False
                 
         except Exception as e:
             print(f"ERROR: Case B execution failed: {e}")
@@ -934,17 +1818,34 @@ class StratergyDirectIOCBox:
             print(f"INFO: Using global observation for BUY leg execution order: {buy_leg_keys}")
             
             if buy_observation == None or buy_observation == False:
-                # BUY legs are stable, execute in original order
-                print(f"INFO: BUY legs are stable, executing in original order")
+                # BUY legs are stable or no observation available, execute in original order
+                print(f"INFO: BUY legs are stable or no observation - executing in original order")
                 first_buy_leg = buy_leg_keys[0]
                 second_buy_leg = buy_leg_keys[1]
                 current_buy_prices = self._get_leg_prices(buy_leg_keys)
+                execution_reason = "No strategic observation available"
             else:
-                # BUY legs are moving, execute stronger movement first
-                print(f"INFO: BUY legs are moving, executing stronger movement first")
-                first_buy_leg = buy_observation['first_leg']
-                second_buy_leg = buy_observation['second_leg']
-                current_buy_prices = buy_observation['final_prices']
+                # Check if we have the new strategic execution format
+                if isinstance(buy_observation, dict) and 'execution_strategy' in buy_observation:
+                    strategy = buy_observation['execution_strategy']
+                    if strategy['action'] == 'SKIP':
+                        print(f"WARNING: BUY leg execution skipped: {strategy['reason']}")
+                        return False  # Skip execution based on strategy
+                    
+                    first_buy_leg = strategy['first_leg']
+                    second_buy_leg = strategy['second_leg']
+                    current_buy_prices = buy_observation['final_prices']
+                    execution_reason = strategy['reason']
+                    
+                    print(f"INFO: BUY legs strategic execution: {strategy['strategy']}")
+                    print(f"INFO: First: {first_buy_leg}, Second: {second_buy_leg} | {execution_reason}")
+                else:
+                    # Fallback to old logic for compatibility
+                    print(f"WARNING: Using fallback BUY execution logic")
+                    first_buy_leg = buy_observation.get('first_leg', buy_leg_keys[0])
+                    second_buy_leg = buy_observation.get('second_leg', buy_leg_keys[1])
+                    current_buy_prices = buy_observation.get('final_prices', self._get_leg_prices(buy_leg_keys))
+                    execution_reason = "Fallback execution"
             
             # Step 2: Execute BUY legs sequentially based on global observation
             print(f"INFO: Executing BUY legs - First: {first_buy_leg}, Second: {second_buy_leg}")
@@ -1057,13 +1958,635 @@ class StratergyDirectIOCBox:
 
     def _execute_sell_exit(self, uid):
         """Execute exit orders for SELL legs to realize profit."""
-        print(f"INFO: Executing SELL exit orders for user {uid}")
-        return True
+        self.logger.info(f"Triggering complete exit execution for user {uid}")
+        
+        # Get current prices for exit execution
+        all_leg_keys = list(self.legs.keys())
+        leg_prices = self._get_leg_prices(all_leg_keys, is_exit=True)
+        
+        # Execute complete exit strategy
+        return self._execute_exit_both_pairs(uid, leg_prices)
 
     def _execute_buy_exit(self, uid):
-        """Execute exit orders for BUY legs to realize profit."""
-        print(f"INFO: Executing BUY exit orders for user {uid}")
-        return True
+        """Execute exit orders for BUY legs to realize profit."""  
+        self.logger.info(f"Triggering complete exit execution for user {uid}")
+        
+        # Get current prices for exit execution
+        all_leg_keys = list(self.legs.keys())
+        leg_prices = self._get_leg_prices(all_leg_keys, is_exit=True)
+        
+        # Execute complete exit strategy
+        return self._execute_exit_both_pairs(uid, leg_prices)
+
+    def _execute_exit_both_pairs(self, uid, prices):
+        """Execute exit for both pairs using dual strategy approach with global observation."""
+        try:
+            self.logger.separator(f"EXECUTING EXIT PAIRS FOR USER {uid}")
+            
+            # Step 0: Check if we have positions to exit
+            if not self.all_legs_executed.get(uid, False):
+                self.logger.warning(f"No positions to exit for user {uid} - entry not completed")
+                return False
+            
+            self.logger.info("Using global observation results for dual strategy exit execution")
+            
+            # Use new dual strategy exit execution with global observation
+            return self._execute_dual_strategy_exit_pairs(uid, prices)
+            
+        except KeyboardInterrupt:
+            self.logger.warning("Exit execution interrupted by user")
+            self.execution_tracker.add_milestone("User interrupt during exit execution")
+            return False
+        except Exception as e:
+            self.logger.error(f"Failed to execute exit for user {uid}", exception=e)
+            self.execution_tracker.add_error(f"Exit execution failed for user {uid}", str(e), e)
+            return False
+
+    def _execute_dual_strategy_exit_pairs(self, uid, prices):
+        """Execute exit pairs using dual strategy approach with dedicated 10-second observation."""
+        try:
+            self.logger.separator(f"DUAL STRATEGY EXIT EXECUTION - USER {uid}")
+            
+            # Step 1: Identify EXIT leg pairs (reversed from entry)
+            # In exit: entry SELL legs become BUY orders, entry BUY legs become SELL orders
+            exit_buy_leg_keys = [self.pair2_bidding_leg, self.pair2_base_leg]  # Was SELL in entry, now BUY to close
+            exit_sell_leg_keys = [self.pair1_bidding_leg, self.pair1_base_leg]  # Was BUY in entry, now SELL to close
+            
+            self.logger.info(
+                "Starting 10-second dedicated observation for EXIT CASE A/B decision",
+                f"EXIT BUY legs (close SELL positions): {exit_buy_leg_keys}"
+            )
+            
+            # Step 2: Perform dedicated 10-second observation for EXIT BUY pair decision
+            self.execution_tracker.add_milestone("Starting 10-second EXIT BUY pair observation for case decision", {
+                "user": uid,
+                "exit_buy_legs": exit_buy_leg_keys,
+                "exit_sell_legs": exit_sell_leg_keys,
+                "observation_duration": 10
+            })
+            
+            # Dedicated 10-second observation specifically for EXIT CASE A/B decision
+            exit_buy_pair_observation = self._observe_market_for_case_decision(exit_buy_leg_keys[0], exit_buy_leg_keys[1], 10)
+            
+            # Log the detailed observation result
+            self.execution_tracker.add_observation("EXIT_BUY_PAIR_CASE_DECISION", {
+                "user": uid,
+                "exit_buy_legs": exit_buy_leg_keys,
+                "exit_sell_legs": exit_sell_leg_keys,
+                "observation_result": exit_buy_pair_observation,
+                "observation_duration": 10
+            })
+            
+            # Step 3: Make EXIT CASE A/B decision based on 10-second observation
+            if exit_buy_pair_observation == False or exit_buy_pair_observation is None:
+                # EXIT BUY legs are STABLE over 10 seconds - EXIT CASE A: Execute SELL legs first
+                self.logger.success("EXIT CASE A: BUY legs are STABLE over 10 seconds - executing SELL legs first")
+                case_type = "EXIT_CASE_A"
+                self.execution_tracker.add_milestone(f"User {uid} executing EXIT CASE A", {
+                    "strategy": "SELL_FIRST_EXIT",
+                    "reason": "EXIT_BUY_legs_stable_10_seconds",
+                    "observation_details": exit_buy_pair_observation
+                })
+                return self._execute_exit_case_a_sell_first(uid, prices, exit_buy_leg_keys, exit_sell_leg_keys)
+            else:
+                # EXIT BUY legs are moving over 10 seconds - EXIT CASE B: Execute BUY legs first
+                self.logger.warning("EXIT CASE B: BUY legs are MOVING over 10 seconds - executing BUY legs first")
+                case_type = "EXIT_CASE_B"
+                self.execution_tracker.add_milestone(f"User {uid} executing EXIT CASE B", {
+                    "strategy": "BUY_FIRST_EXIT",
+                    "reason": "EXIT_BUY_legs_moving_10_seconds",
+                    "observation_details": exit_buy_pair_observation
+                })
+                return self._execute_exit_case_b_buy_first(uid, prices, exit_buy_leg_keys, exit_sell_leg_keys, exit_buy_pair_observation)
+                
+        except Exception as e:
+            self.logger.error(f"Failed to execute dual exit strategy for user {uid}", exception=e)
+            self.execution_tracker.add_error(f"Dual exit strategy failed for user {uid}", str(e), e)
+            return False
+
+    def _execute_exit_case_a_sell_first(self, uid, prices, exit_buy_leg_keys, exit_sell_leg_keys):
+        """EXIT CASE A: BUY legs stable - Execute SELL legs first (close BUY positions), then BUY legs (close SELL positions)."""
+        try:
+            self.logger.info("EXIT CASE A: BUY legs stable - executing SELL legs first to close BUY positions")
+            self.execution_tracker.add_milestone(f"EXIT CASE A execution started for user {uid}", {
+                "strategy": "SELL_FIRST_EXIT",
+                "exit_buy_legs": exit_buy_leg_keys,
+                "exit_sell_legs": exit_sell_leg_keys
+            })
+            
+            # Get SELL leg observation result from global observation
+            sell_observation = self._get_global_observation_result("SELL_PAIR")
+            
+            self.logger.info("Using global observation for EXIT SELL leg execution order", str(exit_sell_leg_keys))
+            
+            if sell_observation == None or sell_observation == False:
+                # SELL legs are stable or no observation available, execute in original order
+                self.logger.info("EXIT SELL legs are stable or no observation - executing in original order")
+                first_exit_sell_leg = exit_sell_leg_keys[0]
+                second_exit_sell_leg = exit_sell_leg_keys[1]
+                current_sell_prices = self._get_leg_prices(exit_sell_leg_keys, is_exit=True)
+                execution_reason = "No strategic observation available"
+            else:
+                # Check if we have the new strategic execution format
+                if isinstance(sell_observation, dict) and 'execution_strategy' in sell_observation:
+                    strategy = sell_observation['execution_strategy']
+                    if strategy['action'] == 'SKIP':
+                        self.logger.warning(f"EXIT SELL leg execution skipped: {strategy['reason']}")
+                        return False  # Skip execution based on strategy
+                    
+                    first_exit_sell_leg = strategy['first_leg']
+                    second_exit_sell_leg = strategy['second_leg']
+                    current_sell_prices = sell_observation['final_prices']
+                    execution_reason = strategy['reason']
+                    
+                    self.logger.success(
+                        f"EXIT SELL legs strategic execution: {strategy['strategy']}",
+                        f"First: {first_exit_sell_leg}, Second: {second_exit_sell_leg} | {execution_reason}"
+                    )
+                else:
+                    # Fallback to old logic for compatibility
+                    self.logger.warning("Using fallback EXIT SELL execution logic")
+                    first_exit_sell_leg = sell_observation.get('first_leg', exit_sell_leg_keys[0])
+                    second_exit_sell_leg = sell_observation.get('second_leg', exit_sell_leg_keys[1])
+                    current_sell_prices = sell_observation.get('final_prices', self._get_leg_prices(exit_sell_leg_keys, is_exit=True))
+                    execution_reason = "Fallback execution"
+            
+            self.logger.info(
+                "Executing EXIT SELL legs with strategic analysis",
+                f"First: {first_exit_sell_leg}, Second: {second_exit_sell_leg} | {execution_reason}"
+            )
+            
+            # Execute first EXIT SELL leg with MODIFY strategy (closing BUY position)
+            self.execution_tracker.add_milestone(f"Placing first EXIT SELL order (MODIFY) for {first_exit_sell_leg}")
+            first_sell_result = self._execute_exit_pair_with_strategy(uid, [first_exit_sell_leg], 
+                                                                    pair_type="exit_sell_first", execution_mode="modify", 
+                                                                    spread_check_func=None, strategy_info=sell_observation)
+            if not first_sell_result['success']:
+                self.logger.error(f"First EXIT SELL leg ({first_exit_sell_leg}) failed")
+                self.execution_tracker.add_error(f"First EXIT SELL leg failed", f"Leg: {first_exit_sell_leg}")
+                return False
+
+            # Execute second EXIT SELL leg with MODIFY strategy (closing BUY position)
+            self.execution_tracker.add_milestone(f"Placing second EXIT SELL order (MODIFY) for {second_exit_sell_leg}")
+            second_sell_result = self._execute_exit_pair_with_strategy(uid, [second_exit_sell_leg], 
+                                                                     pair_type="exit_sell_second", execution_mode="modify", 
+                                                                     spread_check_func=None, strategy_info=sell_observation)
+            if not second_sell_result['success']:
+                self.logger.error(f"Second EXIT SELL leg ({second_exit_sell_leg}) failed")
+                self.execution_tracker.add_error(f"Second EXIT SELL leg failed", f"Leg: {second_exit_sell_leg}")
+                return False
+            
+            self.logger.success(f"EXIT SELL pair executed successfully", "Closed BUY positions")
+            self.execution_tracker.add_milestone("EXIT SELL pair execution completed", {
+                "action": "closed_buy_positions",
+                "legs": [first_exit_sell_leg, second_exit_sell_leg]
+            })
+            
+            # Step 2: Calculate EXIT BUY legs execution with desired exit spread
+            self.logger.info("Proceeding to EXIT BUY legs execution to close SELL positions")
+            
+            # Use exit_desired_spread for target calculation
+            exit_desired_spread = self.params.get("exit_desired_spread", 200)
+            
+            # Get current EXIT BUY prices for spread checking
+            current_buy_prices = self._get_leg_prices(exit_buy_leg_keys, is_exit=True)
+            current_buy_spread = sum(current_buy_prices[leg] for leg in exit_buy_leg_keys)
+            
+            self.logger.info(f"EXIT: Desired exit spread: {exit_desired_spread:.2f}")
+            self.logger.info(f"EXIT: Current BUY spread: {current_buy_spread:.2f}")
+            
+            # For exits, we want to ensure reasonable spread conditions
+            spread_checker = self._create_spread_condition_checker(uid, exit_buy_leg_keys, current_buy_spread, "<=")
+            
+            # Execute EXIT BUY legs with IOC strategy
+            buy_result = self._execute_exit_pair_with_strategy(uid, exit_buy_leg_keys, 
+                                                             pair_type="exit_buy", execution_mode="ioc",
+                                                             spread_check_func=spread_checker, strategy_info=None)
+            
+            if buy_result['success']:
+                # Successfully executed EXIT BUY legs
+                self.logger.success("EXIT CASE A execution completed with IOC BUY", "All positions closed")
+                return True
+            else:
+                self.logger.warning("EXIT BUY legs execution failed, positions partially closed")
+                return False
+                
+        except Exception as e:
+            self.logger.error(f"EXIT CASE A execution failed: {e}", exception=e)
+            return False
+
+    def _execute_exit_case_b_buy_first(self, uid, prices, exit_buy_leg_keys, exit_sell_leg_keys, exit_buy_observation):
+        """EXIT CASE B: BUY legs moving - Execute BUY legs first (close SELL positions), then SELL legs (close BUY positions)."""
+        try:
+            self.logger.info("EXIT CASE B: BUY legs moving - executing BUY legs first to close SELL positions")
+            
+            # Get BUY confirmation from global observation
+            buy_observation_2 = self._get_global_observation_result("BUY_PAIR")
+            
+            self.logger.info("Using global observation to confirm EXIT BUY market conditions")
+            
+            if buy_observation_2 == None or buy_observation_2 == False:
+                self.logger.warning("EXIT BUY legs became stable, switching to EXIT Case A")
+                return self._execute_exit_case_a_sell_first(uid, prices, exit_buy_leg_keys, exit_sell_leg_keys)
+            
+            # Handle new strategic execution format
+            if isinstance(buy_observation_2, dict) and 'execution_strategy' in buy_observation_2:
+                strategy = buy_observation_2['execution_strategy']
+                if strategy['action'] == 'SKIP':
+                    self.logger.warning(f"EXIT BUY leg execution skipped by strategy: {strategy['reason']}")
+                    return False
+                
+                first_exit_buy_leg = strategy['first_leg']
+                second_exit_buy_leg = strategy['second_leg']
+                final_prices = buy_observation_2['final_prices']
+                execution_reason = strategy['reason']
+                
+                self.logger.info(f"EXIT BUY legs strategic execution: {strategy['strategy']}")
+                self.logger.info(f"EXIT: {execution_reason}")
+            else:
+                # Fallback for old format or from 10-second observation
+                if isinstance(exit_buy_observation, dict) and 'first_leg' in exit_buy_observation:
+                    # Check consistency between initial and confirmation observations
+                    if (exit_buy_observation['first_leg'] != buy_observation_2.get('first_leg') or 
+                        exit_buy_observation['second_leg'] != buy_observation_2.get('second_leg')):
+                        self.logger.warning("EXIT BUY market conditions inconsistent, aborting")
+                        return False
+                    
+                    first_exit_buy_leg = exit_buy_observation['first_leg']
+                    second_exit_buy_leg = exit_buy_observation['second_leg']
+                else:
+                    first_exit_buy_leg = exit_buy_leg_keys[0]
+                    second_exit_buy_leg = exit_buy_leg_keys[1]
+                
+                final_prices = buy_observation_2.get('final_prices', self._get_leg_prices(exit_buy_leg_keys, is_exit=True))
+                execution_reason = "Fallback execution logic"
+            
+            self.logger.info(f"Executing EXIT BUY legs with MODIFY strategy - First: {first_exit_buy_leg}, Second: {second_exit_buy_leg}")
+            
+            # Execute first EXIT BUY leg with MODIFY strategy (closing SELL position)
+            first_buy_result = self._execute_exit_pair_with_strategy(uid, [first_exit_buy_leg], 
+                                                                   pair_type="exit_buy_first", execution_mode="modify",
+                                                                   spread_check_func=None, strategy_info=buy_observation_2)
+            if not first_buy_result['success']:
+                self.logger.error("First EXIT BUY leg failed")
+                return False
+                
+            # Execute second EXIT BUY leg with MODIFY strategy (closing SELL position)
+            second_buy_result = self._execute_exit_pair_with_strategy(uid, [second_exit_buy_leg], 
+                                                                    pair_type="exit_buy_second", execution_mode="modify",
+                                                                    spread_check_func=None, strategy_info=buy_observation_2)
+            if not second_buy_result['success']:
+                self.logger.error("Second EXIT BUY leg failed")
+                return False
+            
+            self.logger.success("EXIT BUY pair executed successfully", "Closed SELL positions")
+            
+            # Step 2: Calculate EXIT SELL legs execution with desired exit spread
+            self.logger.info("Proceeding to EXIT SELL legs execution to close BUY positions")
+            
+            # Use exit_desired_spread for target calculation
+            exit_desired_spread = self.params.get("exit_desired_spread", 200)
+            
+            # Get current EXIT SELL prices for spread checking
+            current_sell_prices = self._get_leg_prices(exit_sell_leg_keys, is_exit=True)
+            current_sell_spread = sum(current_sell_prices[leg] for leg in exit_sell_leg_keys)
+            
+            self.logger.info(f"EXIT: Desired exit spread: {exit_desired_spread:.2f}")
+            self.logger.info(f"EXIT: Current SELL spread: {current_sell_spread:.2f}")
+            
+            # For exits, we want to ensure reasonable spread conditions  
+            spread_checker = self._create_spread_condition_checker(uid, exit_sell_leg_keys, current_sell_spread, ">=")
+            
+            # Execute EXIT SELL legs with IOC strategy
+            sell_result = self._execute_exit_pair_with_strategy(uid, exit_sell_leg_keys, 
+                                                              pair_type="exit_sell", execution_mode="ioc",
+                                                              spread_check_func=spread_checker, strategy_info=None)
+            
+            if sell_result['success']:
+                # Successfully executed EXIT SELL legs
+                self.logger.success("EXIT CASE B execution completed with IOC SELL", "All positions closed")
+                return True
+            else:
+                self.logger.warning("EXIT SELL legs execution failed, positions partially closed")
+                return False
+                
+        except Exception as e:
+            self.logger.error(f"EXIT CASE B execution failed: {e}", exception=e)
+            return False
+
+    def _execute_exit_pair_with_strategy(self, uid, leg_keys, pair_type="exit", execution_mode="modify", 
+                                       spread_check_func=None, strategy_info=None):
+        """
+        Execute exit pair using specified execution strategy.
+        
+        Args:
+            uid: User ID
+            leg_keys: List of leg keys [leg1, leg2] or [leg1] for single leg
+            pair_type: Type of exit pair ("exit_buy", "exit_sell", etc.)
+            execution_mode: "modify" or "ioc"
+            spread_check_func: Function to check spread condition (for IOC mode)
+            strategy_info: Strategy execution info
+            
+        Returns:
+            dict: Execution results for the legs
+        """
+        try:
+            self.logger.info(f"Executing EXIT {pair_type} using {execution_mode} strategy", 
+                           f"Legs: {leg_keys}, User: {uid}")
+            
+            # Determine execution order based on strategy
+            if strategy_info and 'execution_strategy' in strategy_info:
+                first_leg = strategy_info['execution_strategy']['first_leg']
+                if len(leg_keys) > 1:
+                    second_leg = strategy_info['execution_strategy']['second_leg']
+                execution_reason = strategy_info['execution_strategy']['reason']
+                
+                self.logger.info(f"Using strategic EXIT execution order", 
+                               f"First: {first_leg}, Second: {second_leg if len(leg_keys) > 1 else 'N/A'} | {execution_reason}")
+            else:
+                # Default order
+                first_leg = leg_keys[0]
+                second_leg = leg_keys[1] if len(leg_keys) > 1 else None
+                execution_reason = "Default EXIT execution order"
+            
+            results = {}
+            
+            # Execute first leg
+            self.logger.info(f"Executing EXIT first leg: {first_leg}")
+            if execution_mode.upper() == "MODIFY":
+                first_result = self._place_modify_exit_order_until_complete(uid, first_leg)
+            else:  # IOC
+                first_result = self._place_ioc_exit_order_with_retry(uid, first_leg, spread_check_func=spread_check_func)
+            
+            results[first_leg] = first_result
+            
+            if not first_result['success']:
+                self.logger.error(f"EXIT first leg execution failed: {first_leg}", str(first_result))
+                return {"success": False, "legs": results, "failed_leg": first_leg}
+            
+            # Execute second leg if exists
+            if second_leg:
+                self.logger.info(f"Executing EXIT second leg: {second_leg}")
+                if execution_mode.upper() == "MODIFY":
+                    second_result = self._place_modify_exit_order_until_complete(uid, second_leg)
+                else:  # IOC
+                    second_result = self._place_ioc_exit_order_with_retry(uid, second_leg, spread_check_func=spread_check_func)
+                
+                results[second_leg] = second_result
+                
+                if not second_result['success']:
+                    self.logger.error(f"EXIT second leg execution failed: {second_leg}", str(second_result))
+                    return {"success": False, "legs": results, "failed_leg": second_leg}
+            
+            # All legs successful
+            self.logger.success(f"EXIT {pair_type} execution completed", 
+                              f"Mode: {execution_mode}, All legs filled successfully")
+            
+            return {
+                "success": True,
+                "legs": results,
+                "execution_order": [first_leg] + ([second_leg] if second_leg else []),
+                "execution_reason": execution_reason,
+                "mode": execution_mode
+            }
+            
+        except Exception as e:
+            self.logger.error(f"EXIT pair execution failed for {pair_type}", exception=e)
+            return {"success": False, "error": str(e), "legs": results if 'results' in locals() else {}}
+
+    def _place_modify_exit_order_until_complete(self, uid, leg_key, max_attempts=30, modify_interval=0.3):
+        """
+        Place EXIT order using MODIFY strategy until completion.
+        
+        Args:
+            uid: User ID
+            leg_key: Leg identifier  
+            max_attempts: Maximum modification attempts
+            modify_interval: Time between modifications (seconds)
+            
+        Returns:
+            dict: Execution result with filled_qty, filled_price, success status
+        """
+        try:
+            self.logger.info(f"Starting EXIT MODIFY execution for {leg_key}", f"User: {uid}, Max attempts: {max_attempts}")
+            
+            # Get remaining quantity and prepare initial exit order
+            remaining_qty, desired_qty, current_qty = self._get_remaining_exit_quantity_for_leg(uid, leg_key)
+            if remaining_qty <= 0:
+                self.logger.success(f"No exit quantity needed for {leg_key}")
+                return {"success": True, "filled_qty": 0, "filled_price": 0, "reason": "no_exit_needed"}
+            
+            # Get current price and prepare exit order
+            current_prices = self._get_leg_prices([leg_key], is_exit=True)
+            order = self.exit_order_templates[uid][leg_key].copy()
+            order["Quantity"] = remaining_qty
+            order["Slice_Quantity"] = remaining_qty
+            
+            # Add price adjustment based on exit action
+            tick = 0.05 if order.get("Action") == ActionEnum.BUY else -0.05
+            order["Limit_Price"] = StrategyHelpers.format_limit_price(float(current_prices[leg_key]) + tick)
+            
+            # Place initial exit order
+            self.logger.info(f"Placing initial EXIT order for {leg_key}", f"Qty: {remaining_qty}, Price: {order['Limit_Price']}")
+            success, result = self.execution_helper.execute_order(self.order, order, uid, f"exit_{leg_key}")
+            
+            if not success:
+                self.logger.error(f"Initial EXIT order placement failed for {leg_key}")
+                return {"success": False, "filled_qty": 0, "filled_price": 0, "reason": "initial_placement_failed"}
+            
+            order_id = result.get('order_id') if isinstance(result, dict) else None
+            if not order_id:
+                self.logger.error(f"No EXIT order ID received for {leg_key}")
+                return {"success": False, "filled_qty": 0, "filled_price": 0, "reason": "no_order_id"}
+            
+            # Monitor and modify until completion
+            total_filled_qty = 0
+            attempt = 0
+            
+            while attempt < max_attempts and total_filled_qty < remaining_qty:
+                time.sleep(modify_interval)
+                attempt += 1
+                
+                # Check order status
+                remark = order.get('remark', 'Lord_Shreeji_Exit')
+                status = self.order.get_order_status(order_id, uid, remark)
+                
+                current_filled = status.get('filled_qty', 0)
+                filled_price = status.get('filled_price', 0)
+                order_status = status.get('order_status', 'unknown')
+                
+                self.logger.debug(f"EXIT MODIFY attempt {attempt} for {leg_key}", 
+                                f"Filled: {current_filled}/{remaining_qty}, Price: {filled_price}, Status: {order_status}")
+                
+                if current_filled >= remaining_qty:
+                    # Exit order completed
+                    self.logger.success(f"EXIT MODIFY execution completed for {leg_key}", 
+                                      f"Filled: {current_filled}, Price: {filled_price}")
+                    return {"success": True, "filled_qty": current_filled, "filled_price": filled_price, "order_id": order_id}
+                
+                # Get fresh price for modification
+                fresh_prices = self._get_leg_prices([leg_key], is_exit=True)
+                new_limit_price = StrategyHelpers.format_limit_price(float(fresh_prices[leg_key]) + tick)
+                
+                # Modify order with new price
+                modify_details = {
+                    'user_id': uid,
+                    'Order_ID': order_id,
+                    'Trading_Symbol': order.get('Trading_Symbol'),
+                    'Exchange': order.get('Exchange'),
+                    'Action': order.get('Action'),
+                    'Order_Type': order.get('Order_Type', OrderTypeEnum.LIMIT),
+                    'Quantity': remaining_qty,
+                    'CurrentQuantity': remaining_qty - current_filled,
+                    'Limit_Price': new_limit_price,
+                    'Streaming_Symbol': order.get('Streaming_Symbol'),
+                    'ProductCode': order.get('ProductCode')
+                }
+                
+                modify_result = self.order.modify_order(modify_details)
+                
+                if modify_result.get('status') == 'success':
+                    self.logger.debug(f"EXIT order modified for {leg_key}", f"New price: {new_limit_price}")
+                else:
+                    self.logger.warning(f"EXIT order modification failed for {leg_key}", str(modify_result))
+                
+                total_filled_qty = current_filled
+            
+            # Final status check
+            final_status = self.order.get_order_status(order_id, uid, remark)
+            final_filled = final_status.get('filled_qty', 0)
+            final_price = final_status.get('filled_price', 0)
+            
+            if final_filled >= remaining_qty:
+                self.logger.success(f"EXIT MODIFY execution completed for {leg_key} after {attempt} attempts")
+                return {"success": True, "filled_qty": final_filled, "filled_price": final_price, "order_id": order_id}
+            else:
+                self.logger.warning(f"EXIT MODIFY execution incomplete for {leg_key}", 
+                                  f"Filled: {final_filled}/{remaining_qty} after {attempt} attempts")
+                return {"success": False, "filled_qty": final_filled, "filled_price": final_price, 
+                       "reason": "max_attempts_reached", "order_id": order_id}
+                
+        except Exception as e:
+            self.logger.error(f"EXIT MODIFY execution failed for {leg_key}", exception=e)
+            return {"success": False, "filled_qty": 0, "filled_price": 0, "reason": str(e)}
+
+    def _place_ioc_exit_order_with_retry(self, uid, leg_key, max_retries=1, spread_check_func=None):
+        """
+        Place EXIT IOC order with retry logic and spread condition checking.
+        
+        Args:
+            uid: User ID
+            leg_key: Leg identifier
+            max_retries: Maximum retry attempts
+            spread_check_func: Function to check if spread condition is still met (returns True/False)
+            
+        Returns:
+            dict: Execution result with filled_qty, filled_price, success status
+        """
+        try:
+            self.logger.info(f"Starting EXIT IOC execution with retry for {leg_key}", f"User: {uid}, Max retries: {max_retries}")
+            
+            retry_count = 0
+            total_filled_qty = 0
+            
+            while retry_count < max_retries:
+                # Check spread condition before each attempt (if provided)
+                if spread_check_func and not spread_check_func():
+                    self.logger.warning(f"EXIT spread condition no longer met for {leg_key}, stopping IOC retries")
+                    return {"success": False, "filled_qty": total_filled_qty, "filled_price": 0, 
+                           "reason": "spread_condition_not_met"}
+                
+                # Get remaining exit quantity
+                remaining_qty, desired_qty, current_qty = self._get_remaining_exit_quantity_for_leg(uid, leg_key)
+                if remaining_qty <= 0:
+                    self.logger.success(f"No exit quantity needed for {leg_key}")
+                    return {"success": True, "filled_qty": 0, "filled_price": 0, "reason": "no_exit_needed"}
+                
+                # Prepare EXIT IOC order
+                current_prices = self._get_leg_prices([leg_key], is_exit=True)
+                order = self.exit_order_templates[uid][leg_key].copy()
+                order["Quantity"] = remaining_qty
+                order["Slice_Quantity"] = remaining_qty
+                order["Order_Type"] = OrderTypeEnum.LIMIT
+                order["Duration"] = DurationEnum.IOC
+                order["IOC"] = 0.5  # 500ms timeout
+                
+                # Add price adjustment
+                tick = 0.05 if order.get("Action") == ActionEnum.BUY else -0.05
+                order["Limit_Price"] = StrategyHelpers.format_limit_price(float(current_prices[leg_key]) + tick)
+                
+                retry_count += 1
+                self.logger.info(f"EXIT IOC attempt {retry_count}/{max_retries} for {leg_key}", 
+                               f"Qty: {remaining_qty}, Price: {order['Limit_Price']}")
+                
+                # Place EXIT IOC order
+                success, result = self.execution_helper.execute_order(self.order, order, uid, f"exit_ioc_{leg_key}")
+                
+                if success:
+                    # IOC order placed successfully - check fill
+                    order_id = result.get('order_id') if isinstance(result, dict) else None
+                    if order_id:
+                        # Wait a moment for fill data
+                        time.sleep(0.2)
+                        
+                        remark = order.get('remark', 'Lord_Shreeji_Exit_IOC')
+                        status = self.order.get_order_status(order_id, uid, remark)
+                        filled_qty = status.get('filled_qty', 0)
+                        filled_price = status.get('filled_price', 0)
+                        
+                        total_filled_qty += filled_qty
+                        
+                        if filled_qty > 0:
+                            self.logger.success(f"EXIT IOC order filled for {leg_key}", 
+                                              f"Filled: {filled_qty}, Price: {filled_price}")
+                            
+                            # Check if we have enough quantity
+                            if total_filled_qty >= desired_qty:
+                                return {"success": True, "filled_qty": total_filled_qty, "filled_price": filled_price, 
+                                       "attempts": retry_count}
+                        else:
+                            self.logger.warning(f"EXIT IOC order placed but not filled for {leg_key}")
+                    else:
+                        self.logger.warning(f"EXIT IOC order placed but no order ID for {leg_key}")
+                else:
+                    self.logger.warning(f"EXIT IOC order placement failed for {leg_key}", str(result))
+                
+                # Small delay before retry
+                if retry_count < max_retries:
+                    time.sleep(0.1)
+            
+            # All retries exhausted
+            if total_filled_qty > 0:
+                self.logger.warning(f"EXIT IOC execution partially completed for {leg_key}", 
+                                  f"Filled: {total_filled_qty}/{desired_qty} after {retry_count} attempts")
+                return {"success": False, "filled_qty": total_filled_qty, "filled_price": 0, 
+                       "reason": "partial_fill", "attempts": retry_count}
+            else:
+                self.logger.error(f"EXIT IOC execution failed for {leg_key}", f"No fills after {retry_count} attempts")
+                return {"success": False, "filled_qty": 0, "filled_price": 0, 
+                       "reason": "no_fills", "attempts": retry_count}
+                       
+        except Exception as e:
+            self.logger.error(f"EXIT IOC execution with retry failed for {leg_key}", exception=e)
+            return {"success": False, "filled_qty": 0, "filled_price": 0, "reason": str(e)}
+
+    def _get_remaining_exit_quantity_for_leg(self, uid, leg_key):
+        """Get the remaining quantity that needs to be exited for a specific leg."""
+        try:
+            # Get current entry quantity for this leg
+            current_entry_qty = self.entry_qtys.get(uid, {}).get(leg_key, 0)
+            
+            # Get current exit quantity for this leg
+            current_exit_qty = self.exit_qtys.get(uid, {}).get(leg_key, 0)
+            
+            # Calculate remaining quantity to exit
+            remaining_qty = current_entry_qty - current_exit_qty
+            
+            return remaining_qty, current_entry_qty, current_exit_qty
+            
+        except Exception as e:
+            self.logger.error(f"Failed to get remaining exit quantity for {leg_key}", exception=e)
+            return 0, 0, 0
 
     # Main execution logic (simplified for demo)
     def main_logic(self):

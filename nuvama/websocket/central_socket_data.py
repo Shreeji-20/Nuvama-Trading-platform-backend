@@ -18,10 +18,31 @@ parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
 sys.path.append(parent_dir)
 
 from basic_functions import common_functions
+from tick_data_manager import TickDataManager
 class CentralSocketData:
-    def __init__(self):
+    def __init__(self, enable_tick_logging=True, tick_data_base_dir="tick_data"):
         self.r = redis.Redis(host='localhost', port=6379, db=0)
         self.api_connect = APIConnect("iBe07GpBTEbbhg", "", "", True, "",False)
+        
+        # Initialize tick data manager for high-performance tick logging
+        self.enable_tick_logging = enable_tick_logging
+        if self.enable_tick_logging:
+            try:
+                self.tick_manager = TickDataManager(
+                    base_directory=tick_data_base_dir,
+                    enable_compression=True,  # Compress files to save space
+                    buffer_size=500,  # Buffer 500 ticks before writing
+                    flush_interval=3.0  # Flush every 3 seconds
+                )
+                print(f"✅ Tick data logging enabled - Directory: {tick_data_base_dir}")
+            except Exception as e:
+                print(f"❌ Failed to initialize tick data manager: {e}")
+                self.enable_tick_logging = False
+                self.tick_manager = None
+        else:
+            self.tick_manager = None
+            print("⚠️ Tick data logging disabled")
+        
         if self.r.exists("option_mapper"):
             self.options_data = orjson.loads(self.r.get("option_mapper").decode())
         else:
@@ -67,7 +88,16 @@ class CentralSocketData:
             else:
                 symbol = "OTHER"
             response['response']['data']['symbol'] = symbol
-            # print(response)
+            
+            # Save tick data to files for simulation (high-performance, non-blocking)
+            if self.enable_tick_logging and self.tick_manager:
+                try:
+                    self.tick_manager.save_quotes_tick(symbol, response)
+                except Exception as tick_error:
+                    # Don't let tick logging errors affect main processing
+                    pass
+            
+            # Continue with original Redis storage
             self.r.set(f"reduced_quotes:{symbol}", orjson.dumps(response).decode())
         except Exception as e:
             print(f"Error processing response (callbackfun): {str(e)}")
@@ -78,6 +108,27 @@ class CentralSocketData:
         self.quotes_streamer.unsubscribeReducedQuotesFeed()
     def shutdown(self):
         self.quotes_streamer.shutdown()
+        # Stop tick data manager if running
+        if self.enable_tick_logging and self.tick_manager:
+            try:
+                print("🔄 Stopping tick data manager...")
+                self.tick_manager.stop()
+            except Exception as e:
+                print(f"❌ Error stopping tick data manager: {e}")
+    
+    def get_tick_data_stats(self):
+        """Get tick data logging statistics"""
+        if self.enable_tick_logging and self.tick_manager:
+            return self.tick_manager.get_stats()
+        else:
+            return {"tick_logging": "disabled"}
+    
+    def print_tick_data_stats(self):
+        """Print tick data logging statistics"""
+        if self.enable_tick_logging and self.tick_manager:
+            self.tick_manager.print_stats()
+        else:
+            print("📊 Tick data logging is disabled")
     
     def DepthStreamerCallback(self, response):
         try:
@@ -106,6 +157,15 @@ class CentralSocketData:
                 # fallback to a generic key containing the streaming symbol
                 redis_key = f"depth:{streaming_symbol}"
 
+            # Save tick data to files for simulation (high-performance, non-blocking)
+            if self.enable_tick_logging and self.tick_manager:
+                try:
+                    self.tick_manager.save_depth_tick(redis_key, response)
+                except Exception as tick_error:
+                    # Don't let tick logging errors affect main processing
+                    pass
+
+            # Continue with original Redis storage
             self.r.set(redis_key, orjson.dumps(response).decode())
         except Exception as e:
             print(f"Error processing response (DepthStreamerCallback): {str(e)}")
@@ -119,18 +179,44 @@ class CentralSocketData:
         self.depth_streamer.unsubscribeDepthFeed()
     def depth_shutdown(self):
         self.depth_streamer.shutdown()
+        # Stop tick data manager if running
+        if self.enable_tick_logging and self.tick_manager:
+            try:
+                print("🔄 Stopping tick data manager...")
+                self.tick_manager.stop()
+            except Exception as e:
+                print(f"❌ Error stopping tick data manager: {e}")
         
         
     
 import threading
 if __name__ == "__main__":
+    # Statistics printing thread
+    def print_stats_periodically(socket_instance):
+        """Print tick data statistics every 60 seconds"""
+        while True:
+            try:
+                time.sleep(60)  # Print stats every minute
+                socket_instance.print_tick_data_stats()
+            except Exception as e:
+                print(f"❌ Error printing stats: {e}")
+                break
+    
     socket = CentralSocketData() 
-    t1 = threading.Thread(target=socket.listen_for_strikes_updates,daemon=True).start()
+    t1 = threading.Thread(target=socket.listen_for_strikes_updates, daemon=True)
+    t1.start()
+    
+    # Start stats printing thread
+    t2 = threading.Thread(target=print_stats_periodically, args=(socket,), daemon=True)
+    t2.start()
     
     while True:
         try:
-            print("Starting")
-            socket = CentralSocketData() 
+            print("Starting Central Socket Data with Tick Logging...")
+            socket = CentralSocketData(
+                enable_tick_logging=True,  # Enable tick data logging
+                tick_data_base_dir="tick_data"  # Base directory for tick files
+            ) 
             if socket.r.exists("option_mapper"):
                 socket.options_data = orjson.loads(socket.r.get("option_mapper"))
             try:
@@ -159,6 +245,10 @@ if __name__ == "__main__":
                     
                     time.sleep(0.5)
                 except KeyboardInterrupt:
+                    print("\n🛑 Keyboard interrupt - shutting down gracefully...")
+                    socket.print_tick_data_stats()  # Print final stats
+                    socket.shutdown()
+                    socket.depth_shutdown()
                     os._exit(1)
                 except Exception as e:
                    raise e
@@ -172,5 +262,12 @@ if __name__ == "__main__":
                 pass
             time.sleep(2)  # Longer delay before restart
         except KeyboardInterrupt:
+            print("\n🛑 Keyboard interrupt - shutting down gracefully...")
+            try:
+                socket.print_tick_data_stats()  # Print final stats
+                socket.shutdown()
+                socket.depth_shutdown()
+            except:
+                pass
             os._exit(1)
             

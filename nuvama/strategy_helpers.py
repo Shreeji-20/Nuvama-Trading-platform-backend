@@ -161,6 +161,92 @@ class StrategyPricingHelpers:
             print(f"ERROR: _avg_price failed for side {side_key}: {e}")
             return 0.0
 
+    def calculate_price_volatility(self, prices):
+        """Calculate price volatility (standard deviation) for a price series."""
+        try:
+            if len(prices) < 2:
+                return 0.0
+            
+            mean_price = sum(prices) / len(prices)
+            variance = sum((price - mean_price) ** 2 for price in prices) / len(prices)
+            volatility = variance ** 0.5
+            return volatility
+            
+        except Exception as e:
+            print(f"ERROR: Failed to calculate price volatility: {e}")
+            return 0.0
+
+    def get_leg_prices(self, legs, leg_keys, global_action, data_helpers, is_exit=False):
+        """Get current prices for specified legs based on their actions."""
+        prices = {}
+        for leg_key in leg_keys:
+            try:
+                # Create depth key from leg info
+                leg_info = legs[leg_key]['info']
+                depth_key = data_helpers.create_depth_key(leg_info)
+                leg_data = data_helpers.depth_from_redis(depth_key)
+                
+                if leg_data is None:
+                    print(f"ERROR: No depth data found for {leg_key}")
+                    prices[leg_key] = 0.0
+                    continue
+                
+                leg_action = leg_info.get('action', global_action).upper()
+                
+                # Determine bid_or_ask based on leg action and entry/exit
+                if is_exit:
+                    # For exits, reverse the bid/ask logic
+                    bid_or_ask = "askValues" if leg_action == "BUY" else "bidValues"
+                else:
+                    # For entries, use normal logic
+                    bid_or_ask = "bidValues" if leg_action == "BUY" else "askValues"
+                
+                prices[leg_key] = self.safe_get_price(leg_data, bid_or_ask)
+                
+            except (KeyError, TypeError) as e:
+                print(f"ERROR: Failed to get price for {leg_key}: {e}")
+                prices[leg_key] = 0.0
+        
+        return prices
+
+    def fetch_current_price(self, instrument_token, data_helpers=None, kite=None):
+        """
+        Fetch current price for an instrument token.
+        
+        Args:
+            instrument_token: Token to fetch price for
+            data_helpers: StrategyDataHelpers instance for Redis lookup
+            kite: KiteConnect instance for API fallback
+            
+        Returns:
+            float: Current price
+        """
+        try:
+            # Try to get price from Redis depth data first
+            if data_helpers:
+                # Create a minimal leg info for depth lookup
+                temp_leg_info = {'instrument_token': instrument_token}
+                depth_key = data_helpers.create_depth_key(temp_leg_info)
+                leg_data = data_helpers.depth_from_redis(depth_key)
+                
+                if leg_data:
+                    # Try to get bid price (default for general price fetching)
+                    price = self.safe_get_price(leg_data, "bidValues")
+                    if price > 0:
+                        return price
+            
+            # Fallback: Try using kite API if available
+            if kite:
+                ltp_data = kite.ltp([instrument_token])
+                return ltp_data[str(instrument_token)]['last_price']
+            else:
+                print(f"WARNING: No price source available for token {instrument_token}, using placeholder")
+                return 100.0  # Placeholder price
+                
+        except Exception as e:
+            print(f"ERROR: Failed to fetch current price for {instrument_token}: {e}")
+            return 100.0  # Fallback price
+
 
 class StrategyCalculationHelpers:
     """Helper functions for spread and quantity calculations"""
@@ -581,10 +667,23 @@ class StrategyExecutionTracker:
         """Add order information to tracking"""
         if not self.execution_data:
             return
+        
+        # Create a safe copy of order data, filtering out complex objects
+        safe_order_data = {}
+        if isinstance(order_data, dict):
+            for key, value in order_data.items():
+                if isinstance(value, (str, int, float, bool, type(None))):
+                    safe_order_data[key] = value
+                elif isinstance(value, (list, tuple)):
+                    safe_order_data[key] = [str(v) for v in value]
+                else:
+                    safe_order_data[key] = str(value)
+        else:
+            safe_order_data = str(order_data)
             
         self.execution_data["orders"][order_id] = {
             "timestamp": datetime.now().isoformat(),
-            "order_data": order_data
+            "order_data": safe_order_data
         }
         self._save_to_redis()
     
@@ -595,10 +694,23 @@ class StrategyExecutionTracker:
             
         if observation_type not in self.execution_data["observations"]:
             self.execution_data["observations"][observation_type] = []
+        
+        # Create a safe copy of observation data
+        safe_observation_data = {}
+        if isinstance(observation_data, dict):
+            for key, value in observation_data.items():
+                if isinstance(value, (str, int, float, bool, type(None))):
+                    safe_observation_data[key] = value
+                elif isinstance(value, (list, tuple)):
+                    safe_observation_data[key] = [str(v) for v in value]
+                else:
+                    safe_observation_data[key] = str(value)
+        else:
+            safe_observation_data = str(observation_data)
             
         self.execution_data["observations"][observation_type].append({
             "timestamp": datetime.now().isoformat(),
-            "data": observation_data
+            "data": safe_observation_data
         })
         self._save_to_redis()
     
@@ -641,13 +753,51 @@ class StrategyExecutionTracker:
     def _save_to_redis(self):
         """Save execution data to Redis"""
         try:
+            # Create a JSON-safe copy of execution data
+            safe_data = self._make_json_safe(self.execution_data)
             self.redis_conn.set(
                 self.execution_key,
-                json.dumps(self.execution_data, indent=2),
+                json.dumps(safe_data, indent=2),
                 ex=86400 * 7  # Expire after 7 days
             )
         except Exception as e:
             print(f"Failed to save execution data to Redis: {e}")
+    
+    def _make_json_safe(self, obj, seen=None):
+        """Convert object to JSON-safe format, handling circular references"""
+        if seen is None:
+            seen = set()
+        
+        obj_id = id(obj)
+        if obj_id in seen:
+            return f"<Circular Reference: {type(obj).__name__}>"
+        
+        if isinstance(obj, (str, int, float, bool, type(None))):
+            return obj
+        elif isinstance(obj, dict):
+            seen.add(obj_id)
+            try:
+                result = {}
+                for key, value in obj.items():
+                    try:
+                        result[str(key)] = self._make_json_safe(value, seen.copy())
+                    except (TypeError, ValueError, RecursionError):
+                        result[str(key)] = f"<Non-serializable: {type(value).__name__}>"
+                return result
+            finally:
+                seen.discard(obj_id)
+        elif isinstance(obj, (list, tuple)):
+            seen.add(obj_id)
+            try:
+                return [self._make_json_safe(item, seen.copy()) for item in obj]
+            finally:
+                seen.discard(obj_id)
+        else:
+            # For other types, try to convert to string or mark as non-serializable
+            try:
+                return str(obj)
+            except:
+                return f"<Non-serializable: {type(obj).__name__}>"
     
     def get_execution_summary(self):
         """Get a summary of the current execution"""
@@ -696,8 +846,8 @@ class StrategyExecutionHelpers:
                 f"User: {uid}, Qty: {order_data.get('Quantity')}, Price: {order_data.get('Limit_Price')}"
             )
             result = order_instance.place_order(order_data)
-            
-            if 'data' in result and 'oid' in result['data']:
+
+            if 'response' in result and 'data' in result['response'] and 'oid' in result['response']['data']:
                 StrategyLoggingHelpers.success(f"LIVE ORDER: Successfully placed for {leg_key}")
                 return True, result
             else:
