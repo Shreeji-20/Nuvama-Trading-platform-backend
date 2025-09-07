@@ -4385,3 +4385,904 @@
 2025-09-07 16:50:35,137 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '7ecba057-6717-44ee-83c7-727d881e62be', 'srvTm': 1757244035174}
 2025-09-07 16:50:35,138 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
 
+2025-09-07 16:23:24,355 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-07 16:23:48,269 [DEBUG] selenium.webdriver.common.selenium_manager: Selenium Manager binary found at: /workspace/venv/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager
+2025-09-07 16:23:48,270 [DEBUG] selenium.webdriver.common.selenium_manager: Executing process: /workspace/venv/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager --browser chrome --debug --output json
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: chromedriver not found in PATH
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: chrome not found in PATH
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: chrome not found in the system
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: Required browser: chrome 140.0.7339.80
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: chrome 140.0.7339.80 already exists
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: chrome 140.0.7339.80 is available at /root/.cache/selenium/chrome/linux64/140.0.7339.80/chrome
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: Required driver: chromedriver 140.0.7339.80
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: chromedriver 140.0.7339.80 already in the cache
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: Driver path: /root/.cache/selenium/chromedriver/linux64/140.0.7339.80/chromedriver
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: Browser path: /root/.cache/selenium/chrome/linux64/140.0.7339.80/chrome
+2025-09-07 16:23:48,292 [DEBUG] selenium.webdriver.common.selenium_manager: Using driver at: /root/.cache/selenium/chromedriver/linux64/140.0.7339.80/chromedriver
+2025-09-07 16:23:48,293 [DEBUG] selenium.webdriver.common.service: Started executable: `/root/.cache/selenium/chromedriver/linux64/140.0.7339.80/chromedriver` in a child process with pid: 142
+2025-09-07 16:23:48,795 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session {"capabilities": {"firstMatch": [{}], "alwaysMatch": {"browserName": "chrome", "pageLoadStrategy": "normal", "browserVersion": null, "goog:chromeOptions": {"prefs": {"profile.default_content_setting_values.notifications": 2, "profile.default_content_settings.popups": 0}, "extensions": [], "binary": "/root/.cache/selenium/chrome/linux64/140.0.7339.80/chrome", "args": ["--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1080"]}}}}
+2025-09-07 16:23:48,796 [DEBUG] urllib3.connectionpool: Starting new HTTP connection (1): localhost:51811
+2025-09-07 16:23:49,314 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session HTTP/1.1" 200 848
+2025-09-07 16:23:49,314 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"capabilities":{"acceptInsecureCerts":false,"browserName":"chrome","browserVersion":"140.0.7339.80","chrome":{"chromedriverVersion":"140.0.7339.80 (670b6f192f4668d2ac2c06bd77ec3e4eeda7d648-refs/branch-heads/7339_41@{#3})","userDataDir":"/tmp/.org.chromium.Chromium.za5NXE"},"fedcm:accounts":true,"goog:chromeOptions":{"debuggerAddress":"localhost:42785"},"networkConnectionEnabled":false,"pageLoadStrategy":"normal","platformName":"linux","proxy":{},"setWindowRect":true,"strictFileInteractability":false,"timeouts":{"implicit":0,"pageLoad":300000,"script":30000},"unhandledPromptBehavior":"dismiss and notify","webauthn:extension:credBlob":true,"webauthn:extension:largeBlob":true,"webauthn:extension:minPinLength":true,"webauthn:extension:prf":true,"webauthn:virtualAuthenticators":true},"sessionId":"f98df6cf7711e33f08269e42fce2c513"}} | headers=HTTPHeaderDict({'Content-Length': '848', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:49,314 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:49,314 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/url {"url": "https://www.nuvamawealth.com/api-connect/login?api_key=iBe07GpBTEbbhg"}
+2025-09-07 16:23:49,907 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/url HTTP/1.1" 200 14
+2025-09-07 16:23:49,907 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:49,907 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:52,907 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "[id=\"userID\"]"}
+2025-09-07 16:23:52,922 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 200 125
+2025-09-07 16:23:52,922 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.3"}} | headers=HTTPHeaderDict({'Content-Length': '125', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:52,922 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:52,922 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.3/clear {}
+2025-09-07 16:23:52,962 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.3/clear HTTP/1.1" 200 14
+2025-09-07 16:23:52,962 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:52,962 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:52,962 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.3/value {"text": "70249886", "value": ["7", "0", "2", "4", "9", "8", "8", "6"]}
+2025-09-07 16:23:53,035 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.3/value HTTP/1.1" 200 14
+2025-09-07 16:23:53,035 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:53,035 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:53,035 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "button[type='submit']"}
+2025-09-07 16:23:53,052 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 404 900
+2025-09-07 16:23:53,052 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"button[type='submit']\"}\n  (Session info: chrome=140.0.7339.80)","stacktrace":"#0 0x557d5f2a894a \u003Cunknown>\n#1 0x557d5ed1d8a0 \u003Cunknown>\n#2 0x557d5ed6f540 \u003Cunknown>\n#3 0x557d5ed6f731 \u003Cunknown>\n#4 0x557d5edbd824 \u003Cunknown>\n#5 0x557d5ed9505d \u003Cunknown>\n#6 0x557d5edbac23 \u003Cunknown>\n#7 0x557d5ed94e03 \u003Cunknown>\n#8 0x557d5ed61968 \u003Cunknown>\n#9 0x557d5ed625e1 \u003Cunknown>\n#10 0x557d5f26c548 \u003Cunknown>\n#11 0x557d5f270272 \u003Cunknown>\n#12 0x557d5f253313 \u003Cunknown>\n#13 0x557d5f270dc5 \u003Cunknown>\n#14 0x557d5f23849f \u003Cunknown>\n#15 0x557d5f295158 \u003Cunknown>\n#16 0x557d5f295332 \u003Cunknown>\n#17 0x557d5f2a7a53 \u003Cunknown>\n#18 0x7f004972baa4 \u003Cunknown>\n#19 0x7f00497b8a34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '900', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:53,052 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:53,052 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "input[type='submit']"}
+2025-09-07 16:23:53,068 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 404 899
+2025-09-07 16:23:53,069 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"input[type='submit']\"}\n  (Session info: chrome=140.0.7339.80)","stacktrace":"#0 0x557d5f2a894a \u003Cunknown>\n#1 0x557d5ed1d8a0 \u003Cunknown>\n#2 0x557d5ed6f540 \u003Cunknown>\n#3 0x557d5ed6f731 \u003Cunknown>\n#4 0x557d5edbd824 \u003Cunknown>\n#5 0x557d5ed9505d \u003Cunknown>\n#6 0x557d5edbac23 \u003Cunknown>\n#7 0x557d5ed94e03 \u003Cunknown>\n#8 0x557d5ed61968 \u003Cunknown>\n#9 0x557d5ed625e1 \u003Cunknown>\n#10 0x557d5f26c548 \u003Cunknown>\n#11 0x557d5f270272 \u003Cunknown>\n#12 0x557d5f253313 \u003Cunknown>\n#13 0x557d5f270dc5 \u003Cunknown>\n#14 0x557d5f23849f \u003Cunknown>\n#15 0x557d5f295158 \u003Cunknown>\n#16 0x557d5f295332 \u003Cunknown>\n#17 0x557d5f2a7a53 \u003Cunknown>\n#18 0x7f004972baa4 \u003Cunknown>\n#19 0x7f00497b8a34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '899', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:53,069 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:53,069 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/elements {"using": "tag name", "value": "button"}
+2025-09-07 16:23:53,082 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/elements HTTP/1.1" 200 245
+2025-09-07 16:23:53,082 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.10"},{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.11"}]} | headers=HTTPHeaderDict({'Content-Length': '245', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:53,082 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:53,082 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.10/text {}
+2025-09-07 16:23:53,096 [DEBUG] urllib3.connectionpool: http://localhost:51811 "GET /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.10/text HTTP/1.1" 200 19
+2025-09-07 16:23:53,096 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"Proceed"} | headers=HTTPHeaderDict({'Content-Length': '19', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:53,096 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:53,096 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.10/click {}
+2025-09-07 16:23:53,166 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.10/click HTTP/1.1" 200 14
+2025-09-07 16:23:53,167 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:53,167 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,167 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "[id=\"password\"]"}
+2025-09-07 16:23:57,180 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 200 126
+2025-09-07 16:23:57,181 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.14"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,181 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,181 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.14/clear {}
+2025-09-07 16:23:57,208 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.14/clear HTTP/1.1" 200 14
+2025-09-07 16:23:57,208 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,208 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,208 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.14/value {"text": "Shreeji@2063", "value": ["S", "h", "r", "e", "e", "j", "i", "@", "2", "0", "6", "3"]}
+2025-09-07 16:23:57,272 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.14/value HTTP/1.1" 200 14
+2025-09-07 16:23:57,272 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,272 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,272 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "[id=\"totp-0\"]"}
+2025-09-07 16:23:57,284 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 200 126
+2025-09-07 16:23:57,284 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.15"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,284 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,284 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "[id=\"totp-1\"]"}
+2025-09-07 16:23:57,294 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 200 126
+2025-09-07 16:23:57,295 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.16"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,295 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,295 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "[id=\"totp-2\"]"}
+2025-09-07 16:23:57,306 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 200 126
+2025-09-07 16:23:57,306 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.17"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,306 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,306 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "[id=\"totp-3\"]"}
+2025-09-07 16:23:57,317 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 200 126
+2025-09-07 16:23:57,317 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.18"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,317 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,317 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "[id=\"totp-4\"]"}
+2025-09-07 16:23:57,329 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 200 126
+2025-09-07 16:23:57,329 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.19"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,329 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,329 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "[id=\"totp-5\"]"}
+2025-09-07 16:23:57,340 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 200 126
+2025-09-07 16:23:57,341 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.20"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,341 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,341 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element {"using": "css selector", "value": "[id=\"totp-6\"]"}
+2025-09-07 16:23:57,358 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element HTTP/1.1" 404 894
+2025-09-07 16:23:57,358 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"[id=\"totp-6\"]\"}\n  (Session info: chrome=140.0.7339.80)","stacktrace":"#0 0x557d5f2a894a \u003Cunknown>\n#1 0x557d5ed1d8a0 \u003Cunknown>\n#2 0x557d5ed6f540 \u003Cunknown>\n#3 0x557d5ed6f731 \u003Cunknown>\n#4 0x557d5edbd824 \u003Cunknown>\n#5 0x557d5ed9505d \u003Cunknown>\n#6 0x557d5edbac23 \u003Cunknown>\n#7 0x557d5ed94e03 \u003Cunknown>\n#8 0x557d5ed61968 \u003Cunknown>\n#9 0x557d5ed625e1 \u003Cunknown>\n#10 0x557d5f26c548 \u003Cunknown>\n#11 0x557d5f270272 \u003Cunknown>\n#12 0x557d5f253313 \u003Cunknown>\n#13 0x557d5f270dc5 \u003Cunknown>\n#14 0x557d5f23849f \u003Cunknown>\n#15 0x557d5f295158 \u003Cunknown>\n#16 0x557d5f295332 \u003Cunknown>\n#17 0x557d5f2a7a53 \u003Cunknown>\n#18 0x7f004972baa4 \u003Cunknown>\n#19 0x7f00497b8a34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '894', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,358 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,359 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.15/clear {}
+2025-09-07 16:23:57,388 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.15/clear HTTP/1.1" 200 14
+2025-09-07 16:23:57,389 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,389 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,389 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.15/value {"text": "3", "value": ["3"]}
+2025-09-07 16:23:57,440 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.15/value HTTP/1.1" 200 14
+2025-09-07 16:23:57,440 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,440 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,440 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.16/clear {}
+2025-09-07 16:23:57,469 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.16/clear HTTP/1.1" 200 14
+2025-09-07 16:23:57,469 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,469 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,469 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.16/value {"text": "7", "value": ["7"]}
+2025-09-07 16:23:57,499 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.16/value HTTP/1.1" 200 14
+2025-09-07 16:23:57,499 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,499 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,499 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.17/clear {}
+2025-09-07 16:23:57,525 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.17/clear HTTP/1.1" 200 14
+2025-09-07 16:23:57,525 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,526 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,526 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.17/value {"text": "1", "value": ["1"]}
+2025-09-07 16:23:57,555 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.17/value HTTP/1.1" 200 14
+2025-09-07 16:23:57,555 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,555 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,555 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.18/clear {}
+2025-09-07 16:23:57,583 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.18/clear HTTP/1.1" 200 14
+2025-09-07 16:23:57,583 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,583 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,583 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.18/value {"text": "3", "value": ["3"]}
+2025-09-07 16:23:57,615 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.18/value HTTP/1.1" 200 14
+2025-09-07 16:23:57,615 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,615 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,615 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.19/clear {}
+2025-09-07 16:23:57,643 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.19/clear HTTP/1.1" 200 14
+2025-09-07 16:23:57,643 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,643 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,643 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.19/value {"text": "9", "value": ["9"]}
+2025-09-07 16:23:57,673 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.19/value HTTP/1.1" 200 14
+2025-09-07 16:23:57,673 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,673 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,673 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.20/clear {}
+2025-09-07 16:23:57,700 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.20/clear HTTP/1.1" 200 14
+2025-09-07 16:23:57,700 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,701 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,701 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.20/value {"text": "3", "value": ["3"]}
+2025-09-07 16:23:57,730 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.20/value HTTP/1.1" 200 14
+2025-09-07 16:23:57,730 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,730 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,731 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/elements {"using": "tag name", "value": "button"}
+2025-09-07 16:23:57,739 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/elements HTTP/1.1" 200 245
+2025-09-07 16:23:57,739 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.26"},{"element-6066-11e4-a52e-4f735466cecf":"f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.71"}]} | headers=HTTPHeaderDict({'Content-Length': '245', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,739 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,739 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.26/text {}
+2025-09-07 16:23:57,748 [DEBUG] urllib3.connectionpool: http://localhost:51811 "GET /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.26/text HTTP/1.1" 200 19
+2025-09-07 16:23:57,748 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"Proceed"} | headers=HTTPHeaderDict({'Content-Length': '19', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,748 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:23:57,749 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.26/click {}
+2025-09-07 16:23:57,812 [DEBUG] urllib3.connectionpool: http://localhost:51811 "POST /session/f98df6cf7711e33f08269e42fce2c513/element/f.9B7E40DDC194B0B6ED8D840BE22A870F.d.2B0A626BF8682728289BB0431F70D250.e.26/click HTTP/1.1" 200 14
+2025-09-07 16:23:57,813 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:23:57,813 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:24:02,812 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513/url {}
+2025-09-07 16:24:02,821 [DEBUG] urllib3.connectionpool: http://localhost:51811 "GET /session/f98df6cf7711e33f08269e42fce2c513/url HTTP/1.1" 200 58
+2025-09-07 16:24:02,821 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"https://127.0.0.1/?request_id=326465ca88238e82"} | headers=HTTPHeaderDict({'Content-Length': '58', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:24:02,822 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:24:02,822 [DEBUG] selenium.webdriver.remote.remote_connection: DELETE http://localhost:51811/session/f98df6cf7711e33f08269e42fce2c513 {}
+2025-09-07 16:24:02,924 [DEBUG] urllib3.connectionpool: http://localhost:51811 "DELETE /session/f98df6cf7711e33f08269e42fce2c513 HTTP/1.1" 200 14
+2025-09-07 16:24:02,924 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:24:02,924 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:24:02,957 [INFO] constants.router: Router object is being created.
+2025-09-07 16:24:02,957 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:24:02,957 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:24:02,957 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:24:02,961 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:24:08,602 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 200 None
+2025-09-07 16:24:08,603 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-09-07 16:24:08,604 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-09-07 16:24:08,676 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-09-07 16:24:08,679 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-09-07 16:24:08,679 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-09-07 16:24:08,680 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:24:08,785 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:24:08,786 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'd57e9d79-662f-429c-bbfd-7bdf551d036c', 'srvTm': 1757244248827}
+2025-09-07 16:24:09,489 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-09-07 16:24:09,564 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-09-07 16:24:10,213 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-09-07 16:24:11,640 [INFO] constants.router: Router object is being created.
+2025-09-07 16:24:11,640 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:24:11,641 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:24:11,641 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:24:11,642 [INFO] constants.router: Router object is being created.
+2025-09-07 16:24:11,643 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:24:11,643 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:24:11,643 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:24:11,645 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:24:11,646 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:24:11,648 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:24:11,650 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:24:17,101 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:24:17,102 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '1fe98c40-3f9c-49d0-a3bd-c275c33e9dd2', 'srvTm': 1757244257144}
+2025-09-07 16:24:17,103 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:24:17,231 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:24:17,232 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'c287d2a8-060b-4355-8928-037e67bda759', 'srvTm': 1757244257270}
+2025-09-07 16:24:17,237 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:24:22,292 [INFO] constants.router: Router object is being created.
+2025-09-07 16:24:22,292 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:24:22,292 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:24:22,293 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:24:22,295 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:24:22,296 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:24:24,918 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:24:24,918 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '133ab2c5-f9f3-40ef-9186-912752ba271d', 'srvTm': 1757244264683}
+2025-09-07 16:24:24,920 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:24:29,794 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:24:29,795 [DEBUG] feed.depth_feed: Subscribing depth feed with request: {"request": {"streaming_type": "quote2", "data": {"accType": "EQ", "symbols": [{"symbol": "44637_NFO"}, {"symbol": "44848_NFO"}, {"symbol": "44661_NFO"}, {"symbol": "44485_NFO"}, {"symbol": "44713_NFO"}, {"symbol": "44847_NFO"}, {"symbol": "44516_NFO"}, {"symbol": "44687_NFO"}, {"symbol": "44828_NFO"}, {"symbol": "44517_NFO"}, {"symbol": "44482_NFO"}, {"symbol": "44639_NFO"}, {"symbol": "44640_NFO"}, {"symbol": "44588_NFO"}, {"symbol": "44484_NFO"}, {"symbol": "44542_NFO"}, {"symbol": "44589_NFO"}, {"symbol": "44897_NFO"}, {"symbol": "44638_NFO"}, {"symbol": "44662_NFO"}, {"symbol": "44483_NFO"}, {"symbol": "44827_NFO"}, {"symbol": "44543_NFO"}, {"symbol": "44831_NFO"}, {"symbol": "44532_NFO"}, {"symbol": "44855_NFO"}, {"symbol": "44631_NFO"}, {"symbol": "44467_NFO"}, {"symbol": "44580_NFO"}, {"symbol": "44832_NFO"}, {"symbol": "44581_NFO"}, {"symbol": "44729_NFO"}, {"symbol": "44853_NFO"}, {"symbol": "44533_NFO"}, {"symbol": "44829_NFO"}, {"symbol": "44830_NFO"}, {"symbol": "44854_NFO"}, {"symbol": "44534_NFO"}, {"symbol": "44706_NFO"}, {"symbol": "44730_NFO"}, {"symbol": "44857_NFO"}, {"symbol": "44582_NFO"}, {"symbol": "44834_NFO"}, {"symbol": "44583_NFO"}, {"symbol": "44535_NFO"}, {"symbol": "44728_NFO"}, {"symbol": "44882_NFO"}, {"symbol": "44858_NFO"}, {"symbol": "44466_NFO"}, {"symbol": "44443_NFO"}, {"symbol": "44856_NFO"}, {"symbol": "44727_NFO"}, {"symbol": "44881_NFO"}, {"symbol": "44442_NFO"}, {"symbol": "44833_NFO"}, {"symbol": "44632_NFO"}, {"symbol": "44813_NFO"}, {"symbol": "44549_NFO"}, {"symbol": "44796_NFO"}, {"symbol": "44474_NFO"}, {"symbol": "44526_NFO"}, {"symbol": "44602_NFO"}, {"symbol": "44885_NFO"}, {"symbol": "44837_NFO"}, {"symbol": "44574_NFO"}, {"symbol": "44503_NFO"}, {"symbol": "44449_NFO"}, {"symbol": "44475_NFO"}, {"symbol": "44795_NFO"}, {"symbol": "44527_NFO"}, {"symbol": "44835_NFO"}, {"symbol": "44812_NFO"}, {"symbol": "44836_NFO"}, {"symbol": "44575_NFO"}, {"symbol": "44840_NFO"}, {"symbol": "44887_NFO"}, {"symbol": "44652_NFO"}, {"symbol": "44447_NFO"}, {"symbol": "44446_NFO"}, {"symbol": "44841_NFO"}, {"symbol": "44864_NFO"}, {"symbol": "44604_NFO"}, {"symbol": "44651_NFO"}, {"symbol": "44448_NFO"}, {"symbol": "44603_NFO"}, {"symbol": "44744_NFO"}, {"symbol": "44886_NFO"}, {"symbol": "44743_NFO"}, {"symbol": "44520_NFO"}, {"symbol": "44480_NFO"}, {"symbol": "44479_NFO"}, {"symbol": "44890_NFO"}, {"symbol": "44867_NFO"}, {"symbol": "44544_NFO"}, {"symbol": "44891_NFO"}, {"symbol": "44521_NFO"}, {"symbol": "44865_NFO"}, {"symbol": "44742_NFO"}, {"symbol": "44481_NFO"}, {"symbol": "44888_NFO"}, {"symbol": "44545_NFO"}, {"symbol": "44842_NFO"}, {"symbol": "44741_NFO"}, {"symbol": "44869_NFO"}, {"symbol": "44870_NFO"}, {"symbol": "44546_NFO"}, {"symbol": "44764_NFO"}, {"symbol": "44688_NFO"}, {"symbol": "44547_NFO"}, {"symbol": "44763_NFO"}, {"symbol": "44846_NFO"}, {"symbol": "44476_NFO"}, {"symbol": "44524_NFO"}, {"symbol": "44668_NFO"}, {"symbol": "44548_NFO"}, {"symbol": "44478_NFO"}, {"symbol": "44477_NFO"}, {"symbol": "44525_NFO"}, {"symbol": "44868_NFO"}, {"symbol": "44667_NFO"}, {"symbol": "44845_NFO"}, {"symbol": "44502_NFO"}, {"symbol": "862095_BFO"}, {"symbol": "862135_BFO"}, {"symbol": "862012_BFO"}, {"symbol": "862494_BFO"}, {"symbol": "862024_BFO"}, {"symbol": "862469_BFO"}, {"symbol": "862271_BFO"}, {"symbol": "862246_BFO"}, {"symbol": "862359_BFO"}, {"symbol": "862212_BFO"}, {"symbol": "862060_BFO"}, {"symbol": "862134_BFO"}, {"symbol": "862111_BFO"}, {"symbol": "862025_BFO"}, {"symbol": "862061_BFO"}, {"symbol": "862110_BFO"}, {"symbol": "862333_BFO"}, {"symbol": "862210_BFO"}, {"symbol": "862157_BFO"}, {"symbol": "862269_BFO"}, {"symbol": "862424_BFO"}, {"symbol": "862471_BFO"}, {"symbol": "862423_BFO"}, {"symbol": "862168_BFO"}, {"symbol": "862501_BFO"}, {"symbol": "862096_BFO"}, {"symbol": "862524_BFO"}, {"symbol": "862458_BFO"}, {"symbol": "862437_BFO"}, {"symbol": "862461_BFO"}, {"symbol": "862237_BFO"}, {"symbol": "862332_BFO"}, {"symbol": "862297_BFO"}, {"symbol": "862119_BFO"}, {"symbol": "862120_BFO"}, {"symbol": "862285_BFO"}, {"symbol": "862380_BFO"}, {"symbol": "862131_BFO"}, {"symbol": "862451_BFO"}, {"symbol": "862318_BFO"}, {"symbol": "862403_BFO"}, {"symbol": "862296_BFO"}, {"symbol": "862070_BFO"}, {"symbol": "862438_BFO"}, {"symbol": "862154_BFO"}, {"symbol": "862259_BFO"}, {"symbol": "862176_BFO"}, {"symbol": "862509_BFO"}, {"symbol": "862414_BFO"}, {"symbol": "862035_BFO"}, {"symbol": "862450_BFO"}, {"symbol": "862205_BFO"}, {"symbol": "862464_BFO"}, {"symbol": "862253_BFO"}, {"symbol": "862476_BFO"}, {"symbol": "862452_BFO"}, {"symbol": "862053_BFO"}, {"symbol": "862030_BFO"}, {"symbol": "862341_BFO"}, {"symbol": "862141_BFO"}, {"symbol": "862304_BFO"}, {"symbol": "862189_BFO"}, {"symbol": "862190_BFO"}, {"symbol": "862505_BFO"}, {"symbol": "862353_BFO"}, {"symbol": "862229_BFO"}, {"symbol": "862299_BFO"}, {"symbol": "862388_BFO"}, {"symbol": "862241_BFO"}, {"symbol": "862043_BFO"}, {"symbol": "862104_BFO"}, {"symbol": "862327_BFO"}, {"symbol": "862287_BFO"}, {"symbol": "862240_BFO"}, {"symbol": "862339_BFO"}, {"symbol": "862078_BFO"}, {"symbol": "862020_BFO"}, {"symbol": "862475_BFO"}, {"symbol": "862518_BFO"}, {"symbol": "862115_BFO"}, {"symbol": "862151_BFO"}, {"symbol": "862079_BFO"}, {"symbol": "862103_BFO"}, {"symbol": "862487_BFO"}, {"symbol": "862044_BFO"}, {"symbol": "862204_BFO"}, {"symbol": "862305_BFO"}, {"symbol": "862352_BFO"}, {"symbol": "862417_BFO"}, {"symbol": "862499_BFO"}, {"symbol": "862525_BFO"}, {"symbol": "862003_BFO"}, {"symbol": "862385_BFO"}, {"symbol": "862098_BFO"}, {"symbol": "862350_BFO"}, {"symbol": "862219_BFO"}, {"symbol": "862015_BFO"}, {"symbol": "862374_BFO"}, {"symbol": "862431_BFO"}, {"symbol": "862418_BFO"}, {"symbol": "862514_BFO"}, {"symbol": "862397_BFO"}, {"symbol": "862315_BFO"}, {"symbol": "862169_BFO"}, {"symbol": "862433_BFO"}, {"symbol": "862489_BFO"}, {"symbol": "862016_BFO"}, {"symbol": "862170_BFO"}, {"symbol": "862526_BFO"}, {"symbol": "862290_BFO"}, {"symbol": "862409_BFO"}, {"symbol": "862278_BFO"}, {"symbol": "862456_BFO"}, {"symbol": "862124_BFO"}, {"symbol": "862088_BFO"}, {"symbol": "862277_BFO"}, {"symbol": "862408_BFO"}, {"symbol": "862396_BFO"}, {"symbol": "862005_BFO"}, {"symbol": "862289_BFO"}, {"symbol": "862231_BFO"}, {"symbol": "862337_BFO"}, {"symbol": "40662_NFO"}, {"symbol": "40638_NFO"}, {"symbol": "40598_NFO"}, {"symbol": "40527_NFO"}, {"symbol": "40504_NFO"}, {"symbol": "40637_NFO"}, {"symbol": "40661_NFO"}, {"symbol": "40640_NFO"}, {"symbol": "40639_NFO"}, {"symbol": "40573_NFO"}, {"symbol": "40547_NFO"}, {"symbol": "40524_NFO"}, {"symbol": "40571_NFO"}, {"symbol": "40641_NFO"}, {"symbol": "40572_NFO"}, {"symbol": "40664_NFO"}, {"symbol": "40548_NFO"}, {"symbol": "40570_NFO"}, {"symbol": "40594_NFO"}, {"symbol": "40569_NFO"}, {"symbol": "40523_NFO"}, {"symbol": "40593_NFO"}, {"symbol": "40642_NFO"}, {"symbol": "40665_NFO"}, {"symbol": "40644_NFO"}, {"symbol": "40592_NFO"}, {"symbol": "40568_NFO"}, {"symbol": "40668_NFO"}, {"symbol": "40643_NFO"}, {"symbol": "40519_NFO"}, {"symbol": "40645_NFO"}, {"symbol": "40520_NFO"}, {"symbol": "40667_NFO"}, {"symbol": "40591_NFO"}, {"symbol": "40567_NFO"}, {"symbol": "40647_NFO"}, {"symbol": "40565_NFO"}, {"symbol": "40672_NFO"}, {"symbol": "40518_NFO"}, {"symbol": "40646_NFO"}, {"symbol": "40566_NFO"}, {"symbol": "40601_NFO"}, {"symbol": "40670_NFO"}, {"symbol": "40564_NFO"}, {"symbol": "40625_NFO"}, {"symbol": "40587_NFO"}, {"symbol": "40648_NFO"}, {"symbol": "40588_NFO"}, {"symbol": "40517_NFO"}, {"symbol": "40671_NFO"}, {"symbol": "40586_NFO"}, {"symbol": "40674_NFO"}, {"symbol": "40538_NFO"}, {"symbol": "40603_NFO"}, {"symbol": "40562_NFO"}, {"symbol": "40650_NFO"}, {"symbol": "40626_NFO"}, {"symbol": "40602_NFO"}, {"symbol": "40649_NFO"}, {"symbol": "40540_NFO"}, {"symbol": "40675_NFO"}, {"symbol": "40539_NFO"}, {"symbol": "40563_NFO"}, {"symbol": "40561_NFO"}, {"symbol": "40673_NFO"}, {"symbol": "40537_NFO"}, {"symbol": "40584_NFO"}, {"symbol": "40514_NFO"}, {"symbol": "40651_NFO"}, {"symbol": "40585_NFO"}, {"symbol": "40559_NFO"}, {"symbol": "40629_NFO"}, {"symbol": "40653_NFO"}, {"symbol": "40583_NFO"}, {"symbol": "40512_NFO"}, {"symbol": "40677_NFO"}, {"symbol": "40536_NFO"}, {"symbol": "40560_NFO"}, {"symbol": "40652_NFO"}, {"symbol": "40513_NFO"}, {"symbol": "40534_NFO"}, {"symbol": "40511_NFO"}, {"symbol": "40654_NFO"}, {"symbol": "40606_NFO"}, {"symbol": "40676_NFO"}, {"symbol": "40630_NFO"}, {"symbol": "40535_NFO"}, {"symbol": "40558_NFO"}, {"symbol": "40582_NFO"}, {"symbol": "40533_NFO"}, {"symbol": "40556_NFO"}, {"symbol": "40580_NFO"}, {"symbol": "40509_NFO"}, {"symbol": "40557_NFO"}, {"symbol": "40655_NFO"}, {"symbol": "40510_NFO"}, {"symbol": "40581_NFO"}, {"symbol": "40678_NFO"}, {"symbol": "40507_NFO"}, {"symbol": "40555_NFO"}, {"symbol": "40657_NFO"}, {"symbol": "40578_NFO"}, {"symbol": "40579_NFO"}, {"symbol": "40633_NFO"}, {"symbol": "40532_NFO"}, {"symbol": "40508_NFO"}, {"symbol": "40679_NFO"}, {"symbol": "40656_NFO"}, {"symbol": "40530_NFO"}, {"symbol": "40577_NFO"}, {"symbol": "40529_NFO"}, {"symbol": "40635_NFO"}, {"symbol": "40658_NFO"}, {"symbol": "40634_NFO"}, {"symbol": "40531_NFO"}, {"symbol": "40554_NFO"}, {"symbol": "40611_NFO"}, {"symbol": "40528_NFO"}, {"symbol": "40660_NFO"}, {"symbol": "40636_NFO"}, {"symbol": "40553_NFO"}, {"symbol": "40659_NFO"}, {"symbol": "859727_BFO"}, {"symbol": "859640_BFO"}, {"symbol": "859464_BFO"}, {"symbol": "859299_BFO"}, {"symbol": "859177_BFO"}, {"symbol": "859305_BFO"}, {"symbol": "859077_BFO"}, {"symbol": "859563_BFO"}, {"symbol": "859376_BFO"}, {"symbol": "859189_BFO"}, {"symbol": "859317_BFO"}, {"symbol": "859399_BFO"}, {"symbol": "859154_BFO"}, {"symbol": "859628_BFO"}, {"symbol": "859252_BFO"}, {"symbol": "859215_BFO"}, {"symbol": "859429_BFO"}, {"symbol": "859386_BFO"}, {"symbol": "859298_BFO"}, {"symbol": "859338_BFO"}, {"symbol": "859714_BFO"}, {"symbol": "859178_BFO"}, {"symbol": "859676_BFO"}, {"symbol": "859315_BFO"}, {"symbol": "859441_BFO"}, {"symbol": "859054_BFO"}, {"symbol": "859677_BFO"}, {"symbol": "859506_BFO"}, {"symbol": "859274_BFO"}, {"symbol": "859576_BFO"}, {"symbol": "859327_BFO"}, {"symbol": "859155_BFO"}, {"symbol": "859090_BFO"}, {"symbol": "859498_BFO"}, {"symbol": "859405_BFO"}, {"symbol": "859020_BFO"}, {"symbol": "859078_BFO"}, {"symbol": "859191_BFO"}, {"symbol": "859132_BFO"}, {"symbol": "859202_BFO"}, {"symbol": "859566_BFO"}, {"symbol": "859186_BFO"}, {"symbol": "859661_BFO"}, {"symbol": "859589_BFO"}, {"symbol": "859021_BFO"}, {"symbol": "859485_BFO"}, {"symbol": "859214_BFO"}, {"symbol": "859507_BFO"}, {"symbol": "859131_BFO"}, {"symbol": "859602_BFO"}, {"symbol": "859684_BFO"}, {"symbol": "859554_BFO"}, {"symbol": "859544_BFO"}, {"symbol": "859438_BFO"}, {"symbol": "859508_BFO"}, {"symbol": "859377_BFO"}, {"symbol": "859260_BFO"}, {"symbol": "859662_BFO"}, {"symbol": "859626_BFO"}, {"symbol": "859022_BFO"}, {"symbol": "859686_BFO"}, {"symbol": "859651_BFO"}, {"symbol": "859437_BFO"}, {"symbol": "859201_BFO"}, {"symbol": "859674_BFO"}, {"symbol": "859307_BFO"}, {"symbol": "859697_BFO"}, {"symbol": "859733_BFO"}, {"symbol": "859657_BFO"}, {"symbol": "859123_BFO"}, {"symbol": "859394_BFO"}, {"symbol": "859171_BFO"}, {"symbol": "859235_BFO"}, {"symbol": "859222_BFO"}, {"symbol": "859581_BFO"}, {"symbol": "859410_BFO"}, {"symbol": "859358_BFO"}, {"symbol": "859471_BFO"}, {"symbol": "859545_BFO"}, {"symbol": "859122_BFO"}, {"symbol": "859048_BFO"}, {"symbol": "859719_BFO"}, {"symbol": "859583_BFO"}, {"symbol": "859281_BFO"}, {"symbol": "859368_BFO"}, {"symbol": "859458_BFO"}, {"symbol": "859594_BFO"}, {"symbol": "859268_BFO"}, {"symbol": "859144_BFO"}, {"symbol": "859322_BFO"}, {"symbol": "859150_BFO"}, {"symbol": "859114_BFO"}, {"symbol": "859718_BFO"}, {"symbol": "859102_BFO"}, {"symbol": "859337_BFO"}, {"symbol": "859643_BFO"}, {"symbol": "859208_BFO"}, {"symbol": "859418_BFO"}, {"symbol": "859729_BFO"}, {"symbol": "859168_BFO"}, {"symbol": "859192_BFO"}, {"symbol": "859525_BFO"}, {"symbol": "859350_BFO"}, {"symbol": "859243_BFO"}, {"symbol": "859679_BFO"}, {"symbol": "859359_BFO"}, {"symbol": "859456_BFO"}, {"symbol": "859562_BFO"}, {"symbol": "859101_BFO"}, {"symbol": "859477_BFO"}, {"symbol": "859705_BFO"}, {"symbol": "859574_BFO"}, {"symbol": "859254_BFO"}, {"symbol": "859028_BFO"}, {"symbol": "859490_BFO"}, {"symbol": "859170_BFO"}, {"symbol": "859064_BFO"}, {"symbol": "859633_BFO"}, {"symbol": "859455_BFO"}, {"symbol": "859230_BFO"}, {"symbol": "859526_BFO"}, {"symbol": "859395_BFO"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:27:58,705 [INFO] constants.router: Router object is being created.
+2025-09-07 16:27:58,706 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:27:58,706 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:27:58,706 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:27:58,712 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:27:58,713 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:27:59,145 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:27:59,146 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'dbf3a287-473f-4875-a140-941d849245bc', 'srvTm': 1757244479187}
+2025-09-07 16:27:59,147 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:32:12,007 [INFO] constants.router: Router object is being created.
+2025-09-07 16:32:12,007 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:32:12,008 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:32:12,008 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:32:12,011 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:32:12,012 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:32:12,851 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:32:12,852 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '41c5f65b-e4b8-4194-811e-637da0506843', 'srvTm': 1757244732897}
+2025-09-07 16:32:12,855 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:32:16,765 [INFO] constants.router: Router object is being created.
+2025-09-07 16:32:16,765 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:32:16,766 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:32:16,766 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:32:16,769 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:32:16,770 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:32:17,154 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:32:17,156 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'd04d8a8a-0695-4574-b965-53917f0c93c7', 'srvTm': 1757244737199}
+2025-09-07 16:32:17,158 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:32:17,996 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:32:17,997 [DEBUG] feed.depth_feed: Subscribing depth feed with request: {"request": {"streaming_type": "quote2", "data": {"accType": "EQ", "symbols": [{"symbol": "44637_NFO"}, {"symbol": "44848_NFO"}, {"symbol": "44661_NFO"}, {"symbol": "44485_NFO"}, {"symbol": "44713_NFO"}, {"symbol": "44847_NFO"}, {"symbol": "44516_NFO"}, {"symbol": "44687_NFO"}, {"symbol": "44828_NFO"}, {"symbol": "44517_NFO"}, {"symbol": "44482_NFO"}, {"symbol": "44639_NFO"}, {"symbol": "44640_NFO"}, {"symbol": "44588_NFO"}, {"symbol": "44484_NFO"}, {"symbol": "44542_NFO"}, {"symbol": "44589_NFO"}, {"symbol": "44897_NFO"}, {"symbol": "44638_NFO"}, {"symbol": "44662_NFO"}, {"symbol": "44483_NFO"}, {"symbol": "44827_NFO"}, {"symbol": "44543_NFO"}, {"symbol": "44831_NFO"}, {"symbol": "44532_NFO"}, {"symbol": "44855_NFO"}, {"symbol": "44631_NFO"}, {"symbol": "44467_NFO"}, {"symbol": "44580_NFO"}, {"symbol": "44832_NFO"}, {"symbol": "44581_NFO"}, {"symbol": "44729_NFO"}, {"symbol": "44853_NFO"}, {"symbol": "44533_NFO"}, {"symbol": "44829_NFO"}, {"symbol": "44830_NFO"}, {"symbol": "44854_NFO"}, {"symbol": "44534_NFO"}, {"symbol": "44706_NFO"}, {"symbol": "44730_NFO"}, {"symbol": "44857_NFO"}, {"symbol": "44582_NFO"}, {"symbol": "44834_NFO"}, {"symbol": "44583_NFO"}, {"symbol": "44535_NFO"}, {"symbol": "44728_NFO"}, {"symbol": "44882_NFO"}, {"symbol": "44858_NFO"}, {"symbol": "44466_NFO"}, {"symbol": "44443_NFO"}, {"symbol": "44856_NFO"}, {"symbol": "44727_NFO"}, {"symbol": "44881_NFO"}, {"symbol": "44442_NFO"}, {"symbol": "44833_NFO"}, {"symbol": "44632_NFO"}, {"symbol": "44813_NFO"}, {"symbol": "44549_NFO"}, {"symbol": "44796_NFO"}, {"symbol": "44474_NFO"}, {"symbol": "44526_NFO"}, {"symbol": "44602_NFO"}, {"symbol": "44885_NFO"}, {"symbol": "44837_NFO"}, {"symbol": "44574_NFO"}, {"symbol": "44503_NFO"}, {"symbol": "44449_NFO"}, {"symbol": "44475_NFO"}, {"symbol": "44795_NFO"}, {"symbol": "44527_NFO"}, {"symbol": "44835_NFO"}, {"symbol": "44812_NFO"}, {"symbol": "44836_NFO"}, {"symbol": "44575_NFO"}, {"symbol": "44840_NFO"}, {"symbol": "44887_NFO"}, {"symbol": "44652_NFO"}, {"symbol": "44447_NFO"}, {"symbol": "44446_NFO"}, {"symbol": "44841_NFO"}, {"symbol": "44864_NFO"}, {"symbol": "44604_NFO"}, {"symbol": "44651_NFO"}, {"symbol": "44448_NFO"}, {"symbol": "44603_NFO"}, {"symbol": "44744_NFO"}, {"symbol": "44886_NFO"}, {"symbol": "44743_NFO"}, {"symbol": "44520_NFO"}, {"symbol": "44480_NFO"}, {"symbol": "44479_NFO"}, {"symbol": "44890_NFO"}, {"symbol": "44867_NFO"}, {"symbol": "44544_NFO"}, {"symbol": "44891_NFO"}, {"symbol": "44521_NFO"}, {"symbol": "44865_NFO"}, {"symbol": "44742_NFO"}, {"symbol": "44481_NFO"}, {"symbol": "44888_NFO"}, {"symbol": "44545_NFO"}, {"symbol": "44842_NFO"}, {"symbol": "44741_NFO"}, {"symbol": "44869_NFO"}, {"symbol": "44870_NFO"}, {"symbol": "44546_NFO"}, {"symbol": "44764_NFO"}, {"symbol": "44688_NFO"}, {"symbol": "44547_NFO"}, {"symbol": "44763_NFO"}, {"symbol": "44846_NFO"}, {"symbol": "44476_NFO"}, {"symbol": "44524_NFO"}, {"symbol": "44668_NFO"}, {"symbol": "44548_NFO"}, {"symbol": "44478_NFO"}, {"symbol": "44477_NFO"}, {"symbol": "44525_NFO"}, {"symbol": "44868_NFO"}, {"symbol": "44667_NFO"}, {"symbol": "44845_NFO"}, {"symbol": "44502_NFO"}, {"symbol": "862095_BFO"}, {"symbol": "862135_BFO"}, {"symbol": "862012_BFO"}, {"symbol": "862494_BFO"}, {"symbol": "862024_BFO"}, {"symbol": "862469_BFO"}, {"symbol": "862271_BFO"}, {"symbol": "862246_BFO"}, {"symbol": "862359_BFO"}, {"symbol": "862212_BFO"}, {"symbol": "862060_BFO"}, {"symbol": "862134_BFO"}, {"symbol": "862111_BFO"}, {"symbol": "862025_BFO"}, {"symbol": "862061_BFO"}, {"symbol": "862110_BFO"}, {"symbol": "862333_BFO"}, {"symbol": "862210_BFO"}, {"symbol": "862157_BFO"}, {"symbol": "862269_BFO"}, {"symbol": "862424_BFO"}, {"symbol": "862471_BFO"}, {"symbol": "862423_BFO"}, {"symbol": "862168_BFO"}, {"symbol": "862501_BFO"}, {"symbol": "862096_BFO"}, {"symbol": "862524_BFO"}, {"symbol": "862458_BFO"}, {"symbol": "862437_BFO"}, {"symbol": "862461_BFO"}, {"symbol": "862237_BFO"}, {"symbol": "862332_BFO"}, {"symbol": "862297_BFO"}, {"symbol": "862119_BFO"}, {"symbol": "862120_BFO"}, {"symbol": "862285_BFO"}, {"symbol": "862380_BFO"}, {"symbol": "862131_BFO"}, {"symbol": "862451_BFO"}, {"symbol": "862318_BFO"}, {"symbol": "862403_BFO"}, {"symbol": "862296_BFO"}, {"symbol": "862070_BFO"}, {"symbol": "862438_BFO"}, {"symbol": "862154_BFO"}, {"symbol": "862259_BFO"}, {"symbol": "862176_BFO"}, {"symbol": "862509_BFO"}, {"symbol": "862414_BFO"}, {"symbol": "862035_BFO"}, {"symbol": "862450_BFO"}, {"symbol": "862205_BFO"}, {"symbol": "862464_BFO"}, {"symbol": "862253_BFO"}, {"symbol": "862476_BFO"}, {"symbol": "862452_BFO"}, {"symbol": "862053_BFO"}, {"symbol": "862030_BFO"}, {"symbol": "862341_BFO"}, {"symbol": "862141_BFO"}, {"symbol": "862304_BFO"}, {"symbol": "862189_BFO"}, {"symbol": "862190_BFO"}, {"symbol": "862505_BFO"}, {"symbol": "862353_BFO"}, {"symbol": "862229_BFO"}, {"symbol": "862299_BFO"}, {"symbol": "862388_BFO"}, {"symbol": "862241_BFO"}, {"symbol": "862043_BFO"}, {"symbol": "862104_BFO"}, {"symbol": "862327_BFO"}, {"symbol": "862287_BFO"}, {"symbol": "862240_BFO"}, {"symbol": "862339_BFO"}, {"symbol": "862078_BFO"}, {"symbol": "862020_BFO"}, {"symbol": "862475_BFO"}, {"symbol": "862518_BFO"}, {"symbol": "862115_BFO"}, {"symbol": "862151_BFO"}, {"symbol": "862079_BFO"}, {"symbol": "862103_BFO"}, {"symbol": "862487_BFO"}, {"symbol": "862044_BFO"}, {"symbol": "862204_BFO"}, {"symbol": "862305_BFO"}, {"symbol": "862352_BFO"}, {"symbol": "862417_BFO"}, {"symbol": "862499_BFO"}, {"symbol": "862525_BFO"}, {"symbol": "862003_BFO"}, {"symbol": "862385_BFO"}, {"symbol": "862098_BFO"}, {"symbol": "862350_BFO"}, {"symbol": "862219_BFO"}, {"symbol": "862015_BFO"}, {"symbol": "862374_BFO"}, {"symbol": "862431_BFO"}, {"symbol": "862418_BFO"}, {"symbol": "862514_BFO"}, {"symbol": "862397_BFO"}, {"symbol": "862315_BFO"}, {"symbol": "862169_BFO"}, {"symbol": "862433_BFO"}, {"symbol": "862489_BFO"}, {"symbol": "862016_BFO"}, {"symbol": "862170_BFO"}, {"symbol": "862526_BFO"}, {"symbol": "862290_BFO"}, {"symbol": "862409_BFO"}, {"symbol": "862278_BFO"}, {"symbol": "862456_BFO"}, {"symbol": "862124_BFO"}, {"symbol": "862088_BFO"}, {"symbol": "862277_BFO"}, {"symbol": "862408_BFO"}, {"symbol": "862396_BFO"}, {"symbol": "862005_BFO"}, {"symbol": "862289_BFO"}, {"symbol": "862231_BFO"}, {"symbol": "862337_BFO"}, {"symbol": "40662_NFO"}, {"symbol": "40638_NFO"}, {"symbol": "40598_NFO"}, {"symbol": "40527_NFO"}, {"symbol": "40504_NFO"}, {"symbol": "40637_NFO"}, {"symbol": "40661_NFO"}, {"symbol": "40640_NFO"}, {"symbol": "40639_NFO"}, {"symbol": "40573_NFO"}, {"symbol": "40547_NFO"}, {"symbol": "40524_NFO"}, {"symbol": "40571_NFO"}, {"symbol": "40641_NFO"}, {"symbol": "40572_NFO"}, {"symbol": "40664_NFO"}, {"symbol": "40548_NFO"}, {"symbol": "40570_NFO"}, {"symbol": "40594_NFO"}, {"symbol": "40569_NFO"}, {"symbol": "40523_NFO"}, {"symbol": "40593_NFO"}, {"symbol": "40642_NFO"}, {"symbol": "40665_NFO"}, {"symbol": "40644_NFO"}, {"symbol": "40592_NFO"}, {"symbol": "40568_NFO"}, {"symbol": "40668_NFO"}, {"symbol": "40643_NFO"}, {"symbol": "40519_NFO"}, {"symbol": "40645_NFO"}, {"symbol": "40520_NFO"}, {"symbol": "40667_NFO"}, {"symbol": "40591_NFO"}, {"symbol": "40567_NFO"}, {"symbol": "40647_NFO"}, {"symbol": "40565_NFO"}, {"symbol": "40672_NFO"}, {"symbol": "40518_NFO"}, {"symbol": "40646_NFO"}, {"symbol": "40566_NFO"}, {"symbol": "40601_NFO"}, {"symbol": "40670_NFO"}, {"symbol": "40564_NFO"}, {"symbol": "40625_NFO"}, {"symbol": "40587_NFO"}, {"symbol": "40648_NFO"}, {"symbol": "40588_NFO"}, {"symbol": "40517_NFO"}, {"symbol": "40671_NFO"}, {"symbol": "40586_NFO"}, {"symbol": "40674_NFO"}, {"symbol": "40538_NFO"}, {"symbol": "40603_NFO"}, {"symbol": "40562_NFO"}, {"symbol": "40650_NFO"}, {"symbol": "40626_NFO"}, {"symbol": "40602_NFO"}, {"symbol": "40649_NFO"}, {"symbol": "40540_NFO"}, {"symbol": "40675_NFO"}, {"symbol": "40539_NFO"}, {"symbol": "40563_NFO"}, {"symbol": "40561_NFO"}, {"symbol": "40673_NFO"}, {"symbol": "40537_NFO"}, {"symbol": "40584_NFO"}, {"symbol": "40514_NFO"}, {"symbol": "40651_NFO"}, {"symbol": "40585_NFO"}, {"symbol": "40559_NFO"}, {"symbol": "40629_NFO"}, {"symbol": "40653_NFO"}, {"symbol": "40583_NFO"}, {"symbol": "40512_NFO"}, {"symbol": "40677_NFO"}, {"symbol": "40536_NFO"}, {"symbol": "40560_NFO"}, {"symbol": "40652_NFO"}, {"symbol": "40513_NFO"}, {"symbol": "40534_NFO"}, {"symbol": "40511_NFO"}, {"symbol": "40654_NFO"}, {"symbol": "40606_NFO"}, {"symbol": "40676_NFO"}, {"symbol": "40630_NFO"}, {"symbol": "40535_NFO"}, {"symbol": "40558_NFO"}, {"symbol": "40582_NFO"}, {"symbol": "40533_NFO"}, {"symbol": "40556_NFO"}, {"symbol": "40580_NFO"}, {"symbol": "40509_NFO"}, {"symbol": "40557_NFO"}, {"symbol": "40655_NFO"}, {"symbol": "40510_NFO"}, {"symbol": "40581_NFO"}, {"symbol": "40678_NFO"}, {"symbol": "40507_NFO"}, {"symbol": "40555_NFO"}, {"symbol": "40657_NFO"}, {"symbol": "40578_NFO"}, {"symbol": "40579_NFO"}, {"symbol": "40633_NFO"}, {"symbol": "40532_NFO"}, {"symbol": "40508_NFO"}, {"symbol": "40679_NFO"}, {"symbol": "40656_NFO"}, {"symbol": "40530_NFO"}, {"symbol": "40577_NFO"}, {"symbol": "40529_NFO"}, {"symbol": "40635_NFO"}, {"symbol": "40658_NFO"}, {"symbol": "40634_NFO"}, {"symbol": "40531_NFO"}, {"symbol": "40554_NFO"}, {"symbol": "40611_NFO"}, {"symbol": "40528_NFO"}, {"symbol": "40660_NFO"}, {"symbol": "40636_NFO"}, {"symbol": "40553_NFO"}, {"symbol": "40659_NFO"}, {"symbol": "859727_BFO"}, {"symbol": "859640_BFO"}, {"symbol": "859464_BFO"}, {"symbol": "859299_BFO"}, {"symbol": "859177_BFO"}, {"symbol": "859305_BFO"}, {"symbol": "859077_BFO"}, {"symbol": "859563_BFO"}, {"symbol": "859376_BFO"}, {"symbol": "859189_BFO"}, {"symbol": "859317_BFO"}, {"symbol": "859399_BFO"}, {"symbol": "859154_BFO"}, {"symbol": "859628_BFO"}, {"symbol": "859252_BFO"}, {"symbol": "859215_BFO"}, {"symbol": "859429_BFO"}, {"symbol": "859386_BFO"}, {"symbol": "859298_BFO"}, {"symbol": "859338_BFO"}, {"symbol": "859714_BFO"}, {"symbol": "859178_BFO"}, {"symbol": "859676_BFO"}, {"symbol": "859315_BFO"}, {"symbol": "859441_BFO"}, {"symbol": "859054_BFO"}, {"symbol": "859677_BFO"}, {"symbol": "859506_BFO"}, {"symbol": "859274_BFO"}, {"symbol": "859576_BFO"}, {"symbol": "859327_BFO"}, {"symbol": "859155_BFO"}, {"symbol": "859090_BFO"}, {"symbol": "859498_BFO"}, {"symbol": "859405_BFO"}, {"symbol": "859020_BFO"}, {"symbol": "859078_BFO"}, {"symbol": "859191_BFO"}, {"symbol": "859132_BFO"}, {"symbol": "859202_BFO"}, {"symbol": "859566_BFO"}, {"symbol": "859186_BFO"}, {"symbol": "859661_BFO"}, {"symbol": "859589_BFO"}, {"symbol": "859021_BFO"}, {"symbol": "859485_BFO"}, {"symbol": "859214_BFO"}, {"symbol": "859507_BFO"}, {"symbol": "859131_BFO"}, {"symbol": "859602_BFO"}, {"symbol": "859684_BFO"}, {"symbol": "859554_BFO"}, {"symbol": "859544_BFO"}, {"symbol": "859438_BFO"}, {"symbol": "859508_BFO"}, {"symbol": "859377_BFO"}, {"symbol": "859260_BFO"}, {"symbol": "859662_BFO"}, {"symbol": "859626_BFO"}, {"symbol": "859022_BFO"}, {"symbol": "859686_BFO"}, {"symbol": "859651_BFO"}, {"symbol": "859437_BFO"}, {"symbol": "859201_BFO"}, {"symbol": "859674_BFO"}, {"symbol": "859307_BFO"}, {"symbol": "859697_BFO"}, {"symbol": "859733_BFO"}, {"symbol": "859657_BFO"}, {"symbol": "859123_BFO"}, {"symbol": "859394_BFO"}, {"symbol": "859171_BFO"}, {"symbol": "859235_BFO"}, {"symbol": "859222_BFO"}, {"symbol": "859581_BFO"}, {"symbol": "859410_BFO"}, {"symbol": "859358_BFO"}, {"symbol": "859471_BFO"}, {"symbol": "859545_BFO"}, {"symbol": "859122_BFO"}, {"symbol": "859048_BFO"}, {"symbol": "859719_BFO"}, {"symbol": "859583_BFO"}, {"symbol": "859281_BFO"}, {"symbol": "859368_BFO"}, {"symbol": "859458_BFO"}, {"symbol": "859594_BFO"}, {"symbol": "859268_BFO"}, {"symbol": "859144_BFO"}, {"symbol": "859322_BFO"}, {"symbol": "859150_BFO"}, {"symbol": "859114_BFO"}, {"symbol": "859718_BFO"}, {"symbol": "859102_BFO"}, {"symbol": "859337_BFO"}, {"symbol": "859643_BFO"}, {"symbol": "859208_BFO"}, {"symbol": "859418_BFO"}, {"symbol": "859729_BFO"}, {"symbol": "859168_BFO"}, {"symbol": "859192_BFO"}, {"symbol": "859525_BFO"}, {"symbol": "859350_BFO"}, {"symbol": "859243_BFO"}, {"symbol": "859679_BFO"}, {"symbol": "859359_BFO"}, {"symbol": "859456_BFO"}, {"symbol": "859562_BFO"}, {"symbol": "859101_BFO"}, {"symbol": "859477_BFO"}, {"symbol": "859705_BFO"}, {"symbol": "859574_BFO"}, {"symbol": "859254_BFO"}, {"symbol": "859028_BFO"}, {"symbol": "859490_BFO"}, {"symbol": "859170_BFO"}, {"symbol": "859064_BFO"}, {"symbol": "859633_BFO"}, {"symbol": "859455_BFO"}, {"symbol": "859230_BFO"}, {"symbol": "859526_BFO"}, {"symbol": "859395_BFO"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:34:30,555 [INFO] constants.router: Router object is being created.
+2025-09-07 16:34:30,555 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:34:30,555 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:34:30,556 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:34:30,558 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:34:30,559 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:34:30,934 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:34:30,936 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '7de6ed0b-8796-456f-9b69-b7ba8d0b939e', 'srvTm': 1757244870981}
+2025-09-07 16:34:30,938 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:34:35,930 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:34:35,931 [DEBUG] feed.depth_feed: Subscribing depth feed with request: {"request": {"streaming_type": "quote2", "data": {"accType": "EQ", "symbols": [{"symbol": "44637_NFO"}, {"symbol": "44848_NFO"}, {"symbol": "44661_NFO"}, {"symbol": "44485_NFO"}, {"symbol": "44713_NFO"}, {"symbol": "44847_NFO"}, {"symbol": "44516_NFO"}, {"symbol": "44687_NFO"}, {"symbol": "44828_NFO"}, {"symbol": "44517_NFO"}, {"symbol": "44482_NFO"}, {"symbol": "44639_NFO"}, {"symbol": "44640_NFO"}, {"symbol": "44588_NFO"}, {"symbol": "44484_NFO"}, {"symbol": "44542_NFO"}, {"symbol": "44589_NFO"}, {"symbol": "44897_NFO"}, {"symbol": "44638_NFO"}, {"symbol": "44662_NFO"}, {"symbol": "44483_NFO"}, {"symbol": "44827_NFO"}, {"symbol": "44543_NFO"}, {"symbol": "44831_NFO"}, {"symbol": "44532_NFO"}, {"symbol": "44855_NFO"}, {"symbol": "44631_NFO"}, {"symbol": "44467_NFO"}, {"symbol": "44580_NFO"}, {"symbol": "44832_NFO"}, {"symbol": "44581_NFO"}, {"symbol": "44729_NFO"}, {"symbol": "44853_NFO"}, {"symbol": "44533_NFO"}, {"symbol": "44829_NFO"}, {"symbol": "44830_NFO"}, {"symbol": "44854_NFO"}, {"symbol": "44534_NFO"}, {"symbol": "44706_NFO"}, {"symbol": "44730_NFO"}, {"symbol": "44857_NFO"}, {"symbol": "44582_NFO"}, {"symbol": "44834_NFO"}, {"symbol": "44583_NFO"}, {"symbol": "44535_NFO"}, {"symbol": "44728_NFO"}, {"symbol": "44882_NFO"}, {"symbol": "44858_NFO"}, {"symbol": "44466_NFO"}, {"symbol": "44443_NFO"}, {"symbol": "44856_NFO"}, {"symbol": "44727_NFO"}, {"symbol": "44881_NFO"}, {"symbol": "44442_NFO"}, {"symbol": "44833_NFO"}, {"symbol": "44632_NFO"}, {"symbol": "44813_NFO"}, {"symbol": "44549_NFO"}, {"symbol": "44796_NFO"}, {"symbol": "44474_NFO"}, {"symbol": "44526_NFO"}, {"symbol": "44602_NFO"}, {"symbol": "44885_NFO"}, {"symbol": "44837_NFO"}, {"symbol": "44574_NFO"}, {"symbol": "44503_NFO"}, {"symbol": "44449_NFO"}, {"symbol": "44475_NFO"}, {"symbol": "44795_NFO"}, {"symbol": "44527_NFO"}, {"symbol": "44835_NFO"}, {"symbol": "44812_NFO"}, {"symbol": "44836_NFO"}, {"symbol": "44575_NFO"}, {"symbol": "44840_NFO"}, {"symbol": "44887_NFO"}, {"symbol": "44652_NFO"}, {"symbol": "44447_NFO"}, {"symbol": "44446_NFO"}, {"symbol": "44841_NFO"}, {"symbol": "44864_NFO"}, {"symbol": "44604_NFO"}, {"symbol": "44651_NFO"}, {"symbol": "44448_NFO"}, {"symbol": "44603_NFO"}, {"symbol": "44744_NFO"}, {"symbol": "44886_NFO"}, {"symbol": "44743_NFO"}, {"symbol": "44520_NFO"}, {"symbol": "44480_NFO"}, {"symbol": "44479_NFO"}, {"symbol": "44890_NFO"}, {"symbol": "44867_NFO"}, {"symbol": "44544_NFO"}, {"symbol": "44891_NFO"}, {"symbol": "44521_NFO"}, {"symbol": "44865_NFO"}, {"symbol": "44742_NFO"}, {"symbol": "44481_NFO"}, {"symbol": "44888_NFO"}, {"symbol": "44545_NFO"}, {"symbol": "44842_NFO"}, {"symbol": "44741_NFO"}, {"symbol": "44869_NFO"}, {"symbol": "44870_NFO"}, {"symbol": "44546_NFO"}, {"symbol": "44764_NFO"}, {"symbol": "44688_NFO"}, {"symbol": "44547_NFO"}, {"symbol": "44763_NFO"}, {"symbol": "44846_NFO"}, {"symbol": "44476_NFO"}, {"symbol": "44524_NFO"}, {"symbol": "44668_NFO"}, {"symbol": "44548_NFO"}, {"symbol": "44478_NFO"}, {"symbol": "44477_NFO"}, {"symbol": "44525_NFO"}, {"symbol": "44868_NFO"}, {"symbol": "44667_NFO"}, {"symbol": "44845_NFO"}, {"symbol": "44502_NFO"}, {"symbol": "862095_BFO"}, {"symbol": "862135_BFO"}, {"symbol": "862012_BFO"}, {"symbol": "862494_BFO"}, {"symbol": "862024_BFO"}, {"symbol": "862469_BFO"}, {"symbol": "862271_BFO"}, {"symbol": "862246_BFO"}, {"symbol": "862359_BFO"}, {"symbol": "862212_BFO"}, {"symbol": "862060_BFO"}, {"symbol": "862134_BFO"}, {"symbol": "862111_BFO"}, {"symbol": "862025_BFO"}, {"symbol": "862061_BFO"}, {"symbol": "862110_BFO"}, {"symbol": "862333_BFO"}, {"symbol": "862210_BFO"}, {"symbol": "862157_BFO"}, {"symbol": "862269_BFO"}, {"symbol": "862424_BFO"}, {"symbol": "862471_BFO"}, {"symbol": "862423_BFO"}, {"symbol": "862168_BFO"}, {"symbol": "862501_BFO"}, {"symbol": "862096_BFO"}, {"symbol": "862524_BFO"}, {"symbol": "862458_BFO"}, {"symbol": "862437_BFO"}, {"symbol": "862461_BFO"}, {"symbol": "862237_BFO"}, {"symbol": "862332_BFO"}, {"symbol": "862297_BFO"}, {"symbol": "862119_BFO"}, {"symbol": "862120_BFO"}, {"symbol": "862285_BFO"}, {"symbol": "862380_BFO"}, {"symbol": "862131_BFO"}, {"symbol": "862451_BFO"}, {"symbol": "862318_BFO"}, {"symbol": "862403_BFO"}, {"symbol": "862296_BFO"}, {"symbol": "862070_BFO"}, {"symbol": "862438_BFO"}, {"symbol": "862154_BFO"}, {"symbol": "862259_BFO"}, {"symbol": "862176_BFO"}, {"symbol": "862509_BFO"}, {"symbol": "862414_BFO"}, {"symbol": "862035_BFO"}, {"symbol": "862450_BFO"}, {"symbol": "862205_BFO"}, {"symbol": "862464_BFO"}, {"symbol": "862253_BFO"}, {"symbol": "862476_BFO"}, {"symbol": "862452_BFO"}, {"symbol": "862053_BFO"}, {"symbol": "862030_BFO"}, {"symbol": "862341_BFO"}, {"symbol": "862141_BFO"}, {"symbol": "862304_BFO"}, {"symbol": "862189_BFO"}, {"symbol": "862190_BFO"}, {"symbol": "862505_BFO"}, {"symbol": "862353_BFO"}, {"symbol": "862229_BFO"}, {"symbol": "862299_BFO"}, {"symbol": "862388_BFO"}, {"symbol": "862241_BFO"}, {"symbol": "862043_BFO"}, {"symbol": "862104_BFO"}, {"symbol": "862327_BFO"}, {"symbol": "862287_BFO"}, {"symbol": "862240_BFO"}, {"symbol": "862339_BFO"}, {"symbol": "862078_BFO"}, {"symbol": "862020_BFO"}, {"symbol": "862475_BFO"}, {"symbol": "862518_BFO"}, {"symbol": "862115_BFO"}, {"symbol": "862151_BFO"}, {"symbol": "862079_BFO"}, {"symbol": "862103_BFO"}, {"symbol": "862487_BFO"}, {"symbol": "862044_BFO"}, {"symbol": "862204_BFO"}, {"symbol": "862305_BFO"}, {"symbol": "862352_BFO"}, {"symbol": "862417_BFO"}, {"symbol": "862499_BFO"}, {"symbol": "862525_BFO"}, {"symbol": "862003_BFO"}, {"symbol": "862385_BFO"}, {"symbol": "862098_BFO"}, {"symbol": "862350_BFO"}, {"symbol": "862219_BFO"}, {"symbol": "862015_BFO"}, {"symbol": "862374_BFO"}, {"symbol": "862431_BFO"}, {"symbol": "862418_BFO"}, {"symbol": "862514_BFO"}, {"symbol": "862397_BFO"}, {"symbol": "862315_BFO"}, {"symbol": "862169_BFO"}, {"symbol": "862433_BFO"}, {"symbol": "862489_BFO"}, {"symbol": "862016_BFO"}, {"symbol": "862170_BFO"}, {"symbol": "862526_BFO"}, {"symbol": "862290_BFO"}, {"symbol": "862409_BFO"}, {"symbol": "862278_BFO"}, {"symbol": "862456_BFO"}, {"symbol": "862124_BFO"}, {"symbol": "862088_BFO"}, {"symbol": "862277_BFO"}, {"symbol": "862408_BFO"}, {"symbol": "862396_BFO"}, {"symbol": "862005_BFO"}, {"symbol": "862289_BFO"}, {"symbol": "862231_BFO"}, {"symbol": "862337_BFO"}, {"symbol": "40662_NFO"}, {"symbol": "40638_NFO"}, {"symbol": "40598_NFO"}, {"symbol": "40527_NFO"}, {"symbol": "40504_NFO"}, {"symbol": "40637_NFO"}, {"symbol": "40661_NFO"}, {"symbol": "40640_NFO"}, {"symbol": "40639_NFO"}, {"symbol": "40573_NFO"}, {"symbol": "40547_NFO"}, {"symbol": "40524_NFO"}, {"symbol": "40571_NFO"}, {"symbol": "40641_NFO"}, {"symbol": "40572_NFO"}, {"symbol": "40664_NFO"}, {"symbol": "40548_NFO"}, {"symbol": "40570_NFO"}, {"symbol": "40594_NFO"}, {"symbol": "40569_NFO"}, {"symbol": "40523_NFO"}, {"symbol": "40593_NFO"}, {"symbol": "40642_NFO"}, {"symbol": "40665_NFO"}, {"symbol": "40644_NFO"}, {"symbol": "40592_NFO"}, {"symbol": "40568_NFO"}, {"symbol": "40668_NFO"}, {"symbol": "40643_NFO"}, {"symbol": "40519_NFO"}, {"symbol": "40645_NFO"}, {"symbol": "40520_NFO"}, {"symbol": "40667_NFO"}, {"symbol": "40591_NFO"}, {"symbol": "40567_NFO"}, {"symbol": "40647_NFO"}, {"symbol": "40565_NFO"}, {"symbol": "40672_NFO"}, {"symbol": "40518_NFO"}, {"symbol": "40646_NFO"}, {"symbol": "40566_NFO"}, {"symbol": "40601_NFO"}, {"symbol": "40670_NFO"}, {"symbol": "40564_NFO"}, {"symbol": "40625_NFO"}, {"symbol": "40587_NFO"}, {"symbol": "40648_NFO"}, {"symbol": "40588_NFO"}, {"symbol": "40517_NFO"}, {"symbol": "40671_NFO"}, {"symbol": "40586_NFO"}, {"symbol": "40674_NFO"}, {"symbol": "40538_NFO"}, {"symbol": "40603_NFO"}, {"symbol": "40562_NFO"}, {"symbol": "40650_NFO"}, {"symbol": "40626_NFO"}, {"symbol": "40602_NFO"}, {"symbol": "40649_NFO"}, {"symbol": "40540_NFO"}, {"symbol": "40675_NFO"}, {"symbol": "40539_NFO"}, {"symbol": "40563_NFO"}, {"symbol": "40561_NFO"}, {"symbol": "40673_NFO"}, {"symbol": "40537_NFO"}, {"symbol": "40584_NFO"}, {"symbol": "40514_NFO"}, {"symbol": "40651_NFO"}, {"symbol": "40585_NFO"}, {"symbol": "40559_NFO"}, {"symbol": "40629_NFO"}, {"symbol": "40653_NFO"}, {"symbol": "40583_NFO"}, {"symbol": "40512_NFO"}, {"symbol": "40677_NFO"}, {"symbol": "40536_NFO"}, {"symbol": "40560_NFO"}, {"symbol": "40652_NFO"}, {"symbol": "40513_NFO"}, {"symbol": "40534_NFO"}, {"symbol": "40511_NFO"}, {"symbol": "40654_NFO"}, {"symbol": "40606_NFO"}, {"symbol": "40676_NFO"}, {"symbol": "40630_NFO"}, {"symbol": "40535_NFO"}, {"symbol": "40558_NFO"}, {"symbol": "40582_NFO"}, {"symbol": "40533_NFO"}, {"symbol": "40556_NFO"}, {"symbol": "40580_NFO"}, {"symbol": "40509_NFO"}, {"symbol": "40557_NFO"}, {"symbol": "40655_NFO"}, {"symbol": "40510_NFO"}, {"symbol": "40581_NFO"}, {"symbol": "40678_NFO"}, {"symbol": "40507_NFO"}, {"symbol": "40555_NFO"}, {"symbol": "40657_NFO"}, {"symbol": "40578_NFO"}, {"symbol": "40579_NFO"}, {"symbol": "40633_NFO"}, {"symbol": "40532_NFO"}, {"symbol": "40508_NFO"}, {"symbol": "40679_NFO"}, {"symbol": "40656_NFO"}, {"symbol": "40530_NFO"}, {"symbol": "40577_NFO"}, {"symbol": "40529_NFO"}, {"symbol": "40635_NFO"}, {"symbol": "40658_NFO"}, {"symbol": "40634_NFO"}, {"symbol": "40531_NFO"}, {"symbol": "40554_NFO"}, {"symbol": "40611_NFO"}, {"symbol": "40528_NFO"}, {"symbol": "40660_NFO"}, {"symbol": "40636_NFO"}, {"symbol": "40553_NFO"}, {"symbol": "40659_NFO"}, {"symbol": "859727_BFO"}, {"symbol": "859640_BFO"}, {"symbol": "859464_BFO"}, {"symbol": "859299_BFO"}, {"symbol": "859177_BFO"}, {"symbol": "859305_BFO"}, {"symbol": "859077_BFO"}, {"symbol": "859563_BFO"}, {"symbol": "859376_BFO"}, {"symbol": "859189_BFO"}, {"symbol": "859317_BFO"}, {"symbol": "859399_BFO"}, {"symbol": "859154_BFO"}, {"symbol": "859628_BFO"}, {"symbol": "859252_BFO"}, {"symbol": "859215_BFO"}, {"symbol": "859429_BFO"}, {"symbol": "859386_BFO"}, {"symbol": "859298_BFO"}, {"symbol": "859338_BFO"}, {"symbol": "859714_BFO"}, {"symbol": "859178_BFO"}, {"symbol": "859676_BFO"}, {"symbol": "859315_BFO"}, {"symbol": "859441_BFO"}, {"symbol": "859054_BFO"}, {"symbol": "859677_BFO"}, {"symbol": "859506_BFO"}, {"symbol": "859274_BFO"}, {"symbol": "859576_BFO"}, {"symbol": "859327_BFO"}, {"symbol": "859155_BFO"}, {"symbol": "859090_BFO"}, {"symbol": "859498_BFO"}, {"symbol": "859405_BFO"}, {"symbol": "859020_BFO"}, {"symbol": "859078_BFO"}, {"symbol": "859191_BFO"}, {"symbol": "859132_BFO"}, {"symbol": "859202_BFO"}, {"symbol": "859566_BFO"}, {"symbol": "859186_BFO"}, {"symbol": "859661_BFO"}, {"symbol": "859589_BFO"}, {"symbol": "859021_BFO"}, {"symbol": "859485_BFO"}, {"symbol": "859214_BFO"}, {"symbol": "859507_BFO"}, {"symbol": "859131_BFO"}, {"symbol": "859602_BFO"}, {"symbol": "859684_BFO"}, {"symbol": "859554_BFO"}, {"symbol": "859544_BFO"}, {"symbol": "859438_BFO"}, {"symbol": "859508_BFO"}, {"symbol": "859377_BFO"}, {"symbol": "859260_BFO"}, {"symbol": "859662_BFO"}, {"symbol": "859626_BFO"}, {"symbol": "859022_BFO"}, {"symbol": "859686_BFO"}, {"symbol": "859651_BFO"}, {"symbol": "859437_BFO"}, {"symbol": "859201_BFO"}, {"symbol": "859674_BFO"}, {"symbol": "859307_BFO"}, {"symbol": "859697_BFO"}, {"symbol": "859733_BFO"}, {"symbol": "859657_BFO"}, {"symbol": "859123_BFO"}, {"symbol": "859394_BFO"}, {"symbol": "859171_BFO"}, {"symbol": "859235_BFO"}, {"symbol": "859222_BFO"}, {"symbol": "859581_BFO"}, {"symbol": "859410_BFO"}, {"symbol": "859358_BFO"}, {"symbol": "859471_BFO"}, {"symbol": "859545_BFO"}, {"symbol": "859122_BFO"}, {"symbol": "859048_BFO"}, {"symbol": "859719_BFO"}, {"symbol": "859583_BFO"}, {"symbol": "859281_BFO"}, {"symbol": "859368_BFO"}, {"symbol": "859458_BFO"}, {"symbol": "859594_BFO"}, {"symbol": "859268_BFO"}, {"symbol": "859144_BFO"}, {"symbol": "859322_BFO"}, {"symbol": "859150_BFO"}, {"symbol": "859114_BFO"}, {"symbol": "859718_BFO"}, {"symbol": "859102_BFO"}, {"symbol": "859337_BFO"}, {"symbol": "859643_BFO"}, {"symbol": "859208_BFO"}, {"symbol": "859418_BFO"}, {"symbol": "859729_BFO"}, {"symbol": "859168_BFO"}, {"symbol": "859192_BFO"}, {"symbol": "859525_BFO"}, {"symbol": "859350_BFO"}, {"symbol": "859243_BFO"}, {"symbol": "859679_BFO"}, {"symbol": "859359_BFO"}, {"symbol": "859456_BFO"}, {"symbol": "859562_BFO"}, {"symbol": "859101_BFO"}, {"symbol": "859477_BFO"}, {"symbol": "859705_BFO"}, {"symbol": "859574_BFO"}, {"symbol": "859254_BFO"}, {"symbol": "859028_BFO"}, {"symbol": "859490_BFO"}, {"symbol": "859170_BFO"}, {"symbol": "859064_BFO"}, {"symbol": "859633_BFO"}, {"symbol": "859455_BFO"}, {"symbol": "859230_BFO"}, {"symbol": "859526_BFO"}, {"symbol": "859395_BFO"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:48:46,904 [DEBUG] selenium.webdriver.common.selenium_manager: Selenium Manager binary found at: /workspace/venv/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager
+2025-09-07 16:48:46,904 [DEBUG] selenium.webdriver.common.selenium_manager: Executing process: /workspace/venv/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager --browser chrome --debug --output json
+2025-09-07 16:48:51,021 [DEBUG] selenium.webdriver.common.selenium_manager: chromedriver not found in PATH
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: chrome not found in PATH
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: chrome not found in the system
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: Discovering versions from https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: Required browser: chrome 140.0.7339.80
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: chrome 140.0.7339.80 already exists
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: chrome 140.0.7339.80 is available at /root/.cache/selenium/chrome/linux64/140.0.7339.80/chrome
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: Discovering versions from https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: Required driver: chromedriver 140.0.7339.80
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: chromedriver 140.0.7339.80 already in the cache
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: Driver path: /root/.cache/selenium/chromedriver/linux64/140.0.7339.80/chromedriver
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: Browser path: /root/.cache/selenium/chrome/linux64/140.0.7339.80/chrome
+2025-09-07 16:48:51,022 [DEBUG] selenium.webdriver.common.selenium_manager: Using driver at: /root/.cache/selenium/chromedriver/linux64/140.0.7339.80/chromedriver
+2025-09-07 16:48:51,023 [DEBUG] selenium.webdriver.common.service: Started executable: `/root/.cache/selenium/chromedriver/linux64/140.0.7339.80/chromedriver` in a child process with pid: 427
+2025-09-07 16:48:51,525 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session {"capabilities": {"firstMatch": [{}], "alwaysMatch": {"browserName": "chrome", "pageLoadStrategy": "normal", "browserVersion": null, "goog:chromeOptions": {"prefs": {"profile.default_content_setting_values.notifications": 2, "profile.default_content_settings.popups": 0}, "extensions": [], "binary": "/root/.cache/selenium/chrome/linux64/140.0.7339.80/chrome", "args": ["--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1080"]}}}}
+2025-09-07 16:48:51,525 [DEBUG] urllib3.connectionpool: Starting new HTTP connection (1): localhost:45901
+2025-09-07 16:48:52,378 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session HTTP/1.1" 200 848
+2025-09-07 16:48:52,379 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"capabilities":{"acceptInsecureCerts":false,"browserName":"chrome","browserVersion":"140.0.7339.80","chrome":{"chromedriverVersion":"140.0.7339.80 (670b6f192f4668d2ac2c06bd77ec3e4eeda7d648-refs/branch-heads/7339_41@{#3})","userDataDir":"/tmp/.org.chromium.Chromium.lbdwio"},"fedcm:accounts":true,"goog:chromeOptions":{"debuggerAddress":"localhost:43915"},"networkConnectionEnabled":false,"pageLoadStrategy":"normal","platformName":"linux","proxy":{},"setWindowRect":true,"strictFileInteractability":false,"timeouts":{"implicit":0,"pageLoad":300000,"script":30000},"unhandledPromptBehavior":"dismiss and notify","webauthn:extension:credBlob":true,"webauthn:extension:largeBlob":true,"webauthn:extension:minPinLength":true,"webauthn:extension:prf":true,"webauthn:virtualAuthenticators":true},"sessionId":"727cd49be2853f6ca9037e4452ca5ebd"}} | headers=HTTPHeaderDict({'Content-Length': '848', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:48:52,379 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:48:52,379 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/url {"url": "https://www.nuvamawealth.com/api-connect/login?api_key=iBe07GpBTEbbhg"}
+2025-09-07 16:48:53,222 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/url HTTP/1.1" 200 14
+2025-09-07 16:48:53,222 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:48:53,222 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:48:56,223 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "[id=\"userID\"]"}
+2025-09-07 16:48:56,237 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 200 125
+2025-09-07 16:48:56,237 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.3"}} | headers=HTTPHeaderDict({'Content-Length': '125', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:48:56,237 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:48:56,237 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.3/clear {}
+2025-09-07 16:48:56,282 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.3/clear HTTP/1.1" 200 14
+2025-09-07 16:48:56,282 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:48:56,282 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:48:56,282 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.3/value {"text": "70249886", "value": ["7", "0", "2", "4", "9", "8", "8", "6"]}
+2025-09-07 16:48:56,365 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.3/value HTTP/1.1" 200 14
+2025-09-07 16:48:56,365 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:48:56,365 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:48:56,365 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "button[type='submit']"}
+2025-09-07 16:48:56,386 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 404 900
+2025-09-07 16:48:56,386 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"button[type='submit']\"}\n  (Session info: chrome=140.0.7339.80)","stacktrace":"#0 0x557b2fd0094a \u003Cunknown>\n#1 0x557b2f7758a0 \u003Cunknown>\n#2 0x557b2f7c7540 \u003Cunknown>\n#3 0x557b2f7c7731 \u003Cunknown>\n#4 0x557b2f815824 \u003Cunknown>\n#5 0x557b2f7ed05d \u003Cunknown>\n#6 0x557b2f812c23 \u003Cunknown>\n#7 0x557b2f7ece03 \u003Cunknown>\n#8 0x557b2f7b9968 \u003Cunknown>\n#9 0x557b2f7ba5e1 \u003Cunknown>\n#10 0x557b2fcc4548 \u003Cunknown>\n#11 0x557b2fcc8272 \u003Cunknown>\n#12 0x557b2fcab313 \u003Cunknown>\n#13 0x557b2fcc8dc5 \u003Cunknown>\n#14 0x557b2fc9049f \u003Cunknown>\n#15 0x557b2fced158 \u003Cunknown>\n#16 0x557b2fced332 \u003Cunknown>\n#17 0x557b2fcffa53 \u003Cunknown>\n#18 0x7fe10026eaa4 \u003Cunknown>\n#19 0x7fe1002fba34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '900', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:48:56,386 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:48:56,386 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "input[type='submit']"}
+2025-09-07 16:48:56,404 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 404 899
+2025-09-07 16:48:56,404 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"input[type='submit']\"}\n  (Session info: chrome=140.0.7339.80)","stacktrace":"#0 0x557b2fd0094a \u003Cunknown>\n#1 0x557b2f7758a0 \u003Cunknown>\n#2 0x557b2f7c7540 \u003Cunknown>\n#3 0x557b2f7c7731 \u003Cunknown>\n#4 0x557b2f815824 \u003Cunknown>\n#5 0x557b2f7ed05d \u003Cunknown>\n#6 0x557b2f812c23 \u003Cunknown>\n#7 0x557b2f7ece03 \u003Cunknown>\n#8 0x557b2f7b9968 \u003Cunknown>\n#9 0x557b2f7ba5e1 \u003Cunknown>\n#10 0x557b2fcc4548 \u003Cunknown>\n#11 0x557b2fcc8272 \u003Cunknown>\n#12 0x557b2fcab313 \u003Cunknown>\n#13 0x557b2fcc8dc5 \u003Cunknown>\n#14 0x557b2fc9049f \u003Cunknown>\n#15 0x557b2fced158 \u003Cunknown>\n#16 0x557b2fced332 \u003Cunknown>\n#17 0x557b2fcffa53 \u003Cunknown>\n#18 0x7fe10026eaa4 \u003Cunknown>\n#19 0x7fe1002fba34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '899', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:48:56,404 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:48:56,404 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/elements {"using": "tag name", "value": "button"}
+2025-09-07 16:48:56,417 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/elements HTTP/1.1" 200 245
+2025-09-07 16:48:56,417 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.10"},{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.11"}]} | headers=HTTPHeaderDict({'Content-Length': '245', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:48:56,417 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:48:56,417 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.10/text {}
+2025-09-07 16:48:56,431 [DEBUG] urllib3.connectionpool: http://localhost:45901 "GET /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.10/text HTTP/1.1" 200 19
+2025-09-07 16:48:56,432 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"Proceed"} | headers=HTTPHeaderDict({'Content-Length': '19', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:48:56,432 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:48:56,432 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.10/click {}
+2025-09-07 16:48:56,511 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.10/click HTTP/1.1" 200 14
+2025-09-07 16:48:56,511 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:48:56,511 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,510 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "[id=\"password\"]"}
+2025-09-07 16:49:00,522 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 200 126
+2025-09-07 16:49:00,522 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.14"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,522 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,523 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.14/clear {}
+2025-09-07 16:49:00,550 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.14/clear HTTP/1.1" 200 14
+2025-09-07 16:49:00,550 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,550 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,550 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.14/value {"text": "Shreeji@2063", "value": ["S", "h", "r", "e", "e", "j", "i", "@", "2", "0", "6", "3"]}
+2025-09-07 16:49:00,613 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.14/value HTTP/1.1" 200 14
+2025-09-07 16:49:00,614 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,614 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,614 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "[id=\"totp-0\"]"}
+2025-09-07 16:49:00,626 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 200 126
+2025-09-07 16:49:00,626 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.15"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,626 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,626 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "[id=\"totp-1\"]"}
+2025-09-07 16:49:00,636 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 200 126
+2025-09-07 16:49:00,637 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.16"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,637 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,637 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "[id=\"totp-2\"]"}
+2025-09-07 16:49:00,649 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 200 126
+2025-09-07 16:49:00,649 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.17"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,649 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,649 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "[id=\"totp-3\"]"}
+2025-09-07 16:49:00,661 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 200 126
+2025-09-07 16:49:00,661 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.18"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,661 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,661 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "[id=\"totp-4\"]"}
+2025-09-07 16:49:00,672 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 200 126
+2025-09-07 16:49:00,672 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.19"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,672 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,672 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "[id=\"totp-5\"]"}
+2025-09-07 16:49:00,683 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 200 126
+2025-09-07 16:49:00,683 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.20"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,683 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,683 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element {"using": "css selector", "value": "[id=\"totp-6\"]"}
+2025-09-07 16:49:00,700 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element HTTP/1.1" 404 894
+2025-09-07 16:49:00,700 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"[id=\"totp-6\"]\"}\n  (Session info: chrome=140.0.7339.80)","stacktrace":"#0 0x557b2fd0094a \u003Cunknown>\n#1 0x557b2f7758a0 \u003Cunknown>\n#2 0x557b2f7c7540 \u003Cunknown>\n#3 0x557b2f7c7731 \u003Cunknown>\n#4 0x557b2f815824 \u003Cunknown>\n#5 0x557b2f7ed05d \u003Cunknown>\n#6 0x557b2f812c23 \u003Cunknown>\n#7 0x557b2f7ece03 \u003Cunknown>\n#8 0x557b2f7b9968 \u003Cunknown>\n#9 0x557b2f7ba5e1 \u003Cunknown>\n#10 0x557b2fcc4548 \u003Cunknown>\n#11 0x557b2fcc8272 \u003Cunknown>\n#12 0x557b2fcab313 \u003Cunknown>\n#13 0x557b2fcc8dc5 \u003Cunknown>\n#14 0x557b2fc9049f \u003Cunknown>\n#15 0x557b2fced158 \u003Cunknown>\n#16 0x557b2fced332 \u003Cunknown>\n#17 0x557b2fcffa53 \u003Cunknown>\n#18 0x7fe10026eaa4 \u003Cunknown>\n#19 0x7fe1002fba34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '894', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,700 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,700 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.15/clear {}
+2025-09-07 16:49:00,728 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.15/clear HTTP/1.1" 200 14
+2025-09-07 16:49:00,728 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,728 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,728 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.15/value {"text": "2", "value": ["2"]}
+2025-09-07 16:49:00,781 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.15/value HTTP/1.1" 200 14
+2025-09-07 16:49:00,781 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,781 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,781 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.16/clear {}
+2025-09-07 16:49:00,809 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.16/clear HTTP/1.1" 200 14
+2025-09-07 16:49:00,810 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,810 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,810 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.16/value {"text": "9", "value": ["9"]}
+2025-09-07 16:49:00,841 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.16/value HTTP/1.1" 200 14
+2025-09-07 16:49:00,841 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,841 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,841 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.17/clear {}
+2025-09-07 16:49:00,869 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.17/clear HTTP/1.1" 200 14
+2025-09-07 16:49:00,869 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,869 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,869 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.17/value {"text": "2", "value": ["2"]}
+2025-09-07 16:49:00,900 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.17/value HTTP/1.1" 200 14
+2025-09-07 16:49:00,900 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,900 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,900 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.18/clear {}
+2025-09-07 16:49:00,929 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.18/clear HTTP/1.1" 200 14
+2025-09-07 16:49:00,929 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,929 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,929 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.18/value {"text": "5", "value": ["5"]}
+2025-09-07 16:49:00,959 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.18/value HTTP/1.1" 200 14
+2025-09-07 16:49:00,960 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,960 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,960 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.19/clear {}
+2025-09-07 16:49:00,988 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.19/clear HTTP/1.1" 200 14
+2025-09-07 16:49:00,989 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:00,989 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:00,989 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.19/value {"text": "9", "value": ["9"]}
+2025-09-07 16:49:01,020 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.19/value HTTP/1.1" 200 14
+2025-09-07 16:49:01,020 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:01,020 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:01,020 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.20/clear {}
+2025-09-07 16:49:01,051 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.20/clear HTTP/1.1" 200 14
+2025-09-07 16:49:01,051 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:01,051 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:01,051 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.20/value {"text": "3", "value": ["3"]}
+2025-09-07 16:49:01,082 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.20/value HTTP/1.1" 200 14
+2025-09-07 16:49:01,082 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:01,082 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:01,082 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/elements {"using": "tag name", "value": "button"}
+2025-09-07 16:49:01,090 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/elements HTTP/1.1" 200 245
+2025-09-07 16:49:01,090 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.26"},{"element-6066-11e4-a52e-4f735466cecf":"f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.71"}]} | headers=HTTPHeaderDict({'Content-Length': '245', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:01,090 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:01,090 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.26/text {}
+2025-09-07 16:49:01,100 [DEBUG] urllib3.connectionpool: http://localhost:45901 "GET /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.26/text HTTP/1.1" 200 19
+2025-09-07 16:49:01,100 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"Proceed"} | headers=HTTPHeaderDict({'Content-Length': '19', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:01,100 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:01,100 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.26/click {}
+2025-09-07 16:49:01,163 [DEBUG] urllib3.connectionpool: http://localhost:45901 "POST /session/727cd49be2853f6ca9037e4452ca5ebd/element/f.C8AAF4E6FB6C5BCA7A4955634D2BB853.d.B43398824BB4ECA5FA57F7571D9ACB3F.e.26/click HTTP/1.1" 200 14
+2025-09-07 16:49:01,163 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:01,163 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:06,163 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd/url {}
+2025-09-07 16:49:06,173 [DEBUG] urllib3.connectionpool: http://localhost:45901 "GET /session/727cd49be2853f6ca9037e4452ca5ebd/url HTTP/1.1" 200 58
+2025-09-07 16:49:06,173 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"https://127.0.0.1/?request_id=336635fa5c664a54"} | headers=HTTPHeaderDict({'Content-Length': '58', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:06,173 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:06,174 [DEBUG] selenium.webdriver.remote.remote_connection: DELETE http://localhost:45901/session/727cd49be2853f6ca9037e4452ca5ebd {}
+2025-09-07 16:49:06,277 [DEBUG] urllib3.connectionpool: http://localhost:45901 "DELETE /session/727cd49be2853f6ca9037e4452ca5ebd HTTP/1.1" 200 14
+2025-09-07 16:49:06,277 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-07 16:49:06,277 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-07 16:49:06,292 [INFO] constants.router: Router object is being created.
+2025-09-07 16:49:06,292 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:49:06,292 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:49:06,292 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:49:06,294 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:49:06,716 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 200 None
+2025-09-07 16:49:06,718 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-09-07 16:49:06,718 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-09-07 16:49:06,820 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-09-07 16:49:06,823 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-09-07 16:49:06,823 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-09-07 16:49:06,824 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:49:07,152 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:49:07,156 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '3c228996-0b15-49e1-ba5b-a4a22055dfa7', 'srvTm': 1757245747208}
+2025-09-07 16:49:07,932 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-09-07 16:49:08,000 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-09-07 16:49:08,542 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-09-07 16:49:10,274 [INFO] constants.router: Router object is being created.
+2025-09-07 16:49:10,274 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:49:10,274 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:49:10,274 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:49:10,275 [INFO] constants.router: Router object is being created.
+2025-09-07 16:49:10,275 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 16:49:10,275 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 16:49:10,275 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 16:49:10,277 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:49:10,279 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:49:10,280 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 16:49:10,281 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 16:49:15,657 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:49:15,658 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '59b58a36-7798-4725-9e5f-a8ecbadb94c9', 'srvTm': 1757245755713}
+2025-09-07 16:49:15,659 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 16:49:15,691 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 16:49:15,692 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'bd332992-83b0-454d-9695-035bfaead9d1', 'srvTm': 1757245755744}
+2025-09-07 16:49:15,692 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-07 17:11:22,882 [INFO] constants.router: Router object is being created.
+2025-09-07 17:11:22,883 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:11:22,884 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:11:22,884 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:11:22,888 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:11:22,891 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:11:44,922 [INFO] constants.router: Router object is being created.
+2025-09-07 17:11:44,922 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:11:44,922 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:11:44,922 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:11:44,925 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:11:44,926 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:12:06,962 [INFO] constants.router: Router object is being created.
+2025-09-07 17:12:06,962 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:12:06,962 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:12:06,963 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:12:06,966 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:12:06,968 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:12:28,992 [INFO] constants.router: Router object is being created.
+2025-09-07 17:12:28,992 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:12:28,992 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:12:28,992 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:12:28,996 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:12:28,996 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:12:51,011 [INFO] constants.router: Router object is being created.
+2025-09-07 17:12:51,011 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:12:51,011 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:12:51,011 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:12:51,014 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:12:51,014 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:13:13,037 [INFO] constants.router: Router object is being created.
+2025-09-07 17:13:13,037 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:13:13,037 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:13:13,037 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:13:13,041 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:13:13,042 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:13:35,058 [INFO] constants.router: Router object is being created.
+2025-09-07 17:13:35,058 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:13:35,058 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:13:35,059 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:13:35,061 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:13:35,062 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:13:57,087 [INFO] constants.router: Router object is being created.
+2025-09-07 17:13:57,087 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:13:57,087 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:13:57,087 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:13:57,090 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:13:57,091 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:14:19,114 [INFO] constants.router: Router object is being created.
+2025-09-07 17:14:19,114 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:14:19,114 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:14:19,114 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:14:19,117 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:14:19,118 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:14:41,137 [INFO] constants.router: Router object is being created.
+2025-09-07 17:14:41,137 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:14:41,137 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:14:41,137 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:14:41,140 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:14:41,141 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:15:03,163 [INFO] constants.router: Router object is being created.
+2025-09-07 17:15:03,163 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:15:03,164 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:15:03,164 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:15:03,167 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:15:03,167 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:15:25,190 [INFO] constants.router: Router object is being created.
+2025-09-07 17:15:25,190 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:15:25,190 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:15:25,191 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:15:25,193 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:15:25,194 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:15:47,213 [INFO] constants.router: Router object is being created.
+2025-09-07 17:15:47,214 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:15:47,214 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:15:47,214 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:15:47,218 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:15:47,218 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:16:09,244 [INFO] constants.router: Router object is being created.
+2025-09-07 17:16:09,244 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:16:09,244 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:16:09,245 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:16:09,248 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:16:09,249 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:16:31,272 [INFO] constants.router: Router object is being created.
+2025-09-07 17:16:31,272 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:16:31,272 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:16:31,272 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:16:31,275 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:16:31,276 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:16:53,296 [INFO] constants.router: Router object is being created.
+2025-09-07 17:16:53,296 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:16:53,296 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:16:53,297 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:16:53,299 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:16:53,300 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:17:15,323 [INFO] constants.router: Router object is being created.
+2025-09-07 17:17:15,323 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:17:15,323 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:17:15,324 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:17:15,326 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:17:15,327 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:17:37,350 [INFO] constants.router: Router object is being created.
+2025-09-07 17:17:37,350 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:17:37,350 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:17:37,350 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:17:37,353 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:17:37,354 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:17:59,378 [INFO] constants.router: Router object is being created.
+2025-09-07 17:17:59,378 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:17:59,378 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:17:59,378 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:17:59,380 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:17:59,381 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:18:21,404 [INFO] constants.router: Router object is being created.
+2025-09-07 17:18:21,404 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:18:21,404 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:18:21,405 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:18:21,408 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:18:21,409 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:18:43,432 [INFO] constants.router: Router object is being created.
+2025-09-07 17:18:43,432 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:18:43,432 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:18:43,432 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:18:43,435 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:18:43,436 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:19:05,496 [INFO] constants.router: Router object is being created.
+2025-09-07 17:19:05,496 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:19:05,496 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:19:05,496 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:19:05,499 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:19:05,499 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:19:27,519 [INFO] constants.router: Router object is being created.
+2025-09-07 17:19:27,520 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:19:27,520 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:19:27,520 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:19:27,522 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:19:27,523 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:19:49,543 [INFO] constants.router: Router object is being created.
+2025-09-07 17:19:49,543 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:19:49,544 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:19:49,544 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:19:49,547 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:19:49,547 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:20:11,567 [INFO] constants.router: Router object is being created.
+2025-09-07 17:20:11,567 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:20:11,567 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:20:11,567 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:20:11,569 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:20:11,570 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:20:33,590 [INFO] constants.router: Router object is being created.
+2025-09-07 17:20:33,590 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:20:33,591 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:20:33,591 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:20:33,593 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:20:33,594 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:20:55,616 [INFO] constants.router: Router object is being created.
+2025-09-07 17:20:55,616 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:20:55,616 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:20:55,616 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:20:55,620 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:20:55,621 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:21:17,634 [INFO] constants.router: Router object is being created.
+2025-09-07 17:21:17,634 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:21:17,635 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:21:17,635 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:21:17,638 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:21:17,639 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:21:39,658 [INFO] constants.router: Router object is being created.
+2025-09-07 17:21:39,658 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:21:39,658 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:21:39,659 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:21:39,662 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:21:39,662 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:22:01,682 [INFO] constants.router: Router object is being created.
+2025-09-07 17:22:01,682 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:22:01,682 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:22:01,682 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:22:01,685 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:22:01,685 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:22:23,706 [INFO] constants.router: Router object is being created.
+2025-09-07 17:22:23,706 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:22:23,706 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:22:23,706 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:22:23,709 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:22:23,709 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:22:45,729 [INFO] constants.router: Router object is being created.
+2025-09-07 17:22:45,730 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:22:45,730 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:22:45,730 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:22:45,732 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:22:45,733 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:23:07,747 [INFO] constants.router: Router object is being created.
+2025-09-07 17:23:07,747 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:23:07,747 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:23:07,748 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:23:07,751 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:23:07,752 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:23:29,770 [INFO] constants.router: Router object is being created.
+2025-09-07 17:23:29,770 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:23:29,770 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:23:29,770 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:23:29,774 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:23:29,775 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:23:51,797 [INFO] constants.router: Router object is being created.
+2025-09-07 17:23:51,798 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:23:51,798 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:23:51,798 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:23:51,801 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:23:51,801 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:24:13,824 [INFO] constants.router: Router object is being created.
+2025-09-07 17:24:13,824 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:24:13,824 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:24:13,824 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:24:13,827 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:24:13,828 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:24:35,851 [INFO] constants.router: Router object is being created.
+2025-09-07 17:24:35,851 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:24:35,851 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:24:35,851 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:24:35,854 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:24:35,854 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:24:57,874 [INFO] constants.router: Router object is being created.
+2025-09-07 17:24:57,874 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:24:57,874 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:24:57,874 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:24:57,877 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:24:57,878 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:25:19,900 [INFO] constants.router: Router object is being created.
+2025-09-07 17:25:19,901 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:25:19,901 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:25:19,901 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:25:19,903 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:25:19,904 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:25:41,927 [INFO] constants.router: Router object is being created.
+2025-09-07 17:25:41,927 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:25:41,927 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:25:41,927 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:25:41,930 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:25:41,930 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:26:03,953 [INFO] constants.router: Router object is being created.
+2025-09-07 17:26:03,953 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:26:03,953 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:26:03,954 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:26:03,957 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:26:03,958 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:26:25,982 [INFO] constants.router: Router object is being created.
+2025-09-07 17:26:25,983 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:26:25,983 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:26:25,983 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:26:25,986 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:26:25,986 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:26:48,005 [INFO] constants.router: Router object is being created.
+2025-09-07 17:26:48,005 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:26:48,005 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:26:48,005 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:26:48,008 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:26:48,008 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:27:10,028 [INFO] constants.router: Router object is being created.
+2025-09-07 17:27:10,028 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:27:10,029 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:27:10,029 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:27:10,031 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:27:10,032 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:27:32,052 [INFO] constants.router: Router object is being created.
+2025-09-07 17:27:32,052 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:27:32,052 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:27:32,052 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:27:32,055 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:27:32,056 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:27:54,079 [INFO] constants.router: Router object is being created.
+2025-09-07 17:27:54,080 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:27:54,080 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:27:54,080 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:27:54,082 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:27:54,083 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:28:16,105 [INFO] constants.router: Router object is being created.
+2025-09-07 17:28:16,105 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:28:16,105 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:28:16,105 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:28:16,108 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:28:16,109 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:28:38,130 [INFO] constants.router: Router object is being created.
+2025-09-07 17:28:38,130 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:28:38,130 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:28:38,130 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:28:38,134 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:28:38,135 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:29:00,153 [INFO] constants.router: Router object is being created.
+2025-09-07 17:29:00,153 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:29:00,153 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:29:00,154 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:29:00,157 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:29:00,158 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:29:22,178 [INFO] constants.router: Router object is being created.
+2025-09-07 17:29:22,178 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:29:22,179 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:29:22,179 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:29:22,182 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:29:22,183 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:29:44,205 [INFO] constants.router: Router object is being created.
+2025-09-07 17:29:44,205 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:29:44,206 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:29:44,206 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:29:44,208 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:29:44,209 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:30:06,230 [INFO] constants.router: Router object is being created.
+2025-09-07 17:30:06,231 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:30:06,231 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:30:06,231 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:30:06,233 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:30:06,234 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:30:28,255 [INFO] constants.router: Router object is being created.
+2025-09-07 17:30:28,255 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:30:28,255 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:30:28,255 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:30:28,258 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:30:28,259 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:30:50,282 [INFO] constants.router: Router object is being created.
+2025-09-07 17:30:50,282 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:30:50,282 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:30:50,282 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:30:50,285 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:30:50,285 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:31:12,307 [INFO] constants.router: Router object is being created.
+2025-09-07 17:31:12,307 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:31:12,307 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:31:12,308 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:31:12,311 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:31:12,312 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:31:34,332 [INFO] constants.router: Router object is being created.
+2025-09-07 17:31:34,332 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:31:34,332 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:31:34,332 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:31:34,334 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:31:34,335 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:31:56,358 [INFO] constants.router: Router object is being created.
+2025-09-07 17:31:56,358 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:31:56,358 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:31:56,358 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:31:56,361 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:31:56,362 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:32:18,379 [INFO] constants.router: Router object is being created.
+2025-09-07 17:32:18,379 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:32:18,379 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:32:18,380 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:32:18,382 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:32:18,383 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:32:40,406 [INFO] constants.router: Router object is being created.
+2025-09-07 17:32:40,406 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:32:40,406 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:32:40,406 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:32:40,409 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:32:40,410 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:33:02,427 [INFO] constants.router: Router object is being created.
+2025-09-07 17:33:02,428 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:33:02,428 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:33:02,428 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:33:02,431 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:33:02,432 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:33:24,455 [INFO] constants.router: Router object is being created.
+2025-09-07 17:33:24,455 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:33:24,455 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:33:24,455 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:33:24,458 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:33:24,459 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:33:46,478 [INFO] constants.router: Router object is being created.
+2025-09-07 17:33:46,478 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:33:46,479 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:33:46,479 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:33:46,483 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:33:46,483 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:34:08,504 [INFO] constants.router: Router object is being created.
+2025-09-07 17:34:08,504 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:34:08,504 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:34:08,504 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:34:08,507 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:34:08,508 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:34:30,528 [INFO] constants.router: Router object is being created.
+2025-09-07 17:34:30,528 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:34:30,528 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:34:30,529 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:34:30,531 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:34:30,532 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:34:52,548 [INFO] constants.router: Router object is being created.
+2025-09-07 17:34:52,548 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:34:52,548 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:34:52,549 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:34:52,551 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:34:52,552 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:35:14,575 [INFO] constants.router: Router object is being created.
+2025-09-07 17:35:14,575 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:35:14,575 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:35:14,575 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:35:14,578 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:35:14,579 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:35:36,599 [INFO] constants.router: Router object is being created.
+2025-09-07 17:35:36,599 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:35:36,600 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:35:36,600 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:35:36,603 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:35:36,604 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:35:58,627 [INFO] constants.router: Router object is being created.
+2025-09-07 17:35:58,627 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:35:58,627 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:35:58,628 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:35:58,630 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:35:58,631 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:36:20,653 [INFO] constants.router: Router object is being created.
+2025-09-07 17:36:20,654 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:36:20,654 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:36:20,654 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:36:20,658 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:36:20,659 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:36:42,679 [INFO] constants.router: Router object is being created.
+2025-09-07 17:36:42,679 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:36:42,679 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:36:42,680 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:36:42,682 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:36:42,683 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:37:04,702 [INFO] constants.router: Router object is being created.
+2025-09-07 17:37:04,703 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:37:04,703 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:37:04,703 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:37:04,706 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:37:04,706 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:37:26,727 [INFO] constants.router: Router object is being created.
+2025-09-07 17:37:26,727 [INFO] APIConnect.http: Http object is being created.
+2025-09-07 17:37:26,727 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-07 17:37:26,727 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-07 17:37:26,730 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-07 17:37:26,731 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-07 17:37:37,378 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-07 17:37:37,379 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757203222275, 'exp': 1757203222266, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '0e9119c9-1fd2-4f92-b653-3e41384e925a', 'srvTm': 1757248657461}
+2025-09-07 17:37:37,380 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+

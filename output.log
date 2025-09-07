@@ -1,0 +1,20 @@
+🔄 Tick processing thread started
+✅ TickDataManager started - Base directory: tick_data
+✅ Tick data logging enabled - Directory: tick_data
+Traceback (most recent call last):
+  File "/workspace/Nuvama-Trading-platform-backend/nuvama/websocket/central_socket_data.py", line 212, in <module>
+    socket = CentralSocketData() 
+             ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Nuvama-Trading-platform-backend/nuvama/websocket/central_socket_data.py", line 67, in __init__
+    self.common_obj.refresh_strikes_and_options(expiry=1,symbol='NIFTY')
+  File "/workspace/Nuvama-Trading-platform-backend/nuvama/basic_functions.py", line 76, in refresh_strikes_and_options
+    strikes = self.get_strikes(symbol.upper(), 10)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Nuvama-Trading-platform-backend/nuvama/basic_functions.py", line 27, in get_strikes
+    ltp = self.get_ltp_indices(symbol)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/Nuvama-Trading-platform-backend/nuvama/basic_functions.py", line 18, in get_ltp_indices
+    ltp = json.loads(self.r.get(f"reduced_quotes:{symbol.upper()}").decode())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'decode'
+Connection lost, attempting to reconnect...
