@@ -8,13 +8,17 @@ from fastapi.responses import JSONResponse
 from login_data import login
 import os
 import sys
-from nuvama.websocket import order_streaming_socket
+from nuvama.websocket import central_socket_data, order_streaming_socket
 import threading
 import subprocess
-
+from settings import BASE_DIR
+# directory of current script
+current_dir = os.path.dirname(__file__)
+order_streaming_script = os.path.join(BASE_DIR, "nuvama", "websocket", "order_streaming.py")
+central_socket_data_script = os.path.join(BASE_DIR, "nuvama", "websocket", "central_socket_data.py")
 
 # Path to the directory containing the module
-current_dir = os.path.dirname(__file__)
+
 # Go up one level to reach "child"
 parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
 # Add to sys.path
@@ -37,6 +41,9 @@ class User(BaseModel):
     lastLogin:Optional[str]=None
     password:Optional[str]=None
 
+@router.get("/path")
+def get_path():
+    return {"script_path": script_path, "os_name": os.name}
 
 @router.post("/user")
 def add_user(user:User):
@@ -90,11 +97,23 @@ def userlogin(user: User):
         # Step 3: Launch order streaming
         print(f"🔄 Launching order streaming for user: {user.userid}")
         try:
-            subprocess.run(["start", "cmd", "/k", "python3 C:\\Users\\shree\\OneDrive\\Desktop\\TrueData\\nuvama\\websocket\\order_streaming.py", user.userid], shell=True)
+            if os.name == 'nt':  # For Windows
+                subprocess.Popen(["start", "cmd", "/k", "python3", order_streaming_script, user.userid], shell=True)
+            else:
+                subprocess.Popen([
+                    "gnome-terminal", "--",
+                    "python3", order_streaming_script, str(user.userid)
+                ], shell=True)
             print(f"✅ Order streaming launched for user: {user.userid}")
             
             if user.userid == "70249886":
-                subprocess.run(["start", "cmd", "/k", "python3 C:\\Users\\shree\\OneDrive\\Desktop\\TrueData\\nuvama\\websocket\\central_socket_data.py"], shell=True)
+                if os.name == 'nt':  # For Windows
+                    subprocess.Popen(["start", "cmd", "/k", "python3", central_socket_data_script], shell=True)
+                else:
+                    subprocess.Popen([
+                        "gnome-terminal", "--",
+                        "python3", central_socket_data_script
+                    ],shell=True)
                 print(f"✅ Central socket data launched for user: {user.userid}")
         except Exception as e:
             print(f"⚠️ Failed to launch order streaming for user {user.userid}: {e}")
