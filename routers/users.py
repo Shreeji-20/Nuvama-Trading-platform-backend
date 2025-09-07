@@ -100,17 +100,20 @@ def userlogin(user: User):
             if os.name == 'nt':  # For Windows
                 subprocess.Popen(["start", "cmd", "/k", "python3", order_streaming_script, user.userid], shell=True)
             else:
-                subprocess.Popen([
-                    "python3", order_streaming_script, str(user.userid)
-                ], shell=True)
+              subprocess.Popen([
+                        "nohup","python3", central_socket_data_script," > output2.log 2>&1 &"
+                    ],shell=True)
+                
             print(f"✅ Order streaming launched for user: {user.userid}")
             
             if user.userid == "70249886":
                 if os.name == 'nt':  # For Windows
                     subprocess.Popen(["start", "cmd", "/k", "python3", central_socket_data_script], shell=True)
                 else:
+#                     python3 myscript.py &
+# nohup python3 myscript.py > output.log 2>&1 &
                     subprocess.Popen([
-                        "python3", central_socket_data_script
+                        "nohup","python3", central_socket_data_script," > output.log 2>&1 &"
                     ],shell=True)
                 print(f"✅ Central socket data launched for user: {user.userid}")
         except Exception as e:
