@@ -20,7 +20,7 @@ class TickDataAnalyzer:
     
     def analyze_date(self, date_str):
         """Analyze tick data for a specific date"""
-        print(f"\n📊 ANALYZING TICK DATA FOR {date_str}")
+        print(f"\n[INFO] ANALYZING TICK DATA FOR {date_str}")
         print("=" * 50)
         
         files = self.reader.list_available_files(date_str)
@@ -31,7 +31,7 @@ class TickDataAnalyzer:
         symbols_analyzed = set()
         
         # Analyze quotes files
-        print("\n📈 QUOTES DATA:")
+        print("\n[INFO] QUOTES DATA:")
         print("-" * 20)
         for filename in files["quotes"]:
             filepath = os.path.join(date_path, "quotes", filename)
@@ -54,15 +54,15 @@ class TickDataAnalyzer:
                 duration = max(timestamps) - min(timestamps)
                 avg_frequency = tick_count / duration if duration > 0 else 0
                 
-                print(f"  📁 {filename}")
-                print(f"     📊 Ticks: {tick_count:,}")
-                print(f"     📏 Size: {file_size/1024/1024:.2f} MB")
-                print(f"     🕐 Time: {start_time} - {end_time}")
-                print(f"     ⚡ Freq: {avg_frequency:.1f} ticks/sec")
+                print(f"  [INFO] {filename}")
+                print(f"     [INFO] Ticks: {tick_count:,}")
+                print(f"     [INFO] Size: {file_size/1024/1024:.2f} MB")
+                print(f"     [INFO] Time: {start_time} - {end_time}")
+                print(f"     [INFO] Freq: {avg_frequency:.1f} ticks/sec")
                 print()
         
         # Analyze depth files
-        print("\n📊 DEPTH DATA:")
+        print("\n[INFO] DEPTH DATA:")
         print("-" * 20)
         for filename in files["depth"]:
             filepath = os.path.join(date_path, "depth", filename)
@@ -90,25 +90,25 @@ class TickDataAnalyzer:
                 duration = max(timestamps) - min(timestamps)
                 avg_frequency = tick_count / duration if duration > 0 else 0
                 
-                print(f"  📁 {filename}")
-                print(f"     📊 Ticks: {tick_count:,}")
-                print(f"     📏 Size: {file_size/1024/1024:.2f} MB")
-                print(f"     🕐 Time: {start_time} - {end_time}")
-                print(f"     ⚡ Freq: {avg_frequency:.1f} ticks/sec")
+                print(f"  [INFO] {filename}")
+                print(f"     [INFO] Ticks: {tick_count:,}")
+                print(f"     [INFO] Size: {file_size/1024/1024:.2f} MB")
+                print(f"     [INFO] Time: {start_time} - {end_time}")
+                print(f"     [INFO] Freq: {avg_frequency:.1f} ticks/sec")
                 print()
         
         # Summary
-        print("\n📋 SUMMARY:")
+        print("\n[INFO] SUMMARY:")
         print("-" * 15)
-        print(f"📊 Total ticks: {total_ticks:,}")
-        print(f"📏 Total size: {total_size/1024/1024:.2f} MB")
-        print(f"📁 Total files: {len(files['quotes']) + len(files['depth'])}")
-        print(f"🎯 Symbols: {', '.join(sorted(symbols_analyzed))}")
-        print(f"💾 Compression ratio: ~{(total_ticks * 200) / total_size:.1f}x" if total_size > 0 else "")
+        print(f"[INFO] Total ticks: {total_ticks:,}")
+        print(f"[INFO] Total size: {total_size/1024/1024:.2f} MB")
+        print(f"[INFO] Total files: {len(files['quotes']) + len(files['depth'])}")
+        print(f"[INFO] Symbols: {', '.join(sorted(symbols_analyzed))}")
+        print(f"[INFO] Compression ratio: ~{(total_ticks * 200) / total_size:.1f}x" if total_size > 0 else "")
     
     def compare_dates(self, date1, date2):
         """Compare tick data between two dates"""
-        print(f"\n🔍 COMPARING {date1} vs {date2}")
+        print(f"\n[INFO] COMPARING {date1} vs {date2}")
         print("=" * 40)
         
         for date_str in [date1, date2]:
@@ -126,16 +126,16 @@ class TickDataAnalyzer:
                         for tick in self.reader.read_tick_file(filepath):
                             total_ticks += 1
             
-            print(f"\n📅 {date_str}:")
-            print(f"   📊 Ticks: {total_ticks:,}")
-            print(f"   📏 Size: {total_size/1024/1024:.2f} MB")
-            print(f"   📁 Files: {len(files['quotes']) + len(files['depth'])}")
+            print(f"\n[INFO] {date_str}:")
+            print(f"   [INFO] Ticks: {total_ticks:,}")
+            print(f"   [INFO] Size: {total_size/1024/1024:.2f} MB")
+            print(f"   [INFO] Files: {len(files['quotes']) + len(files['depth'])}")
     
     def find_active_hours(self, date_str, symbol=None):
         """Find the most active trading hours"""
-        print(f"\n🕐 FINDING ACTIVE HOURS FOR {date_str}")
+        print(f"\n[INFO] FINDING ACTIVE HOURS FOR {date_str}")
         if symbol:
-            print(f"🎯 Symbol: {symbol}")
+            print(f"[INFO] Symbol: {symbol}")
         print("=" * 40)
         
         files = self.reader.list_available_files(date_str)
@@ -159,8 +159,8 @@ class TickDataAnalyzer:
         for hour in sorted(hourly_counts.keys()):
             count = hourly_counts[hour]
             bar_length = min(50, count // max(hourly_counts.values()) * 50) if hourly_counts.values() else 0
-            bar = "█" * int(bar_length)
-            print(f"{hour:02d}:00 │{bar:<50}│ {count:,} ticks")
+            bar = "#" * int(bar_length)
+            print(f"{hour:02d}:00 |{bar:<50}| {count:,} ticks")
 
 
 class TickDataSimulator:
@@ -171,11 +171,11 @@ class TickDataSimulator:
     
     def simulate_market_session(self, date_str, symbol=None, speed_multiplier=1.0, start_hour=9, end_hour=16):
         """Simulate a market session with saved tick data"""
-        print(f"\n🎬 SIMULATING MARKET SESSION FOR {date_str}")
+        print(f"\n[INFO] SIMULATING MARKET SESSION FOR {date_str}")
         if symbol:
-            print(f"🎯 Symbol: {symbol}")
-        print(f"⚡ Speed: {speed_multiplier}x")
-        print(f"🕐 Hours: {start_hour:02d}:00 - {end_hour:02d}:00")
+            print(f"[INFO] Symbol: {symbol}")
+        print(f"[INFO] Speed: {speed_multiplier}x")
+        print(f"[INFO] Hours: {start_hour:02d}:00 - {end_hour:02d}:00")
         print("=" * 50)
         
         # Convert hours to timestamps for filtering
@@ -202,15 +202,15 @@ class TickDataSimulator:
                     elapsed = time.time() - start_time
                     rate = tick_count / elapsed if elapsed > 0 else 0
                     tick_time = datetime.fromtimestamp(tick['timestamp']).strftime("%H:%M:%S")
-                    print(f"🔄 {tick_count:,} ticks | {rate:.0f} ticks/sec | Market time: {tick_time}")
+                    print(f"[INFO] {tick_count:,} ticks | {rate:.0f} ticks/sec | Market time: {tick_time}")
         
         except KeyboardInterrupt:
-            print(f"\n⏹️ Simulation stopped by user")
+            print(f"\n[INFO] Simulation stopped by user")
         
         elapsed = time.time() - start_time
-        print(f"\n✅ Simulation completed")
-        print(f"📊 Processed {tick_count:,} ticks in {elapsed:.1f} seconds")
-        # print(f"⚡ Average rate: {tick_count/elapsed:.0f} ticks/sec")
+        print(f"\n[SUCCESS] Simulation completed")
+        print(f"[INFO] Processed {tick_count:,} ticks in {elapsed:.1f} seconds")
+        # print(f"[INFO] Average rate: {tick_count/elapsed:.0f} ticks/sec")
     
     def _process_simulated_tick(self, tick):
         """Process a simulated tick (customize this method)"""
@@ -255,7 +255,7 @@ def main():
     if args.command == "list":
         reader = TickDataReader(args.base_dir)
         dates = reader.list_available_dates()
-        print("\n📅 AVAILABLE DATES:")
+        print("\n[INFO] AVAILABLE DATES:")
         print("-" * 20)
         for date_str in dates:
             files = reader.list_available_files(date_str)
@@ -264,28 +264,28 @@ def main():
     
     elif args.command == "analyze":
         if not args.date:
-            print("❌ --date required for analyze command")
+            print("[ERROR] --date required for analyze command")
             return
         analyzer = TickDataAnalyzer(args.base_dir)
         analyzer.analyze_date(args.date)
     
     elif args.command == "compare":
         if not args.date or not args.date2:
-            print("❌ --date and --date2 required for compare command")
+            print("[ERROR] --date and --date2 required for compare command")
             return
         analyzer = TickDataAnalyzer(args.base_dir)
         analyzer.compare_dates(args.date, args.date2)
     
     elif args.command == "hours":
         if not args.date:
-            print("❌ --date required for hours command")
+            print("[ERROR] --date required for hours command")
             return
         analyzer = TickDataAnalyzer(args.base_dir)
         analyzer.find_active_hours(args.date, args.symbol)
     
     elif args.command == "simulate":
         if not args.date:
-            print("❌ --date required for simulate command")
+            print("[ERROR] --date required for simulate command")
             return
         simulator = TickDataSimulator(args.base_dir)
         simulator.simulate_market_session(

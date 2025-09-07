@@ -59,22 +59,38 @@ class common_functions:
                 return strikes
                
         
-    def get_filtered_df(self, symbol, strikes,expiry=0):
-        filtered_df = self.df[(self.df['symbolname'] == symbol.upper()) & 
-                              (self.df['strikeprice'].isin((strikes)))]
+    def get_filtered_df(self, symbol, strikes=[],expiry=0,exchange="NFO"):
         
-        expiries = filtered_df['expiry'].unique()
-       
-        expiries = [datetime.strptime(d, "%d/%b/%y") for d in expiries]
-        expiries = sorted(expiries)
-        expiries = [d.strftime("%d/%b/%y") for d in expiries]
-      
-        filtered_df = filtered_df[filtered_df['expiry'] == expiries[expiry].upper()]
-        return filtered_df
+        if exchange.upper() in ["NFO","BFO"]:
+            filtered_df = self.df[(self.df['symbolname'] == symbol.upper()) & 
+                                  (self.df['strikeprice'].isin((strikes))) &
+                                  (self.df['exchange'] == exchange.upper())]
+
+            expiries = filtered_df['expiry'].unique()
+        
+            expiries = [datetime.strptime(d, "%d/%b/%y") for d in expiries]
+            expiries = sorted(expiries)
+            expiries = [d.strftime("%d/%b/%y") for d in expiries]
+        
+            filtered_df = filtered_df[filtered_df['expiry'] == expiries[expiry].upper()]
+            return filtered_df
+        elif exchange.upper() == "NSE":
+            filtered_df = self.df[(self.df['symbolname'].isin(symbol)) & 
+                                  (self.df['exchange'] == exchange.upper())]
+            return filtered_df
+        else:
+            raise Exception("Exchange not supported for options fetching")
     
-    def refresh_strikes_and_options(self,expiry=0,symbol='NIFTY'):
-        strikes = self.get_strikes(symbol.upper(), 10)
-        self.options_df = self.get_filtered_df(symbol.upper(), strikes, expiry)
+    def refresh_strikes_and_options(self,expiry=0,symbol='NIFTY',exchange="NFO"):
+        if exchange.upper() in ["NFO","BFO"]:
+            strikes = self.get_strikes(symbol.upper(), 10)
+            self.options_df = self.get_filtered_df(symbol.upper(), strikes, expiry, exchange)
+        elif exchange.upper() == "NSE":
+            self.options_df = self.get_filtered_df(symbol, [], expiry, exchange)
+            # print("NSE data : ",self.options_df)
+            # breakpoint()
+        else:
+            raise Exception("Exchange not supported for options fetching")
         option_mapper = {
             row['exchangetoken']: {
                 'symbolname': row['symbolname'],

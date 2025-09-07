@@ -1,0 +1,807 @@
+{
+    "44637_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24750.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624750PE"
+    },
+    "44661_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24900.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624900PE"
+    },
+    "44713_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "25100.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591625100CE"
+    },
+    "44687_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "25000.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591625000PE"
+    },
+    "44639_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24800.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624800PE"
+    },
+    "44640_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24850.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624850CE"
+    },
+    "44588_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24600.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624600CE"
+    },
+    "44542_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24250.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624250CE"
+    },
+    "44589_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24600.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624600PE"
+    },
+    "44638_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24800.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624800CE"
+    },
+    "44662_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24950.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624950CE"
+    },
+    "44543_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24250.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624250PE"
+    },
+    "44631_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24700.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624700PE"
+    },
+    "44580_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24500.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624500CE"
+    },
+    "44581_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24500.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624500PE"
+    },
+    "44729_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "25150.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591625150PE"
+    },
+    "44534_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24200.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624200CE"
+    },
+    "44706_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "25050.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591625050PE"
+    },
+    "44730_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "25200.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591625200CE"
+    },
+    "44582_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24550.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624550CE"
+    },
+    "44583_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24550.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624550PE"
+    },
+    "44535_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24200.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624200PE"
+    },
+    "44728_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "25150.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591625150CE"
+    },
+    "44727_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "25100.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591625100PE"
+    },
+    "44632_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24750.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624750CE"
+    },
+    "44549_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24400.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624400PE"
+    },
+    "44602_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24650.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624650CE"
+    },
+    "44574_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24450.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624450CE"
+    },
+    "44575_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24450.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624450PE"
+    },
+    "44652_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24900.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624900CE"
+    },
+    "44604_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24700.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624700CE"
+    },
+    "44651_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24850.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624850PE"
+    },
+    "44603_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24650.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624650PE"
+    },
+    "44544_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24300.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624300CE"
+    },
+    "44545_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24300.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624300PE"
+    },
+    "44741_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "25200.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591625200PE"
+    },
+    "44546_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24350.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624350CE"
+    },
+    "44688_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "25050.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591625050CE"
+    },
+    "44547_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24350.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624350PE"
+    },
+    "44668_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "25000.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591625000CE"
+    },
+    "44548_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24400.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2591624400CE"
+    },
+    "44667_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 1,
+        "strikeprice": "24950.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2591624950PE"
+    },
+    "40598_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "25100.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590925100CE"
+    },
+    "40573_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24650.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924650PE"
+    },
+    "40571_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24600.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924600PE"
+    },
+    "40572_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24650.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924650CE"
+    },
+    "40570_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24600.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924600CE"
+    },
+    "40594_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "25050.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590925050PE"
+    },
+    "40569_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24550.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924550PE"
+    },
+    "40593_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "25050.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590925050CE"
+    },
+    "40592_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "25000.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590925000PE"
+    },
+    "40568_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24550.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924550CE"
+    },
+    "40591_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "25000.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590925000CE"
+    },
+    "40567_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24500.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924500PE"
+    },
+    "40565_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24450.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924450PE"
+    },
+    "40566_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24500.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924500CE"
+    },
+    "40601_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "25100.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590925100PE"
+    },
+    "40564_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24450.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924450CE"
+    },
+    "40587_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24950.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924950CE"
+    },
+    "40588_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24950.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924950PE"
+    },
+    "40586_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24900.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924900PE"
+    },
+    "40603_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "25150.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590925150PE"
+    },
+    "40562_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24400.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924400CE"
+    },
+    "40602_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "25150.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590925150CE"
+    },
+    "40563_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24400.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924400PE"
+    },
+    "40561_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24350.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924350PE"
+    },
+    "40584_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24850.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924850PE"
+    },
+    "40585_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24900.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924900CE"
+    },
+    "40559_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24300.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924300PE"
+    },
+    "40583_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24850.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924850CE"
+    },
+    "40560_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24350.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924350CE"
+    },
+    "40606_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "25200.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590925200CE"
+    },
+    "40558_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24300.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924300CE"
+    },
+    "40582_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24800.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924800PE"
+    },
+    "40556_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24250.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924250CE"
+    },
+    "40580_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24750.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924750PE"
+    },
+    "40557_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24250.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924250PE"
+    },
+    "40581_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24800.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924800CE"
+    },
+    "40555_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24200.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924200PE"
+    },
+    "40578_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24700.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590924700PE"
+    },
+    "40579_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24750.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924750CE"
+    },
+    "40577_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24700.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924700CE"
+    },
+    "40554_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "24200.0",
+        "optiontype": "CE",
+        "tradingsymbol": "NIFTY2590924200CE"
+    },
+    "40611_NFO": {
+        "symbolname": "NIFTY",
+        "expiry": 0,
+        "strikeprice": "25200.0",
+        "optiontype": "PE",
+        "tradingsymbol": "NIFTY2590925200PE"
+    },
+    "13101_NSE": {
+        "symbolname": "VIMTALABS",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE579C01029"
+    },
+    "27066_NSE": {
+        "symbolname": "SWIGGY",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE00H001014"
+    },
+    "15119_NSE": {
+        "symbolname": "EDELWEISS",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE532F01054"
+    },
+    "25907_NSE": {
+        "symbolname": "WAAREEENER",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE377N01017"
+    },
+    "10793_NSE": {
+        "symbolname": "SYRMA",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE0DYJ01015"
+    },
+    "5204_NSE": {
+        "symbolname": "GMDCLTD",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE131A01031"
+    },
+    "13637_NSE": {
+        "symbolname": "JMFINANCIL",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE780C01023"
+    },
+    "19585_NSE": {
+        "symbolname": "BSE",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE118H01025"
+    },
+    "21131_NSE": {
+        "symbolname": "TEJASNET",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE010J01012"
+    },
+    "23740_NSE": {
+        "symbolname": "TBOTEK",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE673O01025"
+    },
+    "1134_NSE": {
+        "symbolname": "APOLLO",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE713T01028"
+    },
+    "29459_NSE": {
+        "symbolname": "MOSCHIP",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE935B01025"
+    },
+    "11956_NSE": {
+        "symbolname": "MEDANTA",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE474Q01031"
+    },
+    "30023_NSE": {
+        "symbolname": "ATULAUTO",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE951D01028"
+    },
+    "919_NSE": {
+        "symbolname": "EIHOTEL",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE230A01023"
+    },
+    "28046_NSE": {
+        "symbolname": "MOBIKWIK",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE0HLU01028"
+    },
+    "12092_NSE": {
+        "symbolname": "KAYNES",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE918Z01012"
+    },
+    "3186_NSE": {
+        "symbolname": "SKFINDIA",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE640A01023"
+    },
+    "27969_NSE": {
+        "symbolname": "VMM",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE01EA01019"
+    },
+    "3252_NSE": {
+        "symbolname": "SPIC",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE147A01011"
+    },
+    "30125_NSE": {
+        "symbolname": "SAMMAANCAP",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE148I01020"
+    },
+    "25984_NSE": {
+        "symbolname": "AVL",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE679V01027"
+    },
+    "20830_NSE": {
+        "symbolname": "MOIL",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE490G01020"
+    },
+    "13880_NSE": {
+        "symbolname": "BANCOINDIA",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE213C01025"
+    },
+    "701_NSE": {
+        "symbolname": "HEMIPROP",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE0AJG01018"
+    },
+    "25178_NSE": {
+        "symbolname": "TDPOWERSYS",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE419M01027"
+    },
+    "203_NSE": {
+        "symbolname": "ASHAPURMIN",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE348A01023"
+    },
+    "13966_NSE": {
+        "symbolname": "HBLENGINE",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE292B01021"
+    },
+    "1181_NSE": {
+        "symbolname": "GODFRYPHLP",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE260B01028"
+    },
+    "11571_NSE": {
+        "symbolname": "PPLPHARMA",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE0DK501011"
+    },
+    "25844_NSE": {
+        "symbolname": "HYUNDAI",
+        "expiry": 0,
+        "strikeprice": "",
+        "optiontype": "",
+        "tradingsymbol": "INE0V6F01027"
+    }
+}

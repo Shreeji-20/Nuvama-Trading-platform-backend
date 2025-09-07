@@ -83,7 +83,7 @@ class TickDataManager:
             self.is_running = True
             self.worker_thread = threading.Thread(target=self._process_ticks, daemon=True)
             self.worker_thread.start()
-            print(f"✅ TickDataManager started - Base directory: {self.base_directory}")
+            print(f"[SUCCESS] TickDataManager started - Base directory: {self.base_directory}")
     
     def stop(self):
         """Stop the background processing and flush all buffers"""
@@ -104,7 +104,7 @@ class TickDataManager:
             # Shutdown executor
             self.executor.shutdown(wait=True)
             
-            print(f"✅ TickDataManager stopped - Total ticks processed: {self.stats['total_ticks_written']}")
+            print(f"[SUCCESS] TickDataManager stopped - Total ticks processed: {self.stats['total_ticks_written']}")
     
     def save_quotes_tick(self, symbol: str, tick_data: Dict[Any, Any]):
         """
@@ -131,10 +131,10 @@ class TickDataManager:
             
         except queue.Full:
             self.stats["errors"] += 1
-            print(f"⚠️ Tick queue full - dropping quotes tick for {symbol}")
+            print(f"[WARNING] Tick queue full - dropping quotes tick for {symbol}")
         except Exception as e:
             self.stats["errors"] += 1
-            print(f"❌ Error queuing quotes tick for {symbol}: {e}")
+            print(f"[ERROR] Error queuing quotes tick for {symbol}: {e}")
     
     def save_depth_tick(self, redis_key: str, tick_data: Dict[Any, Any]):
         """
@@ -161,14 +161,14 @@ class TickDataManager:
             
         except queue.Full:
             self.stats["errors"] += 1
-            print(f"⚠️ Tick queue full - dropping depth tick for {redis_key}")
+            print(f"[WARNING] Tick queue full - dropping depth tick for {redis_key}")
         except Exception as e:
             self.stats["errors"] += 1
-            print(f"❌ Error queuing depth tick for {redis_key}: {e}")
+            print(f"[ERROR] Error queuing depth tick for {redis_key}: {e}")
     
     def _process_ticks(self):
         """Background thread function to process ticks from queue"""
-        print("🔄 Tick processing thread started")
+        print("[INFO] Tick processing thread started")
         
         while self.is_running:
             try:
@@ -197,9 +197,9 @@ class TickDataManager:
                 continue
             except Exception as e:
                 self.stats["errors"] += 1
-                print(f"❌ Error processing tick: {e}")
+                print(f"[ERROR] Error processing tick: {e}")
         
-        print("🔄 Tick processing thread stopped")
+        print("[INFO] Tick processing thread stopped")
     
     def _process_single_tick(self, tick_entry: Dict[Any, Any]):
         """Process a single tick entry"""
@@ -211,11 +211,11 @@ class TickDataManager:
             elif tick_type == "depth":
                 self._process_depth_tick(tick_entry)
             else:
-                print(f"⚠️ Unknown tick type: {tick_type}")
+                print(f"[WARNING] Unknown tick type: {tick_type}")
                 
         except Exception as e:
             self.stats["errors"] += 1
-            print(f"❌ Error processing single tick: {e}")
+            print(f"[ERROR] Error processing single tick: {e}")
     
     def _process_quotes_tick(self, tick_entry: Dict[Any, Any]):
         """Process a quotes tick and add to buffer"""
@@ -291,7 +291,7 @@ class TickDataManager:
             
         except Exception as e:
             self.stats["errors"] += 1
-            print(f"❌ Error flushing buffer for {file_key}: {e}")
+            print(f"[ERROR] Error flushing buffer for {file_key}: {e}")
     
     def _write_ticks_to_file(self, filepath: str, ticks: list):
         """Write ticks to file (runs in thread pool)"""
@@ -314,11 +314,11 @@ class TickDataManager:
             # Track file creation
             if filepath not in self.file_handles:
                 self.stats["files_created"] += 1
-                print(f"📁 Created tick data file: {os.path.basename(filepath)}")
+                print(f"[INFO] Created tick data file: {os.path.basename(filepath)}")
             
         except Exception as e:
             self.stats["errors"] += 1
-            print(f"❌ Error writing to file {filepath}: {e}")
+            print(f"[ERROR] Error writing to file {filepath}: {e}")
     
     def _flush_all_buffers(self):
         """Flush all buffers to disk"""
@@ -332,7 +332,7 @@ class TickDataManager:
             try:
                 handle.close()
             except Exception as e:
-                print(f"❌ Error closing file handle: {e}")
+                print(f"[ERROR] Error closing file handle: {e}")
         self.file_handles.clear()
     
     def get_stats(self) -> Dict[str, Any]:
@@ -346,18 +346,18 @@ class TickDataManager:
     def print_stats(self):
         """Print current statistics"""
         stats = self.get_stats()
-        print("\n📊 TICK DATA MANAGER STATISTICS")
+        print("\n[INFO] TICK DATA MANAGER STATISTICS")
         print("-" * 40)
-        print(f"📥 Total ticks received: {stats['total_ticks_received']:,}")
-        print(f"💾 Total ticks written: {stats['total_ticks_written']:,}")
-        print(f"📁 Files created: {stats['files_created']}")
-        print(f"🔄 Queue size: {stats['queue_size']}")
-        print(f"📋 Active buffers: {stats['buffer_count']}")
-        print(f"⏳ Buffered ticks: {stats['total_buffered_ticks']}")
-        print(f"❌ Errors: {stats['errors']}")
+        print(f"[INFO] Total ticks received: {stats['total_ticks_received']:,}")
+        print(f"[INFO] Total ticks written: {stats['total_ticks_written']:,}")
+        print(f"[INFO] Files created: {stats['files_created']}")
+        print(f"[INFO] Queue size: {stats['queue_size']}")
+        print(f"[INFO] Active buffers: {stats['buffer_count']}")
+        print(f"[INFO] Buffered ticks: {stats['total_buffered_ticks']}")
+        print(f"[ERROR] Errors: {stats['errors']}")
         if stats['last_tick_time']:
             last_tick = datetime.fromtimestamp(stats['last_tick_time']).strftime("%H:%M:%S")
-            print(f"🕐 Last tick: {last_tick}")
+            print(f"[INFO] Last tick: {last_tick}")
         print("-" * 40)
 
 
@@ -424,7 +424,7 @@ class TickDataReader:
                         yield tick
                         
         except Exception as e:
-            print(f"❌ Error reading tick file {filepath}: {e}")
+            print(f"[ERROR] Error reading tick file {filepath}: {e}")
     
     def simulate_tick_replay(self, date_str: str, symbol=None, speed_multiplier=1.0):
         """
@@ -438,9 +438,9 @@ class TickDataReader:
         files = self.list_available_files(date_str)
         date_path = os.path.join(self.base_directory, date_str)
         
-        print(f"🎬 Starting tick replay for {date_str}")
+        print(f"[INFO] Starting tick replay for {date_str}")
         if symbol:
-            print(f"🎯 Filtering for symbol: {symbol}")
+            print(f"[INFO] Filtering for symbol: {symbol}")
         
         # Collect all ticks with timestamps
         all_ticks = []
@@ -469,10 +469,10 @@ class TickDataReader:
         all_ticks.sort(key=lambda x: x['timestamp'])
     
         if not all_ticks:
-            print(f"❌ No tick data found for {date_str}")
+            print(f"[ERROR] No tick data found for {date_str}")
             return
         
-        print(f"📊 Found {len(all_ticks)} ticks to replay")
+        print(f"[INFO] Found {len(all_ticks)} ticks to replay")
         
         # Replay ticks
         start_timestamp = all_ticks[0]['timestamp']
@@ -492,9 +492,9 @@ class TickDataReader:
             yield tick
             
             if (i + 1) % 1000 == 0:
-                print(f"🔄 Replayed {i + 1:,}/{len(all_ticks):,} ticks")
+                print(f"[INFO] Replayed {i + 1:,}/{len(all_ticks):,} ticks")
         
-        print(f"✅ Tick replay completed for {date_str}")
+        print(f"[SUCCESS] Tick replay completed for {date_str}")
 
 
 if __name__ == "__main__":

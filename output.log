@@ -1,13 +1,14 @@
 🔄 Tick processing thread started
 ✅ TickDataManager started - Base directory: tick_data
 ✅ Tick data logging enabled - Directory: tick_data
+ltp NIFTY :  {'response': {'data': {'aPr': '0.00', 'aSz': '0', 'altt': '05 Sep 2025, 11:36:47 AM', 'avgPrc': '0.00', 'bPr': '0.00', 'bSz': '0', 'c': '24734.30', 'chg': '-42.80', 'chgp': '-0.17', 'futPrc': '0.00', 'h': '24832.35', 'hCL': '0.00', 'l': '24631.95', 'lCL': '0.00', 'ltp': '24691.50', 'ltq': '0', 'ltt': '05 Sep 2025, 11:36:47 AM', 'lut': '05 Sep 2025, 11:36:47 AM', 'mO': '0', 'ntTrdVal': '0.00', 'o': '24818.85', 'oI': '0', 'oiChg': '0.00', 'oiChgp': '--', 'spotPrc': '0.00', 'sym': '-29', 'tBQ': '0', 'tSQ': '0', 'vol': '0', 'yHgh': '26277.35', 'yLw': '21743.65', 'symbol': 'NIFTY'}, 'streaming_type': 'quote'}}
 Traceback (most recent call last):
-  File "/workspace/Nuvama-Trading-platform-backend/nuvama/websocket/central_socket_data.py", line 212, in <module>
+  File "/workspace/Nuvama-Trading-platform-backend/nuvama/websocket/central_socket_data.py", line 216, in <module>
     socket = CentralSocketData() 
              ^^^^^^^^^^^^^^^^^^^
-  File "/workspace/Nuvama-Trading-platform-backend/nuvama/websocket/central_socket_data.py", line 67, in __init__
-    self.common_obj.refresh_strikes_and_options(expiry=1,symbol='NIFTY')
-  File "/workspace/Nuvama-Trading-platform-backend/nuvama/basic_functions.py", line 76, in refresh_strikes_and_options
+  File "/workspace/Nuvama-Trading-platform-backend/nuvama/websocket/central_socket_data.py", line 68, in __init__
+    self.common_obj.refresh_strikes_and_options(expiry=1,symbol='SENSEX',exchange="BFO")
+  File "/workspace/Nuvama-Trading-platform-backend/nuvama/basic_functions.py", line 86, in refresh_strikes_and_options
     strikes = self.get_strikes(symbol.upper(), 10)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/workspace/Nuvama-Trading-platform-backend/nuvama/basic_functions.py", line 27, in get_strikes
@@ -17,4 +18,3 @@ Traceback (most recent call last):
     ltp = json.loads(self.r.get(f"reduced_quotes:{symbol.upper()}").decode())
                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'NoneType' object has no attribute 'decode'
-Connection lost, attempting to reconnect...

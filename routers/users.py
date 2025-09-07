@@ -1,5 +1,5 @@
 # backend/routers/users.py
-from fastapi import APIRouter
+from fastapi import APIRouter, UploadFile, File
 from pydantic import BaseModel
 import redis
 import json
@@ -10,6 +10,8 @@ import os
 import sys
 import threading
 import subprocess
+import pandas as pd
+import tempfile
 from settings import BASE_DIR
 # directory of current script
 current_dir = os.path.dirname(__file__)
@@ -98,7 +100,7 @@ def userlogin(user: User):
                 subprocess.Popen(["start", "cmd", "/k", "python3", order_streaming_script, user.userid], shell=True)
             else:
                subprocess.Popen(
-                    f"nohup python3 {order_streaming_script} {user.userid} > output2.log 2>&1 &",
+                    f"nohup python3 -u {order_streaming_script} {user.userid} > output2.log 2>&1 &",
                     shell=True
                 )
 
@@ -111,7 +113,7 @@ def userlogin(user: User):
 #                     python3 myscript.py &
 # nohup python3 myscript.py > output.log 2>&1 &
                     subprocess.Popen(
-    f"nohup python3 {central_socket_data_script} > output.log 2>&1 &",
+    f"nohup python3 -u {central_socket_data_script} > output.log 2>&1 &",
     shell=True
 )
                 print(f"✅ Central socket data launched for user: {user.userid}")
@@ -143,5 +145,81 @@ def userlogin(user: User):
                 "message": error_msg,
                 "status": "error",
                 "user_id": user.userid
+            }
+        )
+
+@router.post("/upload-excel")
+async def upload_excel(file: UploadFile = File(...)):
+    try:
+        # Validate file type
+        if not file.filename.endswith(('.xlsx', '.xls')):
+            return JSONResponse(
+                status_code=400,
+                content={"error": "Invalid file type", "message": "Only .xlsx and .xls files are supported"}
+            )
+        
+        print(f"📄 Processing Excel file: {file.filename}")
+        
+        # Create a temporary file to save the uploaded content
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.xlsx') as temp_file:
+            # Read and write the uploaded file content
+            content = await file.read()
+            temp_file.write(content)
+            temp_file_path = temp_file.name
+        
+        try:
+            # Read Excel file using pandas
+            df = pd.read_excel(temp_file_path, usecols=[0])  # Read only column A (index 0)
+            
+            # Get column A data and remove empty/null values
+            column_a_data = df.iloc[:, 0].dropna().astype(str).tolist()
+            
+            # Remove empty strings
+            column_a_data = [item.strip().upper() for item in column_a_data if item.strip()]
+            
+            print(f"📊 Extracted {len(column_a_data)} items from Column A")
+            
+            # Store in Redis as a list
+            redis_key = "excel_column_a_data"
+            r.delete(redis_key)  # Clear existing data
+            
+            if column_a_data:
+                r.lpush(redis_key, *column_a_data)  # Add all items to Redis list
+                print(f"✅ Stored {len(column_a_data)} items in Redis under key: {redis_key}")
+                
+            
+            return JSONResponse(
+                content={
+                    "message": "Excel file processed successfully",
+                    "count": len(column_a_data),
+                    "redis_key": redis_key,
+                    "sample_data": column_a_data[:5] if len(column_a_data) > 5 else column_a_data
+                },
+                status_code=200
+            )
+            
+        except Exception as excel_error:
+            print(f"❌ Error processing Excel file: {excel_error}")
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "error": "Excel processing failed", 
+                    "message": f"Could not read Excel file: {str(excel_error)}"
+                }
+            )
+        
+        finally:
+            # Clean up temporary file
+            if os.path.exists(temp_file_path):
+                os.unlink(temp_file_path)
+                
+    except Exception as e:
+        error_msg = str(e)
+        print(f"❌ Excel upload failed: {error_msg}")
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": "Upload Failed", 
+                "message": error_msg
             }
         )

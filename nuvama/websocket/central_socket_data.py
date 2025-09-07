@@ -41,14 +41,14 @@ class CentralSocketData:
                     buffer_size=500,  # Buffer 500 ticks before writing
                     flush_interval=3.0  # Flush every 3 seconds
                 )
-                print(f"✅ Tick data logging enabled - Directory: {tick_data_base_dir}")
+                print(f"[SUCCESS] Tick data logging enabled - Directory: {tick_data_base_dir}")
             except Exception as e:
-                print(f"❌ Failed to initialize tick data manager: {e}")
+                print(f"[ERROR] Failed to initialize tick data manager: {e}")
                 self.enable_tick_logging = False
                 self.tick_manager = None
         else:
             self.tick_manager = None
-            print("⚠️ Tick data logging disabled")
+            print("[WARNING] Tick data logging disabled")
         
         if self.r.exists("option_mapper"):
             self.options_data = orjson.loads(self.r.get("option_mapper").decode())
@@ -64,10 +64,16 @@ class CentralSocketData:
         self.common_obj = common_functions()
         
         if not self.options_data:
-            self.common_obj.refresh_strikes_and_options(expiry=1,symbol='NIFTY')
-            self.common_obj.refresh_strikes_and_options(expiry=1,symbol='SENSEX')
-            self.common_obj.refresh_strikes_and_options(expiry=0,symbol='NIFTY')
-            self.common_obj.refresh_strikes_and_options(expiry=0,symbol='SENSEX')
+            self.common_obj.refresh_strikes_and_options(expiry=1,symbol='NIFTY',exchange="NFO")
+            # self.common_obj.refresh_strikes_and_options(expiry=1,symbol='SENSEX',exchange="BFO")
+            self.common_obj.refresh_strikes_and_options(expiry=0,symbol='NIFTY',exchange="NFO")
+            # self.common_obj.refresh_strikes_and_options(expiry=0,symbol='SENSEX',exchange="BFO")
+            equity_symbols = self.r.lrange('excel_column_a_data', 0, -1)
+            equity_symbols = [symbol.decode('utf-8') for symbol in equity_symbols]
+            print("Equity Symbols for options fetching: ", equity_symbols)
+            self.common_obj.refresh_strikes_and_options(expiry=0,symbol=equity_symbols,exchange="NSE")
+            
+                
         time.sleep(2)
         self.strikes_updates_channel = self.r.pubsub()
         self.strikes_updates_channel.subscribe('strikes_updates')
@@ -118,10 +124,10 @@ class CentralSocketData:
         # Stop tick data manager if running
         if self.enable_tick_logging and self.tick_manager:
             try:
-                print("🔄 Stopping tick data manager...")
+                print("[INFO] Stopping tick data manager...")
                 self.tick_manager.stop()
             except Exception as e:
-                print(f"❌ Error stopping tick data manager: {e}")
+                print(f"[ERROR] Error stopping tick data manager: {e}")
     
     def get_tick_data_stats(self):
         """Get tick data logging statistics"""
@@ -135,7 +141,7 @@ class CentralSocketData:
         if self.enable_tick_logging and self.tick_manager:
             self.tick_manager.print_stats()
         else:
-            print("📊 Tick data logging is disabled")
+            print("[INFO] Tick data logging is disabled")
     
     def DepthStreamerCallback(self, response):
         try:
@@ -189,10 +195,10 @@ class CentralSocketData:
         # Stop tick data manager if running
         if self.enable_tick_logging and self.tick_manager:
             try:
-                print("🔄 Stopping tick data manager...")
+                print("[INFO] Stopping tick data manager...")
                 self.tick_manager.stop()
             except Exception as e:
-                print(f"❌ Error stopping tick data manager: {e}")
+                print(f"[ERROR] Error stopping tick data manager: {e}")
         
         
     
@@ -206,10 +212,11 @@ if __name__ == "__main__":
                 time.sleep(60)  # Print stats every minute
                 socket_instance.print_tick_data_stats()
             except Exception as e:
-                print(f"❌ Error printing stats: {e}")
+                print(f"[ERROR] Error printing stats: {e}")
                 break
     
     socket = CentralSocketData() 
+    # breakpoint()
     t1 = threading.Thread(target=socket.listen_for_strikes_updates, daemon=True)
     t1.start()
     
@@ -252,7 +259,7 @@ if __name__ == "__main__":
                     
                     time.sleep(0.5)
                 except KeyboardInterrupt:
-                    print("\n🛑 Keyboard interrupt - shutting down gracefully...")
+                    print("\n[INFO] Keyboard interrupt - shutting down gracefully...")
                     socket.print_tick_data_stats()  # Print final stats
                     socket.shutdown()
                     socket.depth_shutdown()
@@ -269,9 +276,10 @@ if __name__ == "__main__":
                 pass
             time.sleep(2)  # Longer delay before restart
         except KeyboardInterrupt:
-            print("\n🛑 Keyboard interrupt - shutting down gracefully...")
+            print("\n[INFO] Keyboard interrupt - shutting down gracefully...")
             try:
                 socket.print_tick_data_stats()  # Print final stats
+                os._exit(1)
                 socket.shutdown()
                 socket.depth_shutdown()
             except:
