@@ -4167,3 +4167,4 @@
 2025-09-07 15:35:57,399 [INFO] routers.stratergy_4leg: Successfully connected to Redis
 2025-09-07 15:52:18,162 [INFO] routers.stratergy_4leg: Successfully connected to Redis
 2025-09-07 15:52:23,901 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-07 16:01:03,214 [ERROR] routers.stratergy_4leg: Failed to connect to Redis: Error while reading from localhost:6379 : (10053, 'An established connection was aborted by the software in your host machine', None, 10053, None)
