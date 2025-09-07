@@ -100,10 +100,11 @@ def userlogin(user: User):
             if os.name == 'nt':  # For Windows
                 subprocess.Popen(["start", "cmd", "/k", "python3", order_streaming_script, user.userid], shell=True)
             else:
-              subprocess.Popen([
-                        "nohup","python3", central_socket_data_script," > output2.log 2>&1 &"
-                    ],shell=True)
-                
+               subprocess.Popen(
+                    f"nohup python3 {order_streaming_script} {user.userid} > output.log 2>&1 &",
+                    shell=True
+                )
+
             print(f"✅ Order streaming launched for user: {user.userid}")
             
             if user.userid == "70249886":
@@ -112,9 +113,10 @@ def userlogin(user: User):
                 else:
 #                     python3 myscript.py &
 # nohup python3 myscript.py > output.log 2>&1 &
-                    subprocess.Popen([
-                        "nohup","python3", central_socket_data_script," > output.log 2>&1 &"
-                    ],shell=True)
+                    subprocess.Popen(
+    f"nohup python3 {central_socket_data_script} > output.log 2>&1 &",
+    shell=True
+)
                 print(f"✅ Central socket data launched for user: {user.userid}")
         except Exception as e:
             print(f"⚠️ Failed to launch order streaming for user {user.userid}: {e}")
