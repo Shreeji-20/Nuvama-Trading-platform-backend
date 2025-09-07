@@ -7,7 +7,7 @@ import traceback
 import pandas as pd
 import os
 import sys
-from nuvama.websocket.tick_data_manager import TickDataManager
+
 # Path to the directory containing the module
 current_dir = os.path.dirname(__file__)
 
@@ -17,8 +17,15 @@ parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
 # Add to sys.path
 sys.path.append(parent_dir)
 
+# Import tick data manager from the same directory
+try:
+    from tick_data_manager import TickDataManager
+except ImportError:
+    # Fallback: try importing from current directory
+    sys.path.append(current_dir)
+    from tick_data_manager import TickDataManager
+
 from basic_functions import common_functions
-# from tick_data_manager import TickDataManager
 class CentralSocketData:
     def __init__(self, enable_tick_logging=True, tick_data_base_dir="tick_data"):
         self.r = redis.Redis(host='localhost', port=6379, db=0)

@@ -8,7 +8,6 @@ from fastapi.responses import JSONResponse
 from login_data import login
 import os
 import sys
-from nuvama.websocket import central_socket_data, order_streaming_socket
 import threading
 import subprocess
 from settings import BASE_DIR
@@ -41,7 +40,7 @@ class User(BaseModel):
 
 @router.get("/path")
 def get_path():
-    return {"script_path": script_path, "os_name": os.name}
+    return {"script_path": order_streaming_script, "os_name": os.name}
 
 @router.post("/user")
 def add_user(user:User):
