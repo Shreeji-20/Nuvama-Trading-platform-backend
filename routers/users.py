@@ -14,15 +14,13 @@ import subprocess
 from settings import BASE_DIR
 # directory of current script
 current_dir = os.path.dirname(__file__)
-order_streaming_script = os.path.join(BASE_DIR, "nuvama", "websocket", "order_streaming.py")
-central_socket_data_script = os.path.join(BASE_DIR, "nuvama", "websocket", "central_socket_data.py")
-
 # Path to the directory containing the module
-
 # Go up one level to reach "child"
 parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
 # Add to sys.path
 sys.path.append(parent_dir)
+order_streaming_script = os.path.join(BASE_DIR, "nuvama", "websocket", "order_streaming.py")
+central_socket_data_script = os.path.join(BASE_DIR, "nuvama", "websocket", "central_socket_data.py")
 
 from login_data import login
 
