@@ -101,7 +101,7 @@ def userlogin(user: User):
                 subprocess.Popen(["start", "cmd", "/k", "python3", order_streaming_script, user.userid], shell=True)
             else:
                subprocess.Popen(
-                    f"nohup python3 {order_streaming_script} {user.userid} > output.log 2>&1 &",
+                    f"nohup python3 {order_streaming_script} {user.userid} > output2.log 2>&1 &",
                     shell=True
                 )
 
