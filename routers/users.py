@@ -101,7 +101,6 @@ def userlogin(user: User):
                 subprocess.Popen(["start", "cmd", "/k", "python3", order_streaming_script, user.userid], shell=True)
             else:
                 subprocess.Popen([
-                    "gnome-terminal", "--",
                     "python3", order_streaming_script, str(user.userid)
                 ], shell=True)
             print(f"✅ Order streaming launched for user: {user.userid}")
@@ -111,7 +110,6 @@ def userlogin(user: User):
                     subprocess.Popen(["start", "cmd", "/k", "python3", central_socket_data_script], shell=True)
                 else:
                     subprocess.Popen([
-                        "gnome-terminal", "--",
                         "python3", central_socket_data_script
                     ],shell=True)
                 print(f"✅ Central socket data launched for user: {user.userid}")
