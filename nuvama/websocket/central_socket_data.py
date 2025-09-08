@@ -65,9 +65,9 @@ class CentralSocketData:
         
         if not self.options_data:
             self.common_obj.refresh_strikes_and_options(expiry=1,symbol='NIFTY',exchange="NFO")
-            # self.common_obj.refresh_strikes_and_options(expiry=1,symbol='SENSEX',exchange="BFO")
+            self.common_obj.refresh_strikes_and_options(expiry=1,symbol='SENSEX',exchange="BFO")
             self.common_obj.refresh_strikes_and_options(expiry=0,symbol='NIFTY',exchange="NFO")
-            # self.common_obj.refresh_strikes_and_options(expiry=0,symbol='SENSEX',exchange="BFO")
+            self.common_obj.refresh_strikes_and_options(expiry=0,symbol='SENSEX',exchange="BFO")
             equity_symbols = self.r.lrange('excel_column_a_data', 0, -1)
             equity_symbols = [symbol.decode('utf-8') for symbol in equity_symbols]
             print("Equity Symbols for options fetching: ", equity_symbols)
@@ -168,7 +168,7 @@ class CentralSocketData:
                 redis_key = f"depth:{symbolname}_{strike}_{opt_type}-{expiry}"
             else:
                 # fallback to a generic key containing the streaming symbol
-                redis_key = f"depth:{streaming_symbol}"
+                redis_key = f"depth:{symbolname or streaming_symbol}"
 
             # Save tick data to files for simulation (high-performance, non-blocking)
             if self.enable_tick_logging and self.tick_manager:

@@ -1,0 +1,65 @@
+INFO:     Will watch for changes in these directories: ['/workspace/Nuvama-Trading-platform-backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [5406] using StatReload
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [5410]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     127.0.0.1:57184 - "GET /index HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57194 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57194 - "GET /index HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57194 - "GET /index HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57184 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57184 - "GET /index HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57184 - "GET /index HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57194 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57194 - "GET /index HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57194 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57194 - "OPTIONS /userlogin HTTP/1.1" 200 OK
+🚀 Starting login process for user: 70249886
+🔐 Attempting web login for user: 70249886
+🔍 Fetching user data for: 70249886
+✅ User data retrieved for: 70249886
+🌐 Initializing web login for: 70249886
+🔐 Starting Nuvama web login for: 70249886
+🚀 Starting Nuvama login for: 70249886
+✅ Chrome WebDriver initialized successfully
+🔄 Step 1: Submitting UserID: 70249886
+🌐 Navigating to: https://www.nuvamawealth.com/api-connect/login?api_key=iBe07GpBTEbbhg
+✅ UserID filled: 70249886
+✅ Proceed button clicked for UserID step
+� Step 2: Submitting password and TOTP
+✅ Password filled
+✅ Found 6 TOTP fields
+📱 Generating TOTP using pyotp...
+✅ Using TOTP secret from initialization
+✅ TOTP generated successfully: 961677
+✅ TOTP filled: 961677
+✅ Final proceed button clicked
+🔍 Waiting for redirect and extracting auth token...
+✅ Redirect detected: https://127.0.0.1/?request_id=326233fc5b5548d8
+🎉 Auth token extracted: 326233fc5b5548d8
+💾 Token saved to nuvama_token_simple.json
+🎉 Login completed successfully!
+🧹 Browser closed
+✅ Web login successful, reqid: 326233fc5b5548d8
+🔧 Initializing API connection for: 70249886
+💾 Storing reqid in Redis for: 70249886
+🎉 Login successful for user_id: 70249886
+✅ Web login successful for user: 70249886
+🔄 Launching order streaming for user: 70249886
+✅ Order streaming launched for user: 70249886
+✅ Central socket data launched for user: 70249886
+🎉 Login process completed successfully for user: 70249886
+INFO:     127.0.0.1:57194 - "POST /userlogin HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57194 - "OPTIONS /user HTTP/1.1" 200 OK
+Req Received :  userid='70249886' apikey='iBe07GpBTEbbhg' apisecret='PhIf&g9m*0C7sQfm' totp_secret='ZIXY5ERK4DJGN6TMRA6VYDDKMYSNJZBN' lastLogin='9/8/2025, 12:34:33 PM' password='Shreeji@2063'
+INFO:     127.0.0.1:57194 - "POST /user HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5410]
+INFO:     Stopping reloader process [5406]
