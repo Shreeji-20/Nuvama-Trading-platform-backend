@@ -6932,3 +6932,25 @@ pip install python-multipart
 2025-09-08 14:11:16,613 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757295223696, 'exp': 1757295223675, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '3407263a-4dc9-40a3-903b-87caeab26317', 'srvTm': 1757322676056}
 2025-09-08 14:11:16,614 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
 
+2025-09-08 14:30:19,007 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-08 15:33:18,598 [INFO] constants.router: Router object is being created.
+2025-09-08 15:33:18,598 [INFO] APIConnect.http: Http object is being created.
+2025-09-08 15:33:18,599 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-08 15:33:18,599 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-08 15:33:18,601 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-08 15:33:18,604 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-08 15:33:18,801 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-08 15:33:18,801 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757295223696, 'exp': 1757295223675, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '50436a57-d089-4faf-80e1-80525cd2e30c', 'srvTm': 1757327598080}
+2025-09-08 15:33:18,803 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-08 16:33:21,245 [INFO] constants.router: Router object is being created.
+2025-09-08 16:33:21,245 [INFO] APIConnect.http: Http object is being created.
+2025-09-08 16:33:21,245 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-08 16:33:21,246 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-08 16:33:21,248 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-08 16:33:21,251 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-08 16:33:21,455 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-08 16:33:21,456 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757295223696, 'exp': 1757295223675, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'cda754c5-75ac-4a2a-9d97-b330299a0284', 'srvTm': 1757331200608}
+2025-09-08 16:33:21,457 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-08 16:46:25,223 [INFO] routers.stratergy_4leg: Successfully connected to Redis
