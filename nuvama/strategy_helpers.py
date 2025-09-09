@@ -349,14 +349,15 @@ class StrategyOrderHelpers:
         self.params = params
         self.option_mapper = option_mapper
         self.exchange = exchange
-    
-    def make_order_template(self, leg_obj, buy_if="BUY", user_id=None, leg_key=None, quantity=None):
+
+    def make_order_template(self, leg_obj, buy_if="BUY", user_id=None, leg_key=None, quantity=None, lotsizes=None):
         """Return a dict template for orders built from a depth/leg object."""
         if leg_obj is None:
             raise RuntimeError("leg_obj is None when building order template")
         
         streaming_symbol = leg_obj["response"]["data"]["symbol"]
         trading_symbol = self.option_mapper[streaming_symbol]["tradingsymbol"]
+        lotsize = lotsizes[leg_obj["response"]["data"]["symbolname"]]
         action = ActionEnum.BUY if buy_if.upper() == "BUY" else ActionEnum.SELL
         order_type = (OrderTypeEnum.MARKET if self.params["order_type"].upper() == "MARKET" 
                      else OrderTypeEnum.LIMIT)
@@ -371,6 +372,11 @@ class StrategyOrderHelpers:
 
         qty *= int(self.params.get("quantity_multiplier", 1))
 
+        slice_multiplier = int(self.params.get("slice_multiplier", 1))
+        if qty < slice_multiplier * int(lotsize):
+            slice_multiplier = 1
+        else:
+            slice_multiplier = max(1, slice_multiplier)
         return {
             "user_id": user_id or self.params.get("user_ids"),
             "Trading_Symbol": trading_symbol,
@@ -378,7 +384,7 @@ class StrategyOrderHelpers:
             "Action": action,
             "Order_Type": order_type,
             "Quantity": qty,
-            "Slice_Quantity": qty,
+            "Slice_Quantity": int(lotsize) * slice_multiplier,
             "Streaming_Symbol": streaming_symbol,
             "Limit_Price": "0",
             "Disclosed_Quantity": 0,
@@ -953,7 +959,7 @@ class StrategyQuantityHelpers:
     """Helper class for quantity-related calculations and validations"""
     
     @staticmethod
-    def get_remaining_quantity_for_leg(params, entry_qtys, uid, leg_key):
+    def get_remaining_quantity_for_leg(params, executed_qtys, uid, leg_key,isExit=False):
         """Get the remaining quantity that can be executed for a specific leg."""
         try:
             # Get desired quantity for this leg
@@ -966,7 +972,7 @@ class StrategyQuantityHelpers:
             desired_qty *= int(params.get("quantity_multiplier", 1))
             
             # Get current executed quantity
-            current_qty = entry_qtys[uid].get(leg_key, 0)
+            current_qty = executed_qtys[uid].get(leg_key, 0)
             
             # Return remaining quantity
             remaining_qty = max(0, desired_qty - current_qty)
