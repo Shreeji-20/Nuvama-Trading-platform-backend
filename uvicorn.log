@@ -6478,3 +6478,778 @@ WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading
 INFO:     Started server process [35037]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35057]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:44286 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:34524 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:44120 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:39064 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59732 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:41136 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35057]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35316]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35337]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35357]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35377]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35377]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35405]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:35684 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35405]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35426]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35447]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35447]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35469]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35495]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35516]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:44772 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35516]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35549]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35549]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35573]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35594]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35594]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35615]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35635]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35655]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:44986 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35655]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35680]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35701]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35721]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35741]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35741]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35761]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35790]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:36982 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:56414 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37376 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51112 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:34232 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35790]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35966]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35987]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35987]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36007]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36007]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36027]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36047]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:39948 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36047]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36102]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:54330 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48302 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:32830 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:60080 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36102]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36130]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36151]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:39642 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36151]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36176]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36196]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36216]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36236]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36253]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36273]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36273]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36297]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36313]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36313]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36337]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36357]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:34514 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36357]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36382]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36402]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36402]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36422]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36442]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36462]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36462]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36486]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36506]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:51626 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:54026 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42748 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36506]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_manager.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36661]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36682]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:42648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46130 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:33504 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36682]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36742]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36763]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36763]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36787]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36807]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:45030 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36807]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36869]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Started server process [36890]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36910]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36930]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36930]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36954]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36974]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [36994]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37015]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:46612 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [37015]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37041]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37061]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37081]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37101]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [37101]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37130]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37150]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37171]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37191]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37211]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37231]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37251]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37271]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:44812 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [37271]
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37296]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37317]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37337]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/websocket/tick_data_utils.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37357]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [37377]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:43108 - "GET /orders HTTP/1.1" 200 OK

@@ -9,7 +9,7 @@ from datetime import datetime, date
 from tick_data_manager import TickDataReader
 import argparse
 import statistics
-
+from central_socket_data import CentralSocketData
 
 class TickDataAnalyzer:
     """Analyze saved tick data files"""
@@ -17,6 +17,7 @@ class TickDataAnalyzer:
     def __init__(self, base_directory="tick_data"):
         self.reader = TickDataReader(base_directory)
         self.base_directory = base_directory
+        
     
     def analyze_date(self, date_str):
         """Analyze tick data for a specific date"""
@@ -168,7 +169,7 @@ class TickDataSimulator:
     
     def __init__(self, base_directory="tick_data"):
         self.reader = TickDataReader(base_directory)
-    
+        self.central_socket_functions = CentralSocketData()
     def simulate_market_session(self, date_str, symbol=None, speed_multiplier=1.0, start_hour=9, end_hour=16):
         """Simulate a market session with saved tick data"""
         print(f"\n[INFO] SIMULATING MARKET SESSION FOR {date_str}")
@@ -187,7 +188,7 @@ class TickDataSimulator:
         start_time = time.time()
         
         try:
-            for tick in self.reader.simulate_tick_replay(date_str, symbol, speed_multiplier):
+            for tick in self.reader.simulate_tick_replay(date_str, symbol, speed_multiplier, int(start_hour), int(end_hour)):
                 # Filter by time range
                 if tick['timestamp'] < start_timestamp or tick['timestamp'] > end_timestamp:
                     continue
@@ -218,23 +219,25 @@ class TickDataSimulator:
         # For now, we'll just update some basic statistics
         
         if tick['type'] == 'quotes':
+            self.central_socket_functions.ReducedQuotesFeedCallback(tick.get('data',{}))
             # Process quotes data
-            symbol = tick.get('symbol')
-            data = tick.get('data', {}).get('response', {}).get('data', {})
-            ltp = data.get('ltp')
-            if ltp:
-                # You could update your strategy with new price
-                pass
+            # symbol = tick.get('symbol')
+            # data = tick.get('data', {}).get('response', {}).get('data', {})
+            # ltp = data.get('ltp')
+            # if ltp:
+            #     # You could update your strategy with new price
+            #     pass
         
         elif tick['type'] == 'depth':
+            self.central_socket_functions.DepthStreamerCallback(tick.get('data',{}))
             # Process depth data
-            redis_key = tick.get('redis_key')
-            data = tick.get('data', {}).get('response', {}).get('data', {})
-            bid = data.get('bid')
-            ask = data.get('ask')
-            if bid and ask:
-                # You could update your order book with new bid/ask
-                pass
+            # redis_key = tick.get('redis_key')
+            # data = tick.get('data', {}).get('response', {}).get('data', {})
+            # bid = data.get('bid')
+            # ask = data.get('ask')
+            # if bid and ask:
+            #     # You could update your order book with new bid/ask
+            #     pass
 
 
 def main():

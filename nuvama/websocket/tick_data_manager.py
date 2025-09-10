@@ -12,8 +12,9 @@ from datetime import datetime, date
 from typing import Dict, Any
 import gzip
 import asyncio
+import re
 from concurrent.futures import ThreadPoolExecutor
-
+from central_socket_data import CentralSocketData
 
 class TickDataManager:
     """
@@ -426,7 +427,7 @@ class TickDataReader:
         except Exception as e:
             print(f"[ERROR] Error reading tick file {filepath}: {e}")
     
-    def simulate_tick_replay(self, date_str: str, symbol=None, speed_multiplier=1.0):
+    def simulate_tick_replay(self, date_str: str, symbol=None, speed_multiplier=1.0,start_hour=10,end_hour=15):
         """
         Simulate tick data replay for a specific date
         
@@ -447,23 +448,29 @@ class TickDataReader:
         
         # Read quotes files
         for filename in files["quotes"]:
-            
-            if symbol and symbol not in filename:
-                continue
-            filepath = os.path.join(date_path, "quotes", filename)
-            for tick in self.read_tick_file(filepath):
-                # print("Tick : ",tick)
-                all_ticks.append(tick)
+            match = re.search(r"_(\d+)\.jsonl\.gz$", filename)
+            if match:
+                num = int(match.group(1))
+                if start_hour <= num < end_hour:
+                    if symbol and symbol not in filename:
+                        continue
+                    filepath = os.path.join(date_path, "quotes", filename)
+                    for tick in self.read_tick_file(filepath):
+                        # print("Tick : ",tick)
+                        all_ticks.append(tick)
         
         # Read depth files
         for filename in files["depth"]:
-            print("Reading Depth files")
-            if symbol and symbol not in filename:
-                continue
-            filepath = os.path.join(date_path, "depth", filename)
-            for tick in self.read_tick_file(filepath):
-                all_ticks.append(tick)
-            print("READING DEPTH FILES COMPLETED")
+            match = re.search(r"_(\d+)\.jsonl\.gz$", filename)
+            if match:
+                num = int(match.group(1))
+                if start_hour <= num < end_hour:
+                    if symbol and symbol not in filename:
+                        continue
+                    filepath = os.path.join(date_path, "depth", filename)
+                    for tick in self.read_tick_file(filepath):
+                        all_ticks.append(tick)
+                    print("READING DEPTH FILES COMPLETED")
         
         # Sort by timestamp
         all_ticks.sort(key=lambda x: x['timestamp'])
