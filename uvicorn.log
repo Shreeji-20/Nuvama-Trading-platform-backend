@@ -5342,3 +5342,1139 @@ INFO:     Finished server process [31230]
 INFO:     Started server process [31394]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45510 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45520 - "GET /lotsizes HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45520 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45510 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45510 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45520 - "GET /spreads HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45520 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45510 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45510 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45510 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45520 - "GET /lotsizes HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /stratergy/stratergy_1 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45510 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45520 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45548 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45498 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /stratergy/stratergy_1 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /advanced-options HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45536 - "GET /spreads HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45460 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /lotsizes HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50262 - "GET /stratergy/stratergy_1 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45458 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50262 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50280 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50270 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50270 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50270 - "GET /optiondata HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50270 - "GET /index HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50270 - "GET /advanced-options HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /stratergy/stratergy_1 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /advanced-options HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /spreads HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /stratergy/stratergy_1 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /advanced-options HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /spreads HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /stratergy/stratergy_1 HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /advanced-options HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50254 - "GET /spreads HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /advanced-options HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49350 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49350 - "GET /users HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49348 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59772 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59772 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59772 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59772 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59772 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59772 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59772 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59772 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59772 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59772 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:44534 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58328 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:54464 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51998 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:50542 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:40732 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:56346 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43086 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37794 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37794 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37794 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37794 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37794 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37794 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37794 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37794 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:38362 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:57704 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:57704 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:57704 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:57704 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:57704 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:57704 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:57704 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:57704 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:53654 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:53654 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:53654 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:53654 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:53654 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:53654 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:53654 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:53654 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42756 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:55616 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:32920 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59888 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:55992 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:38176 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:35924 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:36666 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:35538 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:36790 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:54130 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:44874 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:39266 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:47114 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:41516 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:53730 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42540 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:56422 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:38874 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49296 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51132 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:60286 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:60956 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37282 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37574 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51634 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:53024 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59648 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46736 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43004 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:60436 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [31394]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32310]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:46780 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:34362 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:55082 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32310]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32352]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32373]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32393]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32413]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:34946 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58624 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58374 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:51754 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:46810 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:41626 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:38962 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:41514 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45374 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:49696 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42328 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:60682 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37142 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32413]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32702]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:36552 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32702]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32739]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32760]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32780]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:58168 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:43600 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32780]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32817]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:59918 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32817]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32848]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:47552 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32848]
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32891]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32912]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32912]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32936]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32936]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32964]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [32985]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33005]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:33214 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33005]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33036]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33056]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33056]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33076]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33096]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33116]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33136]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33136]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33169]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33189]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33209]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:38314 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33209]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33241]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33261]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33281]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33301]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33321]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:51808 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59498 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:37266 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:58376 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:56044 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33321]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33367]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33387]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33387]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33411]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33432]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33453]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:45924 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33453]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33474]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33474]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33499]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33519]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33539]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:56944 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33539]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33575]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33595]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33616]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33636]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33656]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33676]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33676]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33703]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33703]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33733]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33754]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:37510 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33754]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33783]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33804]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33804]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33835]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33858]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:60834 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:32962 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33858]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33896]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33916]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33937]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33957]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33977]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [33997]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [34017]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [34037]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:44580 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [34037]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [34066]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [34066]
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [34094]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [34118]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:52110 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:48786 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [34118]
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [34395]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:55632 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:44992 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:55632 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:44992 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:44994 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [34395]
+WARNING:  StatReload detected changes in 'nuvama/stratergies_direct_ioc_box.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [34418]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [34439]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:45012 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45012 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45012 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45012 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:45012 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:42738 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59194 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:38814 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:59278 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [34439]
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [34741]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [34761]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Redis connection established
+INFO:     172.17.0.1:56646 - "GET /orders HTTP/1.1" 200 OK
+INFO:     172.17.0.1:60024 - "GET /orders HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [34761]
+WARNING:  StatReload detected changes in 'nuvama/strategy_helpers.py'. Reloading...
+/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+INFO:     Started server process [35037]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

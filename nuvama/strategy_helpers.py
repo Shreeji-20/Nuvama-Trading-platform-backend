@@ -824,7 +824,7 @@ class StrategyExecutionHelpers:
     LIVE_MODE = "LIVE"
     SIMULATION_MODE = "SIMULATION"
     
-    def __init__(self, redis_connection, execution_mode=LIVE_MODE):
+    def __init__(self, redis_connection, execution_mode=SIMULATION_MODE):
         self.r = redis_connection
         self.execution_mode = execution_mode
         self.simulation_orders = {}  # Store simulated orders
@@ -876,9 +876,9 @@ class StrategyExecutionHelpers:
                 "order_id": sim_order_id,
                 "user_id": uid,
                 "leg_key": leg_key,
-                "symbol": order_data.get("TradingSymbol", "UNKNOWN"),
+                "symbol": order_data.get("Trading_Symbol", "UNKNOWN"),
                 "action": order_data.get("Action", "UNKNOWN"),
-                "quantity": order_data.get("Quantity", 0),
+                "quantity": order_data.get("Slice_Quantity", 0),
                 "executed_price": order_data.get("Limit_Price", 0),
                 "execution_time": datetime.now().isoformat(),
                 "status": "FILLED",
@@ -897,7 +897,7 @@ class StrategyExecutionHelpers:
                 f"OrderID: {sim_order_id}, User: {uid}, Qty: {order_data.get('Quantity')}, Price: {order_data.get('Limit_Price')}"
             )
             
-            return True
+            return True , simulated_execution
             
         except Exception as e:
             StrategyLoggingHelpers.error(f"SIMULATION: Exception executing order for {leg_key}", exception=e)

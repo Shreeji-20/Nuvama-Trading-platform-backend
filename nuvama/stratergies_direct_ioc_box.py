@@ -51,7 +51,7 @@ class StratergyDirectIOCBox:
         self.global_action = self.params.get('action', 'BUY').upper()
         self.hard_entry = False
         # Initialize execution mode (default is SIMULATION)
-        execution_mode = self.params.get('execution_mode', StrategyExecutionHelpers.LIVE_MODE)
+        execution_mode = self.params.get('execution_mode', StrategyExecutionHelpers.SIMULATION_MODE)
         self.execution_helper = StrategyExecutionHelpers(self.r, execution_mode)
         
         # Log execution mode
@@ -1067,6 +1067,7 @@ class StratergyDirectIOCBox:
                 self.logger.error(f"Initial order placement failed for {leg_key}")
                 return {"success": False, "filled_qty": 0, "filled_price": 0, "reason": "initial_placement_failed"}
             
+            # if self.execution_helper.execution_mode == "SIMULATION":
             order_id = result.get('order_id') if isinstance(result, dict) else None
             if not order_id:
                 self.logger.error(f"No order ID received for {leg_key}")
@@ -1081,12 +1082,16 @@ class StratergyDirectIOCBox:
                 attempt += 1
                 
                 # Check order status
-                
-                status = self.order.get_order_status(order_id, uid, order.get('remark', 'Lord_Shreeji'))
-                
-                current_filled = status.get('filled_qty', 0)
-                filled_price = status.get('filled_price', 0)
-                order_status = status.get('order_status', 'unknown')
+                if self.execution_helper.execution_mode == "SIMULATION":
+                    status = result
+                    current_filled = status.get('quantity', 0)
+                    filled_price = order.get('Limit_Price', 0)
+                    order_status = status.get('status', 'unknown')
+                else:
+                    status = self.order.get_order_status(order_id, uid, order.get('remark', 'Lord_Shreeji'))
+                    current_filled = status.get('filled_qty', 0)
+                    filled_price = status.get('filled_price', 0)
+                    order_status = status.get('order_status', 'unknown')
                 
                 self.logger.debug(f"MODIFY attempt {attempt} for {leg_key}", 
                                 f"Filled: {current_filled}/{remaining_qty}, Price: {filled_price}, Status: {order_status}")
@@ -1130,9 +1135,14 @@ class StratergyDirectIOCBox:
                 total_filled_qty = current_filled
             
             # Final status check
-            final_status = self.order.get_order_status(order_id, uid, order.get('remark', 'Lord_Shreeji'))
-            final_filled = final_status.get('filled_qty', 0)
-            final_price = final_status.get('filled_price', 0)
+            if self.execution_helper.execution_mode == "LIVE":
+                final_status = self.order.get_order_status(order_id, uid, order.get('remark', 'Lord_Shreeji'))
+                final_filled = final_status.get('filled_qty', 0)
+                final_price = final_status.get('filled_price', 0)
+            else:
+                final_status = result
+                final_filled = final_status.get('quantity', 0)
+                final_price = order.get('Limit_Price', 0)
             
             if final_filled >= order['Slice_Quantity']:
                 self.logger.success(f"MODIFY execution completed for {leg_key} after {attempt} attempts")
@@ -1220,9 +1230,14 @@ class StratergyDirectIOCBox:
                     if order_id:
                         # Wait a moment for fill data
                         time.sleep(0.2)
-                        status = self.order.get_order_status(order_id, uid, order.get('remark', 'Lord_Shreeji'))
-                        filled_qty = status.get('filled_qty', 0)
-                        filled_price = status.get('filled_price', 0)
+                        if self.execution_helper.execution_mode == "SIMULATION":
+                            status = result
+                            filled_qty = status.get('quantity', 0)
+                            filled_price = order['Limit_Price']
+                        else:
+                            status = self.order.get_order_status(order_id, uid, order.get('remark', 'Lord_Shreeji'))
+                            filled_qty = status.get('filled_qty', 0)
+                            filled_price = status.get('filled_price', 0)
                         
                         total_filled_qty += filled_qty
                         
