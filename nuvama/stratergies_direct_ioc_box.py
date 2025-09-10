@@ -1220,7 +1220,7 @@ class StratergyDirectIOCBox:
                             
                             # Check if we have enough quantity
                             if total_filled_qty >= order['Slice_Quantity']:
-                                return {"success": True, "filled_qty": total_filled_qty, "filled_price": filled_price, 
+                                return {"success": True, "filled_qty": int(total_filled_qty), "filled_price": filled_price, 
                                        "attempts": retry_count}
                         else:
                             self.logger.warning(f"IOC order placed but not filled for {leg_key}")
@@ -1237,7 +1237,7 @@ class StratergyDirectIOCBox:
             if total_filled_qty > 0:
                 self.logger.warning(f"IOC execution partially completed for {leg_key}", 
                                   f"Filled: {total_filled_qty}/{desired_qty} after {retry_count} attempts")
-                return {"success": False, "filled_qty": total_filled_qty, "filled_price": 0, 
+                return {"success": False, "filled_qty": int(total_filled_qty), "filled_price": 0, 
                        "reason": "partial_fill", "attempts": retry_count}
             else:
                 self.logger.error(f"IOC execution failed for {leg_key}", f"No fills after {retry_count} attempts")
@@ -1635,15 +1635,15 @@ class StratergyDirectIOCBox:
                     print(f"INFO: Executing BUY legs - First: {first_buy_leg}, Second: {second_buy_leg}")
                     
                     first_buy_success = self._place_ioc_order_with_retry(uid, first_buy_leg)
-                    if not first_buy_success:
+                    if not first_buy_success['success']:
                         print(f"ERROR: First BUY leg execution failed")
                         continue
-
+                    self.entry_qtys[uid][first_buy_leg] = first_buy_success.get('filled_qty', 0)
                     second_buy_success = self._place_ioc_order_with_retry(uid, second_buy_leg, 20) # Assuming this would execute
-                    if not second_buy_success:
+                    if not second_buy_success['success']:
                         print(f"ERROR: Second BUY leg execution failed")
                         continue
-                    
+                    self.entry_qtys[uid][second_buy_leg] = second_buy_success.get('filled_qty', 0)
                     print(f"SUCCESS: BUY legs executed successfully with SELL profit monitoring")
                     return True
             
@@ -1683,45 +1683,18 @@ class StratergyDirectIOCBox:
 
                     print(f"INFO: Using global observation for SELL leg execution order: {sell_leg_keys}")
 
-                    if sell_observation == None or sell_observation == False:
-                        # SELL legs are stable or no observation available, execute in original order
-                        print(f"INFO: SELL legs are stable or no observation - executing in original order")
-                        first_sell_leg = sell_leg_keys[0]
-                        second_sell_leg = sell_leg_keys[1]
-                        current_sell_prices = self._get_leg_prices(sell_leg_keys)
-                        execution_reason = "No strategic observation available"
-                    else:
-                        # Check if we have the new strategic execution format
-                        if isinstance(sell_observation, dict) and 'execution_strategy' in sell_observation:
-                            strategy = sell_observation['execution_strategy']
-                            if strategy['action'] == 'SKIP':
-                                print(f"WARNING: SELL leg execution skipped: {strategy['reason']}")
-                                return False  # Skip execution based on strategy
-
-                            first_sell_leg = strategy['first_leg']
-                            second_sell_leg = strategy['second_leg']
-                            current_sell_prices = sell_observation['final_prices']
-                            execution_reason = strategy['reason']
-
-                            print(f"INFO: SELL legs strategic execution: {strategy['strategy']}")
-                            print(f"INFO: First: {first_sell_leg}, Second: {second_sell_leg} | {execution_reason}")
-                        else:
-                            # Fallback to old logic for compatibility
-                            print(f"WARNING: Using fallback SELL execution logic")
-                            first_sell_leg = sell_observation.get('first_leg', sell_leg_keys[0])
-                            second_sell_leg = sell_observation.get('second_leg', sell_leg_keys[1])
-                            current_sell_prices = sell_observation.get('final_prices', self._get_leg_prices(sell_leg_keys))
-                            execution_reason = "Fallback execution"
+                    first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, sell_leg_keys)
                     
                     # Execute SELL legs sequentially based on global observation -> pending select legs based on observation
                     
                     first_success = self._place_ioc_order_with_retry(uid, first_sell_leg, 1)
-                    if not first_success:
+                    if not first_success['success']:
                         continue
+                    self.entry_qtys[uid][first_sell_leg] = first_success.get('filled_qty', 0)
                     second_success = self._place_ioc_order_with_retry(uid, second_sell_leg, 20) # Assuming this would execute
-                    if second_success:
+                    if second_success['success']:
                         print(f"SUCCESS: SELL legs executed successfully with BUY profit monitoring")
-                        self.entry_qtys[uid]
+                        self.entry_qtys[uid][second_sell_leg] = second_success.get('filled_qty', 0)
                         return True
                     else:
                         print(f"ERROR: SELL execution failed or BUY profit exit triggered")
@@ -1736,21 +1709,21 @@ class StratergyDirectIOCBox:
         self.logger.info(f"Triggering complete exit execution for user {uid}")
         
         # Get current prices for exit execution
-        all_leg_keys = list(self.legs.keys())
-        leg_prices = self._get_leg_prices(all_leg_keys, is_exit=True)
         
         sell_observation = self._get_global_observation_result("SELL_PAIR")
         print(f"INFO: Using global observation for SELL leg execution order: {sell_observation}")
         first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, [self.pair2_bidding_leg, self.pair2_base_leg])
         
         first_sell_success = self._place_ioc_order_with_retry(uid, first_sell_leg, 1, True)
-        if not first_sell_success:
+        if not first_sell_success.get('success', False):
             print(f"ERROR: First SELL leg execution failed")
             return False
+        self.exit_qtys[uid][first_sell_leg] = first_sell_success.get('filled_qty', 0)
         second_sell_success = self._place_ioc_order_with_retry(uid, second_sell_leg, 20, True) # Assuming this would execute
-        if not second_sell_success:
+        if not second_sell_success.get('success', False):
             print(f"ERROR: Second SELL leg execution failed")
             return False
+        self.exit_qtys[uid][second_sell_leg] = second_sell_success.get('filled_qty', 0)
         # Execute complete exit strategy
         return True
 
@@ -1762,8 +1735,22 @@ class StratergyDirectIOCBox:
         all_leg_keys = list(self.legs.keys())
         leg_prices = self._get_leg_prices(all_leg_keys, is_exit=True)
         
+        buy_observation = self._get_global_observation_result("BUY_PAIR")
+        print(f"INFO: Using global observation for BUY leg execution order: {buy_observation}")
+        first_buy_leg, second_buy_leg, execution_reason = self.get_legs_sequence_from_observation(buy_observation, [self.pair1_bidding_leg, self.pair1_base_leg])
+        first_buy_success = self._place_ioc_order_with_retry(uid, first_buy_leg, 1, True)
+        if not first_buy_success:
+            print(f"ERROR: First BUY leg execution failed")
+            return False
+        self.exit_qtys[uid][first_buy_leg] = first_buy_success.get('filled_qty', 0)
+        second_buy_success = self._place_ioc_order_with_retry(uid, second_buy_leg, 20, True) # Assuming this would execute
+        if not second_buy_success:
+            print(f"ERROR: Second BUY leg execution failed")
+            return False
+        self.exit_qtys[uid][second_buy_leg] = second_buy_success.get('filled_qty', 0)
+        
         # Execute complete exit strategy
-        return self._execute_exit_both_pairs(uid, leg_prices)
+        return True
 
     def _execute_dual_strategy_exit_pairs(self, uid, prices):
         """Execute exit pairs using dual strategy approach with dedicated 10-second observation."""
