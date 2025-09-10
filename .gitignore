@@ -1,3 +1,4 @@
 venv/
 tick_data/
 nuvama/websocket/tick_data/
+*.log

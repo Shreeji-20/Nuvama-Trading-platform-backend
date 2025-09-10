@@ -8350,3 +8350,1196 @@ pip install python-multipart
 2025-09-10 10:14:44,062 [INFO] routers.stratergy_4leg: Successfully connected to Redis
 2025-09-10 10:14:48,965 [INFO] routers.stratergy_4leg: Successfully connected to Redis
 2025-09-10 10:15:12,075 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 10:16:50,956 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:00:54,381 [DEBUG] selenium.webdriver.common.selenium_manager: Selenium Manager binary found at: /workspace/venv/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager
+2025-09-10 11:00:54,382 [DEBUG] selenium.webdriver.common.selenium_manager: Executing process: /workspace/venv/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager --browser chrome --debug --output json
+2025-09-10 11:00:54,818 [DEBUG] selenium.webdriver.common.selenium_manager: chromedriver not found in PATH
+2025-09-10 11:00:54,818 [DEBUG] selenium.webdriver.common.selenium_manager: chrome not found in PATH
+2025-09-10 11:00:54,819 [DEBUG] selenium.webdriver.common.selenium_manager: chrome not found in the system
+2025-09-10 11:00:54,819 [DEBUG] selenium.webdriver.common.selenium_manager: Discovering versions from https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json
+2025-09-10 11:00:54,819 [DEBUG] selenium.webdriver.common.selenium_manager: Required browser: chrome 140.0.7339.82
+2025-09-10 11:00:54,819 [DEBUG] selenium.webdriver.common.selenium_manager: chrome 140.0.7339.82 already exists
+2025-09-10 11:00:54,820 [DEBUG] selenium.webdriver.common.selenium_manager: chrome 140.0.7339.82 is available at /root/.cache/selenium/chrome/linux64/140.0.7339.82/chrome
+2025-09-10 11:00:54,820 [DEBUG] selenium.webdriver.common.selenium_manager: Discovering versions from https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json
+2025-09-10 11:00:54,820 [DEBUG] selenium.webdriver.common.selenium_manager: Required driver: chromedriver 140.0.7339.82
+2025-09-10 11:00:54,820 [DEBUG] selenium.webdriver.common.selenium_manager: chromedriver 140.0.7339.82 already in the cache
+2025-09-10 11:00:54,821 [DEBUG] selenium.webdriver.common.selenium_manager: Driver path: /root/.cache/selenium/chromedriver/linux64/140.0.7339.82/chromedriver
+2025-09-10 11:00:54,821 [DEBUG] selenium.webdriver.common.selenium_manager: Browser path: /root/.cache/selenium/chrome/linux64/140.0.7339.82/chrome
+2025-09-10 11:00:54,821 [DEBUG] selenium.webdriver.common.selenium_manager: Using driver at: /root/.cache/selenium/chromedriver/linux64/140.0.7339.82/chromedriver
+2025-09-10 11:00:54,822 [DEBUG] selenium.webdriver.common.service: Started executable: `/root/.cache/selenium/chromedriver/linux64/140.0.7339.82/chromedriver` in a child process with pid: 17138
+2025-09-10 11:00:55,322 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session {"capabilities": {"firstMatch": [{}], "alwaysMatch": {"browserName": "chrome", "pageLoadStrategy": "normal", "browserVersion": null, "goog:chromeOptions": {"prefs": {"profile.default_content_setting_values.notifications": 2, "profile.default_content_settings.popups": 0}, "extensions": [], "binary": "/root/.cache/selenium/chrome/linux64/140.0.7339.82/chrome", "args": ["--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1080"]}}}}
+2025-09-10 11:00:55,323 [DEBUG] urllib3.connectionpool: Starting new HTTP connection (1): localhost:54473
+2025-09-10 11:00:55,587 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session HTTP/1.1" 200 848
+2025-09-10 11:00:55,588 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"capabilities":{"acceptInsecureCerts":false,"browserName":"chrome","browserVersion":"140.0.7339.82","chrome":{"chromedriverVersion":"140.0.7339.82 (bc93617e21c39ed4afa6ce1c08554e5aa76d132d-refs/branch-heads/7339_41@{#5})","userDataDir":"/tmp/.org.chromium.Chromium.Xp3VFi"},"fedcm:accounts":true,"goog:chromeOptions":{"debuggerAddress":"localhost:42951"},"networkConnectionEnabled":false,"pageLoadStrategy":"normal","platformName":"linux","proxy":{},"setWindowRect":true,"strictFileInteractability":false,"timeouts":{"implicit":0,"pageLoad":300000,"script":30000},"unhandledPromptBehavior":"dismiss and notify","webauthn:extension:credBlob":true,"webauthn:extension:largeBlob":true,"webauthn:extension:minPinLength":true,"webauthn:extension:prf":true,"webauthn:virtualAuthenticators":true},"sessionId":"7cabf75dc9c3e405e1ac8ae5cb069df1"}} | headers=HTTPHeaderDict({'Content-Length': '848', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:00:55,588 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:00:55,588 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/url {"url": "https://www.nuvamawealth.com/api-connect/login?api_key=eYbfnWSPPT1-2g"}
+2025-09-10 11:00:55,840 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/url HTTP/1.1" 200 14
+2025-09-10 11:00:55,841 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:00:55,841 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:00:58,841 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "[id=\"userID\"]"}
+2025-09-10 11:00:58,850 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 200 125
+2025-09-10 11:00:58,851 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.3"}} | headers=HTTPHeaderDict({'Content-Length': '125', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:00:58,851 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:00:58,852 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.3/clear {}
+2025-09-10 11:00:58,879 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.3/clear HTTP/1.1" 200 14
+2025-09-10 11:00:58,880 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:00:58,880 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:00:58,881 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.3/value {"text": "70204607", "value": ["7", "0", "2", "0", "4", "6", "0", "7"]}
+2025-09-10 11:00:58,925 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.3/value HTTP/1.1" 200 14
+2025-09-10 11:00:58,926 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:00:58,926 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:00:58,926 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "button[type='submit']"}
+2025-09-10 11:00:58,936 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 404 900
+2025-09-10 11:00:58,936 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"button[type='submit']\"}\n  (Session info: chrome=140.0.7339.82)","stacktrace":"#0 0x559d7d4b694a \u003Cunknown>\n#1 0x559d7cf2b8a0 \u003Cunknown>\n#2 0x559d7cf7d540 \u003Cunknown>\n#3 0x559d7cf7d731 \u003Cunknown>\n#4 0x559d7cfcb824 \u003Cunknown>\n#5 0x559d7cfa305d \u003Cunknown>\n#6 0x559d7cfc8c23 \u003Cunknown>\n#7 0x559d7cfa2e03 \u003Cunknown>\n#8 0x559d7cf6f968 \u003Cunknown>\n#9 0x559d7cf705e1 \u003Cunknown>\n#10 0x559d7d47a548 \u003Cunknown>\n#11 0x559d7d47e272 \u003Cunknown>\n#12 0x559d7d461313 \u003Cunknown>\n#13 0x559d7d47edc5 \u003Cunknown>\n#14 0x559d7d44649f \u003Cunknown>\n#15 0x559d7d4a3158 \u003Cunknown>\n#16 0x559d7d4a3332 \u003Cunknown>\n#17 0x559d7d4b5a53 \u003Cunknown>\n#18 0x7215ea73eaa4 \u003Cunknown>\n#19 0x7215ea7cba34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '900', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:00:58,936 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:00:58,937 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "input[type='submit']"}
+2025-09-10 11:00:58,947 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 404 899
+2025-09-10 11:00:58,948 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"input[type='submit']\"}\n  (Session info: chrome=140.0.7339.82)","stacktrace":"#0 0x559d7d4b694a \u003Cunknown>\n#1 0x559d7cf2b8a0 \u003Cunknown>\n#2 0x559d7cf7d540 \u003Cunknown>\n#3 0x559d7cf7d731 \u003Cunknown>\n#4 0x559d7cfcb824 \u003Cunknown>\n#5 0x559d7cfa305d \u003Cunknown>\n#6 0x559d7cfc8c23 \u003Cunknown>\n#7 0x559d7cfa2e03 \u003Cunknown>\n#8 0x559d7cf6f968 \u003Cunknown>\n#9 0x559d7cf705e1 \u003Cunknown>\n#10 0x559d7d47a548 \u003Cunknown>\n#11 0x559d7d47e272 \u003Cunknown>\n#12 0x559d7d461313 \u003Cunknown>\n#13 0x559d7d47edc5 \u003Cunknown>\n#14 0x559d7d44649f \u003Cunknown>\n#15 0x559d7d4a3158 \u003Cunknown>\n#16 0x559d7d4a3332 \u003Cunknown>\n#17 0x559d7d4b5a53 \u003Cunknown>\n#18 0x7215ea73eaa4 \u003Cunknown>\n#19 0x7215ea7cba34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '899', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:00:58,948 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:00:58,948 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/elements {"using": "tag name", "value": "button"}
+2025-09-10 11:00:58,956 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/elements HTTP/1.1" 200 244
+2025-09-10 11:00:58,956 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.6"},{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.12"}]} | headers=HTTPHeaderDict({'Content-Length': '244', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:00:58,956 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:00:58,957 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.6/text {}
+2025-09-10 11:00:58,967 [DEBUG] urllib3.connectionpool: http://localhost:54473 "GET /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.6/text HTTP/1.1" 200 19
+2025-09-10 11:00:58,968 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"Proceed"} | headers=HTTPHeaderDict({'Content-Length': '19', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:00:58,968 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:00:58,968 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.6/click {}
+2025-09-10 11:00:59,013 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.6/click HTTP/1.1" 200 14
+2025-09-10 11:00:59,014 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:00:59,014 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,015 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "[id=\"password\"]"}
+2025-09-10 11:01:03,023 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 200 126
+2025-09-10 11:01:03,024 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.15"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,024 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,024 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.15/clear {}
+2025-09-10 11:01:03,047 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.15/clear HTTP/1.1" 200 14
+2025-09-10 11:01:03,048 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,048 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,048 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.15/value {"text": "Rr@123456", "value": ["R", "r", "@", "1", "2", "3", "4", "5", "6"]}
+2025-09-10 11:01:03,098 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.15/value HTTP/1.1" 200 14
+2025-09-10 11:01:03,098 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,098 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,099 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "[id=\"totp-0\"]"}
+2025-09-10 11:01:03,108 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 200 126
+2025-09-10 11:01:03,108 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.16"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,108 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,109 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "[id=\"totp-1\"]"}
+2025-09-10 11:01:03,118 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 200 126
+2025-09-10 11:01:03,119 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.17"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,119 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,119 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "[id=\"totp-2\"]"}
+2025-09-10 11:01:03,128 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 200 126
+2025-09-10 11:01:03,129 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.18"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,129 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,129 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "[id=\"totp-3\"]"}
+2025-09-10 11:01:03,140 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 200 126
+2025-09-10 11:01:03,140 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.19"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,140 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,141 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "[id=\"totp-4\"]"}
+2025-09-10 11:01:03,151 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 200 126
+2025-09-10 11:01:03,151 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.20"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,151 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,152 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "[id=\"totp-5\"]"}
+2025-09-10 11:01:03,161 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 200 126
+2025-09-10 11:01:03,161 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.21"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,161 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,162 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element {"using": "css selector", "value": "[id=\"totp-6\"]"}
+2025-09-10 11:01:03,170 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element HTTP/1.1" 404 894
+2025-09-10 11:01:03,171 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"[id=\"totp-6\"]\"}\n  (Session info: chrome=140.0.7339.82)","stacktrace":"#0 0x559d7d4b694a \u003Cunknown>\n#1 0x559d7cf2b8a0 \u003Cunknown>\n#2 0x559d7cf7d540 \u003Cunknown>\n#3 0x559d7cf7d731 \u003Cunknown>\n#4 0x559d7cfcb824 \u003Cunknown>\n#5 0x559d7cfa305d \u003Cunknown>\n#6 0x559d7cfc8c23 \u003Cunknown>\n#7 0x559d7cfa2e03 \u003Cunknown>\n#8 0x559d7cf6f968 \u003Cunknown>\n#9 0x559d7cf705e1 \u003Cunknown>\n#10 0x559d7d47a548 \u003Cunknown>\n#11 0x559d7d47e272 \u003Cunknown>\n#12 0x559d7d461313 \u003Cunknown>\n#13 0x559d7d47edc5 \u003Cunknown>\n#14 0x559d7d44649f \u003Cunknown>\n#15 0x559d7d4a3158 \u003Cunknown>\n#16 0x559d7d4a3332 \u003Cunknown>\n#17 0x559d7d4b5a53 \u003Cunknown>\n#18 0x7215ea73eaa4 \u003Cunknown>\n#19 0x7215ea7cba34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '894', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,171 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,171 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.16/clear {}
+2025-09-10 11:01:03,186 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.16/clear HTTP/1.1" 200 14
+2025-09-10 11:01:03,186 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,186 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,186 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.16/value {"text": "9", "value": ["9"]}
+2025-09-10 11:01:03,212 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.16/value HTTP/1.1" 200 14
+2025-09-10 11:01:03,212 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,212 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,213 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.17/clear {}
+2025-09-10 11:01:03,227 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.17/clear HTTP/1.1" 200 14
+2025-09-10 11:01:03,228 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,228 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,228 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.17/value {"text": "1", "value": ["1"]}
+2025-09-10 11:01:03,245 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.17/value HTTP/1.1" 200 14
+2025-09-10 11:01:03,245 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,246 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,246 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.18/clear {}
+2025-09-10 11:01:03,261 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.18/clear HTTP/1.1" 200 14
+2025-09-10 11:01:03,261 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,261 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,261 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.18/value {"text": "2", "value": ["2"]}
+2025-09-10 11:01:03,278 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.18/value HTTP/1.1" 200 14
+2025-09-10 11:01:03,279 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,279 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,279 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.19/clear {}
+2025-09-10 11:01:03,294 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.19/clear HTTP/1.1" 200 14
+2025-09-10 11:01:03,294 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,294 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,295 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.19/value {"text": "4", "value": ["4"]}
+2025-09-10 11:01:03,311 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.19/value HTTP/1.1" 200 14
+2025-09-10 11:01:03,311 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,311 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,312 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.20/clear {}
+2025-09-10 11:01:03,327 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.20/clear HTTP/1.1" 200 14
+2025-09-10 11:01:03,328 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,328 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,328 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.20/value {"text": "8", "value": ["8"]}
+2025-09-10 11:01:03,344 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.20/value HTTP/1.1" 200 14
+2025-09-10 11:01:03,344 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,344 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,345 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.21/clear {}
+2025-09-10 11:01:03,359 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.21/clear HTTP/1.1" 200 14
+2025-09-10 11:01:03,360 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,360 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,360 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.21/value {"text": "4", "value": ["4"]}
+2025-09-10 11:01:03,376 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.21/value HTTP/1.1" 200 14
+2025-09-10 11:01:03,376 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,376 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,377 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/elements {"using": "tag name", "value": "button"}
+2025-09-10 11:01:03,381 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/elements HTTP/1.1" 200 245
+2025-09-10 11:01:03,381 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.25"},{"element-6066-11e4-a52e-4f735466cecf":"f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.62"}]} | headers=HTTPHeaderDict({'Content-Length': '245', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,381 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,381 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.25/text {}
+2025-09-10 11:01:03,387 [DEBUG] urllib3.connectionpool: http://localhost:54473 "GET /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.25/text HTTP/1.1" 200 19
+2025-09-10 11:01:03,387 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"Proceed"} | headers=HTTPHeaderDict({'Content-Length': '19', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,387 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:03,387 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.25/click {}
+2025-09-10 11:01:03,422 [DEBUG] urllib3.connectionpool: http://localhost:54473 "POST /session/7cabf75dc9c3e405e1ac8ae5cb069df1/element/f.4696BCDA5AA3521D360B2B8B6E4E6544.d.85FD2CB7A0670F4A262C4197BF53AD01.e.25/click HTTP/1.1" 200 14
+2025-09-10 11:01:03,422 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:03,422 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:08,422 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1/url {}
+2025-09-10 11:01:08,427 [DEBUG] urllib3.connectionpool: http://localhost:54473 "GET /session/7cabf75dc9c3e405e1ac8ae5cb069df1/url HTTP/1.1" 200 58
+2025-09-10 11:01:08,427 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"https://127.0.0.1/?request_id=303163cc936fd237"} | headers=HTTPHeaderDict({'Content-Length': '58', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:08,427 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:08,429 [DEBUG] selenium.webdriver.remote.remote_connection: DELETE http://localhost:54473/session/7cabf75dc9c3e405e1ac8ae5cb069df1 {}
+2025-09-10 11:01:08,480 [DEBUG] urllib3.connectionpool: http://localhost:54473 "DELETE /session/7cabf75dc9c3e405e1ac8ae5cb069df1 HTTP/1.1" 200 14
+2025-09-10 11:01:08,480 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 11:01:08,480 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 11:01:08,507 [INFO] constants.router: Router object is being created.
+2025-09-10 11:01:08,507 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 11:01:08,508 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 11:01:08,508 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 11:01:08,512 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 11:01:08,635 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/eYbfnWSPPT1-2g/ HTTP/1.1" 200 None
+2025-09-10 11:01:08,636 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-09-10 11:01:08,636 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-09-10 11:01:08,689 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-09-10 11:01:08,691 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-09-10 11:01:08,691 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-09-10 11:01:08,693 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 11:01:08,766 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 11:01:08,767 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '7dd71cf1-7f7e-4b80-82b2-e867b47c093c', 'srvTm': 1757484068603}
+2025-09-10 11:01:08,997 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-09-10 11:01:09,258 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-09-10 11:01:09,981 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-09-10 11:01:12,851 [INFO] constants.router: Router object is being created.
+2025-09-10 11:01:12,851 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 11:01:12,851 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 11:01:12,852 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 11:01:12,854 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 11:01:12,857 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 11:01:12,984 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 11:01:12,984 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '4e6daf76-e546-4939-99ef-20eafe9db00c', 'srvTm': 1757484072822}
+2025-09-10 11:01:12,985 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70204607", "accID": "70204607", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-10 11:04:33,258 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:04:39,031 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:04:44,273 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:04:49,558 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:04:54,577 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:04:59,386 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:05:12,590 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:05:17,630 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:05:22,690 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:05:27,592 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:05:47,637 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:05:52,739 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:05:57,734 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:06:03,109 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:06:10,746 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:06:15,616 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:07:03,654 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:07:16,779 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:07:21,798 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:07:26,560 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:11:24,533 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:11:48,253 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:11:53,308 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:11:58,644 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:12:03,520 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:12:08,726 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:12:13,791 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:12:18,573 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:12:47,141 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:12:51,901 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:12:56,784 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:19:08,939 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:19:13,864 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:19:26,647 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:19:31,384 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:19:57,672 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:20:03,146 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:20:08,126 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:20:21,782 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:20:26,771 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:20:31,537 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:20:36,415 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:20:41,855 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:22:04,988 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:22:09,922 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:22:14,839 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:22:35,371 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:22:40,256 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:23:08,803 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:23:13,605 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:23:18,533 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:24:11,428 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:24:16,487 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:24:21,662 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:24:26,785 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:24:31,576 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:25:59,047 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:26:04,072 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:26:09,018 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:26:13,722 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:26:23,305 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:26:28,382 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:26:33,496 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:26:38,354 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:26:43,252 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:26:48,182 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:27:10,254 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:27:15,180 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:27:19,899 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:27:27,368 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:27:45,310 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:27:50,046 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:28:18,197 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:28:39,346 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:28:44,133 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:28:52,803 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:29:01,357 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:29:22,073 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:29:28,693 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:29:39,636 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:29:44,371 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:30:00,480 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:30:05,249 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:30:16,165 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:30:20,981 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:30:25,821 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:30:31,149 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:31:29,403 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:31:35,126 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:31:40,212 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:31:44,944 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:31:49,908 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:33:01,507 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:33:06,224 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:36:43,562 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:36:48,342 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:36:55,095 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:37:00,047 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:37:05,228 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:37:10,271 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:37:17,884 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:37:22,844 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:37:33,555 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:38:05,976 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:38:11,086 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:38:15,976 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:38:27,843 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:38:32,702 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:38:48,886 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:38:53,787 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:39:15,255 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:39:20,207 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:39:41,283 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:39:53,206 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:39:57,984 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:40:04,815 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:40:09,613 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 11:40:14,580 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:01:39,324 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:01:44,267 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:02:06,651 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:02:11,778 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:02:16,827 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:02:22,494 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:02:27,385 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:02:32,326 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:03:00,753 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:03:10,709 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:03:15,461 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:03:36,885 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:03:41,718 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:03:56,045 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:04:01,273 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:04:06,130 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:04:15,761 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:04:29,051 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:04:34,268 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:04:39,057 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:04:56,209 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:05:03,788 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:05:09,005 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:05:14,007 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:05:19,113 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:05:23,914 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:05:55,484 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:06:00,333 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:06:05,248 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:06:28,527 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:06:33,321 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:07:34,829 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:08:10,178 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:08:15,170 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:08:28,003 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:08:32,974 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:08:39,527 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:17:59,885 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:18:04,618 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:18:28,902 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:18:33,921 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:18:39,206 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:18:43,976 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:18:51,701 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:18:56,445 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:19:46,124 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:19:51,065 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:20:05,712 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:20:10,861 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:20:15,828 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:20:20,880 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:20:25,794 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:20:30,716 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:20:43,581 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:20:48,623 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:20:53,406 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:21:44,262 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:21:49,243 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:21:53,982 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:26:27,823 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:26:32,649 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:36:13,951 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:36:19,393 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:36:24,609 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:36:29,757 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:36:34,522 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:36:42,175 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:36:59,442 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:37:04,337 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:37:09,851 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:37:14,759 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:37:41,719 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:38:08,799 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:38:13,559 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:38:18,425 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:38:24,825 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:38:29,707 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:38:37,106 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:39:04,122 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:39:09,024 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:39:13,767 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:40:23,072 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:40:28,029 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:40:32,953 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:40:39,677 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:40:44,591 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:40:49,308 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:40:54,409 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:41:00,121 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:41:04,873 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:41:21,112 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:41:25,860 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:41:30,761 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:41:35,678 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:41:42,075 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:41:59,028 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:42:03,947 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:42:15,772 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:42:29,514 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:42:49,691 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:42:54,906 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:42:59,868 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:43:04,710 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:43:17,402 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:47:39,347 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:48:09,699 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:48:19,382 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:48:24,416 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:48:29,216 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:49:00,784 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:49:06,567 [INFO] routers.stratergy_4leg: Strategy 8f66055e-f52e-4d36-b08e-f0152da74731 updated in Redis with 5 legs
+2025-09-10 12:50:08,919 [INFO] routers.stratergy_4leg: Strategy 8f66055e-f52e-4d36-b08e-f0152da74731 updated in Redis with 5 legs
+2025-09-10 12:50:12,493 [INFO] routers.stratergy_4leg: Strategy 8f66055e-f52e-4d36-b08e-f0152da74731 updated in Redis with 5 legs
+2025-09-10 12:50:48,222 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:51:03,423 [INFO] constants.router: Router object is being created.
+2025-09-10 12:51:03,423 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 12:51:03,423 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 12:51:03,424 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 12:51:03,428 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 12:51:03,433 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 12:51:03,600 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 12:51:03,600 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '9cad1212-508b-49d4-9731-3c40e2f76da8', 'srvTm': 1757490663220}
+2025-09-10 12:51:03,601 [INFO] constants.router: Router object is being created.
+2025-09-10 12:51:03,601 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 12:51:03,602 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 12:51:03,602 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 12:51:03,605 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 12:51:03,608 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 12:51:03,745 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 12:51:03,745 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'af521dfb-84fe-4cc2-8f75-360676100ea8', 'srvTm': 1757490663364}
+2025-09-10 12:51:44,219 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 12:55:04,053 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:55:08,890 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:55:15,621 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:55:20,584 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:55:25,530 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:55:59,492 [DEBUG] urllib3.connectionpool: Resetting dropped connection: nc.nuvamawealth.com
+2025-09-10 12:55:59,703 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 12:57:34,528 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:57:39,237 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:57:54,083 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:58:09,874 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:58:27,919 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:58:32,901 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:58:37,813 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:58:58,800 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:59:03,661 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:59:08,599 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:59:13,502 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 12:59:17,701 [INFO] constants.router: Router object is being created.
+2025-09-10 12:59:17,701 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 12:59:17,702 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 12:59:17,702 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 12:59:17,704 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 12:59:17,707 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 12:59:17,859 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 12:59:17,860 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '0cff99f2-f57d-4bcd-a64b-02d46a056b65', 'srvTm': 1757491157462}
+2025-09-10 12:59:17,860 [INFO] constants.router: Router object is being created.
+2025-09-10 12:59:17,861 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 12:59:17,861 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 12:59:17,861 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 12:59:17,863 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 12:59:17,866 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 12:59:17,986 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 12:59:17,987 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'b6cf7f4f-f705-4bba-bd48-1b415dc9ae74', 'srvTm': 1757491157589}
+2025-09-10 13:00:03,499 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:00:08,754 [INFO] constants.router: Router object is being created.
+2025-09-10 13:00:08,754 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:00:08,754 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:00:08,754 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:00:08,757 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:00:08,760 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:00:09,168 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:00:09,169 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '967d0100-2305-4a72-99a7-b1c7df19ccff', 'srvTm': 1757491208769}
+2025-09-10 13:00:09,169 [INFO] constants.router: Router object is being created.
+2025-09-10 13:00:09,169 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:00:09,170 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:00:09,170 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:00:09,172 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:00:09,174 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:00:09,297 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:00:09,298 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '169ba052-b5c9-47b0-9095-200982f48c42', 'srvTm': 1757491208898}
+2025-09-10 13:02:23,600 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:05:22,270 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:05:27,391 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:05:28,295 [INFO] constants.router: Router object is being created.
+2025-09-10 13:05:28,295 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:05:28,296 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:05:28,296 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:05:28,299 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:05:28,302 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:05:28,460 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:05:28,461 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '92b27dd2-9411-49ca-a380-a3953bc29b21', 'srvTm': 1757491528052}
+2025-09-10 13:05:28,461 [INFO] constants.router: Router object is being created.
+2025-09-10 13:05:28,461 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:05:28,461 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:05:28,462 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:05:28,464 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:05:28,466 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:05:28,614 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:05:28,615 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'a617a466-9d38-4a0f-97e2-42530c7d6abd', 'srvTm': 1757491528206}
+2025-09-10 13:05:44,974 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:08:49,936 [INFO] constants.router: Router object is being created.
+2025-09-10 13:08:49,936 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:08:49,937 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:08:49,937 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:08:49,939 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:08:49,942 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:08:50,105 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:08:50,106 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '6ea5ee52-7769-48c8-ac4f-5d6504294496', 'srvTm': 1757491729691}
+2025-09-10 13:08:50,107 [INFO] constants.router: Router object is being created.
+2025-09-10 13:08:50,107 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:08:50,107 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:08:50,108 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:08:50,110 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:08:50,113 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:08:50,246 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:08:50,248 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '38ab1382-b3b3-4248-bc50-c86510029fcc', 'srvTm': 1757491729829}
+2025-09-10 13:09:19,241 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:10:16,184 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:10:21,619 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:10:26,351 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:11:37,827 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:11:43,084 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:11:47,838 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:13:48,822 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:14:38,264 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:14:43,178 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:14:58,147 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:15:02,923 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:15:12,352 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:15:17,290 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:15:23,646 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:15:28,746 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:15:29,417 [INFO] constants.router: Router object is being created.
+2025-09-10 13:15:29,417 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:15:29,417 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:15:29,418 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:15:29,420 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:15:29,424 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:15:29,581 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:15:29,581 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'e2486a88-2823-40a0-94b3-0526e9841e64', 'srvTm': 1757492129152}
+2025-09-10 13:15:29,582 [INFO] constants.router: Router object is being created.
+2025-09-10 13:15:29,582 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:15:29,582 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:15:29,583 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:15:29,584 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:15:29,587 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:15:29,711 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:15:29,711 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '132b47a1-1655-435b-be2b-b9a77264c502', 'srvTm': 1757492129281}
+2025-09-10 13:15:42,790 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:15:54,017 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:16:05,190 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:16:16,325 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:16:27,576 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:16:38,793 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:16:49,940 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:22:24,417 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:22:29,369 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:22:44,525 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:22:49,241 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:22:58,000 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:23:23,962 [INFO] constants.router: Router object is being created.
+2025-09-10 13:23:23,962 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:23:23,962 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:23:23,962 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:23:23,965 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:23:23,968 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:23:24,109 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:23:24,110 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'b3bf2644-d812-462b-ad62-484f09012dcb', 'srvTm': 1757492603666}
+2025-09-10 13:23:24,110 [INFO] constants.router: Router object is being created.
+2025-09-10 13:23:24,110 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:23:24,111 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:23:24,111 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:23:24,113 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:23:24,115 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:23:24,248 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:23:24,248 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '7b30673a-7d64-4a39-ace8-ee175c6efdab', 'srvTm': 1757492603804}
+2025-09-10 13:23:37,711 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:24:42,433 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:24:47,359 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:25:29,708 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:25:34,828 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:25:39,687 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:25:45,402 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:25:50,394 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:25:55,263 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:26:00,190 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:27:27,825 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:28:37,208 [INFO] constants.router: Router object is being created.
+2025-09-10 13:28:37,208 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:28:37,208 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:28:37,208 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:28:37,211 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:28:37,214 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:28:37,382 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:28:37,382 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'a940f40c-4f89-4b9d-a921-38d346e1b6ed', 'srvTm': 1757492916927}
+2025-09-10 13:28:37,383 [INFO] constants.router: Router object is being created.
+2025-09-10 13:28:37,383 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:28:37,383 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:28:37,383 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:28:37,385 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:28:37,388 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:28:37,510 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:28:37,510 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '07d2cb4f-4ae4-4fae-9426-4c5cf4fa65ac', 'srvTm': 1757492917056}
+2025-09-10 13:28:51,394 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:29:03,175 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:29:03,583 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:29:04,060 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:29:04,488 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:29:04,909 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:29:05,325 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:29:05,763 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:29:06,166 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:29:06,567 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:32:06,996 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:36:49,149 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:36:54,001 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:36:58,881 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:37:07,773 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:37:12,678 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:37:17,379 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:37:51,503 [INFO] constants.router: Router object is being created.
+2025-09-10 13:37:51,503 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:37:51,503 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:37:51,504 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:37:51,509 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:37:51,514 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:37:52,301 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:37:52,302 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'ca08666e-44d6-46dc-bacc-37ce1340122d', 'srvTm': 1757493471818}
+2025-09-10 13:37:52,302 [INFO] constants.router: Router object is being created.
+2025-09-10 13:37:52,303 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:37:52,303 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:37:52,304 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:37:52,306 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:37:52,309 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:37:52,471 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:37:52,471 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '5644180e-0ba2-44c2-a579-bf4baf306fcd', 'srvTm': 1757493471987}
+2025-09-10 13:38:06,279 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:38:17,164 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:38:17,750 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:38:18,464 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:42:54,851 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:42:59,802 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:04,847 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:09,832 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:14,649 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:19,604 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:24,534 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:29,434 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:38,363 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:43,566 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:48,344 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:53,381 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:43:58,365 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:44:17,379 [INFO] constants.router: Router object is being created.
+2025-09-10 13:44:17,379 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:44:17,380 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:44:17,380 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:44:17,383 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:44:17,386 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:44:17,528 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:44:17,529 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'b5ba7e88-542c-4798-8816-409452ca8442', 'srvTm': 1757493857043}
+2025-09-10 13:44:17,529 [INFO] constants.router: Router object is being created.
+2025-09-10 13:44:17,529 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:44:17,530 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:44:17,530 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:44:17,531 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:44:17,534 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:44:17,661 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:44:17,661 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'e7f1ea12-abbc-4c52-8e64-6d40fb7e9c40', 'srvTm': 1757493857175}
+2025-09-10 13:44:31,577 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:44:32,017 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:47:57,488 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:48:02,526 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:48:07,449 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:52:20,347 [INFO] constants.router: Router object is being created.
+2025-09-10 13:52:20,347 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:52:20,347 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:52:20,348 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:52:20,350 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:52:20,353 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:52:20,500 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:52:20,500 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '636a56a9-2dd8-406c-b48f-3c1e8c485081', 'srvTm': 1757494339998}
+2025-09-10 13:52:20,501 [INFO] constants.router: Router object is being created.
+2025-09-10 13:52:20,501 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:52:20,502 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:52:20,502 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:52:20,505 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:52:20,508 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:52:20,754 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:52:20,755 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'fc01c505-bbc0-4bab-9543-76ed5fed3841', 'srvTm': 1757494340252}
+2025-09-10 13:52:35,076 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:35,488 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:36,145 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:36,570 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:37,110 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:37,534 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:38,002 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:38,429 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:38,839 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:39,299 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:39,712 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:40,338 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:40,752 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:41,170 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:41,612 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:42,028 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:42,442 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:42,852 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:43,316 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:43,755 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:44,188 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:44,637 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:45,060 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:45,491 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:52:45,962 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:54:18,242 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:54:23,192 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:54:28,696 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:54:34,193 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:55:09,975 [INFO] constants.router: Router object is being created.
+2025-09-10 13:55:09,976 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:55:09,976 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:55:09,976 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:55:09,979 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:55:09,982 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:55:10,175 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:55:10,176 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '9ed5c894-5881-4bd9-af1b-e0526d8c9a77', 'srvTm': 1757494509667}
+2025-09-10 13:55:10,176 [INFO] constants.router: Router object is being created.
+2025-09-10 13:55:10,177 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:55:10,177 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:55:10,177 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:55:10,179 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:55:10,181 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:55:10,318 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:55:10,319 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'b3cf10a6-0392-40b9-b2cb-3757466a5d43', 'srvTm': 1757494509810}
+2025-09-10 13:55:23,397 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:23,793 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:24,237 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:24,650 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:25,060 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:25,466 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:25,913 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:26,320 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:26,722 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:27,180 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:27,593 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:28,000 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:28,483 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:55:28,886 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:04,968 [INFO] constants.router: Router object is being created.
+2025-09-10 13:56:04,968 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:56:04,968 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:56:04,968 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:56:04,971 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:56:04,975 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:56:05,117 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:56:05,117 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '637f285a-d546-401e-819e-c78e311bbf00', 'srvTm': 1757494564606}
+2025-09-10 13:56:05,118 [INFO] constants.router: Router object is being created.
+2025-09-10 13:56:05,118 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:56:05,118 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:56:05,119 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:56:05,121 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:56:05,126 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:56:05,347 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:56:05,348 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'dce974f3-5b80-44e0-91ca-505951c71f24', 'srvTm': 1757494564836}
+2025-09-10 13:56:21,491 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:21,939 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:22,336 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:22,762 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:23,166 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:23,564 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:23,986 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:24,393 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:24,797 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:25,228 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:25,634 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:26,050 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:26,469 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:56:26,898 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 13:57:20,917 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:57:25,706 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:57:37,626 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:57:42,773 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:57:47,778 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:57:52,592 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 13:59:31,496 [INFO] routers.stratergy_4leg: Strategy 8f66055e-f52e-4d36-b08e-f0152da74731 updated in Redis with 5 legs
+2025-09-10 13:59:40,302 [INFO] constants.router: Router object is being created.
+2025-09-10 13:59:40,303 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:59:40,303 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:59:40,303 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:59:40,306 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:59:40,309 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:59:40,491 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:59:40,492 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '31c76214-647e-498e-b913-bce2b3757d63', 'srvTm': 1757494779973}
+2025-09-10 13:59:40,492 [INFO] constants.router: Router object is being created.
+2025-09-10 13:59:40,492 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 13:59:40,493 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 13:59:40,493 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 13:59:40,495 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 13:59:40,497 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 13:59:40,619 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 13:59:40,619 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'b64da390-d13e-42c8-80df-9379140ca492', 'srvTm': 1757494780103}
+2025-09-10 14:01:40,361 [DEBUG] selenium.webdriver.common.selenium_manager: Selenium Manager binary found at: /workspace/venv/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager
+2025-09-10 14:01:40,361 [DEBUG] selenium.webdriver.common.selenium_manager: Executing process: /workspace/venv/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager --browser chrome --debug --output json
+2025-09-10 14:01:40,712 [DEBUG] selenium.webdriver.common.selenium_manager: chromedriver not found in PATH
+2025-09-10 14:01:40,713 [DEBUG] selenium.webdriver.common.selenium_manager: chrome not found in PATH
+2025-09-10 14:01:40,713 [DEBUG] selenium.webdriver.common.selenium_manager: chrome not found in the system
+2025-09-10 14:01:40,713 [DEBUG] selenium.webdriver.common.selenium_manager: Discovering versions from https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json
+2025-09-10 14:01:40,713 [DEBUG] selenium.webdriver.common.selenium_manager: Required browser: chrome 140.0.7339.82
+2025-09-10 14:01:40,713 [DEBUG] selenium.webdriver.common.selenium_manager: chrome 140.0.7339.82 already exists
+2025-09-10 14:01:40,714 [DEBUG] selenium.webdriver.common.selenium_manager: chrome 140.0.7339.82 is available at /root/.cache/selenium/chrome/linux64/140.0.7339.82/chrome
+2025-09-10 14:01:40,714 [DEBUG] selenium.webdriver.common.selenium_manager: Discovering versions from https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json
+2025-09-10 14:01:40,714 [DEBUG] selenium.webdriver.common.selenium_manager: Required driver: chromedriver 140.0.7339.82
+2025-09-10 14:01:40,714 [DEBUG] selenium.webdriver.common.selenium_manager: chromedriver 140.0.7339.82 already in the cache
+2025-09-10 14:01:40,714 [DEBUG] selenium.webdriver.common.selenium_manager: Driver path: /root/.cache/selenium/chromedriver/linux64/140.0.7339.82/chromedriver
+2025-09-10 14:01:40,714 [DEBUG] selenium.webdriver.common.selenium_manager: Browser path: /root/.cache/selenium/chrome/linux64/140.0.7339.82/chrome
+2025-09-10 14:01:40,715 [DEBUG] selenium.webdriver.common.selenium_manager: Using driver at: /root/.cache/selenium/chromedriver/linux64/140.0.7339.82/chromedriver
+2025-09-10 14:01:40,715 [DEBUG] selenium.webdriver.common.service: Started executable: `/root/.cache/selenium/chromedriver/linux64/140.0.7339.82/chromedriver` in a child process with pid: 28694
+2025-09-10 14:01:41,217 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session {"capabilities": {"firstMatch": [{}], "alwaysMatch": {"browserName": "chrome", "pageLoadStrategy": "normal", "browserVersion": null, "goog:chromeOptions": {"prefs": {"profile.default_content_setting_values.notifications": 2, "profile.default_content_settings.popups": 0}, "extensions": [], "binary": "/root/.cache/selenium/chrome/linux64/140.0.7339.82/chrome", "args": ["--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1080"]}}}}
+2025-09-10 14:01:41,219 [DEBUG] urllib3.connectionpool: Starting new HTTP connection (1): localhost:38361
+2025-09-10 14:01:41,454 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session HTTP/1.1" 200 848
+2025-09-10 14:01:41,454 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"capabilities":{"acceptInsecureCerts":false,"browserName":"chrome","browserVersion":"140.0.7339.82","chrome":{"chromedriverVersion":"140.0.7339.82 (bc93617e21c39ed4afa6ce1c08554e5aa76d132d-refs/branch-heads/7339_41@{#5})","userDataDir":"/tmp/.org.chromium.Chromium.NvSfk3"},"fedcm:accounts":true,"goog:chromeOptions":{"debuggerAddress":"localhost:35701"},"networkConnectionEnabled":false,"pageLoadStrategy":"normal","platformName":"linux","proxy":{},"setWindowRect":true,"strictFileInteractability":false,"timeouts":{"implicit":0,"pageLoad":300000,"script":30000},"unhandledPromptBehavior":"dismiss and notify","webauthn:extension:credBlob":true,"webauthn:extension:largeBlob":true,"webauthn:extension:minPinLength":true,"webauthn:extension:prf":true,"webauthn:virtualAuthenticators":true},"sessionId":"c2c091ed42e45771167845687fd05bb1"}} | headers=HTTPHeaderDict({'Content-Length': '848', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:41,455 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:41,455 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/url {"url": "https://www.nuvamawealth.com/api-connect/login?api_key=iBe07GpBTEbbhg"}
+2025-09-10 14:01:41,734 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/url HTTP/1.1" 200 14
+2025-09-10 14:01:41,734 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:41,735 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:44,735 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "[id=\"userID\"]"}
+2025-09-10 14:01:44,743 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 200 125
+2025-09-10 14:01:44,743 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.3"}} | headers=HTTPHeaderDict({'Content-Length': '125', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:44,743 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:44,744 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.3/clear {}
+2025-09-10 14:01:44,768 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.3/clear HTTP/1.1" 200 14
+2025-09-10 14:01:44,769 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:44,769 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:44,769 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.3/value {"text": "70249886", "value": ["7", "0", "2", "4", "9", "8", "8", "6"]}
+2025-09-10 14:01:44,808 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.3/value HTTP/1.1" 200 14
+2025-09-10 14:01:44,808 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:44,809 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:44,809 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "button[type='submit']"}
+2025-09-10 14:01:44,818 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 404 900
+2025-09-10 14:01:44,818 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"button[type='submit']\"}\n  (Session info: chrome=140.0.7339.82)","stacktrace":"#0 0x653803ca194a \u003Cunknown>\n#1 0x6538037168a0 \u003Cunknown>\n#2 0x653803768540 \u003Cunknown>\n#3 0x653803768731 \u003Cunknown>\n#4 0x6538037b6824 \u003Cunknown>\n#5 0x65380378e05d \u003Cunknown>\n#6 0x6538037b3c23 \u003Cunknown>\n#7 0x65380378de03 \u003Cunknown>\n#8 0x65380375a968 \u003Cunknown>\n#9 0x65380375b5e1 \u003Cunknown>\n#10 0x653803c65548 \u003Cunknown>\n#11 0x653803c69272 \u003Cunknown>\n#12 0x653803c4c313 \u003Cunknown>\n#13 0x653803c69dc5 \u003Cunknown>\n#14 0x653803c3149f \u003Cunknown>\n#15 0x653803c8e158 \u003Cunknown>\n#16 0x653803c8e332 \u003Cunknown>\n#17 0x653803ca0a53 \u003Cunknown>\n#18 0x7a7ce169eaa4 \u003Cunknown>\n#19 0x7a7ce172ba34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '900', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:44,818 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:44,819 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "input[type='submit']"}
+2025-09-10 14:01:44,828 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 404 899
+2025-09-10 14:01:44,828 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"input[type='submit']\"}\n  (Session info: chrome=140.0.7339.82)","stacktrace":"#0 0x653803ca194a \u003Cunknown>\n#1 0x6538037168a0 \u003Cunknown>\n#2 0x653803768540 \u003Cunknown>\n#3 0x653803768731 \u003Cunknown>\n#4 0x6538037b6824 \u003Cunknown>\n#5 0x65380378e05d \u003Cunknown>\n#6 0x6538037b3c23 \u003Cunknown>\n#7 0x65380378de03 \u003Cunknown>\n#8 0x65380375a968 \u003Cunknown>\n#9 0x65380375b5e1 \u003Cunknown>\n#10 0x653803c65548 \u003Cunknown>\n#11 0x653803c69272 \u003Cunknown>\n#12 0x653803c4c313 \u003Cunknown>\n#13 0x653803c69dc5 \u003Cunknown>\n#14 0x653803c3149f \u003Cunknown>\n#15 0x653803c8e158 \u003Cunknown>\n#16 0x653803c8e332 \u003Cunknown>\n#17 0x653803ca0a53 \u003Cunknown>\n#18 0x7a7ce169eaa4 \u003Cunknown>\n#19 0x7a7ce172ba34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '899', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:44,829 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:44,829 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/elements {"using": "tag name", "value": "button"}
+2025-09-10 14:01:44,836 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/elements HTTP/1.1" 200 244
+2025-09-10 14:01:44,836 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.6"},{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.12"}]} | headers=HTTPHeaderDict({'Content-Length': '244', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:44,837 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:44,837 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.6/text {}
+2025-09-10 14:01:44,849 [DEBUG] urllib3.connectionpool: http://localhost:38361 "GET /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.6/text HTTP/1.1" 200 19
+2025-09-10 14:01:44,849 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"Proceed"} | headers=HTTPHeaderDict({'Content-Length': '19', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:44,849 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:44,850 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.6/click {}
+2025-09-10 14:01:44,890 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.6/click HTTP/1.1" 200 14
+2025-09-10 14:01:44,890 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:44,890 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:48,888 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "[id=\"password\"]"}
+2025-09-10 14:01:48,896 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 200 126
+2025-09-10 14:01:48,896 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.15"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:48,896 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:48,897 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.15/clear {}
+2025-09-10 14:01:48,912 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.15/clear HTTP/1.1" 200 14
+2025-09-10 14:01:48,913 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:48,913 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:48,913 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.15/value {"text": "Shreeji@2063", "value": ["S", "h", "r", "e", "e", "j", "i", "@", "2", "0", "6", "3"]}
+2025-09-10 14:01:48,949 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.15/value HTTP/1.1" 200 14
+2025-09-10 14:01:48,949 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:48,949 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:48,949 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "[id=\"totp-0\"]"}
+2025-09-10 14:01:48,957 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 200 126
+2025-09-10 14:01:48,957 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.16"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:48,957 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:48,957 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "[id=\"totp-1\"]"}
+2025-09-10 14:01:48,964 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 200 126
+2025-09-10 14:01:48,964 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.17"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:48,965 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:48,965 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "[id=\"totp-2\"]"}
+2025-09-10 14:01:48,972 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 200 126
+2025-09-10 14:01:48,972 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.18"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:48,973 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:48,973 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "[id=\"totp-3\"]"}
+2025-09-10 14:01:48,981 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 200 126
+2025-09-10 14:01:48,981 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.19"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:48,981 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:48,981 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "[id=\"totp-4\"]"}
+2025-09-10 14:01:48,988 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 200 126
+2025-09-10 14:01:48,989 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.20"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:48,989 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:48,989 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "[id=\"totp-5\"]"}
+2025-09-10 14:01:48,996 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 200 126
+2025-09-10 14:01:48,997 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.21"}} | headers=HTTPHeaderDict({'Content-Length': '126', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:48,997 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:48,997 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element {"using": "css selector", "value": "[id=\"totp-6\"]"}
+2025-09-10 14:01:49,006 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element HTTP/1.1" 404 894
+2025-09-10 14:01:49,007 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=404 | data={"value":{"error":"no such element","message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\"[id=\"totp-6\"]\"}\n  (Session info: chrome=140.0.7339.82)","stacktrace":"#0 0x653803ca194a \u003Cunknown>\n#1 0x6538037168a0 \u003Cunknown>\n#2 0x653803768540 \u003Cunknown>\n#3 0x653803768731 \u003Cunknown>\n#4 0x6538037b6824 \u003Cunknown>\n#5 0x65380378e05d \u003Cunknown>\n#6 0x6538037b3c23 \u003Cunknown>\n#7 0x65380378de03 \u003Cunknown>\n#8 0x65380375a968 \u003Cunknown>\n#9 0x65380375b5e1 \u003Cunknown>\n#10 0x653803c65548 \u003Cunknown>\n#11 0x653803c69272 \u003Cunknown>\n#12 0x653803c4c313 \u003Cunknown>\n#13 0x653803c69dc5 \u003Cunknown>\n#14 0x653803c3149f \u003Cunknown>\n#15 0x653803c8e158 \u003Cunknown>\n#16 0x653803c8e332 \u003Cunknown>\n#17 0x653803ca0a53 \u003Cunknown>\n#18 0x7a7ce169eaa4 \u003Cunknown>\n#19 0x7a7ce172ba34 __clone\n"}} | headers=HTTPHeaderDict({'Content-Length': '894', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,007 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,007 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.16/clear {}
+2025-09-10 14:01:49,028 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.16/clear HTTP/1.1" 200 14
+2025-09-10 14:01:49,028 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,029 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,029 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.16/value {"text": "2", "value": ["2"]}
+2025-09-10 14:01:49,064 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.16/value HTTP/1.1" 200 14
+2025-09-10 14:01:49,065 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,065 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,065 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.17/clear {}
+2025-09-10 14:01:49,085 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.17/clear HTTP/1.1" 200 14
+2025-09-10 14:01:49,085 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,086 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,086 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.17/value {"text": "1", "value": ["1"]}
+2025-09-10 14:01:49,108 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.17/value HTTP/1.1" 200 14
+2025-09-10 14:01:49,109 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,109 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,109 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.18/clear {}
+2025-09-10 14:01:49,129 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.18/clear HTTP/1.1" 200 14
+2025-09-10 14:01:49,129 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,130 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,130 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.18/value {"text": "4", "value": ["4"]}
+2025-09-10 14:01:49,152 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.18/value HTTP/1.1" 200 14
+2025-09-10 14:01:49,152 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,152 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,153 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.19/clear {}
+2025-09-10 14:01:49,171 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.19/clear HTTP/1.1" 200 14
+2025-09-10 14:01:49,171 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,172 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,172 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.19/value {"text": "7", "value": ["7"]}
+2025-09-10 14:01:49,192 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.19/value HTTP/1.1" 200 14
+2025-09-10 14:01:49,192 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,193 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,193 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.20/clear {}
+2025-09-10 14:01:49,212 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.20/clear HTTP/1.1" 200 14
+2025-09-10 14:01:49,212 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,212 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,213 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.20/value {"text": "9", "value": ["9"]}
+2025-09-10 14:01:49,235 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.20/value HTTP/1.1" 200 14
+2025-09-10 14:01:49,235 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,235 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,236 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.21/clear {}
+2025-09-10 14:01:49,255 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.21/clear HTTP/1.1" 200 14
+2025-09-10 14:01:49,255 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,255 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,256 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.21/value {"text": "6", "value": ["6"]}
+2025-09-10 14:01:49,272 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.21/value HTTP/1.1" 200 14
+2025-09-10 14:01:49,272 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,272 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,272 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/elements {"using": "tag name", "value": "button"}
+2025-09-10 14:01:49,277 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/elements HTTP/1.1" 200 245
+2025-09-10 14:01:49,278 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.27"},{"element-6066-11e4-a52e-4f735466cecf":"f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.72"}]} | headers=HTTPHeaderDict({'Content-Length': '245', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,278 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,278 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.27/text {}
+2025-09-10 14:01:49,284 [DEBUG] urllib3.connectionpool: http://localhost:38361 "GET /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.27/text HTTP/1.1" 200 19
+2025-09-10 14:01:49,284 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"Proceed"} | headers=HTTPHeaderDict({'Content-Length': '19', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,285 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:49,285 [DEBUG] selenium.webdriver.remote.remote_connection: POST http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.27/click {}
+2025-09-10 14:01:49,318 [DEBUG] urllib3.connectionpool: http://localhost:38361 "POST /session/c2c091ed42e45771167845687fd05bb1/element/f.2BB5596D706C13239C5AA5C6DC898539.d.118AC563B3113CE114CF7F479241C721.e.27/click HTTP/1.1" 200 14
+2025-09-10 14:01:49,318 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:49,319 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:54,319 [DEBUG] selenium.webdriver.remote.remote_connection: GET http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1/url {}
+2025-09-10 14:01:54,323 [DEBUG] urllib3.connectionpool: http://localhost:38361 "GET /session/c2c091ed42e45771167845687fd05bb1/url HTTP/1.1" 200 58
+2025-09-10 14:01:54,323 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":"https://127.0.0.1/?request_id=31303afa943d7b84"} | headers=HTTPHeaderDict({'Content-Length': '58', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:54,323 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:54,325 [DEBUG] selenium.webdriver.remote.remote_connection: DELETE http://localhost:38361/session/c2c091ed42e45771167845687fd05bb1 {}
+2025-09-10 14:01:54,376 [DEBUG] urllib3.connectionpool: http://localhost:38361 "DELETE /session/c2c091ed42e45771167845687fd05bb1 HTTP/1.1" 200 14
+2025-09-10 14:01:54,376 [DEBUG] selenium.webdriver.remote.remote_connection: Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'Content-Length': '14', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+2025-09-10 14:01:54,376 [DEBUG] selenium.webdriver.remote.remote_connection: Finished Request
+2025-09-10 14:01:54,409 [INFO] constants.router: Router object is being created.
+2025-09-10 14:01:54,409 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:01:54,409 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:01:54,409 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:01:54,414 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:01:54,553 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/loginvendor/iBe07GpBTEbbhg/ HTTP/1.1" 200 None
+2025-09-10 14:01:54,554 [INFO] APIConnect.login_helper: User logged in successfully.
+2025-09-10 14:01:54,554 [INFO] APIConnect.login_helper: Vendor session generated.
+2025-09-10 14:01:54,600 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-login/login/accounts/logindata/ HTTP/1.1" 200 None
+2025-09-10 14:01:54,602 [DEBUG] APIConnect.login_helper: Login details are pickled in file.
+2025-09-10 14:01:54,602 [INFO] APIConnect.login_helper: Authorization done succesfully.
+2025-09-10 14:01:54,603 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:01:54,671 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:01:54,671 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '8ceea436-a2e4-43d4-a2d4-caa25c1df5e7', 'srvTm': 1757494914152}
+2025-09-10 14:01:54,883 [INFO] APIConnect.login_helper: Downloaded instruments.zip
+2025-09-10 14:01:55,086 [INFO] APIConnect.login_helper: Extracted instruments.csv
+2025-09-10 14:01:55,790 [INFO] APIConnect.login_helper: Loaded instruments.csv
+2025-09-10 14:01:57,700 [INFO] constants.router: Router object is being created.
+2025-09-10 14:01:57,701 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:01:57,701 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:01:57,701 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:01:57,703 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:01:57,707 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:01:57,711 [INFO] constants.router: Router object is being created.
+2025-09-10 14:01:57,711 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:01:57,711 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:01:57,712 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:01:57,714 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:01:57,718 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:01:57,838 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:01:57,839 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '42be2d8a-7eeb-4fb6-ae44-6516b45e52d1', 'srvTm': 1757494917319}
+2025-09-10 14:01:57,840 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-10 14:01:57,845 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:01:57,846 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '765c4eeb-a6e1-4f40-bce5-21442854b6d0', 'srvTm': 1757494917326}
+2025-09-10 14:01:57,855 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-10 14:02:02,747 [INFO] constants.router: Router object is being created.
+2025-09-10 14:02:02,747 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:02:02,747 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:02:02,748 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:02:02,750 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:02:02,752 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:02:02,908 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:02:02,908 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'eef3b97b-cdbb-41e0-81ac-41b8b8aaffa4', 'srvTm': 1757494922388}
+2025-09-10 14:02:02,917 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-10 14:02:07,614 [DEBUG] feed.reduced_quotes_feed: Subscribing Reduced quote feed with request: {"request": {"streaming_type": "quote", "data": {"accType": "EQ", "symbols": [{"symbol": "-29"}, {"symbol": "-101"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-10 14:02:07,614 [DEBUG] feed.depth_feed: Subscribing depth feed with request: {"request": {"streaming_type": "quote2", "data": {"accType": "EQ", "symbols": [{"symbol": "47622_NFO"}, {"symbol": "47757_NFO"}, {"symbol": "47734_NFO"}, {"symbol": "47711_NFO"}, {"symbol": "47621_NFO"}, {"symbol": "47620_NFO"}, {"symbol": "47733_NFO"}, {"symbol": "47756_NFO"}, {"symbol": "47760_NFO"}, {"symbol": "47761_NFO"}, {"symbol": "47758_NFO"}, {"symbol": "47712_NFO"}, {"symbol": "47759_NFO"}, {"symbol": "47763_NFO"}, {"symbol": "47764_NFO"}, {"symbol": "47686_NFO"}, {"symbol": "47685_NFO"}, {"symbol": "47762_NFO"}, {"symbol": "47718_NFO"}, {"symbol": "47766_NFO"}, {"symbol": "47717_NFO"}, {"symbol": "47611_NFO"}, {"symbol": "47765_NFO"}, {"symbol": "47610_NFO"}, {"symbol": "47723_NFO"}, {"symbol": "47700_NFO"}, {"symbol": "47724_NFO"}, {"symbol": "47704_NFO"}, {"symbol": "47751_NFO"}, {"symbol": "47752_NFO"}, {"symbol": "47697_NFO"}, {"symbol": "47773_NFO"}, {"symbol": "47703_NFO"}, {"symbol": "47774_NFO"}, {"symbol": "47650_NFO"}, {"symbol": "47649_NFO"}, {"symbol": "47696_NFO"}, {"symbol": "47754_NFO"}, {"symbol": "47755_NFO"}, {"symbol": "47695_NFO"}, {"symbol": "47753_NFO"}, {"symbol": "47623_NFO"}, {"symbol": "862095_BFO"}, {"symbol": "862494_BFO"}, {"symbol": "862024_BFO"}, {"symbol": "862246_BFO"}, {"symbol": "862359_BFO"}, {"symbol": "862060_BFO"}, {"symbol": "862134_BFO"}, {"symbol": "862110_BFO"}, {"symbol": "862210_BFO"}, {"symbol": "862157_BFO"}, {"symbol": "862423_BFO"}, {"symbol": "862437_BFO"}, {"symbol": "862237_BFO"}, {"symbol": "862332_BFO"}, {"symbol": "862297_BFO"}, {"symbol": "862119_BFO"}, {"symbol": "862380_BFO"}, {"symbol": "862451_BFO"}, {"symbol": "862318_BFO"}, {"symbol": "862509_BFO"}, {"symbol": "862030_BFO"}, {"symbol": "862141_BFO"}, {"symbol": "862304_BFO"}, {"symbol": "862189_BFO"}, {"symbol": "862353_BFO"}, {"symbol": "862241_BFO"}, {"symbol": "862043_BFO"}, {"symbol": "862078_BFO"}, {"symbol": "862020_BFO"}, {"symbol": "862475_BFO"}, {"symbol": "862204_BFO"}, {"symbol": "862499_BFO"}, {"symbol": "862003_BFO"}, {"symbol": "862219_BFO"}, {"symbol": "862374_BFO"}, {"symbol": "862514_BFO"}, {"symbol": "862315_BFO"}, {"symbol": "862169_BFO"}, {"symbol": "862489_BFO"}, {"symbol": "862456_BFO"}, {"symbol": "862289_BFO"}, {"symbol": "862337_BFO"}, {"symbol": "44637_NFO"}, {"symbol": "44661_NFO"}, {"symbol": "44713_NFO"}, {"symbol": "44687_NFO"}, {"symbol": "44639_NFO"}, {"symbol": "44640_NFO"}, {"symbol": "44588_NFO"}, {"symbol": "44589_NFO"}, {"symbol": "44638_NFO"}, {"symbol": "44662_NFO"}, {"symbol": "44827_NFO"}, {"symbol": "44631_NFO"}, {"symbol": "44580_NFO"}, {"symbol": "44581_NFO"}, {"symbol": "44729_NFO"}, {"symbol": "44706_NFO"}, {"symbol": "44730_NFO"}, {"symbol": "44582_NFO"}, {"symbol": "44583_NFO"}, {"symbol": "44728_NFO"}, {"symbol": "44727_NFO"}, {"symbol": "44632_NFO"}, {"symbol": "44813_NFO"}, {"symbol": "44796_NFO"}, {"symbol": "44602_NFO"}, {"symbol": "44574_NFO"}, {"symbol": "44795_NFO"}, {"symbol": "44812_NFO"}, {"symbol": "44575_NFO"}, {"symbol": "44652_NFO"}, {"symbol": "44604_NFO"}, {"symbol": "44651_NFO"}, {"symbol": "44603_NFO"}, {"symbol": "44744_NFO"}, {"symbol": "44743_NFO"}, {"symbol": "44742_NFO"}, {"symbol": "44741_NFO"}, {"symbol": "44764_NFO"}, {"symbol": "44688_NFO"}, {"symbol": "44763_NFO"}, {"symbol": "44668_NFO"}, {"symbol": "44667_NFO"}, {"symbol": "859727_BFO"}, {"symbol": "859464_BFO"}, {"symbol": "859177_BFO"}, {"symbol": "859305_BFO"}, {"symbol": "859376_BFO"}, {"symbol": "859154_BFO"}, {"symbol": "859676_BFO"}, {"symbol": "859315_BFO"}, {"symbol": "859054_BFO"}, {"symbol": "859191_BFO"}, {"symbol": "859202_BFO"}, {"symbol": "859661_BFO"}, {"symbol": "859589_BFO"}, {"symbol": "859214_BFO"}, {"symbol": "859507_BFO"}, {"symbol": "859131_BFO"}, {"symbol": "859684_BFO"}, {"symbol": "859544_BFO"}, {"symbol": "859022_BFO"}, {"symbol": "859437_BFO"}, {"symbol": "859697_BFO"}, {"symbol": "859394_BFO"}, {"symbol": "859235_BFO"}, {"symbol": "859581_BFO"}, {"symbol": "859410_BFO"}, {"symbol": "859358_BFO"}, {"symbol": "859048_BFO"}, {"symbol": "859594_BFO"}, {"symbol": "859268_BFO"}, {"symbol": "859322_BFO"}, {"symbol": "859718_BFO"}, {"symbol": "859337_BFO"}, {"symbol": "859208_BFO"}, {"symbol": "859525_BFO"}, {"symbol": "859456_BFO"}, {"symbol": "859562_BFO"}, {"symbol": "859705_BFO"}, {"symbol": "859028_BFO"}, {"symbol": "859490_BFO"}, {"symbol": "859170_BFO"}, {"symbol": "859633_BFO"}, {"symbol": "859230_BFO"}, {"symbol": "6718_NSE"}, {"symbol": "29452_NSE"}, {"symbol": "2643_NSE"}, {"symbol": "27061_NSE"}, {"symbol": "1633_NSE"}, {"symbol": "10726_NSE"}, {"symbol": "1076_NSE"}, {"symbol": "29224_NSE"}, {"symbol": "1247_NSE"}, {"symbol": "13337_NSE"}, {"symbol": "18566_NSE"}, {"symbol": "11006_NSE"}, {"symbol": "7105_NSE"}, {"symbol": "495_NSE"}, {"symbol": "5622_NSE"}, {"symbol": "23553_NSE"}, {"symbol": "13404_NSE"}, {"symbol": "2283_NSE"}, {"symbol": "1628_NSE"}, {"symbol": "3546_NSE"}, {"symbol": "17186_NSE"}, {"symbol": "2649_NSE"}, {"symbol": "13776_NSE"}, {"symbol": "27297_NSE"}, {"symbol": "8529_NSE"}, {"symbol": "18026_NSE"}, {"symbol": "14255_NSE"}, {"symbol": "18359_NSE"}, {"symbol": "474_NSE"}, {"symbol": "1186_NSE"}, {"symbol": "20329_NSE"}, {"symbol": "6596_NSE"}, {"symbol": "1153_NSE"}, {"symbol": "18743_NSE"}, {"symbol": "13147_NSE"}, {"symbol": "29251_NSE"}, {"symbol": "22739_NSE"}, {"symbol": "2049_NSE"}, {"symbol": "28125_NSE"}, {"symbol": "2854_NSE"}, {"symbol": "2085_NSE"}, {"symbol": "10990_NSE"}, {"symbol": "11905_NSE"}, {"symbol": "3327_NSE"}, {"symbol": "11377_NSE"}, {"symbol": "14180_NSE"}, {"symbol": "20152_NSE"}, {"symbol": "13587_NSE"}, {"symbol": "19020_NSE"}, {"symbol": "1621_NSE"}, {"symbol": "11618_NSE"}, {"symbol": "16682_NSE"}, {"symbol": "5054_NSE"}, {"symbol": "48_NSE"}, {"symbol": "21001_NSE"}, {"symbol": "522_NSE"}, {"symbol": "144_NSE"}, {"symbol": "916_NSE"}, {"symbol": "3048_NSE"}, {"symbol": "27066_NSE"}, {"symbol": "3024_NSE"}, {"symbol": "1515_NSE"}, {"symbol": "11223_NSE"}, {"symbol": "21508_NSE"}, {"symbol": "827_NSE"}, {"symbol": "15409_NSE"}, {"symbol": "20556_NSE"}, {"symbol": "13750_NSE"}, {"symbol": "15119_NSE"}, {"symbol": "25328_NSE"}, {"symbol": "3812_NSE"}, {"symbol": "25049_NSE"}, {"symbol": "25907_NSE"}, {"symbol": "1726_NSE"}, {"symbol": "20607_NSE"}, {"symbol": "9617_NSE"}, {"symbol": "9362_NSE"}, {"symbol": "21091_NSE"}, {"symbol": "4892_NSE"}, {"symbol": "2088_NSE"}, {"symbol": "28714_NSE"}, {"symbol": "18721_NSE"}, {"symbol": "3744_NSE"}, {"symbol": "14450_NSE"}, {"symbol": "7936_NSE"}, {"symbol": "17957_NSE"}, {"symbol": "14672_NSE"}, {"symbol": "13643_NSE"}, {"symbol": "757_NSE"}, {"symbol": "18060_NSE"}, {"symbol": "10793_NSE"}, {"symbol": "5204_NSE"}, {"symbol": "13637_NSE"}, {"symbol": "5633_NSE"}, {"symbol": "1476_NSE"}, {"symbol": "7982_NSE"}, {"symbol": "21131_NSE"}, {"symbol": "739_NSE"}, {"symbol": "13035_NSE"}, {"symbol": "8840_NSE"}, {"symbol": "15362_NSE"}, {"symbol": "11840_NSE"}, {"symbol": "5426_NSE"}, {"symbol": "23740_NSE"}, {"symbol": "11966_NSE"}, {"symbol": "24225_NSE"}, {"symbol": "2829_NSE"}, {"symbol": "20905_NSE"}, {"symbol": "6818_NSE"}, {"symbol": "24308_NSE"}, {"symbol": "5385_NSE"}, {"symbol": "10473_NSE"}, {"symbol": "21740_NSE"}, {"symbol": "28847_NSE"}, {"symbol": "380_NSE"}, {"symbol": "8585_NSE"}, {"symbol": "14111_NSE"}, {"symbol": "1491_NSE"}, {"symbol": "4378_NSE"}, {"symbol": "18124_NSE"}, {"symbol": "27052_NSE"}, {"symbol": "14894_NSE"}, {"symbol": "368_NSE"}, {"symbol": "20188_NSE"}, {"symbol": "16783_NSE"}, {"symbol": "25270_NSE"}, {"symbol": "14198_NSE"}, {"symbol": "1838_NSE"}, {"symbol": "2783_NSE"}, {"symbol": "18011_NSE"}, {"symbol": "25222_NSE"}, {"symbol": "11956_NSE"}, {"symbol": "6018_NSE"}, {"symbol": "919_NSE"}, {"symbol": "13072_NSE"}, {"symbol": "7374_NSE"}, {"symbol": "955_NSE"}, {"symbol": "4693_NSE"}, {"symbol": "2535_NSE"}, {"symbol": "25977_NSE"}, {"symbol": "595_NSE"}, {"symbol": "11573_NSE"}, {"symbol": "4992_NSE"}, {"symbol": "13826_NSE"}, {"symbol": "10576_NSE"}, {"symbol": "4907_NSE"}, {"symbol": "17105_NSE"}, {"symbol": "25574_NSE"}, {"symbol": "4487_NSE"}, {"symbol": "1597_NSE"}, {"symbol": "25584_NSE"}, {"symbol": "5948_NSE"}, {"symbol": "24398_NSE"}, {"symbol": "25718_NSE"}, {"symbol": "1442_NSE"}, {"symbol": "5926_NSE"}, {"symbol": "25162_NSE"}, {"symbol": "1174_NSE"}, {"symbol": "3186_NSE"}, {"symbol": "12018_NSE"}, {"symbol": "2606_NSE"}, {"symbol": "527_NSE"}, {"symbol": "23693_NSE"}, {"symbol": "17388_NSE"}, {"symbol": "7227_NSE"}, {"symbol": "12032_NSE"}, {"symbol": "27969_NSE"}, {"symbol": "8546_NSE"}, {"symbol": "14937_NSE"}, {"symbol": "2328_NSE"}, {"symbol": "7358_NSE"}, {"symbol": "19686_NSE"}, {"symbol": "11655_NSE"}, {"symbol": "15228_NSE"}, {"symbol": "1008_NSE"}, {"symbol": "17801_NSE"}, {"symbol": "10577_NSE"}, {"symbol": "592_NSE"}, {"symbol": "756038_NSE"}, {"symbol": "17927_NSE"}, {"symbol": "9741_NSE"}, {"symbol": "11821_NSE"}, {"symbol": "11343_NSE"}, {"symbol": "4822_NSE"}, {"symbol": "30125_NSE"}, {"symbol": "13816_NSE"}, {"symbol": "5265_NSE"}, {"symbol": "1814_NSE"}, {"symbol": "8124_NSE"}, {"symbol": "21154_NSE"}, {"symbol": "9810_NSE"}, {"symbol": "11256_NSE"}, {"symbol": "15179_NSE"}, {"symbol": "3892_NSE"}, {"symbol": "1949_NSE"}, {"symbol": "29124_NSE"}, {"symbol": "17635_NSE"}, {"symbol": "341_NSE"}, {"symbol": "20534_NSE"}, {"symbol": "25807_NSE"}, {"symbol": "5585_NSE"}, {"symbol": "2183_NSE"}, {"symbol": "277_NSE"}, {"symbol": "16915_NSE"}, {"symbol": "11411_NSE"}, {"symbol": "17272_NSE"}, {"symbol": "2987_NSE"}, {"symbol": "2073_NSE"}, {"symbol": "5578_NSE"}, {"symbol": "3339_NSE"}, {"symbol": "14912_NSE"}, {"symbol": "5701_NSE"}, {"symbol": "1808_NSE"}, {"symbol": "5108_NSE"}, {"symbol": "15039_NSE"}, {"symbol": "5407_NSE"}, {"symbol": "7603_NSE"}, {"symbol": "395_NSE"}, {"symbol": "23489_NSE"}, {"symbol": "11491_NSE"}, {"symbol": "940_NSE"}, {"symbol": "29666_NSE"}, {"symbol": "15254_NSE"}, {"symbol": "3475_NSE"}, {"symbol": "5751_NSE"}, {"symbol": "29553_NSE"}, {"symbol": "15180_NSE"}, {"symbol": "9117_NSE"}, {"symbol": "1627_NSE"}, {"symbol": "1508_NSE"}, {"symbol": "16713_NSE"}, {"symbol": "11654_NSE"}, {"symbol": "6445_NSE"}, {"symbol": "19795_NSE"}, {"symbol": "13197_NSE"}, {"symbol": "8866_NSE"}, {"symbol": "11763_NSE"}, {"symbol": "7083_NSE"}, {"symbol": "11452_NSE"}, {"symbol": "27176_NSE"}, {"symbol": "1011_NSE"}, {"symbol": "25312_NSE"}, {"symbol": "28378_NSE"}, {"symbol": "8167_NSE"}, {"symbol": "937_NSE"}, {"symbol": "13880_NSE"}, {"symbol": "9348_NSE"}, {"symbol": "23729_NSE"}, {"symbol": "1979_NSE"}, {"symbol": "1196_NSE"}, {"symbol": "17903_NSE"}, {"symbol": "2463_NSE"}, {"symbol": "14435_NSE"}, {"symbol": "13620_NSE"}, {"symbol": "29008_NSE"}, {"symbol": "10599_NSE"}, {"symbol": "5049_NSE"}, {"symbol": "5435_NSE"}, {"symbol": "583_NSE"}, {"symbol": "18457_NSE"}, {"symbol": "263_NSE"}, {"symbol": "3857_NSE"}, {"symbol": "17279_NSE"}, {"symbol": "7506_NSE"}, {"symbol": "3918_NSE"}, {"symbol": "13081_NSE"}, {"symbol": "13560_NSE"}, {"symbol": "14707_NSE"}, {"symbol": "27839_NSE"}, {"symbol": "12219_NSE"}, {"symbol": "4847_NSE"}, {"symbol": "10579_NSE"}, {"symbol": "357_NSE"}, {"symbol": "4986_NSE"}, {"symbol": "2406_NSE"}, {"symbol": "13451_NSE"}, {"symbol": "7145_NSE"}, {"symbol": "9685_NSE"}, {"symbol": "27097_NSE"}, {"symbol": "8596_NSE"}, {"symbol": "7196_NSE"}, {"symbol": "7242_NSE"}, {"symbol": "5475_NSE"}, {"symbol": "13270_NSE"}, {"symbol": "4421_NSE"}, {"symbol": "25897_NSE"}, {"symbol": "1467_NSE"}, {"symbol": "10637_NSE"}, {"symbol": "10227_NSE"}, {"symbol": "2705_NSE"}, {"symbol": "3345_NSE"}, {"symbol": "19126_NSE"}, {"symbol": "100_NSE"}, {"symbol": "4014_NSE"}, {"symbol": "17433_NSE"}, {"symbol": "19813_NSE"}, {"symbol": "13086_NSE"}, {"symbol": "8110_NSE"}, {"symbol": "17364_NSE"}, {"symbol": "23799_NSE"}, {"symbol": "2866_NSE"}, {"symbol": "193_NSE"}, {"symbol": "3761_NSE"}, {"symbol": "5610_NSE"}, {"symbol": "13966_NSE"}, {"symbol": "17675_NSE"}, {"symbol": "1576_NSE"}, {"symbol": "21334_NSE"}, {"symbol": "14947_NSE"}, {"symbol": "13491_NSE"}, {"symbol": "1164_NSE"}, {"symbol": "1336_NSE"}, {"symbol": "3417_NSE"}, {"symbol": "19543_NSE"}, {"symbol": "10511_NSE"}, {"symbol": "31163_NSE"}, {"symbol": "2739_NSE"}, {"symbol": "15184_NSE"}, {"symbol": "40_NSE"}, {"symbol": "1250_NSE"}, {"symbol": "16253_NSE"}, {"symbol": "1038_NSE"}, {"symbol": "14339_NSE"}, {"symbol": "2431_NSE"}, {"symbol": "13409_NSE"}, {"symbol": "14304_NSE"}, {"symbol": "10515_NSE"}, {"symbol": "15146_NSE"}, {"symbol": "371_NSE"}, {"symbol": "18553_NSE"}, {"symbol": "18581_NSE"}, {"symbol": "18564_NSE"}, {"symbol": "17758_NSE"}, {"symbol": "3329_NSE"}, {"symbol": "1181_NSE"}, {"symbol": "10925_NSE"}, {"symbol": "11253_NSE"}, {"symbol": "3637_NSE"}, {"symbol": "15174_NSE"}, {"symbol": "5378_NSE"}, {"symbol": "7508_NSE"}, {"symbol": "10580_NSE"}, {"symbol": "13976_NSE"}, {"symbol": "399_NSE"}, {"symbol": "480_NSE"}, {"symbol": "5373_NSE"}, {"symbol": "404_NSE"}, {"symbol": "9553_NSE"}, {"symbol": "8825_NSE"}, {"symbol": "20854_NSE"}, {"symbol": "7254_NSE"}, {"symbol": "11580_NSE"}, {"symbol": "1675_NSE"}, {"symbol": "14334_NSE"}, {"symbol": "13577_NSE"}, {"symbol": "24715_NSE"}, {"symbol": "20551_NSE"}, {"symbol": "17313_NSE"}, {"symbol": "22239_NSE"}, {"symbol": "3906_NSE"}, {"symbol": "18822_NSE"}, {"symbol": "1041_NSE"}, {"symbol": "1315_NSE"}, {"symbol": "24814_NSE"}, {"symbol": "20936_NSE"}, {"symbol": "9408_NSE"}, {"symbol": "625_NSE"}, {"symbol": "10176_NSE"}, {"symbol": "17945_NSE"}, {"symbol": "1085_NSE"}, {"symbol": "13305_NSE"}, {"symbol": "25844_NSE"}, {"symbol": "1100_NSE"}, {"symbol": "305_NSE"}, {"symbol": "13868_NSE"}, {"symbol": "12022_NSE"}, {"symbol": "14428_NSE"}, {"symbol": "9581_NSE"}, {"symbol": "2056_NSE"}, {"symbol": "20224_NSE"}, {"symbol": "811_NSE"}, {"symbol": "13260_NSE"}, {"symbol": "13517_NSE"}]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-10 14:04:10,486 [INFO] constants.router: Router object is being created.
+2025-09-10 14:04:10,486 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:04:10,487 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:04:10,487 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:04:10,489 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:04:10,492 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:04:10,645 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:04:10,646 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '60789b53-c5d9-4a80-a3aa-934ce460be58', 'srvTm': 1757495050120}
+2025-09-10 14:04:10,647 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-10 14:04:13,379 [INFO] constants.router: Router object is being created.
+2025-09-10 14:04:13,379 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:04:13,379 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:04:13,380 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:04:13,382 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:04:13,385 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:04:13,535 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:04:13,535 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'f83bc96a-8ec7-4384-9c9b-aef4af9ffe05', 'srvTm': 1757495053009}
+2025-09-10 14:04:13,536 [INFO] constants.router: Router object is being created.
+2025-09-10 14:04:13,536 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:04:13,536 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:04:13,537 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:04:13,539 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:04:13,542 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:04:13,683 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:04:13,684 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'e67042cc-57be-43ce-bd3e-9ac0f3b376f7', 'srvTm': 1757495053157}
+2025-09-10 14:04:31,471 [INFO] routers.stratergy_4leg: Strategy 8f66055e-f52e-4d36-b08e-f0152da74731 updated in Redis with 5 legs
+2025-09-10 14:05:21,792 [INFO] routers.stratergy_4leg: Strategy 8f66055e-f52e-4d36-b08e-f0152da74731 updated in Redis with 5 legs
+2025-09-10 14:06:23,286 [INFO] constants.router: Router object is being created.
+2025-09-10 14:06:23,287 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:06:23,287 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:06:23,287 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:06:23,289 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:06:23,291 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:06:23,583 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:06:23,584 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '2d562103-65f6-470d-9077-6a842a657fa3', 'srvTm': 1757495183052}
+2025-09-10 14:06:23,585 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-10 14:07:32,634 [INFO] constants.router: Router object is being created.
+2025-09-10 14:07:32,635 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:07:32,635 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:07:32,635 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:07:32,638 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:07:32,641 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:07:32,904 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:07:32,905 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '332867e6-2e0d-4a4d-a96e-5ef38c785647', 'srvTm': 1757495252372}
+2025-09-10 14:07:32,905 [INFO] constants.router: Router object is being created.
+2025-09-10 14:07:32,905 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:07:32,906 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:07:32,906 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:07:32,907 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:07:32,910 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:07:33,264 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:07:33,264 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '993d9e02-b18a-40da-80ef-4c0466e68656', 'srvTm': 1757495252732}
+2025-09-10 14:08:53,830 [INFO] routers.stratergy_4leg: Strategy c72ea026-6022-4c19-bebf-1e4724ddafb4 created and stored in Redis with key 4_leg:c72ea026-6022-4c19-bebf-1e4724ddafb4
+2025-09-10 14:08:53,830 [INFO] routers.stratergy_4leg: Strategy has 4 legs: ['leg1', 'leg2', 'leg3', 'leg4']
+2025-09-10 14:09:11,935 [INFO] routers.stratergy_4leg: Strategy c72ea026-6022-4c19-bebf-1e4724ddafb4 updated in Redis with 5 legs
+2025-09-10 14:09:14,345 [INFO] routers.stratergy_4leg: Strategy c72ea026-6022-4c19-bebf-1e4724ddafb4 updated in Redis with 5 legs
+2025-09-10 14:09:20,305 [INFO] routers.stratergy_4leg: Strategy c72ea026-6022-4c19-bebf-1e4724ddafb4 updated in Redis with 5 legs
+2025-09-10 14:09:40,132 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:09:41,717 [INFO] constants.router: Router object is being created.
+2025-09-10 14:09:41,718 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:09:41,718 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:09:41,718 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:09:41,720 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:09:41,724 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:09:41,863 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:09:41,864 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '81f71a8a-1dbd-4746-ad40-c7371f13163b', 'srvTm': 1757495381327}
+2025-09-10 14:09:41,864 [INFO] constants.router: Router object is being created.
+2025-09-10 14:09:41,865 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:09:41,865 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:09:41,865 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:09:41,867 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:09:41,870 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:09:42,040 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:09:42,040 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '9f01d52d-fb9c-414c-8033-59f776dfd4b5', 'srvTm': 1757495381501}
+2025-09-10 14:09:45,095 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:09:55,820 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:09:56,491 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:09:56,913 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:09:57,322 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:09:57,729 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:09:58,153 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:09:58,553 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:09:58,954 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:11:52,313 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:11:57,479 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:12:02,392 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:12:13,416 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:12:18,444 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:12:32,735 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:12:37,591 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:12:42,546 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:12:47,639 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:12:52,321 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:13:08,337 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:13:18,810 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:13:23,668 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:14:00,825 [INFO] constants.router: Router object is being created.
+2025-09-10 14:14:00,825 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:14:00,825 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:14:00,826 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:14:00,828 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:14:00,831 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:14:00,971 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:14:00,972 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '3e736d6d-016f-4108-994f-a3b97a2ba198', 'srvTm': 1757495640427}
+2025-09-10 14:14:00,973 [INFO] constants.router: Router object is being created.
+2025-09-10 14:14:00,973 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:14:00,973 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:14:00,974 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:14:00,976 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:14:00,979 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:14:01,137 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:14:01,137 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '2af87c7b-5db5-4139-a9b2-19fb5bfb5cc0', 'srvTm': 1757495640592}
+2025-09-10 14:14:14,112 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:14:14,605 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:14:15,028 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:14:15,434 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:14:26,901 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:14:27,327 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:14:27,802 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:14:28,214 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:14:28,625 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:16:19,919 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:16:24,858 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:16:32,518 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:16:37,473 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:16:42,331 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:16:47,026 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:17:41,754 [INFO] constants.router: Router object is being created.
+2025-09-10 14:17:41,755 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:17:41,755 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:17:41,756 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:17:41,759 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:17:41,764 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:17:42,143 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:17:42,143 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '16066e4d-58ce-4bc1-ab5b-5a65f35d71c1', 'srvTm': 1757495861590}
+2025-09-10 14:17:42,144 [INFO] constants.router: Router object is being created.
+2025-09-10 14:17:42,144 [INFO] APIConnect.http: Http object is being created.
+2025-09-10 14:17:42,144 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-10 14:17:42,144 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-10 14:17:42,146 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-10 14:17:42,148 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-10 14:17:42,276 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-10 14:17:42,277 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757462422009, 'exp': 1757462422001, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'c53cb13a-37c2-4b55-b457-26f284367ddd', 'srvTm': 1757495861723}
+2025-09-10 14:17:57,090 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:17:57,527 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "PUT /edelmw-eq/eq/trade/modifytrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:17:57,931 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-10 14:18:42,954 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:18:48,138 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:18:52,939 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:19:00,973 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:19:05,872 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:19:10,749 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:19:26,857 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:19:32,178 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:19:37,153 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:19:42,131 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:21:35,188 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:21:40,155 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:21:44,910 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-10 14:37:03,115 [INFO] routers.stratergy_4leg: Successfully connected to Redis
