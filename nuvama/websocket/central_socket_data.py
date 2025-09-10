@@ -109,7 +109,7 @@ class CentralSocketData:
                 except Exception as tick_error:
                     # Don't let tick logging errors affect main processing
                     pass
-            
+            breakpoint()
             # Continue with original Redis storage
             self.r.set(f"reduced_quotes:{symbol}", orjson.dumps(response).decode())
         except Exception as e:

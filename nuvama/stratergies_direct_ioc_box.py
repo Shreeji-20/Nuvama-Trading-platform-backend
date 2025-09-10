@@ -1561,7 +1561,13 @@ class StratergyDirectIOCBox:
                     print(f"\nINFO: SELL profit threshold reached ({sell_profit:.2f} >= {profit_threshold}), exiting with profit")
                     # Execute SELL exit orders
                     self._execute_sell_exit(uid,not isExit)
-                    return False  # Don't execute BUY legs
+                    self.execution_tracker.add_milestone(f"User {uid} exited with SELL profit", {
+                        "user": uid,
+                        "profit": sell_profit,
+                        "spread": current_sell_spread
+                    })
+                    return True  # Exit with profit
+                    
                  # Check if SELL spread is favorable
                 if abs(current_buy_spread) <= abs(remaining_spread):
                     print(f"\nINFO: BUY spread favorable, proceeding with SELL execution\n")
@@ -1585,6 +1591,7 @@ class StratergyDirectIOCBox:
                     self.entry_qtys[uid][second_buy_leg] = second_buy_success.get('filled_qty', 0)
                     print(f"SUCCESS: BUY legs executed successfully with SELL profit monitoring")
                     self.all_legs_executed[uid] = True
+                    
                     return True
             
         except Exception as e:

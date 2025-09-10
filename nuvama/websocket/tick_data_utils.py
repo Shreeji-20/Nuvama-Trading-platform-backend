@@ -9,7 +9,7 @@ from datetime import datetime, date
 from tick_data_manager import TickDataReader
 import argparse
 import statistics
-from central_socket_data import CentralSocketData
+
 
 class TickDataAnalyzer:
     """Analyze saved tick data files"""
@@ -163,13 +163,15 @@ class TickDataAnalyzer:
             bar = "#" * int(bar_length)
             print(f"{hour:02d}:00 |{bar:<50}| {count:,} ticks")
 
-
+import redis
 class TickDataSimulator:
     """Simulate market data using saved tick files"""
     
     def __init__(self, base_directory="tick_data"):
         self.reader = TickDataReader(base_directory)
-        self.central_socket_functions = CentralSocketData()
+        self.r = redis.Redis(host='localhost', port=6379, db=0)
+        self.options_data = orjson.loads(self.r.get("option_mapper").decode())
+        
     def simulate_market_session(self, date_str, symbol=None, speed_multiplier=1.0, start_hour=9, end_hour=16):
         """Simulate a market session with saved tick data"""
         print(f"\n[INFO] SIMULATING MARKET SESSION FOR {date_str}")
@@ -219,25 +221,54 @@ class TickDataSimulator:
         # For now, we'll just update some basic statistics
         
         if tick['type'] == 'quotes':
-            self.central_socket_functions.ReducedQuotesFeedCallback(tick.get('data',{}))
-            # Process quotes data
-            # symbol = tick.get('symbol')
-            # data = tick.get('data', {}).get('response', {}).get('data', {})
-            # ltp = data.get('ltp')
-            # if ltp:
-            #     # You could update your strategy with new price
-            #     pass
+            try:
+                response = tick.get("data", {})
+                if str(response['response']['data']['sym']) == "-29":
+                    symbol = "NIFTY"
+                elif str(response['response']['data']['sym']) == "-101":
+                    symbol = "SENSEX"
+                else:
+                    symbol = "OTHER"
+                response['response']['data']['symbol'] = symbol
+                
+                # Continue with original Redis storage
+                self.r.set(f"reduced_quotes:{symbol}", orjson.dumps(response).decode())
+            except Exception as e:
+                print(f"Error processing response (callbackfun): {str(e)}")
         
         elif tick['type'] == 'depth':
-            self.central_socket_functions.DepthStreamerCallback(tick.get('data',{}))
-            # Process depth data
-            # redis_key = tick.get('redis_key')
-            # data = tick.get('data', {}).get('response', {}).get('data', {})
-            # bid = data.get('bid')
-            # ask = data.get('ask')
-            # if bid and ask:
-            #     # You could update your order book with new bid/ask
-            #     pass
+            try:
+                response = tick.get("data", {})
+                
+                # streaming symbol contained in the payload
+                streaming_symbol = response['response']['data'].get('symbol')
+                details = self.options_data.get(streaming_symbol, {})
+                # merge details into the response data safely
+                try:
+                    if details:
+                        # ensure we're updating the dict, not the symbol string
+                        response['response']['data'].update(details)
+                except Exception as e:
+                    print(f"Failed to merge option details into response data: {e}")
+
+                # construct redis key defensively using available fields
+                symbolname = details.get('symbolname') or response['response']['data'].get('symbolname') or streaming_symbol
+                strike = details.get('strikeprice') or response['response']['data'].get('strikeprice')
+                opt_type = details.get('optiontype') or response['response']['data'].get('optiontype')
+                expiry = details.get('expiry') or response['response']['data'].get('expiry')
+
+                if symbolname and strike and opt_type:
+                    redis_key = f"depth:{symbolname}_{strike}_{opt_type}-{expiry}"
+                else:
+                    # fallback to a generic key containing the streaming symbol
+                    redis_key = f"depth:{symbolname or streaming_symbol}"
+
+                # Save tick data to files for simulation (high-performance, non-blocking)
+
+                # Continue with original Redis storage
+                self.r.set(redis_key, orjson.dumps(response).decode())
+            except Exception as e:
+                print(f"Error processing response (DepthStreamerCallback): {str(e)}")
 
 
 def main():

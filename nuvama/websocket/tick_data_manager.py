@@ -12,9 +12,10 @@ from datetime import datetime, date
 from typing import Dict, Any
 import gzip
 import asyncio
+import redis
 import re
 from concurrent.futures import ThreadPoolExecutor
-from central_socket_data import CentralSocketData
+
 
 class TickDataManager:
     """
@@ -39,6 +40,7 @@ class TickDataManager:
         
         # Create base directory structure
         self._setup_directories()
+       
         
         # Threading components for async processing
         self.tick_queue = queue.Queue(maxsize=100000)  # Large queue to handle bursts
@@ -494,7 +496,6 @@ class TickDataReader:
             if target_replay_time > elapsed_replay_time:
                 time.sleep(target_replay_time - elapsed_replay_time)
             
-            print("Tick : ",tick)
             # Yield the tick for processing
             yield tick
             
