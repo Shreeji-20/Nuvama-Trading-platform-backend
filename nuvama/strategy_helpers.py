@@ -384,7 +384,7 @@ class StrategyOrderHelpers:
             "Action": action,
             "Order_Type": order_type,
             "Quantity": qty,
-            "Slice_Quantity": int(lotsize) * slice_multiplier,
+            "Slice_Quantity": int(lotsize) * int(slice_multiplier),
             "Streaming_Symbol": streaming_symbol,
             "Limit_Price": "0",
             "Disclosed_Quantity": 0,

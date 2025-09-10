@@ -1038,10 +1038,18 @@ class StratergyDirectIOCBox:
                 return {"success": True, "filled_qty": current_qty, "filled_price": 0, "reason": "already_filled"}
             
             # Get current price and prepare order
-            current_prices = self._get_leg_prices([leg_key])
-            order = self.order_templates[uid][leg_key].copy()
-            order["Quantity"] = remaining_qty
-            order["Slice_Quantity"] = remaining_qty
+            if not isExit:
+                current_prices = self._get_leg_prices([leg_key])
+                order = self.order_templates[uid][leg_key].copy()
+                order["Quantity"] = remaining_qty
+                if order['Quantity'] < order['Slice_Quantity']:
+                    order['Slice_Quantity'] = order['Quantity']
+            else:
+                current_prices = self._get_leg_prices([leg_key],isExit)
+                order = self.exit_order_templates[uid][leg_key].copy()
+                order["Quantity"] = self.entry_qtys[uid][leg_key]
+                if order["Quantity"] < order['Slice_Quantity']:
+                    order['Slice_Quantity'] = order['Quantity']
             
             # Add price adjustment based on action
             tick = 0.05 if order.get("Action") == ActionEnum.BUY else -0.05
@@ -1097,8 +1105,8 @@ class StratergyDirectIOCBox:
                     'Exchange': order.get('Exchange'),
                     'Action': order.get('Action'),
                     'Order_Type': order.get('Order_Type', OrderTypeEnum.LIMIT),
-                    'Quantity': remaining_qty,
-                    'CurrentQuantity': remaining_qty - current_filled,
+                    'Quantity': order.get('Slice_Quantity',remaining_qty),
+                    'CurrentQuantity': order.get('Slice_Quantity') - current_filled,
                     'Limit_Price': new_limit_price,
                     'Streaming_Symbol': order.get('Streaming_Symbol'),
                     'ProductCode': order.get('ProductCode')
@@ -1118,8 +1126,12 @@ class StratergyDirectIOCBox:
             final_filled = final_status.get('filled_qty', 0)
             final_price = final_status.get('filled_price', 0)
             
-            if final_filled >= remaining_qty:
+            if final_filled >= order['Slice_Quantity']:
                 self.logger.success(f"MODIFY execution completed for {leg_key} after {attempt} attempts")
+                if not isExit:
+                    self.entry_qtys[uid][leg_key] += final_filled
+                else:
+                    self.exit_qtys[uid][leg_key] += final_filled
                 return {"success": True, "filled_qty": final_filled, "filled_price": final_price, "order_id": order_id}
             else:
                 self.logger.warning(f"MODIFY execution incomplete for {leg_key}", 
@@ -1207,7 +1219,7 @@ class StratergyDirectIOCBox:
                                               f"Filled: {filled_qty}, Price: {filled_price}")
                             
                             # Check if we have enough quantity
-                            if total_filled_qty >= desired_qty:
+                            if total_filled_qty >= order['Slice_Quantity']:
                                 return {"success": True, "filled_qty": total_filled_qty, "filled_price": filled_price, 
                                        "attempts": retry_count}
                         else:
@@ -1235,39 +1247,6 @@ class StratergyDirectIOCBox:
         except Exception as e:
             self.logger.error(f"IOC execution with retry failed for {leg_key}", exception=e)
             return {"success": False, "filled_qty": 0, "filled_price": 0, "reason": str(e)}
-
-    def _create_spread_condition_checker(self, uid, target_legs, required_spread, comparison_type="<="):
-        """
-        Create a function to check if spread condition is still met.
-        
-        Args:
-            uid: User ID
-            target_legs: List of leg keys to check spread for
-            required_spread: Required spread value
-            comparison_type: "<=" for BUY (current <= required), ">=" for SELL (current >= required)
-            
-        Returns:
-            function: Callable that returns True if condition is met
-        """
-        def check_spread_condition():
-            try:
-                current_prices = self._get_leg_prices(target_legs)
-                current_spread = sum(current_prices[leg] for leg in target_legs)
-                
-                if comparison_type == "<=":
-                    condition_met = current_spread <= required_spread
-                    self.logger.debug(f"BUY spread check: {current_spread:.2f} <= {required_spread:.2f} = {condition_met}")
-                else:  # ">="
-                    condition_met = current_spread >= required_spread
-                    self.logger.debug(f"SELL spread check: {current_spread:.2f} >= {required_spread:.2f} = {condition_met}")
-                
-                return condition_met
-                
-            except Exception as e:
-                self.logger.error("Spread condition check failed", exception=e)
-                return False  # Conservative approach - don't execute if check fails
-        
-        return check_spread_condition
 
     def _calculate_executed_spread(self, uid, leg_keys, execution_results):
         """
@@ -1663,7 +1642,7 @@ class StratergyDirectIOCBox:
                     second_buy_success = self._place_ioc_order_with_retry(uid, second_buy_leg, 20) # Assuming this would execute
                     if not second_buy_success:
                         print(f"ERROR: Second BUY leg execution failed")
-                        return False
+                        continue
                     
                     print(f"SUCCESS: BUY legs executed successfully with SELL profit monitoring")
                     return True
@@ -1764,7 +1743,7 @@ class StratergyDirectIOCBox:
         print(f"INFO: Using global observation for SELL leg execution order: {sell_observation}")
         first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, [self.pair2_bidding_leg, self.pair2_base_leg])
         
-        first_sell_success = self._place_ioc_order_with_retry(uid, first_sell_leg,1,True)
+        first_sell_success = self._place_ioc_order_with_retry(uid, first_sell_leg, 1, True)
         if not first_sell_success:
             print(f"ERROR: First SELL leg execution failed")
             return False
