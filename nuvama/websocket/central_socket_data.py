@@ -64,8 +64,12 @@ class CentralSocketData:
         self.common_obj = common_functions()
         
         if not self.options_data:
+            self.common_obj.refresh_strikes_and_options(expiry=3,symbol='NIFTY',exchange="NFO")
+            self.common_obj.refresh_strikes_and_options(expiry=2,symbol='NIFTY',exchange="NFO")
             self.common_obj.refresh_strikes_and_options(expiry=1,symbol='NIFTY',exchange="NFO")
             self.common_obj.refresh_strikes_and_options(expiry=1,symbol='SENSEX',exchange="BFO")
+            self.common_obj.refresh_strikes_and_options(expiry=2,symbol='SENSEX',exchange="BFO")
+            self.common_obj.refresh_strikes_and_options(expiry=3,symbol='SENSEX',exchange="BFO")
             self.common_obj.refresh_strikes_and_options(expiry=0,symbol='NIFTY',exchange="NFO")
             self.common_obj.refresh_strikes_and_options(expiry=0,symbol='SENSEX',exchange="BFO")
             equity_symbols = self.r.lrange('excel_column_a_data', 0, -1)

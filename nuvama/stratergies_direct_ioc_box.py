@@ -322,7 +322,7 @@ class StratergyDirectIOCBox:
         
         # Use new execution strategy logic
         execution_strategy = self._determine_execution_strategy(
-            leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type
+            leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type,isExit
         )
         
         # self.logger.info(
@@ -356,7 +356,7 @@ class StratergyDirectIOCBox:
             'leg_action_type': leg_action_type
         }
 
-    def _determine_execution_strategy(self, leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type="BUY"):
+    def _determine_execution_strategy(self, leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type="BUY",isExit=False):
         """
         Determine execution strategy based on market trends and order type.
         
@@ -378,16 +378,23 @@ class StratergyDirectIOCBox:
             #     f"{leg1_key}: {leg1_trend} ({leg1_change:.2f}), {leg2_key}: {leg2_trend} ({leg2_change:.2f})"
             # )
             
-            if leg_action_type.upper() == "SELL":
-                return self._determine_sell_execution_strategy(leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change)
-            else:  # BUY
-                return self._determine_buy_execution_strategy(leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change)
+            if not isExit:
+                if leg_action_type.upper() == "SELL":
+                    return self._determine_sell_execution_strategy(leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change,isExit)
+                else:  # BUY
+                    return self._determine_buy_execution_strategy(leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change,isExit)
+            else:
+                # For exit, use same logic as entry but with different thresholds if needed
+                if leg_action_type.upper() == "SELL":
+                    return self._determine_buy_execution_strategy(leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change,isExit)
+                else:  # BUY
+                    return self._determine_sell_execution_strategy(leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change,isExit)
                 
         except Exception as e:
             self.logger.error("Failed to determine execution strategy", exception=e)
             return {"action": "SKIP", "reason": "strategy_determination_failed"}
 
-    def _determine_sell_execution_strategy(self, leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change):
+    def _determine_sell_execution_strategy(self, leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change,isExit):
         """
         SELL execution rules:
         1. Both legs stable -> execute legs
@@ -478,7 +485,7 @@ class StratergyDirectIOCBox:
             "reason": "Unhandled trend combination - default execution"
         }
 
-    def _determine_buy_execution_strategy(self, leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change):
+    def _determine_buy_execution_strategy(self, leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change,isExit):
         """
         BUY execution rules:
         1. Both stable -> execute
@@ -1063,11 +1070,9 @@ class StratergyDirectIOCBox:
             # Monitor and modify until completion
             total_filled_qty = 0
             attempt = 0
-            
+            previous_price = float(order["Limit_Price"])
             while attempt < max_attempts and total_filled_qty < remaining_qty:
                 time.sleep(modify_interval)
-                attempt += 1
-                
                 # Check order status
                 if self.execution_helper.execution_mode == "SIMULATION":
                     status = result
@@ -1096,7 +1101,9 @@ class StratergyDirectIOCBox:
                 # Get fresh price for modification
                 fresh_prices = self._get_leg_prices([leg_key],isExit)
                 new_limit_price = StrategyHelpers.format_limit_price(float(fresh_prices[leg_key]) + tick)
-                
+                if float(new_limit_price) == previous_price:
+                    self.logger.debug(f"No price change for {leg_key}, skipping modification")
+                    continue  # Skip modification if price hasn't changed
                 # Modify order with new price
                 modify_details = {
                     'user_id': uid,
@@ -1120,7 +1127,7 @@ class StratergyDirectIOCBox:
                     self.logger.warning(f"Order modification failed for {leg_key}", str(modify_result))
                 
                 total_filled_qty = current_filled
-            
+                attempt += 1
             # Final status check
             if self.execution_helper.execution_mode == "LIVE":
                 final_status = self.order.get_order_status(order_id, uid, order.get('remark', 'Lord_Shreeji'))
