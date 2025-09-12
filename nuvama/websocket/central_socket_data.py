@@ -93,6 +93,7 @@ class CentralSocketData:
                
     def ReducedQuotesFeedCallback(self,response):
         try:
+            print("ReducedQuotesFeedCallback response received", response)
             response = orjson.loads(response.encode())
             if str(response['response']['data']['sym']) == "-29":
                 symbol = "NIFTY"
@@ -109,7 +110,7 @@ class CentralSocketData:
                 except Exception as tick_error:
                     # Don't let tick logging errors affect main processing
                     pass
-            breakpoint()
+            # breakpoint()
             # Continue with original Redis storage
             self.r.set(f"reduced_quotes:{symbol}", orjson.dumps(response).decode())
         except Exception as e:

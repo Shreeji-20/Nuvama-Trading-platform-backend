@@ -435,7 +435,7 @@ class StratergyDirectIOCBox:
             (leg1_trend == "STABLE" and leg2_trend == "INCREASING")):
             stable_leg = leg1_key if leg1_trend == "STABLE" else leg2_key
             increasing_leg = leg2_key if leg1_trend == "STABLE" else leg1_key
-            # self.logger.success(f"SELL Strategy: Increasing with stable - executing stable leg ({stable_leg}) first")
+            self.logger.success(f"SELL Strategy: Increasing with stable - executing stable leg ({stable_leg}) first")
             return {
                 "action": "EXECUTE", 
                 "strategy": "stable_first",
@@ -451,7 +451,7 @@ class StratergyDirectIOCBox:
                 first_leg, second_leg = leg1_key, leg2_key
             else:
                 first_leg, second_leg = leg2_key, leg1_key
-            # self.logger.info("SELL Strategy: Both increasing - executing stronger increase first")
+            self.logger.info("SELL Strategy: Both increasing - executing stronger increase first")
             return {
                 "action": "EXECUTE",
                 "strategy": "both_increasing",
@@ -462,17 +462,10 @@ class StratergyDirectIOCBox:
         
         if leg1_trend == "DECREASING" and leg2_trend == "DECREASING":
             # Both decreasing - execute based on change magnitude (stronger decrease first)
-            if abs(leg1_change) >= abs(leg2_change):
-                first_leg, second_leg = leg1_key, leg2_key
-            else:
-                first_leg, second_leg = leg2_key, leg1_key
-            # self.logger.warning("SELL Strategy: Both decreasing - executing stronger decrease first")
             return {
-                "action": "EXECUTE",
-                "strategy": "both_decreasing", 
-                "first_leg": first_leg,
-                "second_leg": second_leg,
-                "reason": "Both decreasing - execute stronger movement first"
+                "action": "SKIP",
+                "strategy": "decreasing_with_decreasing", 
+                "reason": "Both Decreasing - unfavorable for SELL"
             }
         
         # Fallback
@@ -545,17 +538,11 @@ class StratergyDirectIOCBox:
         # Additional cases: Both increasing or both decreasing
         if leg1_trend == "INCREASING" and leg2_trend == "INCREASING":
             # Both increasing - execute based on change magnitude (stronger increase first)
-            if abs(leg1_change) >= abs(leg2_change):
-                first_leg, second_leg = leg1_key, leg2_key
-            else:
-                first_leg, second_leg = leg2_key, leg1_key
-            # self.logger.warning("BUY Strategy: Both increasing - executing stronger increase first")
+            # self.logger.warning("BUY Strategy: Both increasing - skipping execution")
             return {
-                "action": "EXECUTE",
-                "strategy": "both_increasing",
-                "first_leg": first_leg,
-                "second_leg": second_leg,
-                "reason": "Both increasing - execute stronger movement first"
+                "action": "SKIP",
+                "strategy": "increasing_with_increasing", 
+                "reason": "Both Incresing - unfavorable for SELL"
             }
         
         if leg1_trend == "DECREASING" and leg2_trend == "DECREASING":
@@ -564,7 +551,7 @@ class StratergyDirectIOCBox:
                 first_leg, second_leg = leg1_key, leg2_key
             else:
                 first_leg, second_leg = leg2_key, leg1_key
-            self.logger.info("BUY Strategy: Both decreasing - executing stronger decrease first")
+            # self.execution_tracker.add_observation("BUY Strategy: Both decreasing - executing stronger decrease first")
             return {
                 "action": "EXECUTE",
                 "strategy": "both_decreasing",
@@ -1346,7 +1333,7 @@ class StratergyDirectIOCBox:
             })
             
             # Dedicated 10-second observation specifically for CASE A/B decision
-            buy_pair_observation = self._observe_market_for_case_decision(buy_leg_keys[0], buy_leg_keys[1], 10)
+            buy_pair_observation = self._observe_market_for_case_decision(buy_leg_keys[0], buy_leg_keys[1], 60)
            
             self.execution_tracker.add_observation("BUY_PAIR_CASE_DECISION", {
                 "user": uid,
@@ -1440,7 +1427,11 @@ class StratergyDirectIOCBox:
             
             
             # Step 2: Calculate BUY legs prices based on remaining spread
-            desired_spread = self.params.get("desired_spread", 405)
+            if isExit:
+                desired_spread = self.params.get("exit_desired_spread", 405)
+            else:
+                desired_spread = self.params.get("desired_spread", 405)
+                
             remaining_spread_for_buy = desired_spread + sell_executed_spread
             
             print(f"INFO: Remaining spread for BUY legs: {remaining_spread_for_buy:.2f}")
@@ -1450,10 +1441,10 @@ class StratergyDirectIOCBox:
             current_buy_spread = current_buy_prices[buy_leg_keys[0]] + current_buy_prices[buy_leg_keys[1]]
             profit_threshold_buy = self.params.get("profit_threshold_buy", 3)
             print(f"INFO: Current BUY spread: {current_buy_spread:.2f}, Required: <= {remaining_spread_for_buy:.2f}")
-            breakpoint()
+            # breakpoint()
             self._monitor_sell_profit_and_execute_buy(uid, sell_executed_spread, remaining_spread_for_buy, 
                                                                          buy_leg_keys, profit_threshold_buy,isExit)
-            breakpoint()
+            # breakpoint()
             return True
         except Exception as e:
             print(f"ERROR: Case A execution failed: {e}")
@@ -1503,7 +1494,10 @@ class StratergyDirectIOCBox:
             print(f"INFO: BUY pair executed spread: {buy_executed_spread:.2f}")
             
             # Step 2: Calculate SELL legs prices based on remaining spread
-            desired_spread = self.params.get("desired_spread", 405)
+            if isExit:
+                desired_spread = self.params.get("exit_desired_spread", 405)
+            else:
+                desired_spread = self.params.get("desired_spread", 405)
             remaining_spread_for_sell = buy_executed_spread - desired_spread
             
             print(f"INFO: Remaining spread for SELL legs: {remaining_spread_for_sell:.2f}")
@@ -1515,10 +1509,10 @@ class StratergyDirectIOCBox:
             print(f"INFO: Current SELL spread: {current_sell_spread:.2f}, Required: >= {remaining_spread_for_sell:.2f}")
             
             profit_threshold_buy = self.params.get("profit_threshold_buy", 2)
-            breakpoint()
+            # breakpoint()
             self._monitor_buy_profit_and_execute_sell(uid, buy_executed_spread, remaining_spread_for_sell, 
                                                            sell_leg_keys, profit_threshold_buy,isExit)
-            breakpoint()
+            # breakpoint()
             return True
         except Exception as e:
             print(f"ERROR: Case B execution failed: {e}")
@@ -1591,7 +1585,11 @@ class StratergyDirectIOCBox:
                     self.entry_qtys[uid][second_buy_leg] = second_buy_success.get('filled_qty', 0)
                     print(f"SUCCESS: BUY legs executed successfully with SELL profit monitoring")
                     self.all_legs_executed[uid] = True
-                    
+                    self.execution_tracker.add_milestone(f"User {uid} completed execution with BUY after SELL profit monitoring", { 
+                        "user": uid,
+                        "sell_profit": sell_profit,
+                        "spread": current_buy_spread
+                    })
                     return True
             
         except Exception as e:
@@ -1621,6 +1619,11 @@ class StratergyDirectIOCBox:
                 if buy_profit >= profit_threshold:
                     print(f"\nINFO: BUY profit threshold reached ({buy_profit:.2f} >= {profit_threshold}), exiting with profit")
                     self._execute_buy_exit(uid,not isExit)
+                    self.execution_tracker.add_milestone(f"User {uid} exited with BUY profit", {
+                        "user": uid,
+                        "profit": buy_profit,
+                        "spread": current_buy_spread
+                    })
                     return True  # Exit with profit
                 
                 # Check if SELL spread is favorable
@@ -1643,6 +1646,11 @@ class StratergyDirectIOCBox:
                     if second_success['success']:
                         print(f"SUCCESS: SELL legs executed successfully with BUY profit monitoring")
                         self.all_legs_executed[uid] = True
+                        self.execution_tracker.add_milestone(f"User {uid} completed execution with SELL after BUY profit monitoring", {
+                            "user": uid,
+                            "buy_profit": buy_profit,
+                            "spread": current_sell_spread
+                        })
                         return True
                     else:
                         continue
@@ -1730,6 +1738,7 @@ class StratergyDirectIOCBox:
                             active_users += 1
                             self.logger.debug(f"Processing user {uid}")
                             self._execute_both_pairs(uid, leg_prices,isExit=False)
+                            self._execute_both_pairs(uid, leg_prices,isExit=True)
                             processed_users += 1
                     
                     # Log progress periodically
@@ -1744,6 +1753,7 @@ class StratergyDirectIOCBox:
                         self.execution_tracker.add_milestone("All users completed")
                         break
                     
+                    print("\nStartin Again\n")
                     time.sleep(1)  # Main loop delay
                     
                 except KeyboardInterrupt:
