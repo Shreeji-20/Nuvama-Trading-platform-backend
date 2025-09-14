@@ -54,9 +54,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
         )
         
         self.entry_legs = {}
-        self.exit_legs = {}
-        
-        
+        self.open_order = False
         
         self.global_action = self.params.get('action', 'BUY').upper()
         # Load option mapper
@@ -70,7 +68,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
 
         # Initialize legs and order templates
         self._init_legs_and_orders()
-        self._create_order_templates(all_leg_keys=['leg1','leg2','leg3','leg4'])
+        
         # Start global parallel observation
         self._init_global_parallel_observation()
         live_atm_thread = threading.Thread(target=self._live_atm_update_thread,daemon=True)
@@ -152,7 +150,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 ltp_base_index = json.loads(self.r.get(f"reduced_quotes:{self.params.get('symbol',"NIFTY")}"))
                 ltp_base_index = ltp_base_index.get['response']['data'].get('ltp',0)
                 atm_base_index = int(round(ltp_base_index / 50) * 50)
-                if self.current_atm_strike != atm_base_index and (abs(ltp_base_index - self.current_atm) >= 50):
+                if self.current_atm_strike != atm_base_index and (abs(ltp_base_index - self.current_atm) >= 50) and self.open_order==False:
                     self.logger.info(f"ATM updated to {self.current_atm_strike} based on LTP {self.current_atm} ,previous ATM {self.current_atm_strike} , previous LTP {self.current_atm}")
                     self.current_atm_strike = atm_base_index
                     self.current_atm = ltp_base_index
@@ -781,7 +779,6 @@ class StratergyDirectIOCBoxDynamicStrikes:
         if len(primary_legs) >= 2:
             return primary_legs[0], primary_legs[1]
         
-
     def _assign_remaining_pair(self, sell_legs, buy_legs, all_leg_keys, pair1_bidding, pair1_base):
         """Assign second pair from remaining legs."""
         if len(sell_legs) >= 2:
@@ -796,44 +793,28 @@ class StratergyDirectIOCBoxDynamicStrikes:
         self.current_atm = ltp_base_index
         self.current_atm_strike = atm_base_index
         
-        if isExit:
-            for i in range(0,4):
-                self.entry_legs[f'leg{i+1}'] = {
-                    "strike":atm_base_index - (self.params.get('itm_steps'))*50 if i%2==0 else atm_base_index + (self.params.get('otm_steps'))*50,
-                    "type":"CE" if i%2==0 else "PE",
-                    "symbol":self.params.get('symbol',"NIFTY"),
-                    "expiry":self.params.get('expiry',""),
-                    "quantity":self.params.get('quantity',75),
-                    "action":"BUY" if i<2 else "SELL"
+      
+        for i in range(0,4):
+            self.entry_legs[f'leg{i+1}'] = {
+                "strike":atm_base_index - (self.params.get('itm_steps'))*50 if i%2==0 else atm_base_index + (self.params.get('otm_steps'))*50,
+                "type":"CE" if i%2==0 else "PE",
+                "symbol":self.params.get('symbol',"NIFTY"),
+                "expiry":self.params.get('expiry',""),
+                "quantity":self.params.get('quantity',75),
+                "action":"BUY" if i<2 else "SELL"
                     }
-        else:
-            for i in range(0,4):
-                self.exit_legs[f'leg{i+1}'] = {
-                    "strike":atm_base_index - (self.params.get('itm_steps'))*50 if i%2==0 else atm_base_index + (self.params.get('otm_steps'))*50,
-                    "type":"CE" if i%2==0 else "PE",
-                    "symbol":self.params.get('symbol',"NIFTY"),
-                    "expiry":self.params.get('expiry',""),
-                    "quantity":self.params.get('quantity',75),
-                    "action":"SELL" if i<2 else "BUY"
-                    }
+       
         # Load base legs
         base_leg_keys = ["leg1", "leg2", "leg3", "leg4"] # Fixed 4 legs for box strategy
         all_leg_keys = base_leg_keys
         
-        if isExit:
-            for leg_key in base_leg_keys:
-                leg_info = self.exit_legs.get(leg_key)
-                if not leg_info:
-                    print(f"WARNING: Missing leg info for {leg_key}")
-                    continue
-                self.exit_legs[leg_key] = self.data_helpers.load_leg_data(leg_key, leg_info)
-        else:
-            for leg_key in base_leg_keys:
-                leg_info = self.entry_legs.get(leg_key)
-                if not leg_info:
-                    print(f"WARNING: Missing leg info for {leg_key}")
-                    continue
-                self.entry_legs[leg_key] = self.data_helpers.load_leg_data(leg_key, leg_info)
+     
+        for leg_key in base_leg_keys:
+            leg_info = self.entry_legs.get(leg_key)
+            if not leg_info:
+                print(f"WARNING: Missing leg info for {leg_key}")
+                continue
+            self.entry_legs[leg_key] = self.data_helpers.load_leg_data(leg_key, leg_info)
         
         # Determine pairs automatically
         (self.pair1_bidding_leg, self.pair1_base_leg, 
@@ -845,12 +826,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
         # Validate leg assignments
         required_legs = [self.pair1_bidding_leg, self.pair1_base_leg, self.pair2_bidding_leg, self.pair2_base_leg]
         for leg in required_legs:
-            if isExit:
-                if leg not in self.exit_legs:
-                    raise RuntimeError(f"Missing required leg: {leg}")
-            else:
-                if leg not in self.entry_legs:
-                    raise RuntimeError(f"Missing required leg: {leg}")
+            if leg not in self.entry_legs:
+                raise RuntimeError(f"Missing required leg: {leg}")
         # Determine exchange
         self._determine_exchange()
         
@@ -862,7 +839,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
         self._setup_user_data(all_leg_keys)
         
         # Create order templates
-        
+        self._create_order_templates(all_leg_keys=['leg1','leg2','leg3','leg4'])
         
 
     def _determine_exchange(self):
@@ -1270,7 +1247,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 
                 # Dedicated 10-second observation specifically for CASE A/B decision
                 buy_pair_observation = self._observe_market_for_case_decision(buy_leg_keys[0], buy_leg_keys[1], 60)
-            
+                breakpoint()
                 self.execution_tracker.add_observation("BUY_PAIR_CASE_DECISION", {
                     "user": uid,
                     "buy_legs": buy_leg_keys,
@@ -1333,7 +1310,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             # Execute first SELL leg with MODIFY strategy
             self.execution_tracker.add_milestone(f"Placing first SELL order (MODIFY) for {first_sell_leg}")
             first_sell_result = self._place_modify_order_until_complete(uid, first_sell_leg,30,0.3,isExit)
-            
+            self.open_order = True
             if not first_sell_result['success']:
                 self.logger.error(f"First SELL leg ({first_sell_leg}) failed")
                 self.execution_tracker.add_error(f"First SELL leg failed", f"Leg: {first_sell_leg}")
@@ -1409,7 +1386,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             
             # Execute first BUY leg with MODIFY strategy
             first_buy_result = self._place_modify_order_until_complete(uid, first_buy_leg,30,0.3,isExit)
-            
+            self.open_order = True
             if not first_buy_result['success']:
                 print(f"ERROR: First BUY leg failed")
                 return False
