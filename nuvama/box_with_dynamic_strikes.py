@@ -382,10 +382,6 @@ class StratergyDirectIOCBoxDynamicStrikes:
             dict: Execution strategy with action and order details
         """
         try:
-            # self.logger.info(
-            #     f"Determining execution strategy for {leg_action_type} legs",
-            #     f"{leg1_key}: {leg1_trend} ({leg1_change:.2f}), {leg2_key}: {leg2_trend} ({leg2_change:.2f})"
-            # )
             
             if not isExit:
                 if leg_action_type.upper() == "SELL":
@@ -1459,7 +1455,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 if strategy['action'] == 'SKIP':
                     return None, None, f"Exit execution skipped: {strategy['reason']}"
                 
-                return strategy['first_leg'], strategy['second_leg'], strategy['reason']
+                return strategy['first_leg_exit'], strategy['second_leg_exit'], strategy['reason']
         
         # Fallback to old logic
         first_leg = observation.get('first_leg', leg_keys[0])
