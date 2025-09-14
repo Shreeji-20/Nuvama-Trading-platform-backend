@@ -30,6 +30,7 @@ params = {
     "itm_steps": 2,
     "otm_steps": 2,
     "symbol" : "NIFTY",
+    "expiry":0
 }
 
 obj_seq = box_with_dynamic_strikes.StratergyDirectIOCBoxDynamicStrikes(params)

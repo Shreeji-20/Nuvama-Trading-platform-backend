@@ -31,49 +31,55 @@ from constants.duration import DurationEnum
 
 class StratergyDirectIOCBoxDynamicStrikes:
     def __init__(self,params) -> None:
-        print("Initializing Direct IOC Box Strategy with Dynamic Strikes... 123")
-        self.params=params
-        self.r = redis.Redis(host="localhost", port=6379, db=0)
-        self.execution_tracker = StrategyExecutionTracker(self.r, "DirectIOCBoxDynamicStrikes")
-        self.logger = StrategyLoggingHelpers
-        
-        self.lot_sizes = json.loads(self.r.get("lotsizes"))
-        self._init_user_connections()
+        try:
+            print("Initializing Direct IOC Box Strategy with Dynamic Strikes... 123")
+            self.params=params
+            self.r = redis.Redis(host="localhost", port=6379, db=0)
+            self.execution_tracker = StrategyExecutionTracker(self.r, "DirectIOCBoxDynamicStrikes")
+            self.logger = StrategyLoggingHelpers
+            
+            self.lot_sizes = json.loads(self.r.get("lotsizes"))
+            self._init_user_connections()
 
-        self.templates_lock = threading.Lock()
-        self.executor = ThreadPoolExecutor(max_workers=5)
+            self.templates_lock = threading.Lock()
+            self.executor = ThreadPoolExecutor(max_workers=5)
 
-        # Initialize execution mode (default is SIMULATION)
-        execution_mode = self.params.get('execution_mode', StrategyExecutionHelpers.SIMULATION_MODE)
-        self.execution_helper = StrategyExecutionHelpers(self.r, execution_mode)
-        
-        # Log execution mode
-        StrategyLoggingHelpers.info(
-            f"Strategy initialized in {execution_mode} mode",
-            f"Params ID: {datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        )
-        
-        self.entry_legs = {}
-        self.open_order = False
-        
-        self.global_action = self.params.get('action', 'BUY').upper()
-        # Load option mapper
-        self._load_option_mapper()
+            # Initialize execution mode (default is SIMULATION)
+            execution_mode = self.params.get('execution_mode', StrategyExecutionHelpers.SIMULATION_MODE)
+            self.execution_helper = StrategyExecutionHelpers(self.r, execution_mode)
+            
+            # Log execution mode
+            StrategyLoggingHelpers.info(
+                f"Strategy initialized in {execution_mode} mode",
+                f"Params ID: {datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            )
+            
+            self.entry_legs = {}
+            self.open_order = False
+            
+            self.global_action = self.params.get('action', 'BUY').upper()
+            # Load option mapper
+            self._load_option_mapper()
 
-        # Initialize tracking dictionaries
-        self._init_tracking_data()
+            # Initialize tracking dictionaries
+            self._init_tracking_data()
 
-        # Initialize helper classes
-        self._init_helpers()
+            # Initialize helper classes
+            self._init_helpers()
 
-        # Initialize legs and order templates
-        self._init_legs_and_orders()
-        
-        # Start global parallel observation
-        self._init_global_parallel_observation()
-        live_atm_thread = threading.Thread(target=self._live_atm_update_thread,daemon=True)
-        live_atm_thread.start()
-        self.live_atm_update_thread = live_atm_thread
+            # Initialize legs and order templates
+            self._init_legs_and_orders()
+            breakpoint()
+            # Start global parallel observation
+            self._init_global_parallel_observation()
+            live_atm_thread = threading.Thread(target=self._live_atm_update_thread,daemon=True)
+            live_atm_thread.start()
+            self.live_atm_update_thread = live_atm_thread
+        except Exception as e:
+            StrategyLoggingHelpers.error("Failed to initialize strategy", exception=e)
+            print(traceback.format_exc())
+            breakpoint()
+            raise
 
     def _init_user_connections(self):
         """Initialize user API connections."""
@@ -148,18 +154,19 @@ class StratergyDirectIOCBoxDynamicStrikes:
         while not self.stop_live_atm_thread:
             try:
                 ltp_base_index = json.loads(self.r.get(f"reduced_quotes:{self.params.get('symbol',"NIFTY")}"))
-                ltp_base_index = ltp_base_index.get['response']['data'].get('ltp',0)
+                ltp_base_index = float(ltp_base_index['response']['data'].get('ltp',0))
                 atm_base_index = int(round(ltp_base_index / 50) * 50)
                 if self.current_atm_strike != atm_base_index and (abs(ltp_base_index - self.current_atm) >= 50) and self.open_order==False:
                     self.logger.info(f"ATM updated to {self.current_atm_strike} based on LTP {self.current_atm} ,previous ATM {self.current_atm_strike} , previous LTP {self.current_atm}")
                     self.current_atm_strike = atm_base_index
                     self.current_atm = ltp_base_index
-                    self._init_legs_and_orders(False)
-                    self._init_legs_and_orders(True)
+                    self._init_legs_and_orders()
+                   
                     
                     
             except Exception as e:
                 self.logger.error("Params update thread failed", exception=e)
+                print(traceback.format_exc())
 
     def _init_global_parallel_observation(self):
         """
@@ -447,7 +454,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             (leg1_trend == "STABLE" and leg2_trend == "INCREASING")):
             stable_leg = leg1_key if leg1_trend == "STABLE" else leg2_key
             increasing_leg = leg2_key if leg1_trend == "STABLE" else leg1_key
-            self.logger.success(f"SELL Strategy: Increasing with stable - executing stable leg ({stable_leg}) first")
+            # self.logger.success(f"SELL Strategy: Increasing with stable - executing stable leg ({stable_leg}) first")
             return {
                 "action": "EXECUTE", 
                 "strategy": "stable_first",
@@ -463,7 +470,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 first_leg, second_leg = leg1_key, leg2_key
             else:
                 first_leg, second_leg = leg2_key, leg1_key
-            self.logger.info("SELL Strategy: Both increasing - executing stronger increase first")
+            # self.logger.info("SELL Strategy: Both increasing - executing stronger increase first")
             return {
                 "action": "EXECUTE",
                 "strategy": "both_increasing",
@@ -481,7 +488,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             }
         
         # Fallback
-        self.logger.warning("SELL Strategy: Unhandled case - using default execution")
+        # self.logger.warning("SELL Strategy: Unhandled case - using default execution")
         return {
             "action": "EXECUTE",
             "strategy": "default",
@@ -800,7 +807,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
         if len(sell_legs) >= 2:
             return sell_legs[0], sell_legs[1]
 
-    def _init_legs_and_orders(self,isExit=False):
+    def _init_legs_and_orders(self):
         """Initialize 4-leg sequential box strategy with optimized leg pairing."""
         # Load legs data
         ltp_base_index = json.loads(self.r.get(f"reduced_quotes:{self.params.get('symbol',"NIFTY")}")) or 0
@@ -820,8 +827,6 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 "action":"BUY" if i<2 else "SELL"
                     }
        
-        print("Legs : ",json.dumps(self.entry_legs,indent=2))
-        breakpoint()
         # Load base legs
         base_leg_keys = ["leg1", "leg2", "leg3", "leg4"] # Fixed 4 legs for box strategy
         all_leg_keys = base_leg_keys
@@ -1314,7 +1319,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             })
             
             # Get SELL leg observation result from global observation
-            sell_observation = self._get_global_observation_result("SELL_PAIR",isExit)
+            sell_observation = self._get_global_observation_result("SELL_PAIR")
             first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, [sell_leg_keys[0],sell_leg_keys[1]],isExit)
             self.logger.info("Using global observation for SELL leg execution order", str(sell_leg_keys))
 
@@ -1389,7 +1394,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             print(f"INFO: Case B - BUY legs moving, executing BUY legs first")
             
             # Get BUY confirmation from global observation
-            buy_observation_2 = self._get_global_observation_result("BUY_PAIR",isExit)
+            buy_observation_2 = self._get_global_observation_result("BUY_PAIR")
             
             print(f"INFO: Using global observation to confirm BUY market conditions")
             
@@ -1647,7 +1652,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
         
         try:
             # Start execution tracking
-            execution_id = self.execution_tracker.start_execution(self.paramsid)
+            execution_id = self.execution_tracker.start_execution(f"{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_BoxStrategy")
             self.logger.separator("STRATEGY EXECUTION START")
             
             # Global parallel observation should already be initialized in __init__
