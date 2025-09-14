@@ -685,16 +685,28 @@ class StratergyDirectIOCBoxDynamicStrikes:
             )
             
             # Determine execution order for moving legs (stronger movement first)
-            if abs(leg1_change) > abs(leg2_change):
-                first_leg, second_leg = leg1_key, leg2_key
-                primary_change, secondary_change = leg1_change, leg2_change
-            elif abs(leg2_change) > abs(leg1_change):
-                first_leg, second_leg = leg2_key, leg1_key
-                primary_change, secondary_change = leg2_change, leg1_change
+            if not isExit:
+                if abs(leg1_change) > abs(leg2_change):
+                    first_leg, second_leg = leg1_key, leg2_key
+                    primary_change, secondary_change = leg1_change, leg2_change
+                elif abs(leg2_change) > abs(leg1_change):
+                    first_leg, second_leg = leg2_key, leg1_key
+                    primary_change, secondary_change = leg2_change, leg1_change
+                else:
+                    # Equal movement, use original order
+                    first_leg, second_leg = leg1_key, leg2_key
+                    primary_change, secondary_change = leg1_change, leg2_change
             else:
-                # Equal movement, use original order
-                first_leg, second_leg = leg1_key, leg2_key
-                primary_change, secondary_change = leg1_change, leg2_change
+                if abs(leg1_change) < abs(leg2_change):
+                    first_leg, second_leg = leg1_key, leg2_key
+                    primary_change, secondary_change = leg1_change, leg2_change
+                elif abs(leg2_change) < abs(leg1_change):
+                    first_leg, second_leg = leg2_key, leg1_key
+                    primary_change, secondary_change = leg2_change, leg1_change
+                else:
+                    # Equal movement, use original order
+                    first_leg, second_leg = leg1_key, leg2_key
+                    primary_change, secondary_change = leg1_change, leg2_change
             
             return {
                 'first_leg': first_leg,
@@ -805,9 +817,11 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 "symbol":self.params.get('symbol',"NIFTY"),
                 "expiry":self.params.get('expiry',""),
                 "quantity":self.params.get('quantity',75),
-                "action":"BUY" if i<2 else "SELL"
+                "action":"BUY" if i%3==0 else "SELL"
                     }
        
+        print("Legs : ",json.dumps(self.entry_legs,indent=2))
+        breakpoint()
         # Load base legs
         base_leg_keys = ["leg1", "leg2", "leg3", "leg4"] # Fixed 4 legs for box strategy
         all_leg_keys = base_leg_keys
