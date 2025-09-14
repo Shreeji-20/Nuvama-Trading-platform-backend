@@ -1,6 +1,6 @@
 from nuvama import stratergies_4leg
 from nuvama import stratergies_direct_ioc_box
-
+from nuvama import box_with_dynamic_strikes
 # obj_4leg = stratergies_4leg.Stratergy4Leg("e93eaed7-d907-4703-9e5c-46acea6fb962")
 # obj_4leg.main_logic()
 
@@ -9,8 +9,6 @@ from nuvama import stratergies_direct_ioc_box
 
 
 params = {
-   
-  
     "desired_spread": 198,
     "exit_desired_spread": 201,
     "action": "BUY",
@@ -34,7 +32,7 @@ params = {
     "symbol" : "NIFTY",
 }
 
-obj_seq = stratergies_direct_ioc_box.StratergyDirectIOCBox(params)
+obj_seq = box_with_dynamic_strikes.StratergyDirectIOCBoxDynamicStrikes(params)
 # obj_seq._init_legs_and_orders()
 
 obj_seq.main_logic()

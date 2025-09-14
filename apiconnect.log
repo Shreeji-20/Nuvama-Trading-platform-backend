@@ -13130,3 +13130,60 @@ pip install python-multipart
 2025-09-14 14:59:16,365 [INFO] routers.stratergy_4leg: Successfully connected to Redis
 2025-09-14 14:59:28,370 [INFO] routers.stratergy_4leg: Successfully connected to Redis
 2025-09-14 14:59:33,167 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:00:54,131 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:01:11,486 [INFO] constants.router: Router object is being created.
+2025-09-14 15:01:11,486 [INFO] APIConnect.http: Http object is being created.
+2025-09-14 15:01:11,486 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-14 15:01:11,487 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-14 15:01:11,489 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-14 15:01:11,492 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-14 15:01:11,677 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-14 15:01:11,677 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757808022638, 'exp': 1757808022606, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '3e70f5f7-1920-4c08-acc2-6d1a747edc42', 'srvTm': 1757844071623}
+2025-09-14 15:01:11,678 [INFO] constants.router: Router object is being created.
+2025-09-14 15:01:11,678 [INFO] APIConnect.http: Http object is being created.
+2025-09-14 15:01:11,678 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-14 15:01:11,679 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-14 15:01:11,680 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-14 15:01:11,683 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-14 15:01:11,838 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-14 15:01:11,838 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757808022638, 'exp': 1757808022606, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '0cb7ed88-7712-47d6-894e-660b6cfd669a', 'srvTm': 1757844071784}
+2025-09-14 15:02:04,888 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:02:19,671 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:02:24,507 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:02:29,290 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:03:03,003 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:03:07,829 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:03:19,644 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:03:24,476 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:03:26,053 [INFO] constants.router: Router object is being created.
+2025-09-14 15:03:26,053 [INFO] APIConnect.http: Http object is being created.
+2025-09-14 15:03:26,054 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-14 15:03:26,054 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-14 15:03:26,056 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-14 15:03:26,059 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-14 15:03:26,241 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-14 15:03:26,241 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757808022638, 'exp': 1757808022606, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '574ffd40-b23e-464b-aac7-1f52f09a313d', 'srvTm': 1757844206182}
+2025-09-14 15:03:26,242 [INFO] constants.router: Router object is being created.
+2025-09-14 15:03:26,242 [INFO] APIConnect.http: Http object is being created.
+2025-09-14 15:03:26,242 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-14 15:03:26,242 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-14 15:03:26,244 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-14 15:03:26,247 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-14 15:03:26,427 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-14 15:03:26,428 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757808022638, 'exp': 1757808022606, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'f68c389b-d5b0-4003-986f-552e252cb821', 'srvTm': 1757844206368}
+2025-09-14 15:04:15,071 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:05:08,516 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:05:13,272 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:06:10,449 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:06:28,884 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:06:33,593 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:06:44,516 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:06:49,446 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:06:55,090 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:06:59,922 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:07:04,646 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:07:16,628 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:08:37,314 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:08:42,009 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:09:06,583 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-14 15:09:11,317 [INFO] routers.stratergy_4leg: Successfully connected to Redis

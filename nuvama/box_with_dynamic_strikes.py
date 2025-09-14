@@ -812,12 +812,12 @@ class StratergyDirectIOCBoxDynamicStrikes:
       
         for i in range(0,4):
             self.entry_legs[f'leg{i+1}'] = {
-                "strike":atm_base_index - (self.params.get('itm_steps'))*50 if i%2==0 else atm_base_index + (self.params.get('otm_steps'))*50,
+                "strike":atm_base_index - (self.params.get('itm_steps'))*50 if i%3==0 else atm_base_index + (self.params.get('otm_steps'))*50,
                 "type":"CE" if i%2==0 else "PE",
                 "symbol":self.params.get('symbol',"NIFTY"),
                 "expiry":self.params.get('expiry',""),
                 "quantity":self.params.get('quantity',75),
-                "action":"BUY" if i%3==0 else "SELL"
+                "action":"BUY" if i<2 else "SELL"
                     }
        
         print("Legs : ",json.dumps(self.entry_legs,indent=2))
