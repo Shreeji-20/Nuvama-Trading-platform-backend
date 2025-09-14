@@ -3,6 +3,7 @@ Direct IOC Box Strategy - Main Logic
 Execute legs in pairs with direct IOC orders using bid/ask pricing
 """
 
+from ast import Pass
 import datetime
 import os
 from pickle import TRUE
@@ -69,7 +70,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
 
             # Initialize legs and order templates
             self._init_legs_and_orders()
-            breakpoint()
+            # breakpoint()
             # Start global parallel observation
             self._init_global_parallel_observation()
             live_atm_thread = threading.Thread(target=self._live_atm_update_thread,daemon=True)
@@ -78,7 +79,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
         except Exception as e:
             StrategyLoggingHelpers.error("Failed to initialize strategy", exception=e)
             print(traceback.format_exc())
-            breakpoint()
+            # breakpoint()
             raise
 
     def _init_user_connections(self):
@@ -330,23 +331,12 @@ class StratergyDirectIOCBoxDynamicStrikes:
         
         # Use new execution strategy logic
         execution_strategy = self._determine_execution_strategy(
-            leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type,isExit
+            leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type,False
         )
         
         execution_strategy_exit = self._determine_execution_strategy(
             leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type,True
         )
-        
-        # self.logger.info(
-        #     f"Market observation complete for {leg_action_type} legs",
-        #     f"Strategy: {execution_strategy['strategy']} | Action: {execution_strategy['action']}"
-        # )
-        
-        # Return False if we should skip execution
-        
-        if execution_strategy['action'] == 'SKIP':
-            # self.logger.warning(f"Skipping execution: {execution_strategy['reason']}")
-            return False
         
         # Return execution details for proceeding with orders
         return {
@@ -619,10 +609,23 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 leg2_price = current_prices.get(leg2_key, 0)
                 
                 if leg1_price > 0 and leg2_price > 0:  # Valid prices
-                    leg1_prices.append(leg1_price)
-                    leg2_prices.append(leg2_price)
-                    timestamps.append(current_time)
-                    valid_samples += 1
+                    if leg1_prices and leg1_price != leg1_prices[-1]: 
+                        leg1_prices.append(leg1_price)
+                    elif not leg1_prices:
+                        leg1_prices.append(leg1_price)
+                    else:
+                        continue  # Skip duplicate price
+                    if leg2_prices and leg2_price != leg2_prices[-1]:
+                        leg2_prices.append(leg2_price)
+                        timestamps.append(current_time)
+                        valid_samples += 1
+                    elif not leg2_prices:
+                        leg2_prices.append(leg2_price)
+                        timestamps.append(current_time)
+                        valid_samples += 1
+                    else:
+                        continue  # Skip duplicate price
+                    
                     
                     # Log first few samples to verify we're getting fresh data
                     if valid_samples <= 3:
@@ -1269,8 +1272,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 })
                 
                 # Dedicated 10-second observation specifically for CASE A/B decision
-                buy_pair_observation = self._observe_market_for_case_decision(buy_leg_keys[0], buy_leg_keys[1], 60)
-                breakpoint()
+                buy_pair_observation = self._observe_market_for_case_decision(buy_leg_keys[0], buy_leg_keys[1], 60,isExit)
+                # breakpoint()
                 self.execution_tracker.add_observation("BUY_PAIR_CASE_DECISION", {
                     "user": uid,
                     "buy_legs": buy_leg_keys,
@@ -1466,7 +1469,6 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 strategy = observation['execution_strategy']
                 if strategy['action'] == 'SKIP':
                     return None, None, f"Execution skipped: {strategy['reason']}"
-                
                 return strategy['first_leg'], strategy['second_leg'], strategy['reason']
         else:
             if isinstance(observation, dict) and 'exit_execution_strategy' in observation:
@@ -1683,6 +1685,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                             active_users += 1
                             self.logger.debug(f"Processing user {uid}")
                             self._execute_both_pairs(uid, leg_prices,isExit=False)
+                            breakpoint()
                             self._execute_both_pairs(uid, leg_prices,isExit=True)
                             processed_users += 1
                     

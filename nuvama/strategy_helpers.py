@@ -49,11 +49,11 @@ class StrategyHelpers:
             weight_total += weight
         
         weighted_trend = weighted_sum / weight_total if weight_total > 0 else 0
-        
+        # print("\nWeighted trend:", weighted_trend,end="\n ")
         # Determine trend direction
-        if weighted_trend > 0.02:  # More than 2 paise increase
+        if weighted_trend > 2:  # More than 2 paise increase
             return "INCREASING", weighted_trend
-        elif weighted_trend < -0.02:  # More than 2 paise decrease
+        elif weighted_trend < -2:  # More than 2 paise decrease
             return "DECREASING", weighted_trend
         else:
             return "STABLE", weighted_trend
