@@ -318,12 +318,16 @@ class StratergyDirectIOCBoxDynamicStrikes:
         leg2_trend, leg2_change = StrategyHelpers.analyze_price_trend(leg2_prices)
         
         # Determine leg action type (BUY or SELL) from the first leg
-        leg1_action = self.legs[leg1_key]['info'].get('action', self.global_action).upper()
+        leg1_action = self.entry_legs[leg1_key]['info'].get('action', self.global_action).upper()
         leg_action_type = "BUY" if leg1_action == "BUY" else "SELL"
         
         # Use new execution strategy logic
         execution_strategy = self._determine_execution_strategy(
             leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type,isExit
+        )
+        
+        execution_strategy_exit = self._determine_execution_strategy(
+            leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type,True
         )
         
         # self.logger.info(
@@ -332,14 +336,15 @@ class StratergyDirectIOCBoxDynamicStrikes:
         # )
         
         # Return False if we should skip execution
+        
         if execution_strategy['action'] == 'SKIP':
             # self.logger.warning(f"Skipping execution: {execution_strategy['reason']}")
             return False
         
         # Return execution details for proceeding with orders
         return {
-            'first_leg': execution_strategy['first_leg'],
-            'second_leg': execution_strategy['second_leg'],
+            'first_leg': execution_strategy['first_leg'] if execution_strategy['action'] == 'EXECUTE' else None,
+            'second_leg': execution_strategy['second_leg'] if execution_strategy['action'] == 'EXECUTE' else None,
             'trend': 'strategic_execution',
             'execution_strategy': execution_strategy,
             'price_data': {
@@ -354,7 +359,10 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 leg1_key: leg1_prices[-1],
                 leg2_key: leg2_prices[-1]
             },
-            'leg_action_type': leg_action_type
+            'leg_action_type': leg_action_type,
+            'exit_execution_strategy': execution_strategy_exit,
+            'first_leg_exit': execution_strategy_exit['first_leg'] if execution_strategy_exit['action'] == 'EXECUTE' else None,
+            'second_leg_exit': execution_strategy_exit['second_leg'] if execution_strategy_exit['action'] == 'EXECUTE' else None
         }
 
     def _determine_execution_strategy(self, leg1_key, leg2_key, leg1_trend, leg2_trend, leg1_change, leg2_change, leg_action_type="BUY",isExit=False):
@@ -737,7 +745,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
     def _get_leg_prices(self, leg_keys, is_exit=False):
         """Get current prices for specified legs based on their actions."""
         return self.pricing_helpers.get_leg_prices(
-            self.legs, leg_keys, self.global_action, self.data_helpers, is_exit
+            self.entry_legs, leg_keys, self.global_action, self.data_helpers, is_exit
         )
 
     def _calculate_price_volatility(self, prices):
@@ -902,10 +910,10 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 self.exit_order_templates[uid][leg_key] = self.order_helpers.make_order_template(
                     leg_data, exit_action, uid, leg_key,lotsizes=self.lot_sizes)
 
-    def _check_desired_quantity_reached(self, uid):
+    def _check_desired_quantity_reached(self, uid,isExit=False):
         """Check if the desired quantities have been reached for all legs."""
         return StrategyQuantityHelpers.check_desired_quantity_reached(
-            self.legs, self.params, self.entry_qtys, uid
+            self.entry_legs, self.params, self.entry_qtys if not isExit else self.exit_qtys, uid
         )
 
     def _get_remaining_quantity_for_leg(self, uid, leg_key, isExit=False):
@@ -1296,8 +1304,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
             })
             
             # Get SELL leg observation result from global observation
-            sell_observation = self._get_global_observation_result("SELL_PAIR")
-            first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, [sell_leg_keys[0],sell_leg_keys[1]])
+            sell_observation = self._get_global_observation_result("SELL_PAIR",isExit)
+            first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, [sell_leg_keys[0],sell_leg_keys[1]],isExit)
             self.logger.info("Using global observation for SELL leg execution order", str(sell_leg_keys))
 
             self.logger.info(f"SELL legs execution order determined: {first_sell_leg}, {second_sell_leg}")
@@ -1371,7 +1379,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             print(f"INFO: Case B - BUY legs moving, executing BUY legs first")
             
             # Get BUY confirmation from global observation
-            buy_observation_2 = self._get_global_observation_result("BUY_PAIR")
+            buy_observation_2 = self._get_global_observation_result("BUY_PAIR",isExit)
             
             print(f"INFO: Using global observation to confirm BUY market conditions")
             
@@ -1380,7 +1388,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 return self._execute_case_a_sell_first(uid, prices, buy_leg_keys, sell_leg_keys)
             
             # Handle new strategic execution format
-            first_buy_leg, second_buy_leg, execution_reason = self.get_legs_sequence_from_observation(buy_observation_2, [buy_leg_keys[0],buy_leg_keys[1]])
+            first_buy_leg, second_buy_leg, execution_reason = self.get_legs_sequence_from_observation(buy_observation_2, [buy_leg_keys[0],buy_leg_keys[1]],isExit)
             
             print(f"INFO: Executing BUY legs with MODIFY strategy - First: {first_buy_leg}, Second: {second_buy_leg}")
             
@@ -1433,17 +1441,25 @@ class StratergyDirectIOCBoxDynamicStrikes:
             traceback.print_exc()
             return False
         
-    def get_legs_sequence_from_observation(self, observation, leg_keys):
+    def get_legs_sequence_from_observation(self, observation, leg_keys,isExit=False):
         """Determine leg execution sequence from observation data."""
         if observation == None or observation == False:
             return leg_keys[0], leg_keys[1], "No strategic observation available"
         
-        if isinstance(observation, dict) and 'execution_strategy' in observation:
-            strategy = observation['execution_strategy']
-            if strategy['action'] == 'SKIP':
-                return None, None, f"Execution skipped: {strategy['reason']}"
-            
-            return strategy['first_leg'], strategy['second_leg'], strategy['reason']
+        if not isExit:
+            if isinstance(observation, dict) and 'execution_strategy' in observation:
+                strategy = observation['execution_strategy']
+                if strategy['action'] == 'SKIP':
+                    return None, None, f"Execution skipped: {strategy['reason']}"
+                
+                return strategy['first_leg'], strategy['second_leg'], strategy['reason']
+        else:
+            if isinstance(observation, dict) and 'exit_execution_strategy' in observation:
+                strategy = observation['exit_execution_strategy']
+                if strategy['action'] == 'SKIP':
+                    return None, None, f"Exit execution skipped: {strategy['reason']}"
+                
+                return strategy['first_leg'], strategy['second_leg'], strategy['reason']
         
         # Fallback to old logic
         first_leg = observation.get('first_leg', leg_keys[0])
@@ -1482,7 +1498,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
     
                     buy_observation = self._get_global_observation_result("BUY_PAIR")
                     print(f"INFO: Using global observation for BUY leg execution order: {buy_leg_keys}")
-                    first_buy_leg, second_buy_leg, execution_reason = self.get_legs_sequence_from_observation(buy_observation, buy_leg_keys)
+                    first_buy_leg, second_buy_leg, execution_reason = self.get_legs_sequence_from_observation(buy_observation, buy_leg_keys,isExit)
                     
                     # Step 2: Execute BUY legs sequentially based on global observation
                     print(f"INFO: Executing BUY legs - First: {first_buy_leg}, Second: {second_buy_leg}")
@@ -1548,7 +1564,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
 
                     print(f"INFO: Using global observation for SELL leg execution order: {sell_leg_keys}")
 
-                    first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, sell_leg_keys)
+                    first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, sell_leg_keys,isExit)
                     
                     # Execute SELL legs sequentially based on global observation -> pending select legs based on observation
                     
@@ -1581,7 +1597,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
         
         sell_observation = self._get_global_observation_result("SELL_PAIR")
         print(f"INFO: Using global observation for SELL leg execution order: {sell_observation}")
-        first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, [self.pair2_bidding_leg, self.pair2_base_leg])
+        first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, [self.pair2_bidding_leg, self.pair2_base_leg],isExit)
         
         first_sell_success = self._place_ioc_order_with_retry(uid, first_sell_leg, 1, isExit)
         if not first_sell_success.get('success', False):
@@ -1600,7 +1616,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
         
         buy_observation = self._get_global_observation_result("BUY_PAIR")
         print(f"INFO: Using global observation for BUY leg execution order: {buy_observation}")
-        first_buy_leg, second_buy_leg, execution_reason = self.get_legs_sequence_from_observation(buy_observation, [self.pair1_bidding_leg, self.pair1_base_leg])
+        first_buy_leg, second_buy_leg, execution_reason = self.get_legs_sequence_from_observation(buy_observation, [self.pair1_bidding_leg, self.pair1_base_leg],isExit)
         first_buy_success = self._place_ioc_order_with_retry(uid, first_buy_leg, 1, isExit)
         if not first_buy_success:
             print(f"ERROR: First BUY leg execution failed")
