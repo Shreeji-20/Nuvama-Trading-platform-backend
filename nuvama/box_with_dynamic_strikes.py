@@ -70,12 +70,16 @@ class StratergyDirectIOCBoxDynamicStrikes:
 
             # Initialize legs and order templates
             self._init_legs_and_orders()
-            # breakpoint()
+            # breakpoint
+       
             # Start global parallel observation
             self._init_global_parallel_observation()
+            breakpoint()
             live_atm_thread = threading.Thread(target=self._live_atm_update_thread,daemon=True)
             live_atm_thread.start()
             self.live_atm_update_thread = live_atm_thread
+            
+            
         except Exception as e:
             StrategyLoggingHelpers.error("Failed to initialize strategy", exception=e)
             print(traceback.format_exc())
@@ -834,7 +838,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
         base_leg_keys = ["leg1", "leg2", "leg3", "leg4"] # Fixed 4 legs for box strategy
         all_leg_keys = base_leg_keys
         
-     
+        print("Legs Selected : ",json.dumps(self.entry_legs, indent=2))
         for leg_key in base_leg_keys:
             leg_info = self.entry_legs.get(leg_key)
             if not leg_info:
@@ -1476,7 +1480,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 if strategy['action'] == 'SKIP':
                     return None, None, f"Exit execution skipped: {strategy['reason']}"
                 
-                return strategy['first_leg_exit'], strategy['second_leg_exit'], strategy['reason']
+                return strategy['first_leg'], strategy['second_leg'], strategy['reason']
         
         # Fallback to old logic
         first_leg = observation.get('first_leg', leg_keys[0])
@@ -1495,7 +1499,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 current_buy_spread = current_prices[self.pair1_bidding_leg] + current_prices[self.pair1_base_leg]
                 sell_profit = sell_executed_spread - current_sell_spread
                 
-                print(f"SELL Profit: {sell_profit:.2f} current_buy_spread : {current_buy_spread} rbs:{remaining_spread} (threshold: {profit_threshold})", end='\r')
+                print(f"SELL Profit: {sell_profit:.2f} current_buy_spread : {current_buy_spread:.2f} rbs:{remaining_spread:.2f} (threshold: {profit_threshold})", end='\r')
                 
                 # Check profit threshold
                 if sell_profit >= profit_threshold:
