@@ -46,7 +46,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             self.executor = ThreadPoolExecutor(max_workers=5)
 
             # Initialize execution mode (default is SIMULATION)
-            execution_mode = self.params.get('execution_mode', StrategyExecutionHelpers.SIMULATION_MODE)
+            execution_mode = self.params.get('execution_mode', StrategyExecutionHelpers.LIVE_MODE)
             self.execution_helper = StrategyExecutionHelpers(self.r, execution_mode)
             
             # Log execution mode
@@ -1158,7 +1158,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                     order_id = result.get('order_id') if isinstance(result, dict) else None
                     if order_id:
                         # Wait a moment for fill data
-                        time.sleep(0.2)
+                        time.sleep(0.6)
                         if self.execution_helper.execution_mode == "SIMULATION":
                             status = result
                             filled_qty = status.get('quantity', 0)
@@ -1202,6 +1202,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                        "reason": "partial_fill", "attempts": retry_count}
             else:
                 self.logger.error(f"IOC execution failed for {leg_key}", f"No fills after {retry_count} attempts")
+                breakpoint()
                 return {"success": False, "filled_qty": 0, "filled_price": 0, 
                        "reason": "no_fills", "attempts": retry_count}
                        
@@ -1254,8 +1255,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
     def _execute_dual_strategy_pairs(self, uid, prices,isExit=False):
         """Execute pairs using dual strategy approach with dedicated 10-second BUY pair observation."""
         try:
-            buy_pair_observation = 1
-            while buy_pair_observation == 1:
+            
+            while True:
                 self.logger.separator(f"DUAL STRATEGY EXECUTION - USER {uid}")
                 
                 # Step 1: Identify BUY and SELL leg pairs
@@ -1297,7 +1298,10 @@ class StratergyDirectIOCBoxDynamicStrikes:
                         "reason": "BUY_legs_stable_10_seconds",
                         "observation_details": buy_pair_observation
                     })
-                    self._execute_case_a_sell_first(uid, prices, buy_leg_keys, sell_leg_keys,isExit)
+                    if not isExit:
+                        success = self._execute_case_a_sell_first(uid, prices, buy_leg_keys, sell_leg_keys,isExit)
+                    else:
+                        success = self._execute_case_b_buy_first(uid, prices, buy_leg_keys, sell_leg_keys, buy_pair_observation,isExit)
                 else:
                     # BUY legs are moving over 10 seconds - CASE B: Execute BUY legs first with profit monitoring
                     self.logger.warning("CASE B: BUY legs are MOVING over 10 seconds - executing BUY legs first")
@@ -1307,7 +1311,27 @@ class StratergyDirectIOCBoxDynamicStrikes:
                         "reason": "BUY_legs_moving_10_seconds",
                         "observation_details": buy_pair_observation
                     })
-                    self._execute_case_b_buy_first(uid, prices, buy_leg_keys, sell_leg_keys, buy_pair_observation,isExit)
+                    if not isExit:
+                        success = self._execute_case_b_buy_first(uid, prices, buy_leg_keys, sell_leg_keys, buy_pair_observation,isExit)
+                    else:
+                        success = self._execute_case_a_sell_first(uid, prices, buy_leg_keys, sell_leg_keys,isExit)
+                if success:
+                    self.logger.success(f"Dual strategy execution completed for user {uid} with {case_type}")
+                    self.execution_tracker.add_milestone(f"User {uid} dual strategy execution successful", {
+                        "user": uid,
+                        "strategy": case_type,
+                        "status": "success"
+                    })
+                    break  # Exit the while loop on success
+                else:
+                    self.logger.warning(f"Dual strategy execution failed for user {uid} with {case_type}, retrying...")
+                    self.execution_tracker.add_milestone(f"User {uid} dual strategy execution failed, retrying", {
+                        "user": uid,
+                        "strategy": case_type,
+                        "status": "failed"
+                    })
+                    time.sleep(1)  # Brief pause before retrying
+                    continue
             return True
         except Exception as e:
             self.logger.error(f"Failed to execute dual strategy for user {uid}", exception=e)
@@ -1328,6 +1352,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
             # Get SELL leg observation result from global observation
             sell_observation = self._get_global_observation_result("SELL_PAIR")
             first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, [sell_leg_keys[0],sell_leg_keys[1]],isExit)
+            if not first_sell_leg or not second_sell_leg:
+                return False
             self.logger.info("Using global observation for SELL leg execution order", str(sell_leg_keys))
 
             self.logger.info(f"SELL legs execution order determined: {first_sell_leg}, {second_sell_leg}")
@@ -1386,10 +1412,13 @@ class StratergyDirectIOCBoxDynamicStrikes:
             profit_threshold_buy = self.params.get("profit_threshold_buy", 3)
             print(f"INFO: Current BUY spread: {current_buy_spread:.2f}, Required: <= {remaining_spread_for_buy:.2f}")
             # breakpoint()
-            self._monitor_sell_profit_and_execute_buy(uid, sell_executed_spread, remaining_spread_for_buy, 
+            second_pair = self._monitor_sell_profit_and_execute_buy(uid, sell_executed_spread, remaining_spread_for_buy, 
                                                                          buy_leg_keys, profit_threshold_buy,isExit)
             # breakpoint()
-            return True
+            if second_pair:
+                return True
+            else:
+                return False
         except Exception as e:
             print(f"ERROR: Case A execution failed: {e}")
             traceback.print_exc()
@@ -1411,7 +1440,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
             
             # Handle new strategic execution format
             first_buy_leg, second_buy_leg, execution_reason = self.get_legs_sequence_from_observation(buy_observation_2, [buy_leg_keys[0],buy_leg_keys[1]],isExit)
-            
+            if not first_buy_leg or not second_buy_leg:
+                return False
             print(f"INFO: Executing BUY legs with MODIFY strategy - First: {first_buy_leg}, Second: {second_buy_leg}")
             
             # Execute first BUY leg with MODIFY strategy
@@ -1453,10 +1483,10 @@ class StratergyDirectIOCBoxDynamicStrikes:
             print(f"INFO: Current SELL spread: {current_sell_spread:.2f}, Required: >= {remaining_spread_for_sell:.2f}")
             
             profit_threshold_buy = self.params.get("profit_threshold_buy", 2)
-            # breakpoint()
-            self._monitor_buy_profit_and_execute_sell(uid, buy_executed_spread, remaining_spread_for_sell, 
+            second_pair = self._monitor_buy_profit_and_execute_sell(uid, buy_executed_spread, remaining_spread_for_sell, 
                                                            sell_leg_keys, profit_threshold_buy,isExit)
-            # breakpoint()
+            if not second_pair:
+                return False
             return True
         except Exception as e:
             print(f"ERROR: Case B execution failed: {e}")
@@ -1505,13 +1535,14 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 if sell_profit >= profit_threshold:
                     print(f"\nINFO: SELL profit threshold reached ({sell_profit:.2f} >= {profit_threshold}), exiting with profit")
                     # Execute SELL exit orders
-                    self._execute_sell_exit(uid,not isExit)
+                    exit_success = self._execute_sell_exit(uid,not isExit)
                     self.execution_tracker.add_milestone(f"User {uid} exited with SELL profit", {
                         "user": uid,
                         "profit": sell_profit,
                         "spread": current_sell_spread
                     })
-                    return True  # Exit with profit
+                    if exit_success:
+                        return True  # Exit with profit
                     
                  # Check if SELL spread is favorable
                 if abs(current_buy_spread) <= abs(remaining_spread):
@@ -1520,7 +1551,9 @@ class StratergyDirectIOCBoxDynamicStrikes:
                     buy_observation = self._get_global_observation_result("BUY_PAIR")
                     print(f"INFO: Using global observation for BUY leg execution order: {buy_leg_keys}")
                     first_buy_leg, second_buy_leg, execution_reason = self.get_legs_sequence_from_observation(buy_observation, buy_leg_keys,isExit)
-                    
+                    if not first_buy_leg or not second_buy_leg:
+                        print(f"ERROR: Invalid BUY leg sequence from observation")
+                        continue
                     # Step 2: Execute BUY legs sequentially based on global observation
                     print(f"INFO: Executing BUY legs - First: {first_buy_leg}, Second: {second_buy_leg}")
                     
@@ -1569,13 +1602,14 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 # Check BUY profit threshold
                 if buy_profit >= profit_threshold:
                     print(f"\nINFO: BUY profit threshold reached ({buy_profit:.2f} >= {profit_threshold}), exiting with profit")
-                    self._execute_buy_exit(uid,not isExit)
+                    exit_success = self._execute_buy_exit(uid,not isExit)
                     self.execution_tracker.add_milestone(f"User {uid} exited with BUY profit", {
                         "user": uid,
                         "profit": buy_profit,
                         "spread": current_buy_spread
                     })
-                    return True  # Exit with profit
+                    if exit_success:
+                        return True  # Exit with profit
                 
                 # Check if SELL spread is favorable
                 if abs(current_sell_spread) >= abs(remaining_spread):
@@ -1586,7 +1620,9 @@ class StratergyDirectIOCBoxDynamicStrikes:
                     print(f"INFO: Using global observation for SELL leg execution order: {sell_leg_keys}")
 
                     first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, sell_leg_keys,isExit)
-                    
+                    if not first_sell_leg or not second_sell_leg:
+                        print(f"ERROR: Invalid SELL leg sequence from observation")
+                        continue
                     # Execute SELL legs sequentially based on global observation -> pending select legs based on observation
                     
                     first_success = self._place_ioc_order_with_retry(uid, first_sell_leg, 1,isExit)
@@ -1619,7 +1655,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
         sell_observation = self._get_global_observation_result("SELL_PAIR")
         print(f"INFO: Using global observation for SELL leg execution order: {sell_observation}")
         first_sell_leg, second_sell_leg, execution_reason = self.get_legs_sequence_from_observation(sell_observation, [self.pair2_bidding_leg, self.pair2_base_leg],isExit)
-        
+        if not first_sell_leg or not second_sell_leg:
+            return False
         first_sell_success = self._place_ioc_order_with_retry(uid, first_sell_leg, 1, isExit)
         if not first_sell_success.get('success', False):
             print(f"ERROR: First SELL leg execution failed")
@@ -1638,6 +1675,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
         buy_observation = self._get_global_observation_result("BUY_PAIR")
         print(f"INFO: Using global observation for BUY leg execution order: {buy_observation}")
         first_buy_leg, second_buy_leg, execution_reason = self.get_legs_sequence_from_observation(buy_observation, [self.pair1_bidding_leg, self.pair1_base_leg],isExit)
+        if not first_buy_leg or not second_buy_leg:
+            return False
         first_buy_success = self._place_ioc_order_with_retry(uid, first_buy_leg, 1, isExit)
         if not first_buy_success:
             print(f"ERROR: First BUY leg execution failed")

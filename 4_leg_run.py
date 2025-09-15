@@ -11,20 +11,20 @@ itm_steps=4
 otm_steps=5
 
 params = {
-    "desired_spread": ((itm_steps + otm_steps)/2)*100 - 2,
-    "exit_desired_spread":  ((itm_steps + otm_steps)/2)*100 - 1,
+    "desired_spread": ((itm_steps + otm_steps)/2)*100 - 0,
+    "exit_desired_spread":  ((itm_steps + otm_steps)/2)*100 + 1,
     "action": "BUY",
     "quantity_multiplier": 1,
     "slice_multiplier": 1,
     "user_ids": [
-        "70249886"
+        "70204607"
     ],
     "run_state": 0,
     "order_type": "LIMIT",
     "IOC_timeout": 0.5,
     "exit_price_gap": 2,
     "no_of_bidask_average": 1,
-    "notes": "Imported from MultiLeg: Price-adjust | Bidding Leg: NIFTY 25250 CE",
+    "notes": "Lord1_Shreeji",
     "strategy_id": "075855a6-b104-4d60-b1cf-fc510641e98d",
     "redis_key": "4_leg:075855a6-b104-4d60-b1cf-fc510641e98d",
     "pricing_method": "depth",
