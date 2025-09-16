@@ -23,7 +23,7 @@ class TickDataManager:
     with minimal impact on real-time performance
     """
     
-    def __init__(self, base_directory="tick_data", enable_compression=True, buffer_size=1000, flush_interval=5.0):
+    def __init__(self, base_directory="tick_data", enable_compression=False, buffer_size=2000, flush_interval=10.0, compression_level=1):
         """
         Initialize tick data manager
         
@@ -32,28 +32,31 @@ class TickDataManager:
             enable_compression: Whether to compress files (saves space but uses more CPU)
             buffer_size: Number of ticks to buffer before writing to disk
             flush_interval: Time interval (seconds) to force flush buffers
+            compression_level: Compression level (1-9, 1=fastest, 9=best compression)
         """
         self.base_directory = base_directory
         self.enable_compression = enable_compression
         self.buffer_size = buffer_size
         self.flush_interval = flush_interval
+        self.compression_level = compression_level
         
         # Create base directory structure
         self._setup_directories()
        
         
         # Threading components for async processing
-        self.tick_queue = queue.Queue(maxsize=100000)  # Large queue to handle bursts
+        self.tick_queue = queue.Queue(maxsize=50000)  # Larger queue to handle bursts
         self.worker_thread = None
         self.is_running = False
         
         # File handles and buffers
         self.file_handles = {}
         self.tick_buffers = {}
+        self.buffer_timestamps = {}  # Track when buffers were last updated
         self.last_flush_time = time.time()
         
-        # Thread pool for I/O operations
-        self.executor = ThreadPoolExecutor(max_workers=2)
+        # Thread pool for I/O operations - reduced workers to save CPU
+        self.executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="TickWriter")
         
         # Statistics
         self.stats = {
@@ -228,12 +231,17 @@ class TickDataManager:
         # Add to buffer
         if file_key not in self.tick_buffers:
             self.tick_buffers[file_key] = []
+            self.buffer_timestamps[file_key] = time.time()
         
         self.tick_buffers[file_key].append(tick_entry)
         
-        # Check if buffer needs flushing
+        # Check if buffer needs flushing (size-based)
         if len(self.tick_buffers[file_key]) >= self.buffer_size:
             self._flush_buffer(file_key)
+        # Check if buffer needs flushing (time-based for smaller buffers)
+        elif (time.time() - self.buffer_timestamps[file_key]) > (self.flush_interval * 2):
+            if len(self.tick_buffers[file_key]) > 0:
+                self._flush_buffer(file_key)
     
     def _process_depth_tick(self, tick_entry: Dict[Any, Any]):
         """Process a depth tick and add to buffer"""
@@ -253,12 +261,17 @@ class TickDataManager:
         # Add to buffer
         if file_key not in self.tick_buffers:
             self.tick_buffers[file_key] = []
+            self.buffer_timestamps[file_key] = time.time()
         
         self.tick_buffers[file_key].append(tick_entry)
         
-        # Check if buffer needs flushing
+        # Check if buffer needs flushing (size-based)
         if len(self.tick_buffers[file_key]) >= self.buffer_size:
             self._flush_buffer(file_key)
+        # Check if buffer needs flushing (time-based for smaller buffers)
+        elif (time.time() - self.buffer_timestamps[file_key]) > (self.flush_interval * 2):
+            if len(self.tick_buffers[file_key]) > 0:
+                self._flush_buffer(file_key)
     
     def _flush_buffer(self, file_key: str):
         """Flush a specific buffer to file"""
@@ -289,6 +302,10 @@ class TickDataManager:
             ticks_to_write = self.tick_buffers[file_key].copy()
             self.tick_buffers[file_key].clear()
             
+            # Update buffer timestamp
+            if file_key in self.buffer_timestamps:
+                self.buffer_timestamps[file_key] = time.time()
+            
             # Submit to thread pool for I/O
             self.executor.submit(self._write_ticks_to_file, filepath, ticks_to_write)
             
@@ -299,24 +316,24 @@ class TickDataManager:
     def _write_ticks_to_file(self, filepath: str, ticks: list):
         """Write ticks to file (runs in thread pool)"""
         try:
-            mode = 'ab' if self.enable_compression else 'a'
-            
+            # Batch write for better performance
             if self.enable_compression:
-                with gzip.open(filepath, mode) as f:
-                    for tick in ticks:
-                        line = orjson.dumps(tick) + b'\n'
-                        f.write(line)
+                with gzip.open(filepath, 'ab', compresslevel=self.compression_level) as f:
+                    # Write all ticks in one go to reduce system calls
+                    data = b''.join(orjson.dumps(tick) + b'\n' for tick in ticks)
+                    f.write(data)
             else:
-                with open(filepath, mode, encoding='utf-8') as f:
-                    for tick in ticks:
-                        line = orjson.dumps(tick).decode() + '\n'
-                        f.write(line)
+                with open(filepath, 'a', encoding='utf-8') as f:
+                    # Write all ticks in one go to reduce system calls
+                    data = ''.join(orjson.dumps(tick).decode() + '\n' for tick in ticks)
+                    f.write(data)
             
             self.stats["total_ticks_written"] += len(ticks)
             
             # Track file creation
             if filepath not in self.file_handles:
                 self.stats["files_created"] += 1
+                self.file_handles[filepath] = True
                 print(f"[INFO] Created tick data file: {os.path.basename(filepath)}")
             
         except Exception as e:
@@ -429,56 +446,103 @@ class TickDataReader:
         except Exception as e:
             print(f"[ERROR] Error reading tick file {filepath}: {e}")
     
-    def simulate_tick_replay(self, date_str: str, symbol=None, speed_multiplier=1.0,start_hour=10,end_hour=15):
+    def simulate_tick_replay(self, date_str: str, symbol=None, speed_multiplier=1.0, start_hour=10, end_hour=15, symbol_filter=None):
         """
         Simulate tick data replay for a specific date
         
         Args:
             date_str: Date in YYYYMMDD format
-            symbol: Specific symbol to replay (optional)
+            symbol: Specific symbol to replay (optional, for backward compatibility)
             speed_multiplier: Speed multiplier for replay (1.0 = real-time)
+            start_hour: Start hour for filtering
+            end_hour: End hour for filtering
+            symbol_filter: List of symbols to filter or single symbol string
         """
         files = self.list_available_files(date_str)
         date_path = os.path.join(self.base_directory, date_str)
         
+        # Handle symbol filtering
+        symbols_to_filter = set()
+        if symbol_filter:
+            if isinstance(symbol_filter, str):
+                symbols_to_filter.add(symbol_filter.upper())
+            elif isinstance(symbol_filter, (list, tuple)):
+                symbols_to_filter.update([s.upper() for s in symbol_filter])
+        elif symbol:  # Backward compatibility
+            symbols_to_filter.add(symbol.upper())
+        
         print(f"[INFO] Starting tick replay for {date_str}")
-        if symbol:
-            print(f"[INFO] Filtering for symbol: {symbol}")
+        if symbols_to_filter:
+            print(f"[INFO] Filtering for symbols: {', '.join(sorted(symbols_to_filter))}")
+        
+        def should_include_file(filename, symbols_set):
+            """Check if file should be included based on symbol filtering"""
+            if not symbols_set:
+                return True
+            
+            filename_upper = filename.upper()
+            for sym in symbols_set:
+                if sym in filename_upper:
+                    return True
+            return False
+        
+        def should_include_tick(tick, symbols_set):
+            """Check if tick should be included based on symbol filtering"""
+            if not symbols_set:
+                return True
+            
+            # For quotes ticks
+            if tick.get('type') == 'quotes':
+                tick_symbol = tick.get('symbol', '').upper()
+                return tick_symbol in symbols_set
+            
+            # For depth ticks
+            elif tick.get('type') == 'depth':
+                redis_key = tick.get('redis_key', '').upper()
+                for sym in symbols_set:
+                    if sym in redis_key:
+                        return True
+                return False
+            
+            return True
         
         # Collect all ticks with timestamps
         all_ticks = []
         
         # Read quotes files
         for filename in files["quotes"]:
-            match = re.search(r"_(\d+)\.jsonl\.gz$", filename)
+            # Handle both compressed and uncompressed files
+            match = re.search(r"_(\d+)\.jsonl", filename)
             if match:
                 num = int(match.group(1))
                 if start_hour <= num < end_hour:
-                    if symbol and symbol not in filename:
+                    if not should_include_file(filename, symbols_to_filter):
                         continue
                     filepath = os.path.join(date_path, "quotes", filename)
                     for tick in self.read_tick_file(filepath):
-                        # print("Tick : ",tick)
-                        all_ticks.append(tick)
+                        if should_include_tick(tick, symbols_to_filter):
+                            all_ticks.append(tick)
         
         # Read depth files
         for filename in files["depth"]:
-            match = re.search(r"_(\d+)\.jsonl\.gz$", filename)
+            # Handle both compressed and uncompressed files
+            match = re.search(r"_(\d+)\.jsonl", filename)
             if match:
                 num = int(match.group(1))
                 if start_hour <= num < end_hour:
-                    if symbol and symbol not in filename:
+                    if not should_include_file(filename, symbols_to_filter):
                         continue
                     filepath = os.path.join(date_path, "depth", filename)
                     for tick in self.read_tick_file(filepath):
-                        all_ticks.append(tick)
+                        if should_include_tick(tick, symbols_to_filter):
+                            all_ticks.append(tick)
                     print("READING DEPTH FILES COMPLETED")
         
         # Sort by timestamp
         all_ticks.sort(key=lambda x: x['timestamp'])
     
         if not all_ticks:
-            print(f"[ERROR] No tick data found for {date_str}")
+            print(f"[ERROR] No tick data found for {date_str} with the specified filters")
             return
         
         print(f"[INFO] Found {len(all_ticks)} ticks to replay")
@@ -506,8 +570,13 @@ class TickDataReader:
 
 
 if __name__ == "__main__":
-    # Example usage
-    manager = TickDataManager()
+    # Example usage with optimized settings
+    manager = TickDataManager(
+        enable_compression=False,  # Disabled for better performance
+        buffer_size=2000,          # Larger buffer for efficiency
+        flush_interval=10.0,       # Longer interval for fewer flushes
+        compression_level=1        # Fastest compression if enabled
+    )
     
     # Simulate some tick data
     import random

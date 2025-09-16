@@ -37,9 +37,10 @@ class CentralSocketData:
             try:
                 self.tick_manager = TickDataManager(
                     base_directory=tick_data_base_dir,
-                    enable_compression=True,  # Compress files to save space
-                    buffer_size=500,  # Buffer 500 ticks before writing
-                    flush_interval=3.0  # Flush every 3 seconds
+                    enable_compression=False,  # Disable compression for better performance
+                    buffer_size=1000,  # Larger buffer for fewer I/O operations
+                    flush_interval=5.0,  # Moderate flush interval
+                    compression_level=1  # Fastest compression if enabled
                 )
                 print(f"[SUCCESS] Tick data logging enabled - Directory: {tick_data_base_dir}")
             except Exception as e:

@@ -172,11 +172,23 @@ class TickDataSimulator:
         self.r = redis.Redis(host='localhost', port=6379, db=0)
         self.options_data = orjson.loads(self.r.get("option_mapper").decode())
         
-    def simulate_market_session(self, date_str, symbol=None, speed_multiplier=1.0, start_hour=9, end_hour=16):
+    def simulate_market_session(self, date_str, symbol=None, speed_multiplier=1.0, start_hour=9, end_hour=16, symbol_filter=None):
         """Simulate a market session with saved tick data"""
         print(f"\n[INFO] SIMULATING MARKET SESSION FOR {date_str}")
-        if symbol:
-            print(f"[INFO] Symbol: {symbol}")
+        
+        # Handle symbol filtering
+        symbols_to_filter = []
+        if symbol_filter:
+            if isinstance(symbol_filter, str):
+                symbols_to_filter = [symbol_filter]
+            elif isinstance(symbol_filter, (list, tuple)):
+                symbols_to_filter = list(symbol_filter)
+        elif symbol:  # Backward compatibility
+            symbols_to_filter = [symbol]
+        
+        if symbols_to_filter:
+            print(f"[INFO] Symbols: {', '.join(symbols_to_filter)}")
+        
         print(f"[INFO] Speed: {speed_multiplier}x")
         print(f"[INFO] Hours: {start_hour:02d}:00 - {end_hour:02d}:00")
         print("=" * 50)
@@ -190,7 +202,14 @@ class TickDataSimulator:
         start_time = time.time()
         
         try:
-            for tick in self.reader.simulate_tick_replay(date_str, symbol, speed_multiplier, int(start_hour), int(end_hour)):
+            for tick in self.reader.simulate_tick_replay(
+                date_str, 
+                symbol=symbol,  # Keep for backward compatibility
+                speed_multiplier=speed_multiplier, 
+                start_hour=int(start_hour), 
+                end_hour=int(end_hour),
+                symbol_filter=symbols_to_filter  # New symbol filtering
+            ):
                 # Filter by time range
                 if tick['timestamp'] < start_timestamp or tick['timestamp'] > end_timestamp:
                     continue
@@ -278,7 +297,8 @@ def main():
                        help="Command to execute")
     parser.add_argument("--date", help="Date in YYYYMMDD format")
     parser.add_argument("--date2", help="Second date for comparison (YYYYMMDD format)")
-    parser.add_argument("--symbol", help="Symbol to filter (e.g., NIFTY, SENSEX)")
+    parser.add_argument("--symbols", nargs='+', help="Multiple symbols to filter (e.g., --symbols NIFTY SENSEX BANKNIFTY)")
+    parser.add_argument("--symbol", help="Single symbol to filter (e.g., NIFTY, SENSEX) - for backward compatibility")
     parser.add_argument("--speed", type=float, default=1.0, help="Simulation speed multiplier")
     parser.add_argument("--start-hour", type=int, default=9, help="Start hour for simulation")
     parser.add_argument("--end-hour", type=int, default=16, help="End hour for simulation")
@@ -321,10 +341,18 @@ def main():
         if not args.date:
             print("[ERROR] --date required for simulate command")
             return
+        
+        # Handle symbol filtering - prefer --symbols over --symbol
+        symbol_filter = args.symbols if args.symbols else (args.symbol if args.symbol else None)
+        
         simulator = TickDataSimulator(args.base_dir)
         simulator.simulate_market_session(
-            args.date, args.symbol, args.speed, 
-            args.start_hour, args.end_hour
+            args.date, 
+            symbol=args.symbol,  # Keep for backward compatibility
+            speed_multiplier=args.speed, 
+            start_hour=args.start_hour, 
+            end_hour=args.end_hour,
+            symbol_filter=symbol_filter  # New symbol filtering
         )
 
 
