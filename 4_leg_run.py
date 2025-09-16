@@ -7,12 +7,12 @@ from nuvama import box_with_dynamic_strikes
 # obj_dual = stratergies_dual_spread.StratergyDualSpread("fde5ebd6-3052-43cb-a8c8-3871b66c9705")
 # obj_dual.main_logic()
 
-itm_steps=4
-otm_steps=5
+itm_steps=2
+otm_steps=4
 
 params = {
     "desired_spread": ((itm_steps + otm_steps)/2)*100 - 0,
-    "exit_desired_spread":  ((itm_steps + otm_steps)/2)*100 + 1,
+    "exit_desired_spread":  ((itm_steps + otm_steps)/2)*100 + 2,
     "action": "BUY",
     "quantity_multiplier": 1,
     "slice_multiplier": 1,
@@ -32,7 +32,8 @@ params = {
     "itm_steps": itm_steps,
     "otm_steps": otm_steps,
     "symbol" : "NIFTY",
-    "expiry":1
+    "expiry":1,
+    "case_decision_observation_time":60,
 }
 
 obj_seq = box_with_dynamic_strikes.StratergyDirectIOCBoxDynamicStrikes(params)
