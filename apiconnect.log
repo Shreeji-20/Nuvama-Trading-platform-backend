@@ -16927,3 +16927,21 @@ pip install python-multipart
 2025-09-16 14:40:23,943 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
 2025-09-16 14:40:25,934 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
 2025-09-16 14:40:27,142 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-16 15:14:57,055 [INFO] constants.router: Router object is being created.
+2025-09-16 15:14:57,055 [INFO] APIConnect.http: Http object is being created.
+2025-09-16 15:14:57,055 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-16 15:14:57,056 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-16 15:14:57,057 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-16 15:14:57,061 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-16 15:14:57,234 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-16 15:14:57,235 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1757980822709, 'exp': 1757980822689, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': '57300fb2-3fca-4f10-8205-c42d9ad9028c', 'srvTm': 1758017696314}
+2025-09-16 15:14:57,236 [DEBUG] feed.orders_feed: Subscribing orders feed with request: {"request": {"streaming_type": "orderFiler", "data": {"accType": "EQ", "userID": "70249886", "accID": "70249886", "responseType": ["ORDER_UPDATE", "TRADE_UPDATE"]}, "formFactor": "P", "appID": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOjAsImZmIjoiVyIsImJkIjoid2ViLXBjIiwibmJmIjoxNzUzNDI5MDE3LCJzcmMiOiJlbXRtdyIsImF2IjoiMi4wLjkiLCJhcHBpZCI6Ijk2MDk5MzE5MTQ4NzgxOWMzN2ZmZDBhZTlmMzEyYjQzIiwiaXNzIjoiZW10IiwiZXhwIjoxNzUzNDY4MjAwLCJpYXQiOjE3NTM0MjkzMTd9.uyTTEGoncLPh4GSxxEE3aGtYw24gYjptAOiawZjehYw", "response_format": "json", "request_type": "subscribe"}, "echo": {}}
+
+2025-09-16 16:06:04,671 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-16 16:08:41,227 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-16 16:11:43,331 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-16 16:19:12,162 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-16 16:22:49,856 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-16 16:25:06,095 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-16 16:25:11,492 [INFO] routers.stratergy_4leg: Successfully connected to Redis
+2025-09-16 16:25:17,380 [INFO] routers.stratergy_4leg: Successfully connected to Redis

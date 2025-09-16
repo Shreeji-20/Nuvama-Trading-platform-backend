@@ -7,6 +7,6 @@ r = redis.Redis(host='localhost', port=6379, db=0)
 data = json.loads(r.get('user:70249886'))
 
 response = requests.post(
-    'http://localhost:8000/userlogin',json=data)
+    'http://100.98.41.25:8000/userlogin',json=data)
 
 
