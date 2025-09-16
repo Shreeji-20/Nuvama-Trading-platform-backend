@@ -7,32 +7,40 @@ INFO:     Started reloader process [23] using StatReload
 INFO:     Started server process [26]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-WARNING:  StatReload detected changes in 'direct_login_req.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [26]
-WARNING:  StatReload detected changes in 'direct_login_req.py'. Reloading...
-/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
-* 'schema_extra' has been renamed to 'json_schema_extra'
-  warnings.warn(message, UserWarning)
-INFO:     Started server process [818]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
-* 'schema_extra' has been renamed to 'json_schema_extra'
-  warnings.warn(message, UserWarning)
-INFO:     Started server process [854]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  StatReload detected changes in 'direct_login_req.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [854]
-/workspace/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
-* 'schema_extra' has been renamed to 'json_schema_extra'
-  warnings.warn(message, UserWarning)
-INFO:     Started server process [901]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
+✅ Redis connection established
+🚀 Starting login process for user: 70249886
+🔐 Attempting web login for user: 70249886
+🔍 Fetching user data for: 70249886
+✅ User data retrieved for: 70249886
+🌐 Initializing web login for: 70249886
+🔐 Starting Nuvama web login for: 70249886
+🚀 Starting Nuvama login for: 70249886
+✅ Chrome WebDriver initialized successfully
+🔄 Step 1: Submitting UserID: 70249886
+🌐 Navigating to: https://www.nuvamawealth.com/api-connect/login?api_key=iBe07GpBTEbbhg
+✅ UserID filled: 70249886
+✅ Proceed button clicked for UserID step
+� Step 2: Submitting password and TOTP
+✅ Password filled
+✅ Found 6 TOTP fields
+📱 Generating TOTP using pyotp...
+✅ Using TOTP secret from initialization
+✅ TOTP generated successfully: 311001
+✅ TOTP filled: 311001
+✅ Final proceed button clicked
+🔍 Waiting for redirect and extracting auth token...
+✅ Redirect detected: https://127.0.0.1/?request_id=356537d28497f8ef
+🎉 Auth token extracted: 356537d28497f8ef
+💾 Token saved to nuvama_token_simple.json
+🎉 Login completed successfully!
+🧹 Browser closed
+✅ Web login successful, reqid: 356537d28497f8ef
+🔧 Initializing API connection for: 70249886
+💾 Storing reqid in Redis for: 70249886
+🎉 Login successful for user_id: 70249886
+✅ Web login successful for user: 70249886
+🔄 Launching order streaming for user: 70249886
+✅ Order streaming launched for user: 70249886
+✅ Central socket data launched for user: 70249886
+🎉 Login process completed successfully for user: 70249886
+INFO:     172.17.0.1:58622 - "POST /userlogin HTTP/1.1" 200 OK
