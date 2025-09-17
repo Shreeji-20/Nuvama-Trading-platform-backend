@@ -1,6 +1,6 @@
 from nuvama import stratergies_4leg
 from nuvama import stratergies_direct_ioc_box
-from nuvama import box_with_dynamic_strikes
+from stratergies.Box_with_marke_sentiment_and_dynamic_strikes_selection import box_with_dynamic_strikes
 # obj_4leg = stratergies_4leg.Stratergy4Leg("e93eaed7-d907-4703-9e5c-46acea6fb962")
 # obj_4leg.main_logic()
 

@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 import pandas as pd
 import time
 import traceback
-from routers import users , spreads, stratergy_1,multi_leg_spreads ,stratergy_4leg
+from routers import users , spreads, stratergy_1,multi_leg_spreads ,stratergy_4leg, observations
 
 # Connect to Redis
 r = redis.Redis(host="localhost", port=6379, db=0, decode_responses=True)
@@ -17,6 +17,7 @@ app.include_router(spreads.router)
 app.include_router(stratergy_1.router)
 app.include_router(multi_leg_spreads.router)
 app.include_router(stratergy_4leg.router)
+app.include_router(observations.router)
 
 
 # Allow CORS from any origin (you can restrict this later)
