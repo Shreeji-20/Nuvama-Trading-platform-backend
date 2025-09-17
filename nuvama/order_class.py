@@ -31,7 +31,7 @@ class Orders:
                 Trading_Symbol=order_details.get("Trading_Symbol", ""),
                 Exchange=order_details.get("Exchange", ExchangeEnum.NSE),
                 Action=order_details.get("Action", ActionEnum.BUY),
-                Duration=DurationEnum.DAY, 
+                Duration=order_details.get("Duration",DurationEnum.DAY), 
                 Order_Type=order_details.get("Order_Type", OrderTypeEnum.MARKET),
                 Quantity=int(order_details.get("Slice_Quantity", 1)),
                 Streaming_Symbol=order_details.get("Streaming_Symbol", "4963_NSE"),

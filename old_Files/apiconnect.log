@@ -116,3 +116,13 @@ KeyError: 'NFO'
 2025-08-28 18:10:21,249 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
 2025-08-28 18:10:22,213 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
 2025-08-28 18:10:22,213 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1756339223462, 'exp': 1756339223452, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'f39c29e7-4359-427c-8a9d-bcf9766bd7cb', 'srvTm': 1756384823449}
+2025-09-17 11:54:34,163 [INFO] constants.router: Router object is being created.
+2025-09-17 11:54:34,164 [INFO] APIConnect.http: Http object is being created.
+2025-09-17 11:54:34,164 [INFO] APIConnect.login_helper: LoginHelper object is being created.
+2025-09-17 11:54:34,164 [INFO] APIConnect.order_helper: OrderHelper object is being created.
+2025-09-17 11:54:34,167 [INFO] APIConnect.api_utils: Checking for new update.
+2025-09-17 11:54:34,170 [DEBUG] urllib3.connectionpool: Starting new HTTPS connection (1): nc.nuvamawealth.com:443
+2025-09-17 11:54:34,314 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-content/content/adhoc/lib/version/ HTTP/1.1" 200 None
+2025-09-17 11:54:34,315 [DEBUG] APIConnect.api_utils: Response received: {'appID': '960993191487819c37ffd0ae9f312b43', 'config': {'app': 1, 'bseExp': 1758067225901, 'exp': 1758067225889, 'info': 4}, 'data': {'type': 'libVsnResponseDao', 'msg': '', 'sts': True, 'vsn': '2.0.2'}, 'msgID': 'ba10963c-edca-4e76-9d90-d1b4866f057a', 'srvTm': 1758090273993}
+2025-09-17 11:55:40,942 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
+2025-09-17 11:56:28,287 [DEBUG] urllib3.connectionpool: https://nc.nuvamawealth.com:443 "POST /edelmw-eq/eq/trade/placetrade/v1/70204607/ HTTP/1.1" 200 None
