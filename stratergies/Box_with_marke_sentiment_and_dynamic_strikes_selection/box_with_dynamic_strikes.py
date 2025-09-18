@@ -5,6 +5,8 @@ Execute legs in pairs with direct IOC orders using bid/ask pricing
 
 # go up 3 levels from the current file
 import os ,sys
+
+from fastapi.background import P
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 from ast import Pass
@@ -36,11 +38,20 @@ from constants.duration import DurationEnum
 class StratergyDirectIOCBoxDynamicStrikes:
     def __init__(self,params) -> None:
         try:
-            print("Initializing Direct IOC Box Strategy with Dynamic Strikes... 123")
+            # Generate unique instance ID for this strategy instance
+            import uuid
+            self.instance_id = f"box_strategy_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{str(uuid.uuid4())[:8]}"
+            
+            print(f"Initializing Direct IOC Box Strategy with Dynamic Strikes... Instance ID: {self.instance_id}")
             self.params=params
             self.r = redis.Redis(host="localhost", port=6379, db=0)
-            self.execution_tracker = StrategyExecutionTracker(self.r, "DirectIOCBoxDynamicStrikes")
+            
+            # Initialize logger first before using it
             self.logger = StrategyLoggingHelpers
+            self.execution_tracker = StrategyExecutionTracker(self.r, "DirectIOCBoxDynamicStrikes")
+            
+            # Store instance metadata in Redis
+            self._store_instance_metadata()
             
             self.lot_sizes = json.loads(self.r.get("lotsizes"))
             self._init_user_connections()
@@ -88,6 +99,30 @@ class StratergyDirectIOCBoxDynamicStrikes:
             print(traceback.format_exc())
             # breakpoint()
             raise
+
+    def _store_instance_metadata(self):
+        """Store instance metadata in Redis."""
+        try:
+            instance_data = {
+                "instance_id": self.instance_id,
+                "created_at": datetime.datetime.now().isoformat(),
+                "params": self.params,
+                "status": "initializing"
+            }
+            
+            # Store individual instance data
+            instance_key = f"strategy_instance:{self.instance_id}"
+            self.r.setex(instance_key, 3600 * 24, json.dumps(instance_data))  # Store for 24 hours
+            
+            # Add to active instances list
+            active_instances_key = "strategy_instances:active"
+            self.r.sadd(active_instances_key, self.instance_id)
+            self.r.expire(active_instances_key, 3600 * 24)  # Keep list for 24 hours
+            
+            self.logger.info(f"Stored instance metadata for {self.instance_id}")
+            
+        except Exception as e:
+            self.logger.error(f"Failed to store instance metadata", exception=e)
 
     def _init_user_connections(self):
         """Initialize user API connections."""
@@ -137,6 +172,15 @@ class StratergyDirectIOCBoxDynamicStrikes:
         self.entry_qtys = {}
         self.exit_qtys = {}
         
+        # Detailed spread tracking for entry and exit
+        self.buy_entry_spread = {}
+        self.buy_exit_spread = {}
+        self.sell_entry_spread = {}
+        self.sell_exit_spread = {}
+        
+        # Modify order tracking (initial price, executed price, difference)
+        self.modify_order_tracking = {}
+        
         # Global parallel observation tracking
         self.global_observation_active = False
         self.global_observation_threads = {}
@@ -147,6 +191,12 @@ class StratergyDirectIOCBoxDynamicStrikes:
         self.stop_live_atm_thread = False
         self.current_atm = None
         self.current_atm_strike = None
+        
+        # Start periodic metrics update
+        import threading
+        timer = threading.Timer(60.0, self._periodic_metrics_update)
+        timer.daemon = True
+        timer.start()
 
     def _init_helpers(self):
         """Initialize helper class instances."""
@@ -161,7 +211,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
         
         while not self.stop_live_atm_thread:
             try:
-                ltp_base_index = json.loads(self.r.get(f"reduced_quotes:{self.params.get('symbol',"NIFTY")}"))
+                ltp_base_index = json.loads(self.r.get(f"reduced_quotes:{self.params.get('symbol','NIFTY')}"))
                 ltp_base_index = float(ltp_base_index['response']['data'].get('ltp',0))
                 atm_base_index = int(round(ltp_base_index / 50) * 50)
                 if self.current_atm_strike != atm_base_index and (abs(ltp_base_index - self.current_atm) >= 50) and self.open_order==False:
@@ -257,6 +307,9 @@ class StratergyDirectIOCBoxDynamicStrikes:
                             'timestamp': time.time(),
                             'legs': [leg1_key, leg2_key]
                         }
+                    
+                    # Store for frontend display
+                    self._store_global_observation_data(observation_key, observation_result)
                     
                     # Small sleep to prevent excessive CPU usage
                     time.sleep(0.5)
@@ -592,14 +645,10 @@ class StratergyDirectIOCBoxDynamicStrikes:
         More comprehensive analysis with detailed logging for critical decision making.
         """
         try:
-            # Generate execution ID for this observation
-            execution_id = getattr(self, 'execution_id', None) or f"{datetime.datetime.now().strftime('%Y%m%d_%H%M%S%f')[:-3]}_{self.params.get('symbol', 'NIFTY')}"
-            if not hasattr(self, 'execution_id'):
-                self.execution_id = execution_id
-                
+            # Use instance ID instead of execution ID for case decision observations
             self.logger.info(
                 f"Starting {observation_duration}-second dedicated observation for CASE decision",
-                f"Legs: {leg1_key}, {leg2_key}, Execution ID: {execution_id}"
+                f"Legs: {leg1_key}, {leg2_key}, Instance ID: {self.instance_id}"
             )
             
             observation_start_time = datetime.datetime.now()
@@ -666,7 +715,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             # Ensure we have enough valid data points
             if len(leg1_prices) < 10:
                 observation_result = {
-                    "execution_id": execution_id,
+                    "instance_id": self.instance_id,
                     "timestamp": observation_start_time.isoformat(),
                     "legs": [leg1_key, leg2_key],
                     "observation_duration": observation_duration,
@@ -680,7 +729,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                     "action": self.params.get("action", "BUY"),
                     "isExit": isExit
                 }
-                self._store_observation_result(execution_id, observation_result)
+                self._store_case_decision_observation(observation_result)
                 
                 self.logger.warning(
                     f"Insufficient valid data for case decision ({len(leg1_prices)} samples out of {sample_count} attempts)",
@@ -717,7 +766,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 )
                 
                 observation_result = {
-                    "execution_id": execution_id,
+                    "instance_id": self.instance_id,
                     "timestamp": observation_start_time.isoformat(),
                     "legs": [leg1_key, leg2_key],
                     "observation_duration": observation_duration,
@@ -762,7 +811,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                         leg2_key: [round(p, 2) for p in leg2_prices]
                     }
                 }
-                self._store_observation_result(execution_id, observation_result)
+                self._store_case_decision_observation(observation_result)
                 return False  # CASE A
             
             # At least one leg is moving - CASE B
@@ -773,7 +822,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 moving_legs.append(f"{leg2_key}({leg2_trend})")
             
             self.logger.warning(
-                f"DECISION: {self.params.get("action","BUY")} legs are MOVING over {self.params.get("case_decision_observation_time")} seconds → CASE B",
+                f"DECISION: {self.params.get('action','BUY')} legs are MOVING over {self.params.get('case_decision_observation_time')} seconds → CASE B",
                 f"Moving legs: {', '.join(moving_legs)}"
             )
             
@@ -805,7 +854,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             decision_reason = "legs_moving"
             
             observation_result = {
-                "execution_id": execution_id,
+                "instance_id": self.instance_id,
                 "timestamp": observation_start_time.isoformat(),
                 "legs": [leg1_key, leg2_key],
                 "observation_duration": observation_duration,
@@ -856,7 +905,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                     leg2_key: [round(p, 2) for p in leg2_prices]
                 }
             }
-            self._store_observation_result(execution_id, observation_result)
+            self._store_case_decision_observation(observation_result)
             
             return {
                 'first_leg': first_leg,
@@ -897,7 +946,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             
         except Exception as e:
             error_result = {
-                "execution_id": getattr(self, 'execution_id', 'unknown'),
+                "instance_id": self.instance_id,
                 "timestamp": datetime.datetime.now().isoformat(),
                 "legs": [leg1_key, leg2_key],
                 "case_decision": "CASE_A",
@@ -908,7 +957,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 "action": self.params.get("action", "BUY"),
                 "isExit": isExit
             }
-            self._store_observation_result(getattr(self, 'execution_id', 'unknown'), error_result)
+            self._store_case_decision_observation(error_result)
             
             self.logger.error(f"Failed to observe market for case decision", exception=e)
             self.logger.warning("Defaulting to CASE A due to observation error")
@@ -924,26 +973,245 @@ class StratergyDirectIOCBoxDynamicStrikes:
         """Calculate price volatility (standard deviation) for a price series."""
         return self.pricing_helpers.calculate_price_volatility(prices)
 
-    def _store_observation_result(self, execution_id, observation_data):
-        """Store observation result in Redis for monitoring."""
+    def _store_global_observation_data(self, observation_key, observation_result):
+        """Store global observation data for real-time frontend updates."""
         try:
-            # Store individual observation
-            redis_key = f"box_observation:{execution_id}"
-            self.r.setex(redis_key, 3600 * 24, json.dumps(observation_data))  # Store for 24 hours
+            if observation_result and isinstance(observation_result, dict):
+                from datetime import datetime
+                
+                # Store the observation result with timestamp and instance ID
+                observation_data = {
+                    **observation_result,
+                    'timestamp': datetime.now().isoformat(),
+                    'instance_id': self.instance_id
+                }
+                
+                # Store specific pair observation with instance ID
+                pair_key = f"global_observation:{self.instance_id}:{observation_key}"
+                self.r.set(pair_key, json.dumps(observation_data))  # Store for 5 minutes
+                
+                # Store combined global observation data for this instance
+                global_key = f"global_observation:{self.instance_id}:latest"
+                
+                # Get existing data and merge
+                existing_data = self.r.get(global_key)
+                combined_data = {}
+                if existing_data:
+                    try:
+                        combined_data = json.loads(existing_data.decode('utf-8'))
+                    except:
+                        pass
+                
+                # Update with new data
+                pair_field = observation_key.lower() + '_pair'
+                combined_data[pair_field] = observation_data
+                combined_data['timestamp'] = datetime.now().isoformat()
+                combined_data['instance_id'] = self.instance_id
+                
+                # Add ATM strike and symbol if available
+                if 'symbol' in observation_result:
+                    combined_data['symbol'] = observation_result['symbol']
+                if 'atm_strike' in observation_result:
+                    combined_data['atm_strike'] = observation_result['atm_strike']
+                
+                # Also store in the latest key for backward compatibility
+                latest_key = "global_observation:latest"
+                self.r.set(latest_key, json.dumps(combined_data))  # Store for 5 minutes
+                
+                # Determine case decision based on available pair data
+                if 'buy_pair' in combined_data and 'sell_pair' in combined_data:
+                    buy_trend = combined_data['buy_pair'].get('execution_strategy', {}).get('strategy', 'UNKNOWN')
+                    sell_trend = combined_data['sell_pair'].get('execution_strategy', {}).get('strategy', 'UNKNOWN')
+                    
+                    if buy_trend == 'STABLE' or sell_trend == 'STABLE':
+                        combined_data['case_decision'] = 'CASE_A'
+                    elif buy_trend == 'MOVING' or sell_trend == 'MOVING':
+                        combined_data['case_decision'] = 'CASE_B'
+                    else:
+                        combined_data['case_decision'] = 'ANALYZING'
+                
+                self.r.set(global_key, json.dumps(combined_data))  # Store for 5 minutes
+                
+                # Add instance to observations list
+                instances_with_observations_key = "strategy_instances:with_observations"
+                self.r.sadd(instances_with_observations_key, self.instance_id)
+                self.r.expire(instances_with_observations_key, 300)
+                
+                # Debug logging
+                # self.logger.info(f"Stored global observation for {observation_key}", {
+                #     "strategy": observation_result.get('execution_strategy', {}).get('strategy', 'N/A'),
+                #     "action": observation_result.get('execution_strategy', {}).get('action', 'N/A')
+                # })
+                
+        except Exception as e:
+            self.logger.error(f"Failed to store global observation data", exception=e)
+
+    def _store_case_decision_observation(self, observation_result):
+        """Store case decision observation data in Redis using instance ID logic."""
+        try:
+            # Generate a unique observation ID based on timestamp
+            timestamp_id = datetime.datetime.now().strftime('%Y%m%d_%H%M%S%f')[:-3]
             
-            # Update execution list
-            execution_list_key = "box_observations:execution_ids"
-            self.r.sadd(execution_list_key, execution_id)
-            self.r.expire(execution_list_key, 3600 * 24 * 7)  # Keep list for 7 days
+            # Store the specific case decision observation
+            case_decision_key = f"case_decision_observation:{self.instance_id}:{timestamp_id}"
+            self.r.setex(case_decision_key, 3600, json.dumps(observation_result))  # Store for 1 hour
             
-            # Store latest observation for each symbol
-            latest_key = f"box_observation:latest:{observation_data.get('symbol', 'NIFTY')}"
-            self.r.setex(latest_key, 3600 * 2, json.dumps(observation_data))  # Store for 2 hours
+            # Store as latest case decision observation for the instance
+            latest_case_decision_key = f"case_decision_observation:{self.instance_id}:latest"
+            self.r.setex(latest_case_decision_key, 3600, json.dumps(observation_result))  # Store for 1 hour
             
-            self.logger.debug(f"Stored observation result for execution ID: {execution_id}")
+            # Add to set of case decision observation IDs for this instance
+            case_decision_ids_key = f"case_decision_observations:{self.instance_id}:ids"
+            self.r.sadd(case_decision_ids_key, timestamp_id)
+            self.r.expire(case_decision_ids_key, 3600)  # Expire after 1 hour
+            
+            # Store in general observations format for compatibility
+            observation_ids_key = f"box_observations:{self.instance_id}:execution_ids"
+            self.r.sadd(observation_ids_key, timestamp_id)
+            
+            # Store the observation data with the timestamp ID for compatibility
+            observation_key = f"box_observation:{self.instance_id}:{timestamp_id}"
+            self.r.setex(observation_key, 3600, json.dumps(observation_result))
+            
+            # Add instance to set of instances with observations
+            self.r.sadd("strategy_instances:with_observations", self.instance_id)
+            
+            self.logger.debug(
+                f"Stored case decision observation for instance {self.instance_id}",
+                f"Decision: {observation_result.get('case_decision', 'Unknown')}, ID: {timestamp_id}"
+            )
             
         except Exception as e:
-            self.logger.error(f"Failed to store observation result", exception=e)
+            self.logger.error(f"Failed to store case decision observation: {str(e)}")
+
+    def _store_live_metrics(self, uid):
+        """Store live trading metrics for frontend display."""
+        try:
+            from datetime import datetime
+            
+            # Calculate total quantities
+            total_entry_qty = 0
+            total_exit_qty = 0
+            
+            if hasattr(self, 'entry_qtys') and uid in self.entry_qtys:
+                for leg_qtys in self.entry_qtys[uid].values():
+                    if isinstance(leg_qtys, dict):
+                        total_entry_qty += sum(leg_qtys.values())
+                    else:
+                        total_entry_qty += leg_qtys
+                        
+            if hasattr(self, 'exit_qtys') and uid in self.exit_qtys:
+                for leg_qtys in self.exit_qtys[uid].values():
+                    if isinstance(leg_qtys, dict):
+                        total_exit_qty += sum(leg_qtys.values())
+                    else:
+                        total_exit_qty += leg_qtys
+            
+            # Get individual spread data
+            buy_entry_spread = self.buy_entry_spread.get(uid, 0.0)
+            buy_exit_spread = self.buy_exit_spread.get(uid, 0.0)
+            sell_entry_spread = self.sell_entry_spread.get(uid, 0.0)
+            sell_exit_spread = self.sell_exit_spread.get(uid, 0.0)
+            
+            # Calculate executed spread (legacy for backward compatibility)
+            executed_spread = 0
+            if hasattr(self, 'pair1_executed_spread') and uid in self.pair1_executed_spread:
+                executed_spread += self.pair1_executed_spread[uid]
+            
+            # Calculate basic PnL (simplified)
+            pnl = executed_spread * total_entry_qty if total_entry_qty > 0 else 0
+            
+            # Initialize modify orders summary
+            modify_orders_summary = {}
+            
+            # Process modify orders if available
+            if hasattr(self, 'modify_orders') and uid in self.modify_orders:
+                for order_id, order_data in self.modify_orders[uid].items():
+                    order_type = order_data.get("order_type", "unknown")
+                    
+                    if order_type not in modify_orders_summary:
+                        modify_orders_summary[order_type] = {
+                            "total_orders": 0,
+                            "avg_initial_price": 0,
+                                "avg_executed_price": 0,
+                            "avg_price_difference": 0,
+                            "total_quantity": 0
+                        }
+                    
+                    modify_orders_summary[order_type]["total_orders"] += 1
+                    modify_orders_summary[order_type]["avg_initial_price"] += order_data.get("initial_price", 0)
+                    modify_orders_summary[order_type]["avg_executed_price"] += order_data.get("executed_price", 0)
+                    modify_orders_summary[order_type]["avg_price_difference"] += order_data.get("price_difference", 0)
+                    modify_orders_summary[order_type]["total_quantity"] += order_data.get("quantity", 0)
+                
+                # Calculate averages
+                for order_type in modify_orders_summary:
+                    total_orders = modify_orders_summary[order_type]["total_orders"]
+                    if total_orders > 0:
+                        modify_orders_summary[order_type]["avg_initial_price"] /= total_orders
+                        modify_orders_summary[order_type]["avg_executed_price"] /= total_orders
+                        modify_orders_summary[order_type]["avg_price_difference"] /= total_orders
+            
+            metrics_data = {
+                "instance_id": self.instance_id,
+                "entry_quantities": total_entry_qty,
+                "exit_quantities": total_exit_qty,
+                "executed_spread": executed_spread,  # Legacy field
+                "pnl": pnl,
+                "buy_entry_spread": buy_entry_spread,
+                "buy_exit_spread": buy_exit_spread,
+                "sell_entry_spread": sell_entry_spread,
+                "sell_exit_spread": sell_exit_spread,
+                "modify_orders": modify_orders_summary,
+                "timestamp": datetime.now().isoformat()
+            }
+            
+            # Store metrics with instance-specific keys
+            metrics_key = f"live_metrics:{self.instance_id}:latest"
+            self.r.set(metrics_key, json.dumps(metrics_data))
+            self.r.expire(metrics_key, 300)  # Store for 5 minutes
+            
+            # Store individual metrics for backup with instance-specific keys
+            self.r.set(f"entry_quantities:{self.instance_id}:latest", json.dumps(total_entry_qty))
+            self.r.set(f"exit_quantities:{self.instance_id}:latest", json.dumps(total_exit_qty))
+            self.r.set(f"executed_spread:{self.instance_id}:latest", json.dumps(executed_spread))
+            self.r.set(f"pnl:{self.instance_id}:latest", json.dumps(pnl))
+            self.r.set(f"buy_entry_spread:{self.instance_id}:latest", json.dumps(buy_entry_spread))
+            self.r.set(f"buy_exit_spread:{self.instance_id}:latest", json.dumps(buy_exit_spread))
+            self.r.set(f"sell_entry_spread:{self.instance_id}:latest", json.dumps(sell_entry_spread))
+            self.r.set(f"sell_exit_spread:{self.instance_id}:latest", json.dumps(sell_exit_spread))
+            
+            # Add instance to metrics list
+            instances_with_metrics_key = "strategy_instances:with_metrics"
+            self.r.sadd(instances_with_metrics_key, self.instance_id)
+            self.r.expire(instances_with_metrics_key, 300)
+            
+            # Debug logging
+            self.logger.info(f"Stored live metrics for instance {self.instance_id}, user {uid}", {
+                "entry_qty": total_entry_qty,
+                "exit_qty": total_exit_qty,
+                "buy_entry_spread": buy_entry_spread,
+                "sell_entry_spread": sell_entry_spread
+            })
+            
+        except Exception as e:
+            self.logger.error(f"Failed to store live metrics", exception=e)
+
+    def _periodic_metrics_update(self):
+        """Periodically update live metrics to prevent data expiry."""
+        try:
+            # Update metrics for all active users
+            for uid in self.entry_qtys.keys():
+                self._store_live_metrics(uid)
+            
+            # Schedule next update after 60 seconds
+            import threading
+            timer = threading.Timer(60.0, self._periodic_metrics_update)
+            timer.daemon = True
+            timer.start()
+            
+        except Exception as e:
+            self.logger.error(f"Failed in periodic metrics update", exception=e)
 
     def _get_lot_size(self):
         """Get the lot size for the trading symbol."""
@@ -988,7 +1256,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
     def _init_legs_and_orders(self):
         """Initialize 4-leg sequential box strategy with optimized leg pairing."""
         # Load legs data
-        ltp_base_index = json.loads(self.r.get(f"reduced_quotes:{self.params.get('symbol',"NIFTY")}")) or 0
+        symbol = self.params.get('symbol', "NIFTY")
+        ltp_base_index = json.loads(self.r.get(f"reduced_quotes:{symbol}")) or 0
         ltp_base_index = float(ltp_base_index['response']['data']['ltp'] or 0)
         atm_base_index = int(round(ltp_base_index / 50) * 50)
         self.current_atm = ltp_base_index
@@ -1019,6 +1288,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
         # Load base legs
         base_leg_keys = ["leg1", "leg2", "leg3", "leg4"] # Fixed 4 legs for box strategy
         all_leg_keys = base_leg_keys
+        self._store_global_leg_details(self.entry_legs)
         
         print("Legs Selected : ",json.dumps(self.entry_legs, indent=2))
         for leg_key in base_leg_keys:
@@ -1053,6 +1323,44 @@ class StratergyDirectIOCBoxDynamicStrikes:
         # Create order templates
         self._create_order_templates(all_leg_keys=['leg1','leg2','leg3','leg4'])
         
+        # Store global leg details for frontend
+        
+
+    def _store_global_leg_details(self,legs):
+        """Store global leg details in Redis for frontend access."""
+        try:
+            if hasattr(self, 'entry_legs') and self.entry_legs:
+                leg_details = {}
+                
+                for leg_key, leg_data in legs.items():
+                    print(leg_key, leg_data)
+                    leg_details[leg_key] = {
+                            "strike": leg_data.get("strike","N/A"),
+                            "option_type": leg_data.get("type","N/A"),
+                            "expiry": leg_data.get("expiry",0),
+                            "action": leg_data.get("action","N/A"),
+                            "symbol": leg_data.get("symbol","N/A"),
+                            "quantity": leg_data.get("quantity",0),
+                            "instance_id": self.instance_id
+                        }
+
+                # Store global leg details with instance ID
+                global_leg_details_key = f"global_leg_details:{self.instance_id}"
+                self.r.set(global_leg_details_key, json.dumps(leg_details))  # Store for 5 minutes
+                
+                # Also store in the latest key for backward compatibility
+                latest_key = "global_leg_details:latest"
+                self.r.set(latest_key, json.dumps(leg_details))  # Store for 5 minutes
+                
+                # Add to instances list
+                instances_with_legs_key = "strategy_instances:with_legs"
+                self.r.sadd(instances_with_legs_key, self.instance_id)
+                # self.r.expire(instances_with_legs_key, 300)
+                
+                self.logger.info(f"Stored global leg details for instance {self.instance_id} with {len(leg_details)} legs")
+                
+        except Exception as e:
+            self.logger.error(f"Failed to store global leg details", exception=e)
 
     def _determine_exchange(self):
         """Determine exchange from first leg symbol."""
@@ -1091,6 +1399,13 @@ class StratergyDirectIOCBoxDynamicStrikes:
             self.pair2_orders_placed[uid] = False
             self.entry_qtys[uid] = {leg: 0 for leg in all_leg_keys}
             self.exit_qtys[uid] = {leg: 0 for leg in all_leg_keys}
+            
+            # Initialize new detailed tracking variables
+            self.buy_entry_spread[uid] = 0.0
+            self.buy_exit_spread[uid] = 0.0
+            self.sell_entry_spread[uid] = 0.0
+            self.sell_exit_spread[uid] = 0.0
+            self.modify_order_tracking[uid] = {}
 
     def _create_order_templates(self, all_leg_keys=['leg1','leg2','leg3','leg4']):
         """Create order templates for all legs and users."""
@@ -1169,6 +1484,23 @@ class StratergyDirectIOCBoxDynamicStrikes:
             # Add price adjustment based on action
             tick = 0.05 if order.get("Action") == ActionEnum.BUY else -0.05
             order["Limit_Price"] = StrategyHelpers.format_limit_price(float(current_prices[leg_key]) + tick)
+            initial_price = float(order["Limit_Price"])
+            
+            # Initialize tracking for this order
+            if uid not in self.modify_order_tracking:
+                self.modify_order_tracking[uid] = {}
+            if leg_key not in self.modify_order_tracking[uid]:
+                self.modify_order_tracking[uid][leg_key] = {}
+            
+            order_tracking_key = f"{'exit' if isExit else 'entry'}_{int(time.time())}"
+            self.modify_order_tracking[uid][leg_key][order_tracking_key] = {
+                "initial_price": initial_price,
+                "executed_price": 0.0,
+                "price_difference": 0.0,
+                "quantity": remaining_qty,
+                "is_exit": isExit,
+                "timestamp": time.time()
+            }
             
             # Place initial order
             self.logger.info(f"Placing initial order for {leg_key}", f"Qty: {remaining_qty}, Price: {order['Limit_Price']}")
@@ -1207,13 +1539,22 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 
                 if current_filled >= remaining_qty:
                     # Order completed
+                    executed_price = float(filled_price) if filled_price else initial_price
+                    price_difference = executed_price - initial_price
+                    
+                    # Update tracking
+                    self.modify_order_tracking[uid][leg_key][order_tracking_key].update({
+                        "executed_price": executed_price,
+                        "price_difference": price_difference
+                    })
+                    
                     self.logger.success(f"MODIFY execution completed for {leg_key}", 
-                                      f"Filled: {current_filled}, Price: {filled_price}")
+                                      f"Filled: {current_filled}, Initial: {initial_price:.2f}, Executed: {executed_price:.2f}, Diff: {price_difference:.2f}")
                     if isExit:
                         self.exit_qtys[uid][leg_key] += int(current_filled)
                     else:
                         self.entry_qtys[uid][leg_key] += int(current_filled)
-                    return {"success": True, "filled_qty": current_filled, "filled_price": filled_price, "order_id": order_id}
+                    return {"success": True, "filled_qty": current_filled, "filled_price": executed_price, "order_id": order_id}
                 
                 # Get fresh price for modification
                 fresh_prices = self._get_leg_prices([leg_key],isExit)
@@ -1256,16 +1597,35 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 final_price = order.get('Limit_Price', 0)
             
             if final_filled >= order['Slice_Quantity']:
-                self.logger.success(f"MODIFY execution completed for {leg_key} after {attempt} attempts")
+                executed_price = float(final_price) if final_price else initial_price
+                price_difference = executed_price - initial_price
+                
+                # Update tracking
+                self.modify_order_tracking[uid][leg_key][order_tracking_key].update({
+                    "executed_price": executed_price,
+                    "price_difference": price_difference
+                })
+                
+                self.logger.success(f"MODIFY execution completed for {leg_key} after {attempt} attempts", 
+                                  f"Initial: {initial_price:.2f}, Executed: {executed_price:.2f}, Diff: {price_difference:.2f}")
                 if not isExit:
                     self.entry_qtys[uid][leg_key] += final_filled
                 else:
                     self.exit_qtys[uid][leg_key] += final_filled
-                return {"success": True, "filled_qty": final_filled, "filled_price": final_price, "order_id": order_id}
+                return {"success": True, "filled_qty": final_filled, "filled_price": executed_price, "order_id": order_id}
             else:
+                executed_price = float(final_price) if final_price else initial_price
+                price_difference = executed_price - initial_price
+                
+                # Update tracking even for incomplete orders
+                self.modify_order_tracking[uid][leg_key][order_tracking_key].update({
+                    "executed_price": executed_price,
+                    "price_difference": price_difference
+                })
+                
                 self.logger.warning(f"MODIFY execution incomplete for {leg_key}", 
-                                  f"Filled: {final_filled}/{remaining_qty} after {attempt} attempts")
-                return {"success": False, "filled_qty": final_filled, "filled_price": final_price, 
+                                  f"Filled: {final_filled}/{remaining_qty} after {attempt} attempts, Initial: {initial_price:.2f}, Executed: {executed_price:.2f}")
+                return {"success": False, "filled_qty": final_filled, "filled_price": executed_price, 
                        "reason": "max_attempts_reached", "order_id": order_id}
                 
         except Exception as e:
@@ -1478,9 +1838,13 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 if buy_pair_observation == False or buy_pair_observation is None:
                     # Both BUY legs are STABLE over 10 seconds - CASE A: Execute SELL legs first
                     if not isExit:
-                        self.logger.success(f"CASE A: {self.params.get("action","BUY")} legs are STABLE over {self.params.get("case_decision_observation_time",60)} seconds - executing SELL legs first {isExit}")
+                        action = self.params.get("action","BUY")
+                        observation_time = self.params.get("case_decision_observation_time",60)
+                        self.logger.success(f"CASE A: {action} legs are STABLE over {observation_time} seconds - executing SELL legs first {isExit}")
                     else:
-                        self.logger.success(f"CASE B: {self.params.get("action","BUY")} legs are STABLE over {self.params.get("case_decision_observation_time",60)} seconds - executing BUY legs first {isExit}")
+                        action = self.params.get("action","BUY")
+                        observation_time = self.params.get("case_decision_observation_time",60)
+                        self.logger.success(f"CASE B: {action} legs are STABLE over {observation_time} seconds - executing BUY legs first {isExit}")
                     case_type = "CASE_A"
                     self.execution_tracker.add_milestone(f"User {uid} executing CASE A", {
                         "strategy": "SELL_FIRST",
@@ -1494,9 +1858,13 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 else:
                     # BUY legs are moving over 10 seconds - CASE B: Execute BUY legs first with profit monitoring
                     if not isExit:
-                        self.logger.warning(f"CASE B: {self.params.get("action","BUY")} legs are MOVING over {self.params.get("case_decision_observation_time",60)} seconds - executing BUY legs first {isExit}")
+                        action = self.params.get("action","BUY")
+                        observation_time = self.params.get("case_decision_observation_time",60)
+                        self.logger.warning(f"CASE B: {action} legs are MOVING over {observation_time} seconds - executing BUY legs first {isExit}")
                     else:
-                        self.logger.warning(f"CASE B: {self.params.get("action","BUY")} legs are MOVING over {self.params.get("case_decision_observation_time",60)} seconds - executing SELL legs first {isExit}")
+                        action = self.params.get("action","BUY")
+                        observation_time = self.params.get("case_decision_observation_time",60)
+                        self.logger.warning(f"CASE B: {action} legs are MOVING over {observation_time} seconds - executing SELL legs first {isExit}")
                     case_type = "CASE_B"
                     self.execution_tracker.add_milestone(f"User {uid} executing CASE B", {
                         "strategy": "BUY_FIRST",
@@ -1587,6 +1955,12 @@ class StratergyDirectIOCBoxDynamicStrikes:
             }
             sell_executed_spread = sell_executed_prices[sell_leg_keys[0]] + sell_executed_prices[sell_leg_keys[1]]
             
+            # Track SELL spread for entry or exit
+            if isExit:
+                self.sell_exit_spread[uid] = sell_executed_spread
+            else:
+                self.sell_entry_spread[uid] = sell_executed_spread
+            
             self.logger.success(f"SELL pair executed successfully", f"Spread: {sell_executed_spread:.2f}")
             self.execution_tracker.add_milestone("SELL pair execution completed", {
                 "spread": sell_executed_spread,
@@ -1676,6 +2050,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 }
                 buy_executed_spread = buy_executed_prices[buy_leg_keys[0]] + buy_executed_prices[buy_leg_keys[1]]
                 self.pair1_executed_spread[uid] = buy_executed_spread
+                # Track BUY entry spread
+                self.buy_entry_spread[uid] = buy_executed_spread
             else:
                 buy_executed_prices = {
                     sell_leg_keys[0]: float(first_buy_result.get('filled_price', prices[buy_leg_keys[0]])),
@@ -1683,6 +2059,8 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 }
                 buy_executed_spread = buy_executed_prices[sell_leg_keys[0]] + buy_executed_prices[sell_leg_keys[1]]
                 self.pair1_executed_spread[uid] = buy_executed_spread
+                # Track BUY exit spread
+                self.buy_exit_spread[uid] = buy_executed_spread
            
             print(f"INFO: BUY pair executed spread: {buy_executed_spread:.2f}")
             
@@ -1793,8 +2171,25 @@ class StratergyDirectIOCBoxDynamicStrikes:
                         print(f"ERROR: Second BUY leg execution failed")
                         continue
                     self.entry_qtys[uid][second_buy_leg] = second_buy_success.get('filled_qty', 0)
-                    print(f"SUCCESS: BUY legs executed successfully with SELL profit monitoring")
+                    
+                    # Calculate and track BUY spread
+                    buy_executed_prices = {
+                        buy_leg_keys[0]: float(first_buy_success.get('filled_price', 0)),
+                        buy_leg_keys[1]: float(second_buy_success.get('filled_price', 0))
+                    }
+                    buy_executed_spread = buy_executed_prices[buy_leg_keys[0]] + buy_executed_prices[buy_leg_keys[1]]
+                    
+                    # Track BUY spread for entry or exit
+                    if isExit:
+                        self.buy_exit_spread[uid] = buy_executed_spread
+                    else:
+                        self.buy_entry_spread[uid] = buy_executed_spread
+                    
+                    print(f"SUCCESS: BUY legs executed successfully with SELL profit monitoring. BUY spread: {buy_executed_spread:.2f}")
                     self.all_legs_executed[uid] = True
+                    
+                    # Store live metrics for frontend
+                    self._store_live_metrics(uid)
                     self.execution_tracker.add_milestone(f"User {uid} completed execution with BUY after SELL profit monitoring", { 
                         "user": uid,
                         "sell_profit": sell_profit,
@@ -1913,6 +2308,9 @@ class StratergyDirectIOCBoxDynamicStrikes:
             print(f"ERROR: Second BUY leg execution failed")
             return False
         self.exit_qtys[uid][second_buy_leg] = second_buy_success.get('filled_qty', 0)
+        
+        # Store live metrics for frontend
+        self._store_live_metrics(uid)
         
         # Execute complete exit strategy
         return True
