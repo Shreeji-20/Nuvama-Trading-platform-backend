@@ -7,12 +7,12 @@ from stratergies.Box_with_marke_sentiment_and_dynamic_strikes_selection import b
 # obj_dual = stratergies_dual_spread.StratergyDualSpread("fde5ebd6-3052-43cb-a8c8-3871b66c9705")
 # obj_dual.main_logic()
 
-itm_steps=2
-otm_steps=5
+itm_steps=6
+otm_steps=7
 
 params = {
-    "desired_spread": ((itm_steps + otm_steps)/2)*100 - 1.5,
-    "exit_desired_spread":  ((itm_steps + otm_steps)/2)*100 + 1,
+    "desired_spread": ((itm_steps + otm_steps)/2)*100 - 3,
+    "exit_desired_spread":  ((itm_steps + otm_steps)/2)*100 - 0.5,
     "action": "BUY",
     "quantity_multiplier": 1,
     "slice_multiplier": 1,
@@ -34,6 +34,7 @@ params = {
     "symbol" : "NIFTY",
     "expiry":1,
     "case_decision_observation_time":60,
+    "global_decision_observation_time":5,
 }
 
 obj_seq = box_with_dynamic_strikes.StratergyDirectIOCBoxDynamicStrikes(params)

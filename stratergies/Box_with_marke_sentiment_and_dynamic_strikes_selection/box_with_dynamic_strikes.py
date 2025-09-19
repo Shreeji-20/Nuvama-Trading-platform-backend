@@ -60,7 +60,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             self.executor = ThreadPoolExecutor(max_workers=5)
 
             # Initialize execution mode (default is SIMULATION)
-            execution_mode = self.params.get('execution_mode', StrategyExecutionHelpers.SIMULATION_MODE)
+            execution_mode = self.params.get('execution_mode', StrategyExecutionHelpers.LIVE_MODE)
             self.execution_helper = StrategyExecutionHelpers(self.r, execution_mode)
             
             # Log execution mode
@@ -251,7 +251,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
                 
                 # Start observation for SELL pair  
                 self._start_global_parallel_observation("SELL_PAIR", sell_leg_keys[0], sell_leg_keys[1])
-                time.sleep(2)
+                time.sleep(self.params.get('global_decision_observation_time', 5))
                 self.global_observation_active = True
                 self.logger.success("Global parallel observation started successfully")
                 
@@ -298,7 +298,7 @@ class StratergyDirectIOCBoxDynamicStrikes:
             while not self.observation_stop_flags.get(observation_key, True):
                 try:
                     # Perform market observation
-                    observation_result = self._observe_market_for_pair(leg1_key, leg2_key, 2)
+                    observation_result = self._observe_market_for_pair(leg1_key, leg2_key, self.params.get('global_decision_observation_time', 5))
                     
                     # Update latest result with lock
                     with self.observation_locks[observation_key]:
@@ -747,6 +747,14 @@ class StratergyDirectIOCBoxDynamicStrikes:
             leg1_direction = "UP" if leg1_prices[-1] > leg1_prices[0] else "DOWN" if leg1_prices[-1] < leg1_prices[0] else "FLAT"
             leg2_direction = "UP" if leg2_prices[-1] > leg2_prices[0] else "DOWN" if leg2_prices[-1] < leg2_prices[0] else "FLAT"
             
+            if (leg1_trend == "INCREASING" and leg1_direction == "DOWN") or (leg2_trend == "INCREASING" and leg2_direction == "DOWN"):
+                self.logger.warning(f"Data inconsistency detected for {leg1_key}: Trend is INCREASING but direction is DOWN, aborting CASE decision observation")
+                return 1
+            elif (leg1_trend == "DECREASING" and leg1_direction == "UP") or (leg2_trend == "DECREASING" and leg2_direction == "UP"):
+                self.logger.warning(f"Data inconsistency detected for {leg1_key}: Trend is DECREASING but direction is UP, aborting CASE decision observation")
+                return 1
+            
+            
             # Log detailed analysis
             self.logger.info(
                 f"{observation_duration}-second observation completed - {sample_count} samples",
@@ -1187,12 +1195,12 @@ class StratergyDirectIOCBoxDynamicStrikes:
             self.r.expire(instances_with_metrics_key, 300)
             
             # Debug logging
-            self.logger.info(f"Stored live metrics for instance {self.instance_id}, user {uid}", {
-                "entry_qty": total_entry_qty,
-                "exit_qty": total_exit_qty,
-                "buy_entry_spread": buy_entry_spread,
-                "sell_entry_spread": sell_entry_spread
-            })
+            # self.logger.info(f"Stored live metrics for instance {self.instance_id}, user {uid}", {
+            #     "entry_qty": total_entry_qty,
+            #     "exit_qty": total_exit_qty,
+            #     "buy_entry_spread": buy_entry_spread,
+            #     "sell_entry_spread": sell_entry_spread
+            # })
             
         except Exception as e:
             self.logger.error(f"Failed to store live metrics", exception=e)
@@ -1856,25 +1864,27 @@ class StratergyDirectIOCBoxDynamicStrikes:
                     else:
                         success = self._execute_case_b_buy_first(uid, prices, buy_leg_keys, sell_leg_keys, buy_pair_observation,isExit)
                 else:
-                    # BUY legs are moving over 10 seconds - CASE B: Execute BUY legs first with profit monitoring
-                    if not isExit:
-                        action = self.params.get("action","BUY")
-                        observation_time = self.params.get("case_decision_observation_time",60)
-                        self.logger.warning(f"CASE B: {action} legs are MOVING over {observation_time} seconds - executing BUY legs first {isExit}")
-                    else:
-                        action = self.params.get("action","BUY")
-                        observation_time = self.params.get("case_decision_observation_time",60)
-                        self.logger.warning(f"CASE B: {action} legs are MOVING over {observation_time} seconds - executing SELL legs first {isExit}")
-                    case_type = "CASE_B"
-                    self.execution_tracker.add_milestone(f"User {uid} executing CASE B", {
-                        "strategy": "BUY_FIRST",
-                        "reason": "BUY_legs_moving_10_seconds",
-                        "observation_details": buy_pair_observation
-                    })
-                    if not isExit:
-                        success = self._execute_case_b_buy_first(uid, prices, buy_leg_keys, sell_leg_keys, buy_pair_observation,isExit)
-                    else:
-                        success = self._execute_case_a_sell_first(uid, prices, buy_leg_keys, sell_leg_keys,buy_pair_observation,isExit)
+                    self.logger.warning(f"Both BUY legs are MOVING over 10 seconds - CASE B execution is currently disabled", str(buy_pair_observation))
+                    continue
+                #     # BUY legs are moving over 10 seconds - CASE B: Execute BUY legs first with profit monitoring
+                #     if not isExit:
+                #         action = self.params.get("action","BUY")
+                #         observation_time = self.params.get("case_decision_observation_time",60)
+                #         self.logger.warning(f"CASE B: {action} legs are MOVING over {observation_time} seconds - executing BUY legs first {isExit}")
+                #     else:
+                #         action = self.params.get("action","BUY")
+                #         observation_time = self.params.get("case_decision_observation_time",60)
+                #         self.logger.warning(f"CASE B: {action} legs are MOVING over {observation_time} seconds - executing SELL legs first {isExit}")
+                #     case_type = "CASE_B"
+                #     self.execution_tracker.add_milestone(f"User {uid} executing CASE B", {
+                #         "strategy": "BUY_FIRST",
+                #         "reason": "BUY_legs_moving_10_seconds",
+                #         "observation_details": buy_pair_observation
+                #     })
+                #     if not isExit:
+                #         success = self._execute_case_b_buy_first(uid, prices, buy_leg_keys, sell_leg_keys, buy_pair_observation,isExit)
+                #     else:
+                #         success = self._execute_case_a_sell_first(uid, prices, buy_leg_keys, sell_leg_keys,buy_pair_observation,isExit)
                 if success:
                     self.logger.success(f"Dual strategy execution completed for user {uid} with {case_type}")
                     self.execution_tracker.add_milestone(f"User {uid} dual strategy execution successful", {
@@ -2342,7 +2352,10 @@ class StratergyDirectIOCBoxDynamicStrikes:
                     # Get current prices for all legs
                     all_leg_keys = list(self.entry_legs.keys())
                     leg_prices = self._get_leg_prices(all_leg_keys)
-                    
+                    leg_prices_exit = self._get_leg_prices(all_leg_keys,True)
+
+                    # print(f"""Current Leg Prices: LEG1: {leg_prices['leg1']:.2f} , LEG2: {leg_prices['leg2']:.2f} , LEG3: {leg_prices['leg3']:.2f} , LEG4: {leg_prices['leg4']:.2f} box_spread : {leg_prices['leg1']+leg_prices['leg2']-leg_prices['leg4']-leg_prices['leg3']:.2f}""", end='\r')
+                    # continue
                     # Process all users
                     processed_users = 0
                     active_users = 0
